@@ -1,0 +1,304 @@
+
+.fullContainer {
+    width: '100%';
+    height: '100%';
+    background-color: teal
+}
+
+.fullHeightContainer{
+    height: '100%';
+}
+
+.fullWidthContainer{
+    width: '100%';
+}
+
+.halfWidthContainer{
+    width: '50%';
+    height: '100%';
+}
+
+.halfHeightContainer{
+    width: '100%';
+    height: '50%';
+}
+.halfContainer{
+    width: '100%';
+    height: '50%';
+}
+
+.bigPadding{
+    padding: 50px
+}
+.bigVerticalPadding{
+    padding-top: 50px;
+    padding-bottom: 50px
+}
+.bigPaddingHorizontal{
+    padding-right: 50px;
+    padding-left: 50px
+}
+.bigPaddingBottom{
+    padding-bottom: 50px
+}
+.bigPaddingTop{
+    padding-top: 50px
+}
+.bigPaddingLeft{
+    padding-left: 50px
+}
+.bigPaddingRight{
+    padding-right: 50px
+}
+
+.padding{
+    padding: 40px
+}
+.verticalPadding{
+    padding-top: 40px;
+    padding-bottom: 40px; 
+}
+.paddingHorizontal{
+    padding-right: 40px;
+    padding-left: 40px;
+}
+.paddingBottom{
+    padding-bottom: 40px;
+}
+.paddingTop{
+    padding-top: 40px;
+}
+.paddingLeft{
+    padding-left: 40px;
+}
+.paddingRight{
+    padding-right: 40px;
+}
+
+.smallPadding{
+    padding: 30px
+}
+.smallVerticalPadding{
+    padding-top: 30px;
+    padding-bottom: 30px; 
+}
+.smallPaddingHorizontal{
+    padding-right: 30px;
+    padding-left: 30px;
+}
+.smallPaddingBottom{
+    padding-bottom: 30px
+}
+.smallPaddingTop{
+    padding-top: 30px;
+}
+.smallPaddingLeft{
+    padding-left: 30px
+}
+.smallPaddingRight{
+    padding-right: 30px
+}
+
+.xSmallPadding{
+    padding: 20px
+}
+.xSmallVerticalPadding{
+    padding-top: 20px;
+    padding-bottom: 20px; 
+}
+.xSmallPaddingHorizontal{
+    padding-right: 20px;
+    padding-left: 20px;
+}
+.xSmallPaddingBottom{
+    padding-bottom: 20px
+}
+.xSmallPaddingTop{
+    padding-top: 20px
+}
+.xSmallPaddingLeft{
+    padding-left: 20px
+}
+.xSmallPaddingRight{
+    padding-right: 20px
+}
+
+.bigMargin{
+    margin: 50px
+}
+.bigMarginVertical{
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+.bigMarginHorizontal{
+    margin-right: 50px;
+    margin-left: 50px;
+}
+.bigMarginBottom{
+    margin-bottom: 50px
+}
+.bigMarginTop{
+    margin-top: 50px
+}
+.bigMarginLeft{
+    margin-left: 50px
+}
+.bigMarginRight{
+    margin-right: 50px
+}
+
+.margin{
+    margin: 40px
+}
+.marginVertical{
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+.marginHorizontal{
+    margin-right: 40px;
+    margin-left: 40px;
+}
+.marginBottom{
+    margin-bottom: 40px
+}
+.marginTop{
+    margin-top: 40px
+}
+.marginLeft{
+    margin-left: 40px
+}
+.marginRight{
+    margin-right: 40px
+}
+
+.smallMargin{
+    margin: 30px
+}
+.smallMarginVertical{
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+.smallMarginHorizontal{
+    margin-right: 30px;
+    margin-left: 30px;
+}
+.smallMarginBottom{
+    margin-bottom: 30px
+}
+.smallMarginTop{
+    margin-top: 30px
+}
+.smallMarginLeft{
+    margin-left: 30px
+}
+.smallMarginRight{
+    margin-right: 30px
+}
+
+.xSmallMargin{
+    margin: 20px
+}
+.xSmallMarginVertical{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.xSmallMarginHorizontal{
+    margin-right: 20px;
+    margin-left: 20px;
+}
+.xSmallMarginBottom{
+    margin-bottom: 20px;
+}
+.xSmallMarginTop{
+    margin-top: 20px;
+}
+.xSmallMarginLeft{
+    margin-left: 20px;
+}
+.xSmallMarginRight{
+    margin-right: 20px;
+}
+
+.row{
+    display: flex;
+    flex-direction: row
+}
+.column{
+    display: flex;
+    flex-direction: column
+}
+
+.spaceBetween{
+    display: flex;
+    justify-content: space-between
+}
+.spaceAround{
+    display: flex;
+    justify-content: space-around
+}
+
+.upAlignedRow{
+    display: flex;
+    flex-direction: row;
+    align-items: 'flex-start'
+}
+.botAlignedRow{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end
+}
+
+.verticalCenterAlignedRow{
+    display: flex;
+    flex-direction: row;
+    align-items: center
+}
+
+.leftAlignedRow{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start
+}
+.rightAlignedRow{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end
+}
+.horizontalCenterAlignedRow{
+    display: flex;
+    flex-direction: row;
+    justify-content: center
+}
+
+.upAlignedColumn{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start
+}
+.botAlignedColumn{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+.verticalCenterAlignedColumn{
+    display: flex;
+    flex-direction: column;
+    justify-content: center
+}
+.leftAlignedColumn{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start
+}
+.rightAlignedColumn{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end
+}
+.horizontalCenterAlignedColumn{
+    flex-direction: column;
+    align-items: center
+}
+.positionAbsolute{
+    position: absolute
+}
