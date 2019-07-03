@@ -1,5 +1,5 @@
 import { TopologyNode } from 'app/Models/TopologyNode';
-import { action, IObservableArray, observable, ObservableMap } from 'mobx';
+import { action, computed, IObservableArray, observable, ObservableMap } from 'mobx';
 import { create } from 'mobx-persist';
 import { createContext } from 'react';
 import { v4 } from "uuid";
@@ -18,6 +18,10 @@ export class TopologyConfigurationStore {
         this.links = observable.map(new Map());
         this.isGridEnabled = true
         this.gridSize = 40
+    }
+
+    @computed get areTopologyConfigurationsReady() {
+        return this.nodes.size > 1 && this.links.size > 0
     }
 
     @action public deleteNode(node: TopologyNode) {

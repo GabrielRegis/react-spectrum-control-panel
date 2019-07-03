@@ -22,7 +22,8 @@ export default {
     configurationContainer: {
         WebkitBoxShadow: '2px 2px 20px 0px rgba(204, 204, 204, 0.27)',
         MozBoxShadow: '2px 2px 20px 0px rgba(204, 204, 204, 0.27)',
-        boxShadow: '2px 2px 20px 0px rgba(204, 204, 204, 0.27)'
+        boxShadow: '2px 2px 20px 0px rgba(204, 204, 204, 0.27)',
+        zIndex: 1
     } as React.CSSProperties,
     shadowView: {
         WebkitBoxShadow: '2px 2px 20px 0px rgba(204, 204, 204, 0.27)',

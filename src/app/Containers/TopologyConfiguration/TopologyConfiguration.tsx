@@ -233,10 +233,10 @@ export default class TopologyConfiguration extends React.Component<IProps, IStat
                 >
                     {this.props.topologyConfigurationStore.isGridEnabled === true && <Layer listening={false}>
                         {this.state.gridHorizontalLines.map((line, i) => {
-                            return <Line opacity={0.2} stroke={Colors.colors.primary} strokeWidth={1} points={[Math.round(i * this.props.topologyConfigurationStore.gridSize) + 0.5, 0, Math.round(i * this.props.topologyConfigurationStore.gridSize) + 0.5, window.innerHeight]}></Line>
+                            return <Line key={line.toString() + i.toString()} opacity={0.2} stroke={Colors.colors.primary} strokeWidth={1} points={[Math.round(i * this.props.topologyConfigurationStore.gridSize) + 0.5, 0, Math.round(i * this.props.topologyConfigurationStore.gridSize) + 0.5, window.innerHeight]}></Line>
                         })}
                         {this.state.gridVerticalLines.map((line, i) => {
-                            return <Line opacity={0.2} stroke={Colors.colors.primary} strokeWidth={1} points={[0, Math.round(i * this.props.topologyConfigurationStore.gridSize), window.innerWidth, Math.round(i * this.props.topologyConfigurationStore.gridSize)]}></Line>
+                            return <Line key={line.toString() + i.toString()} opacity={0.2} stroke={Colors.colors.primary} strokeWidth={1} points={[0, Math.round(i * this.props.topologyConfigurationStore.gridSize), window.innerWidth, Math.round(i * this.props.topologyConfigurationStore.gridSize)]}></Line>
                         })}
                     </Layer>}
                     <LinkLayer

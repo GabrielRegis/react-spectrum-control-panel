@@ -3,13 +3,13 @@ import { inline } from 'app/utils/StylesUtils';
 import { observer } from 'mobx-react';
 import * as React from 'react';
 import { Draggable, DroppableProvided, DroppableStateSnapshot } from 'react-beautiful-dnd';
-import { Flow } from '../../Models/Flow';
-import { FlowComponent } from './FlowComponent';
+import { CallClassConfiguration } from '../../Models/CallClassConfiguration';
+import { CallClassConfigurationComponent } from './CallClassConfigurationComponent';
 import styles from './FlowsConfigurationStyles';
 
 interface IProps {
     // Props type definition
-    flows: Flow[]
+    flowClasses: CallClassConfiguration[]
     provided: DroppableProvided
     snapshot: DroppableStateSnapshot
 }
@@ -19,16 +19,16 @@ interface IState {
 }
 
 @observer
-export class FlowsList extends React.Component<IProps, IState> {
+export class FlowClassesList extends React.Component<IProps, IState> {
     constructor(props) {
         super(props)
     }
 
-    public renderFlow = (flow: Flow, index: number) => {
+    public renderFlow = (flowClass: CallClassConfiguration, index: number) => {
 
-        return <Draggable key={flow.id} draggableId={flow.id} index={index}>
+        return <Draggable key={flowClass.id} draggableId={flowClass.id} index={index}>
             {(provided, snapshot) =>
-                <FlowComponent flow={flow} provided={provided} snapshot={snapshot} />
+                <CallClassConfigurationComponent flowClass={flowClass} provided={provided} snapshot={snapshot} />
             }
         </Draggable>
     }
@@ -39,7 +39,7 @@ export class FlowsList extends React.Component<IProps, IState> {
                 ref={this.props.provided.innerRef}
                 {...this.props.provided.droppableProps}
                 style={inline([styles.fullWidthContainer, styles.topCenteredColumn,])}>
-                {this.props.flows.map((flow, index) => {
+                {this.props.flowClasses.map((flow, index) => {
                     return this.renderFlow(flow, index)
                 })}
                 {this.props.provided.placeholder}

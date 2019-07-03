@@ -4,12 +4,12 @@ import { observer } from 'mobx-react';
 import * as React from 'react';
 import { DraggableProvided, DraggableStateSnapshot } from 'react-beautiful-dnd';
 import { SpectrumTextInput } from '../../Components/SpectrumTextInput/SpectrumTextInput';
-import { Flow } from '../../Models/Flow';
+import { CallClassConfiguration } from '../../Models/CallClassConfiguration';
 import styles from './FlowsConfigurationStyles';
 
 interface IProps {
     // Props type definition
-    flow: Flow
+    flowClass: CallClassConfiguration
     provided: DraggableProvided
     snapshot: DraggableStateSnapshot
 }
@@ -21,7 +21,7 @@ interface IState {
 
 
 @observer
-export class FlowComponent extends React.Component<IProps, IState> {
+export class CallClassConfigurationComponent extends React.Component<IProps, IState> {
     constructor(props) {
         super(props)
         this.state = {
@@ -57,7 +57,7 @@ export class FlowComponent extends React.Component<IProps, IState> {
                 <Container style={inline([styles.flex1, styles.centeredRow, styles.leftAlignedRow])}>
                     <IconButton style={inline([styles.flowClassIndicator])} />
                     <Typography paragraph style={inline([styles.xSmallMarginTop, styles.primaryText, styles.xSmallMarginLeft])} variant={'subtitle1'}>
-                        {this.props.flow.name}
+                        {this.props.flowClass.name}
                     </Typography>
                 </Container>
                 <Collapse style={inline([styles.fullWidthContainer])} in={this.state.isOpened}>
