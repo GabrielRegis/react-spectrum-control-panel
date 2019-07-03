@@ -45,7 +45,10 @@ export default {
     } as React.CSSProperties,
     openToolbarButton: {
         borderRadius: 40,
-        padding: 15,
+        padding: 10,
+        paddingRight: 15,
+        paddingLeft: 15,
+        backgroundColor: Colors.colors.white
     } as React.CSSProperties,
     tipComponent: {
         position: 'absolute',
@@ -54,7 +57,8 @@ export default {
     } as React.CSSProperties,
     navbarButtonsContainer: {
         position: 'absolute',
-        top: 15,
+        top: 100,
+        left: 20,
     } as React.CSSProperties,
 
 } 

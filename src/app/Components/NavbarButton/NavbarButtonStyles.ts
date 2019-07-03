@@ -7,7 +7,7 @@ export default {
         backgroundColor: Colors.colors.white,
         borderRadius: 40,
         marginLeft: 15,
-        padding: 15
+        padding: 15,
     } as React.CSSProperties,
     buttonStatusContainer: {
         ...ApplicationStyles.shadowView,

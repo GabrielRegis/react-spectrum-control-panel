@@ -7,6 +7,7 @@ import { inline } from 'app/utils/StylesUtils';
 import { observer } from 'mobx-react-lite';
 import * as React from 'react';
 import { FunctionComponent, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { NavbarButton } from '../../../Components/NavbarButton/NavbarButton';
 import { Placeholder } from '../Placeholder/Placeholder';
 import styles from './SummaryPlaceholderStyles';
@@ -33,6 +34,10 @@ export const SummaryPlaceholder: FunctionComponent<IProps> = observer((props) =>
         }
     }, [])
 
+    const isSimulationReady = simulationConfigurationStore.areClassesConfigurationsReady &&
+        simulationConfigurationStore.areGeneralConfigurationsReady &&
+        topologyConfigurationStore.areTopologyConfigurationsReady
+
     return (
         <Zoom in={true}>
             <div style={inline([styles.centeredColumn, styles.marginTop, styles.shadowView, styles.padding, styles.infosContainer])}>
@@ -49,28 +54,34 @@ export const SummaryPlaceholder: FunctionComponent<IProps> = observer((props) =>
                 </Typography>
                 <Container>
                     <Container style={inline([styles.centeredRow, styles.leftAlignedRow, styles.xSmallMarginTop])}>
-                        <NavbarButton
-                            icon={faCogs}
-                            styles={inline([styles.navbarButton])}
-                            isFinished={simulationConfigurationStore.areGeneralConfigurationsReady} />
+                        <Link to="/general-configurations">
+                            <NavbarButton
+                                icon={faCogs}
+                                styles={inline([styles.navbarButton])}
+                                isFinished={simulationConfigurationStore.areGeneralConfigurationsReady} />
+                        </Link>
                         <Typography style={inline([styles.xSmallMarginLeft])} variant={'button'}>
                             Configurações gerais
                         </Typography>
                     </Container>
                     <Container style={inline([styles.centeredRow, styles.leftAlignedRow, styles.xSmallMarginTop])}>
-                        <NavbarButton
-                            icon={faStream}
-                            styles={inline([styles.navbarButton])}
-                            isFinished={simulationConfigurationStore.areClassesConfigurationsReady} />
+                        <Link to="/classes-configurations">
+                            <NavbarButton
+                                icon={faStream}
+                                styles={inline([styles.navbarButton])}
+                                isFinished={simulationConfigurationStore.areClassesConfigurationsReady} />
+                        </Link>
                         <Typography style={inline([styles.xSmallMarginLeft])} variant={'button'}>
                             Configurações de classes
                         </Typography>
                     </Container>
                     <Container style={inline([styles.centeredRow, styles.leftAlignedRow, styles.xSmallMarginTop])}>
-                        <NavbarButton
-                            styles={inline([styles.navbarButton])}
-                            icon={faNetworkWired}
-                            isFinished={topologyConfigurationStore.areTopologyConfigurationsReady} />
+                        <Link to="/topology-configurations">
+                            <NavbarButton
+                                styles={inline([styles.navbarButton])}
+                                icon={faNetworkWired}
+                                isFinished={topologyConfigurationStore.areTopologyConfigurationsReady} />
+                        </Link>
                         <Typography style={inline([styles.xSmallMarginLeft])} variant={'button'}>
                             Configurações de topologia
                         </Typography>
@@ -78,12 +89,14 @@ export const SummaryPlaceholder: FunctionComponent<IProps> = observer((props) =>
                 </Container>
                 <Zoom in={!props.isLoading}>
                     <div style={inline([styles.centeredColumn, styles.smallMarginTop])}>
-                        <Button onClick={props.onPlaySimulationPressed} style={inline([styles.startSimulationButton])} >
+                        <Button
+                            disabled={!isSimulationReady}
+                            onClick={props.onPlaySimulationPressed} style={inline([styles.startSimulationButton])} >
                             <div style={inline([styles.flex1, styles.centeredRow])}>
                                 <Typography style={inline([styles.startSimulationButtonText])} variant={'button'}>
                                     Iniciar Simulação
                                 </Typography>
-                                <FontAwesomeIcon size={'2x'} style={inline([styles.addIcon])} icon={faPlayCircle} />
+                                <FontAwesomeIcon size={'2x'} style={inline([isSimulationReady ? styles.addIconOn : styles.addIconOff])} icon={faPlayCircle} />
                             </div>
                             <Zoom style={inline([styles.positionAbsolute])} in={props.isLoading}>
                                 <CircularProgress style={{ ...styles.flex1 }} color="secondary" />

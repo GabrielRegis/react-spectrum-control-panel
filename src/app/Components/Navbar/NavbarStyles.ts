@@ -8,15 +8,14 @@ export default {
         zIndex: 100
     } as React.CSSProperties,
     navbarButton: {
-        backgroundColor: Colors.colors.lightGray,
-        borderRadius: 40,
-        marginLeft: 15,
-        padding: 15
+        width: 120,
     } as React.CSSProperties,
     spectrumButton: {
+        ...ApplicationStyles.shadowView,
         marginLeft: 15,
-        padding: 15,
-        borderRadius: 60
+        padding: 10,
+        borderRadius: 60,
+        backgroundColor: Colors.colors.white
     } as React.CSSProperties,
     logo: {
         width: 45,

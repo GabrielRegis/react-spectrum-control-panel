@@ -20,15 +20,4 @@ export default {
     placeholder: {
         width: 300
     } as React.CSSProperties,
-    simulationTitle: {
-        fontSize: 30,
-        fontWeight: 200
-    } as React.CSSProperties,
-    simulationSubtitle: {
-        fontSize: 20,
-        fontWeight: 200
-    } as React.CSSProperties,
-    navbarButton: {
-        width: 120,
-    } as React.CSSProperties
 } 

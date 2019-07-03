@@ -3,13 +3,13 @@ import IconButton from '@material-ui/core/IconButton';
 import Snackbar from '@material-ui/core/Snackbar';
 import CloseIcon from '@material-ui/icons/Close';
 import { SimulationConfiguration } from 'app/Models/SimulationConfiguration';
+import spectrumSocketServer from 'app/Services/Socket';
 import { simulationConfigurationStoreContext } from 'app/Store/SimulationConfigurationStore';
 import { topologyConfigurationStoreContext } from 'app/Store/TopologyConfigurationStore';
 import { inline } from 'app/utils/StylesUtils';
 import { observer } from 'mobx-react-lite';
 import * as React from 'react';
 import { FunctionComponent, useEffect } from 'react';
-import socketIOClient from "socket.io-client";
 import { v4 } from 'uuid';
 import { TopologyConfiguration } from '../../Models/TopologyConfiguration';
 import { SummaryPlaceholder } from './SummaryPlaceholder/SummaryPlaceholder';
@@ -24,7 +24,6 @@ interface IState {
     isConnected: boolean
     snackbackMessage?: string
     isLoading?: boolean
-    socket: any
 }
 
 export const SummaryScreen: FunctionComponent<IProps> = observer((props) => {
@@ -36,13 +35,11 @@ export const SummaryScreen: FunctionComponent<IProps> = observer((props) => {
         isConnected: false,
         snackbackMessage: null,
         isLoading: false,
-        socket: socketIOClient('http://localhost:4113')
     };
 
     const [isConnected, setIsConnected] = React.useState(initialState.isConnected)
     const [snackbackMessage, setSnackbackMessage] = React.useState(initialState.snackbackMessage)
     const [isLoading, setIsLoading] = React.useState(initialState.isLoading)
-    const [socket, setSocket] = React.useState(initialState.socket)
 
     const onSocketConnected = (data) => {
         console.log("socket connected");
@@ -57,8 +54,8 @@ export const SummaryScreen: FunctionComponent<IProps> = observer((props) => {
 
     // ComponentDidMount
     useEffect(() => {
-        socket.on("connect", onSocketConnected);
-        socket.on('simulationSummary', onSimulationFinished)
+        spectrumSocketServer.on("connect", onSocketConnected);
+        spectrumSocketServer.on('simulationSummary', onSimulationFinished)
         return () => {
             //ComponentDidUnmount
         }
@@ -113,7 +110,7 @@ export const SummaryScreen: FunctionComponent<IProps> = observer((props) => {
             topologyConfiguration: topologyConfiguration
         }
         console.log(simulationConfigurations)
-        socket.emit('startSimulation', simulationConfigurations)
+        spectrumSocketServer.emit('startSimulation', simulationConfigurations)
     }
 
 

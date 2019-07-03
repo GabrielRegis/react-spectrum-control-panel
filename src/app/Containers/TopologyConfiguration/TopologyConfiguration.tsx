@@ -77,17 +77,6 @@ export default class TopologyConfiguration extends React.Component<IProps, IStat
     render() {
         return (
             <div style={inline([styles.fullWidthContainer, styles.topCenteredColumn])}>
-                <Zoom in={true}>
-                    <div style={inline([styles.centeredRow, styles.navbarButtonsContainer])}>
-                        <Button style={inline([styles.shadowView, styles.openToolbarButton])} onClick={this.onToggleToolsPressed}>
-                            {this.state.areToolsOpened ? 'Fechar Ferramentas [T]' : 'Abrir Ferramentas [T]'}
-                        </Button>
-                        <Button style={inline([styles.shadowView, styles.openToolbarButton, styles.smallMarginLeft])} onClick={this.onToggleGridPressed}>
-                            {this.props.topologyConfigurationStore.isGridEnabled ? 'Desabilitar Grid [G]' : 'Habilitar Grid [G]'}
-                        </Button>
-                    </div>
-
-                </Zoom>
 
                 <div style={inline([styles.toolbarContainer, styles.centeredRow, styles.leftAlignedRow])}>
                     <Collapse in={this.state.areToolsOpened}>
@@ -164,7 +153,6 @@ export default class TopologyConfiguration extends React.Component<IProps, IStat
                             </Grid>
 
                             <Grid item>
-
                                 <Button
                                     onClick={() => this.onChangeModePressed(2)}
                                     style={inline([
@@ -251,6 +239,17 @@ export default class TopologyConfiguration extends React.Component<IProps, IStat
                     />
 
                 </Stage>
+
+                <Zoom in={true}>
+                    <div style={inline([styles.centeredColumn, styles.leftAlignedColumn, styles.navbarButtonsContainer])}>
+                        <Button style={inline([styles.shadowView, styles.openToolbarButton])} onClick={this.onToggleToolsPressed}>
+                            {this.state.areToolsOpened ? 'Fechar Ferramentas [T]' : 'Abrir Ferramentas [T]'}
+                        </Button>
+                        <Button style={inline([styles.shadowView, styles.openToolbarButton, styles.smallMarginTop])} onClick={this.onToggleGridPressed}>
+                            {this.props.topologyConfigurationStore.isGridEnabled ? 'Desabilitar Grid [G]' : 'Habilitar Grid [G]'}
+                        </Button>
+                    </div>
+                </Zoom>
 
             </div >
 

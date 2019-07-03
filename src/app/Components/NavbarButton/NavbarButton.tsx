@@ -13,6 +13,7 @@ interface IProps {
     isFinished: number | boolean
     icon: IconProp
     styles?: React.CSSProperties
+    shouldShowStatus?: boolean
 }
 
 interface IState {
@@ -31,11 +32,11 @@ export const NavbarButton: FunctionComponent<IProps> = (props) => {
     return (
         <Button style={inline([styles.navbarButton, props.styles])} >
             <FontAwesomeIcon color={Colors.colors.primary} size={'2x'} icon={props.icon} />
-            <div style={inline([styles.buttonStatusContainer, styles.centeredColumn])}>
+            {props.shouldShowStatus !== false && <div style={inline([styles.buttonStatusContainer, styles.centeredColumn])}>
                 <FontAwesomeIcon
                     style={inline([styles.checkIconOff, props.isFinished ? styles.checkIconOn : {}])}
                     icon={props.isFinished ? faCircle : faAdjust} />
-            </div>
+            </div>}
         </Button>
     );
 };

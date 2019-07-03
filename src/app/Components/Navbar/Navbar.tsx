@@ -43,18 +43,27 @@ export const Navbar: FunctionComponent<IProps> = observer((props) => {
             </Link>
 
             <Link to="/general-configurations">
-                <NavbarButton icon={faCogs} isFinished={simulationConfigurationStore.areGeneralConfigurationsReady} />
+                <NavbarButton
+                    styles={inline([styles.navbarButton])}
+                    icon={faCogs}
+                    isFinished={simulationConfigurationStore.areGeneralConfigurationsReady} />
             </Link>
             <Link to="/classes-configurations">
-                <NavbarButton icon={faStream} isFinished={simulationConfigurationStore.areClassesConfigurationsReady} />
+                <NavbarButton
+                    styles={inline([styles.navbarButton])}
+                    icon={faStream}
+                    isFinished={simulationConfigurationStore.areClassesConfigurationsReady} />
             </Link>
 
             <Link to="/topology-configurations">
-                <NavbarButton icon={faNetworkWired} isFinished={topologyConfigurationStore.areTopologyConfigurationsReady} />
+                <NavbarButton
+                    styles={inline([styles.navbarButton])}
+                    icon={faNetworkWired}
+                    isFinished={topologyConfigurationStore.areTopologyConfigurationsReady} />
             </Link>
 
             <Link to="/summary">
-                <NavbarButton icon={faPoll} isFinished={false} />
+                <NavbarButton icon={faPoll} shouldShowStatus={false} isFinished={false} />
             </Link>
 
         </div>

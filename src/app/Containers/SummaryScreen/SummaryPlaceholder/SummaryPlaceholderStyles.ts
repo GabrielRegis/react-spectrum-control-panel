@@ -4,11 +4,11 @@ export default {
     ...ApplicationStyles,
     simulationTitle: {
         fontSize: 30,
-        fontWeight: 200
+        fontFamily: 'Gilroy'
     } as React.CSSProperties,
     simulationSubtitle: {
         fontSize: 20,
-        fontWeight: 300
+        fontWeight: 200
     } as React.CSSProperties,
     navbarButton: {
         width: 120,
@@ -27,8 +27,12 @@ export default {
     startSimulationButtonText: {
         color: Colors.colors.primary,
     } as React.CSSProperties,
-    addIcon: {
+    addIconOn: {
         color: Colors.colors.patifeGreen,
+        marginLeft: 10
+    } as React.CSSProperties,
+    addIconOff: {
+        color: Colors.colors.lightGray,
         marginLeft: 10
     } as React.CSSProperties,
 }
