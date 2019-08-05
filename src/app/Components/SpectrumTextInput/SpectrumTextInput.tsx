@@ -35,15 +35,8 @@ export const SpectrumTextInput: FunctionComponent<IProps> = (props) => {
     }
 
     return (
-        <div style={inline([styles.textInputContainer, styles.xSmallPadding, { ...props.style }])}>
-            {/* <TextField
-                value={props.value}
-                onChange={(event) => onChange(event.target.value)}
-                InputLabelProps={{
-                    shrink: true,
-                }}
-                margin="normal"
-            /> */}
+        <div style={inline([styles.textInputContainer, styles.shadowView,
+        { ...props.style }])}>
 
             <AutosizeInput
                 inputStyle={inline([styles.textInput])}

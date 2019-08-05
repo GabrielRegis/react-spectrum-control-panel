@@ -22,7 +22,7 @@ export class SimulationConfigurationStore extends SpectrumStore {
             && this.generalConfiguration.simulationCycles
     }
     @computed get areClassesConfigurationsReady() {
-        return this.classesConfiguration.flowClasses.length > 2 && this.classesConfiguration.callsNumber
+        return this.classesConfiguration.flowClasses.length > 1 && this.classesConfiguration.callsNumber
     }
 
     @action public updateGeneralConfigurations = (newConfigurations: GeneralConfigurations) => {

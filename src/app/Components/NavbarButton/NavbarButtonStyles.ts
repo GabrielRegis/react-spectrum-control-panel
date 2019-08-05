@@ -21,12 +21,12 @@ export default {
         width: 25,
         height: 25,
         borderRadius: 23,
-        backgroundColor: Colors.colors.patifeGreen,
+        backgroundColor: Colors.colors.healthGreen,
         marginLeft: 10
     } as React.CSSProperties,
     checkIconOn: {
         fontSize: 20,
-        color: Colors.colors.patifeGreen
+        color: Colors.colors.healthGreen
     } as React.CSSProperties,
     checkIconOff: {
         fontSize: 24,

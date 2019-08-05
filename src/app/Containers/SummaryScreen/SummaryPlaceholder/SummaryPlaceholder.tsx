@@ -12,10 +12,12 @@ import { NavbarButton } from '../../../Components/NavbarButton/NavbarButton';
 import { Placeholder } from '../Placeholder/Placeholder';
 import styles from './SummaryPlaceholderStyles';
 
+
 interface IProps {
     // Props type definition
     onPlaySimulationPressed: () => void
     isLoading: boolean
+    isConnected: boolean
 }
 
 interface IState {
@@ -36,7 +38,7 @@ export const SummaryPlaceholder: FunctionComponent<IProps> = observer((props) =>
 
     const isSimulationReady = simulationConfigurationStore.areClassesConfigurationsReady &&
         simulationConfigurationStore.areGeneralConfigurationsReady &&
-        topologyConfigurationStore.areTopologyConfigurationsReady
+        topologyConfigurationStore.areTopologyConfigurationsReady && props.isConnected
 
     return (
         <Zoom in={true}>
@@ -87,17 +89,22 @@ export const SummaryPlaceholder: FunctionComponent<IProps> = observer((props) =>
                         </Typography>
                     </Container>
                 </Container>
-                <Zoom in={!props.isLoading}>
+                <Zoom in={true}>
                     <div style={inline([styles.centeredColumn, styles.smallMarginTop])}>
                         <Button
-                            disabled={!isSimulationReady}
+                            disabled={!isSimulationReady || props.isLoading}
                             onClick={props.onPlaySimulationPressed} style={inline([styles.startSimulationButton])} >
-                            <div style={inline([styles.flex1, styles.centeredRow])}>
-                                <Typography style={inline([styles.startSimulationButtonText])} variant={'button'}>
-                                    Iniciar Simulação
-                                </Typography>
-                                <FontAwesomeIcon size={'2x'} style={inline([isSimulationReady ? styles.addIconOn : styles.addIconOff])} icon={faPlayCircle} />
-                            </div>
+                            <Zoom in={!props.isLoading}>
+                                <div style={inline([styles.flex1, styles.centeredRow])}>
+
+                                    <Typography style={inline([styles.startSimulationButtonText])} variant={'button'}>
+                                        Iniciar Simulação
+                                    </Typography>
+
+                                    <FontAwesomeIcon size={'2x'} style={inline([isSimulationReady ? styles.addIconOn : styles.addIconOff])} icon={faPlayCircle} />
+                                </div>
+                            </Zoom>
+
                             <Zoom style={inline([styles.positionAbsolute])} in={props.isLoading}>
                                 <CircularProgress style={{ ...styles.flex1 }} color="secondary" />
                             </Zoom>

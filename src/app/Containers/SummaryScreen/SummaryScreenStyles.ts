@@ -14,10 +14,11 @@ export default {
         color: Colors.colors.primary,
     } as React.CSSProperties,
     addIcon: {
-        color: Colors.colors.patifeGreen,
+        color: Colors.colors.healthGreen,
         marginLeft: 10
     } as React.CSSProperties,
     placeholder: {
-        width: 300
+        width: 1020,
+        marginTop: 60
     } as React.CSSProperties,
 } 

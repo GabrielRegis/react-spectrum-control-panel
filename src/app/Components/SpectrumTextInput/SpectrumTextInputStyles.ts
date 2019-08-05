@@ -6,11 +6,12 @@ export default {
         backgroundColor: 'yellow'
     } as React.CSSProperties,
     textInputContainer: {
-        ...ApplicationStyles.shadowView,
         borderRadius: 20,
         backgroundColor: Colors.colors.silentWhite,
-        paddingTop: 5,
-        paddingBottom: 5
+        paddingTop: 4,
+        paddingBottom: 5,
+        paddingLeft: 10,
+        paddingRight: 10
     } as React.CSSProperties,
     textInput: {
         border: 'none',

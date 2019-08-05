@@ -14,7 +14,8 @@ export default {
         width: 120,
     } as React.CSSProperties,
     infosContainer: {
-        borderRadius: 20
+        borderRadius: 20,
+        backgroundColor: Colors.colors.white
     } as React.CSSProperties,
     startSimulationButton: {
         ...ApplicationStyles.shadowView,
@@ -28,7 +29,7 @@ export default {
         color: Colors.colors.primary,
     } as React.CSSProperties,
     addIconOn: {
-        color: Colors.colors.patifeGreen,
+        color: Colors.colors.healthGreen,
         marginLeft: 10
     } as React.CSSProperties,
     addIconOff: {

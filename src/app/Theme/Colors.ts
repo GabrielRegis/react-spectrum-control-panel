@@ -18,7 +18,7 @@ const colors = {
     searcherBackground: '#17171A',
     secondary: '#0F0F14',
     secondaryTransluscent: 'rgba(15, 15, 20, 0.8)',
-    patifeGreen: '#7ED321',
+    healthGreen: '#00CA72',
     mustard: '#F8A01C',
     iosDarkGray: '#EFEFF4',
     iosBlue: '#007AFF',

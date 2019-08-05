@@ -3,7 +3,7 @@ import IconButton from '@material-ui/core/IconButton';
 import Snackbar from '@material-ui/core/Snackbar';
 import CloseIcon from '@material-ui/icons/Close';
 import { SimulationConfiguration } from 'app/Models/SimulationConfiguration';
-import spectrumSocketServer from 'app/Services/Socket';
+import { runSimulation } from 'app/Services/Api';
 import { simulationConfigurationStoreContext } from 'app/Store/SimulationConfigurationStore';
 import { topologyConfigurationStoreContext } from 'app/Store/TopologyConfigurationStore';
 import { inline } from 'app/utils/StylesUtils';
@@ -32,7 +32,7 @@ export const SummaryScreen: FunctionComponent<IProps> = observer((props) => {
     const topologyConfigurationStore = React.useContext(topologyConfigurationStoreContext)
 
     const initialState: IState = {
-        isConnected: false,
+        isConnected: true,
         snackbackMessage: null,
         isLoading: false,
     };
@@ -54,8 +54,8 @@ export const SummaryScreen: FunctionComponent<IProps> = observer((props) => {
 
     // ComponentDidMount
     useEffect(() => {
-        spectrumSocketServer.on("connect", onSocketConnected);
-        spectrumSocketServer.on('simulationSummary', onSimulationFinished)
+        // spectrumSocketServer.on("connect", onSocketConnected);
+        // spectrumSocketServer.on('simulationSummary', onSimulationFinished)
         return () => {
             //ComponentDidUnmount
         }
@@ -81,36 +81,16 @@ export const SummaryScreen: FunctionComponent<IProps> = observer((props) => {
             links: Array.from(topologyConfigurationStore.links.values())
         }
 
-        //Converte de array observável para objeto, em si
-        // const flowClasses = simulationConfigurationStore.classesConfiguration.flowClasses.map((callClass) => {
-        //     const newCallClass: CallClassConfiguration = {
-        //         id: callClass.id,
-        //         name: callClass.name,
-        //         minBandwidth: callClass.minBandwidth,
-        //         maxBandwidth: callClass.maxBandwidth,
-        //         minHoldingTime: callClass.minHoldingTime,
-        //         maxHoldingTime: callClass.maxHoldingTime,
-        //         frequency: callClass.frequency,
-        //         degradationConfiguration: callClass.degradationConfiguration
-        //     }
-        //     return newCallClass
-        // })
-
-        // const classesConfiguration: ClassesConfiguration = {
-        //     callsNumber: simulationConfigurationStore.classesConfiguration.callsNumber,
-        //     flowClasses: flowClasses
-        // }
-
-        // console.log(classesConfiguration)
-
-
         const simulationConfigurations: SimulationConfiguration = {
             generalConfigurations: simulationConfigurationStore.generalConfiguration,
             classesConfiguration: simulationConfigurationStore.classesConfiguration,
             topologyConfiguration: topologyConfiguration
         }
         console.log(simulationConfigurations)
-        spectrumSocketServer.emit('startSimulation', simulationConfigurations)
+        runSimulation(simulationConfigurations).then((response) => {
+            console.log(response)
+        })
+        // spectrumSocketServer.emit('startSimulation', simulationConfigurations)
     }
 
 
@@ -121,7 +101,10 @@ export const SummaryScreen: FunctionComponent<IProps> = observer((props) => {
     return (
         <div style={inline([styles.fullWidthContainer, styles.topCenteredColumn])}>
 
+            <img style={inline([styles.positionAbsolute, styles.placeholder])} src={require('../../Assets/Icons/summaryPlaceholder.svg')} alt="" />
+
             <SummaryPlaceholder
+                isConnected={isConnected}
                 isLoading={isLoading}
                 onPlaySimulationPressed={onPlaySimulationPressed} />
 

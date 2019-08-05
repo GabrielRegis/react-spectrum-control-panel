@@ -6,6 +6,19 @@ export default {
         borderRadius: 10,
         backgroundColor: Colors.colors.extraLightGray,
     } as React.CSSProperties,
+    selectedClassContainer: {
+        ...ApplicationStyles.shadowView,
+        borderRadius: 10,
+        borderWidth: 2,
+        border: '5px solid ' + Colors.colors.extraLightGray
+    } as React.CSSProperties,
+    listPlaceholder: {
+        bottom: 20,
+        zIndex: 0,
+        width: 400,
+        marginTop: 100,
+        marginBottom: 50
+    } as React.CSSProperties,
     flowContainer: {
         borderRadius: 60,
         backgroundColor: Colors.colors.white
@@ -13,7 +26,7 @@ export default {
     draggingFlowContainer: {
         borderRadius: 60,
         border: '2px solid',
-        borderColor: Colors.colors.patifeGreen,
+        borderColor: Colors.colors.healthGreen,
         backgroundColor: Colors.colors.white
     } as React.CSSProperties,
     flowClassIndicator: {
@@ -27,6 +40,6 @@ export default {
         color: Colors.colors.primary
     } as React.CSSProperties,
     addIcon: {
-        color: Colors.colors.patifeGreen
+        color: Colors.colors.healthGreen
     } as React.CSSProperties
 } 

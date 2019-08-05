@@ -65,18 +65,18 @@ export class CallClassConfigurationComponent extends React.Component<IProps, ISt
                         <Grid item xs={12}>
                             <div style={inline([styles.fullWidthContainer, styles.centeredRow, styles.leftAlignedRow, styles.xSmallMarginTop])}>
                                 <Typography paragraph style={inline([styles.xSmallMarginTop, styles.primaryText])} variant={'subtitle1'}>
-                                    Chamadas
-                        </Typography>
+                                    Nome da Classe
+                                </Typography>
+                                <SpectrumTextInput style={inline([styles.xSmallMarginLeft])} value={''} onChange={(text) => { }} />
+                            </div>
+                            <div style={inline([styles.fullWidthContainer, styles.centeredRow, styles.leftAlignedRow, styles.xSmallMarginTop])}>
+                                <Typography paragraph style={inline([styles.xSmallMarginTop, styles.primaryText])} variant={'subtitle1'}>
+                                    Banda requisitada
+                                </Typography>
                                 <Typography paragraph style={inline([styles.xSmallMarginTop, styles.xSmallMarginLeft])} variant={'body1'}>
                                     Realizar
-                        </Typography>
+                                </Typography>
                                 <SpectrumTextInput style={inline([styles.xSmallMarginLeft])} value={''} onChange={(text) => { }} />
-                                <Typography paragraph style={inline([styles.xSmallMarginTop, styles.xSmallMarginLeft, styles.primaryText])} variant={'subtitle1'}>
-                                    Chamadas
-                        </Typography>
-                                <Typography paragraph style={inline([styles.xSmallMarginTop, styles.xSmallMarginLeft])} variant={'body1'}>
-                                    à cada iteração
-                        </Typography>
                             </div>
                         </Grid>
                     </Container>

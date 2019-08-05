@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Button } from '@material-ui/core';
 import { Colors } from 'app/Theme';
 import { inline } from 'app/utils/StylesUtils';
+import Lottie from 'lottie-react-web';
 import * as React from 'react';
 import { FunctionComponent, useEffect } from 'react';
 import styles from './NavbarButtonStyles';
@@ -36,6 +37,13 @@ export const NavbarButton: FunctionComponent<IProps> = (props) => {
                 <FontAwesomeIcon
                     style={inline([styles.checkIconOff, props.isFinished ? styles.checkIconOn : {}])}
                     icon={props.isFinished ? faCircle : faAdjust} />
+                {props.isFinished && <Lottie
+                    style={inline([styles.positionAbsolute])}
+                    options={{
+                        animationData: require('../../Assets/Animations/checkAnimation.json'),
+                        loop: false,
+                    }}
+                />}
             </div>}
         </Button>
     );

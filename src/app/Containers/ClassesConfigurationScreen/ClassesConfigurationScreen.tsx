@@ -1,11 +1,10 @@
 import { faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Collapse, Fade, Grid, Typography } from '@material-ui/core';
+import { Collapse, Container, Divider, Fade, Grid, Typography } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import { SpectrumTextInput } from 'app/Components/SpectrumTextInput/SpectrumTextInput';
 import { simulationConfigurationStoreContext } from 'app/Store/SimulationConfigurationStore';
 import { inline } from 'app/utils/StylesUtils';
-import { observable } from 'mobx';
 import { observer } from 'mobx-react-lite';
 import * as React from 'react';
 import { FunctionComponent, useEffect } from 'react';
@@ -75,61 +74,146 @@ export const ClassesConfigurationScreen: FunctionComponent<IProps> = observer((p
             result.source.index,
             result.destination.index
         );
-        simulationConfigurationStore.classesConfiguration.flowClasses = observable.array(flowClasses)
+        simulationConfigurationStore.classesConfiguration.flowClasses = flowClasses
     }
 
 
     return (
         <Fade timeout={{ enter: 600 }} in={true} mountOnEnter unmountOnExit>
-            <div style={inline([styles.flex1, styles.topCenteredColumn, styles.leftAlignedColumn, styles.padding, styles.shadowView])}>
-                <Typography variant="h5" style={inline([styles.primaryText])}>
-                    Configurações das Requisições
-                </Typography>
+            <div style={inline([styles.flex1, styles.topCenteredColumn])}>
+                <div style={inline([styles.topCenteredColumn, styles.leftAlignedColumn, styles.configurationContainer, styles.padding, styles.shadowView, styles.zIndex3])}>
+                    <Typography variant="h5" style={inline([styles.primaryText])}>
+                        Configurações das Requisições
+                    </Typography>
 
-                <Grid container style={inline([styles.fullWidthContainer])} spacing={1}>
-                    <Grid item xs={12}>
-                        <div style={inline([styles.fullWidthContainer, styles.centeredRow, styles.leftAlignedRow, styles.xSmallMarginTop])}>
-                            <Typography paragraph style={inline([styles.xSmallMarginTop, styles.primaryText])} variant={'subtitle1'}>
-                                Chamadas
-                        </Typography>
-                            <Typography paragraph style={inline([styles.xSmallMarginTop, styles.xSmallMarginLeft])} variant={'body1'}>
-                                Realizar
-                        </Typography>
-                            <SpectrumTextInput style={inline([styles.xSmallMarginLeft])} value={simulationConfigurationStore.classesConfiguration.callsNumber} onChange={onCallsTextChanged} />
-                            <Typography paragraph style={inline([styles.xSmallMarginTop, styles.xSmallMarginLeft, styles.primaryText])} variant={'subtitle1'}>
-                                Chamadas
-                        </Typography>
-                            <Typography paragraph style={inline([styles.xSmallMarginTop, styles.xSmallMarginLeft])} variant={'body1'}>
-                                à cada iteração
-                        </Typography>
-                        </div>
-                    </Grid>
+                    <Grid container style={inline([styles.fullWidthContainer])} spacing={1}>
+                        <Grid item xs={12}>
+                            <div style={inline([styles.fullWidthContainer, styles.centeredRow, styles.leftAlignedRow, styles.xSmallMarginTop])}>
+                                <Typography paragraph style={inline([styles.xSmallMarginTop, styles.primaryText])} variant={'subtitle1'}>
+                                    Chamadas
+                                </Typography>
+                                <Typography paragraph style={inline([styles.xSmallMarginTop, styles.xSmallMarginLeft])} variant={'body1'}>
+                                    Realizar
+                                </Typography>
+                                <SpectrumTextInput style={inline([styles.xSmallMarginLeft])} value={simulationConfigurationStore.classesConfiguration.callsNumber} onChange={onCallsTextChanged} />
+                                <Typography paragraph style={inline([styles.xSmallMarginTop, styles.xSmallMarginLeft, styles.primaryText])} variant={'subtitle1'}>
+                                    Chamadas
+                                </Typography>
+                                <Typography paragraph style={inline([styles.xSmallMarginTop, styles.xSmallMarginLeft])} variant={'body1'}>
+                                    à cada iteração
+                                </Typography>
+                            </div>
+                        </Grid>
 
-                    <Collapse style={inline([styles.centeredColumn, styles.leftAlignedColumn, styles.flowsContainer, styles.smallMarginTop, styles.paddingBottom, styles.paddingHorizontal, styles.fullWidthContainer])} in={true}>
-                        <DragDropContext onDragEnd={onDragEnd}>
-                            <Droppable droppableId="list">
-                                {(provided, snapshot) => (
-                                    <FlowClassesList provided={provided} snapshot={snapshot} flowClasses={simulationConfigurationStore.classesConfiguration.flowClasses} />
-                                )}
-                            </Droppable>
-                        </DragDropContext>
+                        <Grid style={inline([styles.fullWidthContainer, styles.row])} >
+                            <Collapse style={inline([styles.centeredColumn, styles.leftAlignedColumn, styles.flowsContainer, styles.smallMarginTop, styles.paddingBottom, styles.paddingHorizontal])} in={true}>
+                                <DragDropContext onDragEnd={onDragEnd}>
+                                    <Droppable droppableId="list">
+                                        {(provided, snapshot) => (
+                                            <FlowClassesList provided={provided} snapshot={snapshot} flowClasses={simulationConfigurationStore.classesConfiguration.flowClasses} />
+                                        )}
+                                    </Droppable>
+                                </DragDropContext>
 
-                        <Button
-                            onClick={onAddClassClicked}
-                            style={inline([
-                                styles.xSmallMarginTop,
-                                styles.addClassButton,
-                                styles.paddingHorizontal,
-                                styles.shadowView
+                                <Button
+                                    onClick={onAddClassClicked}
+                                    style={inline([
+                                        styles.xSmallMarginTop,
+                                        styles.addClassButton,
+                                        styles.paddingHorizontal,
+                                        styles.shadowView
+                                    ])}>
+                                    <Typography paragraph style={inline([styles.xSmallMarginTop, styles.primaryText, styles.xSmallMarginRight])} variant={'subtitle1'}>
+                                        Adicionar Classe
+                                    </Typography>
+                                    <FontAwesomeIcon size={'2x'} style={inline([styles.addIcon])} icon={faPlusCircle} />
+                                </Button>
+                            </Collapse>
+                            <div style={inline([
+                                styles.topCenteredColumn,
+                                styles.xSmallPadding,
+                                styles.flex1,
+                                styles.selectedClassContainer,
+                                styles.bigMarginLeft
                             ])}>
-                            <Typography paragraph style={inline([styles.xSmallMarginTop, styles.primaryText, styles.xSmallMarginRight])} variant={'subtitle1'}>
-                                Adicionar Classe
-                            </Typography>
-                            <FontAwesomeIcon size={'2x'} style={inline([styles.addIcon])} icon={faPlusCircle} />
-                        </Button>
-                    </Collapse>
-                </Grid>
-
+                                <Container style={inline([styles.centeredRow, styles.leftAlignedRow])}>
+                                    <Grid item xs={12}>
+                                        <Typography paragraph style={inline([styles.xSmallMarginTop, styles.primaryText])} variant={'h6'}>
+                                            Configuração de Classe
+                                        </Typography>
+                                        <div style={inline([styles.fullWidthContainer, styles.centeredRow, styles.leftAlignedRow, styles.xSmallMarginTop])}>
+                                            <Typography paragraph style={inline([styles.xSmallMarginTop, styles.primaryText])} variant={'subtitle1'}>
+                                                Nome da Classe
+                                            </Typography>
+                                            <SpectrumTextInput style={inline([styles.xSmallMarginLeft])} value={'Classe'} onChange={(text) => { }} />
+                                        </div>
+                                        <div style={inline([styles.fullWidthContainer, styles.centeredRow, styles.leftAlignedRow, styles.xSmallMarginTop])}>
+                                            <Typography paragraph style={inline([styles.xSmallMarginTop, styles.primaryText])} variant={'subtitle1'}>
+                                                Banda requisitada
+                                            </Typography>
+                                            <Typography paragraph style={inline([styles.xSmallMarginTop, styles.xSmallMarginLeft])} variant={'body1'}>
+                                                Requisitar entre
+                                            </Typography>
+                                            <SpectrumTextInput style={inline([styles.xSmallMarginLeft])} value={20} onChange={(text) => { }} />
+                                            <Typography paragraph style={inline([styles.xSmallMarginTop, styles.xSmallMarginLeft])} variant={'body1'}>
+                                                e
+                                            </Typography>
+                                            <SpectrumTextInput style={inline([styles.xSmallMarginLeft])} value={20} onChange={(text) => { }} />
+                                            <Typography paragraph style={inline([styles.xSmallMarginTop, styles.xSmallMarginLeft, styles.primaryText])} variant={'subtitle1'}>
+                                                GB/s
+                                            </Typography>
+                                            <Typography paragraph style={inline([styles.xSmallMarginTop, styles.xSmallMarginLeft])} variant={'body1'}>
+                                                de banda larga.
+                                            </Typography>
+                                        </div>
+                                        <div style={inline([styles.fullWidthContainer, styles.centeredRow, styles.leftAlignedRow, styles.xSmallMarginTop])}>
+                                            <Typography paragraph style={inline([styles.xSmallMarginTop, styles.primaryText])} variant={'subtitle1'}>
+                                                Duração
+                                            </Typography>
+                                            <Typography paragraph style={inline([styles.xSmallMarginTop, styles.xSmallMarginLeft])} variant={'body1'}>
+                                                Durar entre
+                                            </Typography>
+                                            <SpectrumTextInput style={inline([styles.xSmallMarginLeft])} value={20} onChange={(text) => { }} />
+                                            <Typography paragraph style={inline([styles.xSmallMarginTop, styles.xSmallMarginLeft])} variant={'body1'}>
+                                                e
+                                            </Typography>
+                                            <SpectrumTextInput style={inline([styles.xSmallMarginLeft])} value={20} onChange={(text) => { }} />
+                                            <Typography paragraph style={inline([styles.xSmallMarginTop, styles.xSmallMarginLeft, styles.primaryText])} variant={'subtitle1'}>
+                                                Instantes.
+                                            </Typography>
+                                        </div>
+                                        <Divider style={inline([styles.xSmallMarginTop])} />
+                                        <Typography paragraph style={inline([styles.xSmallMarginTop, styles.primaryText])} variant={'h6'}>
+                                            Degradação de Serviço no estabelecimento
+                                        </Typography>
+                                        <div style={inline([styles.fullWidthContainer, styles.centeredRow, styles.leftAlignedRow, styles.xSmallMarginTop])}>
+                                            <Typography paragraph style={inline([styles.xSmallMarginTop, styles.primaryText])} variant={'subtitle1'}>
+                                                Degradação de Banda
+                                            </Typography>
+                                            <Typography paragraph style={inline([styles.xSmallMarginTop, styles.xSmallMarginLeft])} variant={'body1'}>
+                                                Permitir a degradação de banda requisitada em
+                                            </Typography>
+                                            <Slider
+                                                defaultValue={80}
+                                                aria-labelledby="discrete-slider-always"
+                                                step={10}
+                                                valueLabelDisplay="on"
+                                            />
+                                            <Typography paragraph style={inline([styles.xSmallMarginTop, styles.xSmallMarginLeft])} variant={'body1'}>
+                                                e
+                                            </Typography>
+                                            <SpectrumTextInput style={inline([styles.xSmallMarginLeft])} value={20} onChange={(text) => { }} />
+                                            <Typography paragraph style={inline([styles.xSmallMarginTop, styles.xSmallMarginLeft, styles.primaryText])} variant={'subtitle1'}>
+                                                Instantes.
+                                            </Typography>
+                                        </div>
+                                    </Grid>
+                                </Container>
+                            </div>
+                        </Grid>
+                    </Grid>
+                </div>
+                <img style={inline([styles.listPlaceholder])} src={require('../../Assets/Icons/listPlaceholder.svg')} alt="" />
             </div>
         </Fade>
     );

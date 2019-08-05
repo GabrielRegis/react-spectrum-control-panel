@@ -20,15 +20,17 @@ export default {
         fontFamily: Fonts.primaryFont
     } as React.CSSProperties,
     configurationContainer: {
-        WebkitBoxShadow: '2px 2px 20px 0px rgba(204, 204, 204, 0.27)',
-        MozBoxShadow: '2px 2px 20px 0px rgba(204, 204, 204, 0.27)',
-        boxShadow: '2px 2px 20px 0px rgba(204, 204, 204, 0.27)',
-        zIndex: 1
+        WebkitBoxShadow: '2px 2px 20px 0px rgba(204, 204, 204, 0.15)',
+        MozBoxShadow: '2px 2px 20px 0px rgba(204, 204, 204, 0.15)',
+        boxShadow: '2px 2px 20px 0px rgba(204, 204, 204, 0.15)',
+        borderRadius: 20,
+        zIndex: 1,
+        margin: 40,
     } as React.CSSProperties,
     shadowView: {
-        WebkitBoxShadow: '2px 2px 20px 0px rgba(204, 204, 204, 0.27)',
-        MozBoxShadow: '2px 2px 20px 0px rgba(204, 204, 204, 0.27)',
-        boxShadow: '2px 2px 20px 0px rgba(204, 204, 204, 0.27)'
+        WebkitBoxShadow: '2px 2px 20px 0px rgba(204, 204, 204, 0.2)',
+        MozBoxShadow: '2px 2px 20px 0px rgba(204, 204, 204, 0.2)',
+        boxShadow: '2px 2px 20px 0px rgba(204, 204, 204, 0.2)'
     } as React.CSSProperties,
     primaryColorBackground: {
         backgroundColor: Colors.colors.primary
@@ -405,27 +407,27 @@ export default {
 
     // XSmall Margin
     xSmallMargin: {
-        margin: 20
+        margin: 15
     } as React.CSSProperties,
     xSmallVerticalMargin: {
-        paddingTop: 20,
-        paddingBottom: 20
+        paddingTop: 15,
+        paddingBottom: 15
     } as React.CSSProperties,
     xSmallHorizontalMargin: {
-        paddingRight: 20,
-        paddingLeft: 20
+        paddingRight: 15,
+        paddingLeft: 15
     } as React.CSSProperties,
     xSmallMarginBottom: {
-        marginBottom: 20
+        marginBottom: 15
     } as React.CSSProperties,
     xSmallMarginTop: {
-        marginTop: 20
+        marginTop: 15
     } as React.CSSProperties,
     xSmallMarginLeft: {
-        marginLeft: 20
+        marginLeft: 15
     } as React.CSSProperties,
     xSmallMarginRight: {
-        marginRight: 20
+        marginRight: 15
     } as React.CSSProperties,
 
     // FlexDirection

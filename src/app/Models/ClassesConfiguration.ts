@@ -7,6 +7,6 @@ export class ClassesConfiguration {
     @observable @persist('list') flowClasses: CallClassConfiguration[]
     constructor() {
         this.callsNumber = 10
-        this.flowClasses = observable.array([])
+        this.flowClasses = []
     }
 }

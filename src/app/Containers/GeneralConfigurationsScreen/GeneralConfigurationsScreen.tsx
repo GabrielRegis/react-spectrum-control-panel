@@ -64,7 +64,7 @@ export const GeneralConfigurationsScreen: FunctionComponent<IProps> = observer((
     // Calcula as iterações de simulação, quando minLoad, maxLoad ou loadStep é alterado.
     // Atualiza, também, a store das configurações gerais
     useEffect(() => {
-        const iterations = ((maxLoad - minLoad) / loadStep) + 1
+        const iterations = Math.floor((maxLoad - minLoad) / loadStep) + 1
         setIterations(iterations)
 
         const generalConfigurations: GeneralConfigurations = {
@@ -109,60 +109,63 @@ export const GeneralConfigurationsScreen: FunctionComponent<IProps> = observer((
 
     return (
         <Fade timeout={{ enter: 600 }} in={true} mountOnEnter unmountOnExit>
-            <div style={inline([styles.flex1, styles.topCenteredColumn, styles.leftAlignedColumn, styles.padding, styles.configurationContainer])}>
-                <Typography variant="h5" style={inline([styles.primaryText])}>
-                    Configurações Gerais
-                <Grid container spacing={1}>
-                        <Grid item xs={12}>
-                            <div style={inline([styles.fullWidthContainer, styles.centeredRow, styles.leftAlignedRow, styles.xSmallMarginTop])}>
-                                <Typography paragraph style={inline([styles.xSmallMarginTop, styles.primaryText])} variant={'subtitle1'}>
-                                    Ciclos
-                            </Typography>
-                                <Typography paragraph style={inline([styles.xSmallMarginTop, styles.xSmallMarginLeft])} variant={'body1'}>
-                                    Realizar
-                            </Typography>
-                                <SpectrumTextInput style={inline([styles.xSmallMarginLeft])} value={cycles} onChange={onCycleTextChanged} />
-                                <Typography paragraph style={inline([styles.xSmallMarginTop, styles.xSmallMarginLeft])} variant={'subtitle1'}>
-                                    Ciclos
-                            </Typography>
-                                <Typography paragraph style={inline([styles.xSmallMarginTop, styles.xSmallMarginLeft])} variant={'body1'}>
-                                    para o cálculo das métricas
-                            </Typography>
-                            </div>
+            <div style={inline([styles.flex1, styles.topCenteredColumn])}>
+                <div style={inline([styles.topCenteredColumn, styles.leftAlignedColumn, styles.padding, styles.configurationContainer])}>
+                    <Typography variant="h5" style={inline([styles.primaryText])}>
+                        Configurações Gerais
+                        <Grid container spacing={1}>
+                            <Grid item xs={12}>
+                                <div style={inline([styles.centeredRow, styles.leftAlignedRow, styles.xSmallMarginTop])}>
+                                    <Typography paragraph style={inline([styles.xSmallMarginTop, styles.primaryText])} variant={'subtitle1'}>
+                                        Ciclos
+                                    </Typography>
+                                    <Typography paragraph style={inline([styles.xSmallMarginTop, styles.xSmallMarginLeft])} variant={'body1'}>
+                                        Realizar
+                                    </Typography>
+                                    <SpectrumTextInput style={inline([styles.xSmallMarginLeft])} value={cycles} onChange={onCycleTextChanged} />
+                                    <Typography paragraph style={inline([styles.xSmallMarginTop, styles.xSmallMarginLeft])} variant={'subtitle1'}>
+                                        Ciclos
+                                    </Typography>
+                                    <Typography paragraph style={inline([styles.xSmallMarginTop, styles.xSmallMarginLeft])} variant={'body1'}>
+                                        para o cálculo das métricas
+                                    </Typography>
+                                </div>
+                            </Grid>
+                            <Grid item xs={12}>
+                                <div style={inline([styles.centeredRow, styles.leftAlignedRow])}>
+                                    <Typography paragraph style={inline([styles.xSmallMarginTop, styles.primaryText])} variant={'subtitle1'}>
+                                        Carga
+                                    </Typography>
+                                    <Typography paragraph style={inline([styles.xSmallMarginTop, styles.xSmallMarginLeft])} variant={'body1'}>
+                                        Aumentar a carga de
+                                    </Typography>
+                                    <SpectrumTextInput style={inline([styles.xSmallMarginLeft])} value={minLoad} onChange={onMinLoadTextChanged} />
+                                    <Typography paragraph style={inline([styles.xSmallMarginTop, styles.xSmallMarginLeft])} variant={'body1'}>
+                                        até
+                                    </Typography>
+                                    <SpectrumTextInput style={inline([styles.xSmallMarginLeft])} value={maxLoad} onChange={onMaxLoadTextChanged} />
+                                    <Typography paragraph style={inline([styles.xSmallMarginTop, styles.xSmallMarginLeft, styles.primaryText])} variant={'subtitle1'}>
+                                        Erlangs
+                                    </Typography>
+                                    <Typography paragraph style={inline([styles.xSmallMarginTop, styles.xSmallMarginLeft])} variant={'body1'}>
+                                        incrementando
+                                    </Typography>
+                                    <SpectrumTextInput style={inline([styles.xSmallMarginLeft])} value={loadStep} onChange={onLoadStepTextChanged} />
+                                    <Typography paragraph style={inline([styles.xSmallMarginTop, styles.xSmallMarginLeft])} variant={'body1'}>
+                                        à cada iteração, resultando em
+                                    </Typography>
+                                    <Typography paragraph style={inline([styles.xSmallMarginTop, styles.xSmallMarginLeft, styles.primaryText])} variant={'subtitle1'}>
+                                        {iterations}
+                                    </Typography>
+                                    <Typography paragraph style={inline([styles.xSmallMarginTop, styles.xSmallMarginLeft])} variant={'body1'}>
+                                        iterações à cada ciclo.
+                                    </Typography>
+                                </div>
+                            </Grid>
                         </Grid>
-                        <Grid item xs={12}>
-                            <div style={inline([styles.fullWidthContainer, styles.centeredRow, styles.leftAlignedRow])}>
-                                <Typography paragraph style={inline([styles.xSmallMarginTop, styles.primaryText])} variant={'subtitle1'}>
-                                    Carga
-                            </Typography>
-                                <Typography paragraph style={inline([styles.xSmallMarginTop, styles.xSmallMarginLeft])} variant={'body1'}>
-                                    Aumentar a carga de
-                            </Typography>
-                                <SpectrumTextInput style={inline([styles.xSmallMarginLeft])} value={minLoad} onChange={onMinLoadTextChanged} />
-                                <Typography paragraph style={inline([styles.xSmallMarginTop, styles.xSmallMarginLeft])} variant={'body1'}>
-                                    até
-                            </Typography>
-                                <SpectrumTextInput style={inline([styles.xSmallMarginLeft])} value={maxLoad} onChange={onMaxLoadTextChanged} />
-                                <Typography paragraph style={inline([styles.xSmallMarginTop, styles.xSmallMarginLeft, styles.primaryText])} variant={'subtitle1'}>
-                                    Erlangs
-                            </Typography>
-                                <Typography paragraph style={inline([styles.xSmallMarginTop, styles.xSmallMarginLeft])} variant={'body1'}>
-                                    incrementando
-                            </Typography>
-                                <SpectrumTextInput style={inline([styles.xSmallMarginLeft])} value={loadStep} onChange={onLoadStepTextChanged} />
-                                <Typography paragraph style={inline([styles.xSmallMarginTop, styles.xSmallMarginLeft])} variant={'body1'}>
-                                    à cada iteração, resultando em
-                            </Typography>
-                                <Typography paragraph style={inline([styles.xSmallMarginTop, styles.xSmallMarginLeft, styles.primaryText])} variant={'subtitle1'}>
-                                    {iterations}
-                                </Typography>
-                                <Typography paragraph style={inline([styles.xSmallMarginTop, styles.xSmallMarginLeft])} variant={'body1'}>
-                                    iterações à cada ciclo.
-                            </Typography>
-                            </div>
-                        </Grid>
-                    </Grid>
-                </Typography>
+                    </Typography>
+                </div>
+                <img style={inline([styles.listPlaceholder])} src={require('../../Assets/Icons/generalSettingsPlaceholder.svg')} alt="" />
             </div>
         </Fade>
     );
