@@ -78,33 +78,17 @@ export const GeneralConfigurationsScreen: FunctionComponent<IProps> = observer((
     }, [minLoad, maxLoad, loadStep])
 
     const onCycleTextChanged = (text: string) => {
-        if (text && text !== '') {
-            setCycles(parseInt(text))
-        } else {
-            setCycles(0)
-        }
+        setCycles(parseInt(text))
     }
     const onMinLoadTextChanged = (text: string) => {
-        if (text && text !== '') {
-            setMinLoad(parseInt(text))
-        } else {
-            setMinLoad(0)
-        }
+        setMinLoad(parseInt(text))
     }
     const onMaxLoadTextChanged = (text: string) => {
-        if (text && text !== '') {
-            setMaxLoad(parseInt(text))
-        } else {
-            setMaxLoad(0)
-        }
+        setMaxLoad(parseInt(text))
     }
 
     const onLoadStepTextChanged = (text: string) => {
-        if (text && text !== '') {
-            setLoadStep(parseInt(text))
-        } else {
-            setLoadStep(0)
-        }
+        setLoadStep(parseInt(text))
     }
 
     return (
@@ -139,18 +123,31 @@ export const GeneralConfigurationsScreen: FunctionComponent<IProps> = observer((
                                     <Typography paragraph style={inline([styles.xSmallMarginTop, styles.xSmallMarginLeft])} variant={'body1'}>
                                         Aumentar a carga de
                                     </Typography>
-                                    <SpectrumTextInput style={inline([styles.xSmallMarginLeft])} value={minLoad} onChange={onMinLoadTextChanged} />
+                                    <SpectrumTextInput
+                                        style={inline([styles.xSmallMarginLeft])}
+                                        type={'number'}
+                                        value={minLoad}
+                                        max={maxLoad}
+                                        onChange={onMinLoadTextChanged} />
                                     <Typography paragraph style={inline([styles.xSmallMarginTop, styles.xSmallMarginLeft])} variant={'body1'}>
                                         até
                                     </Typography>
-                                    <SpectrumTextInput style={inline([styles.xSmallMarginLeft])} value={maxLoad} onChange={onMaxLoadTextChanged} />
+                                    <SpectrumTextInput
+                                        style={inline([styles.xSmallMarginLeft])}
+                                        type={'number'}
+                                        value={maxLoad}
+                                        onChange={onMaxLoadTextChanged} />
                                     <Typography paragraph style={inline([styles.xSmallMarginTop, styles.xSmallMarginLeft, styles.primaryText])} variant={'subtitle1'}>
                                         Erlangs
                                     </Typography>
                                     <Typography paragraph style={inline([styles.xSmallMarginTop, styles.xSmallMarginLeft])} variant={'body1'}>
                                         incrementando
                                     </Typography>
-                                    <SpectrumTextInput style={inline([styles.xSmallMarginLeft])} value={loadStep} onChange={onLoadStepTextChanged} />
+                                    <SpectrumTextInput
+                                        style={inline([styles.xSmallMarginLeft])}
+                                        type={'number'}
+                                        value={loadStep}
+                                        onChange={onLoadStepTextChanged} />
                                     <Typography paragraph style={inline([styles.xSmallMarginTop, styles.xSmallMarginLeft])} variant={'body1'}>
                                         à cada iteração, resultando em
                                     </Typography>

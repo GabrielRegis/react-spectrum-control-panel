@@ -10,6 +10,9 @@ export default {
     secondaryColorText: {
         color: Colors.colors.secondary
     } as React.CSSProperties,
+    whiteText: {
+        color: Colors.colors.white
+    } as React.CSSProperties,
     primaryColorText: {
         color: Colors.colors.primary
     } as React.CSSProperties,

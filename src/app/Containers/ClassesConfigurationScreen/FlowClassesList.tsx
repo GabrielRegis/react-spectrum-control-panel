@@ -1,6 +1,6 @@
 import { List } from '@material-ui/core';
 import { inline } from 'app/utils/StylesUtils';
-import { observer } from 'mobx-react';
+import { inject, observer } from 'mobx-react';
 import * as React from 'react';
 import { Draggable, DroppableProvided, DroppableStateSnapshot } from 'react-beautiful-dnd';
 import { CallClassConfiguration } from '../../Models/CallClassConfiguration';
@@ -18,6 +18,7 @@ interface IState {
     // State type definition
 }
 
+@inject('simulationConfigurationStore')
 @observer
 export class FlowClassesList extends React.Component<IProps, IState> {
     constructor(props) {

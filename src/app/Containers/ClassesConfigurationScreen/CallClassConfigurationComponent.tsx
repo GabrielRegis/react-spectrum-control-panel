@@ -1,10 +1,11 @@
-import { Collapse, Container, Grid, IconButton, ListItem, Typography } from '@material-ui/core';
+import { Container, ListItem, Typography } from '@material-ui/core';
+import { css } from 'aphrodite';
 import { inline } from 'app/utils/StylesUtils';
-import { observer } from 'mobx-react';
+import { inject, observer } from 'mobx-react';
 import * as React from 'react';
 import { DraggableProvided, DraggableStateSnapshot } from 'react-beautiful-dnd';
-import { SpectrumTextInput } from '../../Components/SpectrumTextInput/SpectrumTextInput';
 import { CallClassConfiguration } from '../../Models/CallClassConfiguration';
+import { SimulationConfigurationStore } from '../../Store/SimulationConfigurationStore';
 import styles from './FlowsConfigurationStyles';
 
 interface IProps {
@@ -12,30 +13,30 @@ interface IProps {
     flowClass: CallClassConfiguration
     provided: DraggableProvided
     snapshot: DraggableStateSnapshot
+    simulationConfigurationStore?: SimulationConfigurationStore
 }
 
 interface IState {
     // State type definition
-    isOpened: boolean;
 }
 
-
+@inject('simulationConfigurationStore')
 @observer
 export class CallClassConfigurationComponent extends React.Component<IProps, IState> {
     constructor(props) {
         super(props)
         this.state = {
-            isOpened: false
         }
     }
 
     public onFlowPressed = () => {
-        this.setState({
-            isOpened: !this.state.isOpened
-        })
+        this.props.simulationConfigurationStore.classesConfiguration.selectedFlowClass = this.props.flowClass
     }
 
     public render() {
+
+        const isSelected = this.props.simulationConfigurationStore.classesConfiguration.selectedFlowClass === this.props.flowClass
+
         return (
             <ListItem
                 ref={this.props.provided.innerRef}
@@ -53,34 +54,14 @@ export class CallClassConfigurationComponent extends React.Component<IProps, ISt
                 this.props.snapshot.isDragging ? styles.draggingFlowContainer : {}
                 ]
                 )}
+                className={css(isSelected && styles.aphroditeStyles.selectedFlowContainer)}
             >
                 <Container style={inline([styles.flex1, styles.centeredRow, styles.leftAlignedRow])}>
-                    <IconButton style={inline([styles.flowClassIndicator])} />
+                    <div style={inline([styles.flowClassIndicator])} />
                     <Typography paragraph style={inline([styles.xSmallMarginTop, styles.primaryText, styles.xSmallMarginLeft])} variant={'subtitle1'}>
                         {this.props.flowClass.name}
                     </Typography>
                 </Container>
-                <Collapse style={inline([styles.fullWidthContainer])} in={this.state.isOpened}>
-                    <Container style={inline([styles.flex1, styles.centeredRow, styles.leftAlignedRow])}>
-                        <Grid item xs={12}>
-                            <div style={inline([styles.fullWidthContainer, styles.centeredRow, styles.leftAlignedRow, styles.xSmallMarginTop])}>
-                                <Typography paragraph style={inline([styles.xSmallMarginTop, styles.primaryText])} variant={'subtitle1'}>
-                                    Nome da Classe
-                                </Typography>
-                                <SpectrumTextInput style={inline([styles.xSmallMarginLeft])} value={''} onChange={(text) => { }} />
-                            </div>
-                            <div style={inline([styles.fullWidthContainer, styles.centeredRow, styles.leftAlignedRow, styles.xSmallMarginTop])}>
-                                <Typography paragraph style={inline([styles.xSmallMarginTop, styles.primaryText])} variant={'subtitle1'}>
-                                    Banda requisitada
-                                </Typography>
-                                <Typography paragraph style={inline([styles.xSmallMarginTop, styles.xSmallMarginLeft])} variant={'body1'}>
-                                    Realizar
-                                </Typography>
-                                <SpectrumTextInput style={inline([styles.xSmallMarginLeft])} value={''} onChange={(text) => { }} />
-                            </div>
-                        </Grid>
-                    </Container>
-                </Collapse>
 
             </ListItem>
         );

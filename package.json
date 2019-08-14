@@ -73,6 +73,7 @@
     "@types/react-router-dom": "^4.3.4",
     "@types/uuid": "^3.4.4",
     "add": "^2.0.6",
+    "aphrodite": "^2.3.1",
     "apisauce": "^1.0.3",
     "classnames": "^2.2.6",
     "konva": "^3.3.3",

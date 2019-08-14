@@ -30,6 +30,7 @@ const colors = {
     patifeBrownishGray: '#646464',
     patifeAlert: '#151515',
     patifeAlertText: '#007AFF',
+    pink: '#ea526f',
 
     // pxFeedbacks
     pxFeedPrimary: '#000000',
