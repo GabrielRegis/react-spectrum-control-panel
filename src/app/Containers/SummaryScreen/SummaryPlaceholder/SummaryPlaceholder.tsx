@@ -44,8 +44,8 @@ export const SummaryPlaceholder: FunctionComponent<IProps> = observer((props) =>
         <Zoom in={true}>
             <div style={inline([styles.centeredColumn, styles.marginTop, styles.shadowView, styles.padding, styles.infosContainer])}>
                 <Typography
-                    style={inline([styles.simulationTitle, styles.xSmallMarginBottom])}
-                    variant={'button'}>
+                    style={inline([styles.primaryText, styles.xSmallMarginBottom])}
+                    variant={'h3'}>
                     Resumo de simulação
                 </Typography>
                 <Placeholder />

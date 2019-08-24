@@ -3,7 +3,6 @@ import { ApplicationStyles, Colors } from "app/Theme";
 export default {
     ...ApplicationStyles,
     simulationTitle: {
-        fontSize: 30,
         fontFamily: 'Gilroy'
     } as React.CSSProperties,
     simulationSubtitle: {

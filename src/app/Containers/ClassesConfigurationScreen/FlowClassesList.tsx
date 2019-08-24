@@ -39,7 +39,7 @@ export class FlowClassesList extends React.Component<IProps, IState> {
             <List
                 ref={this.props.provided.innerRef}
                 {...this.props.provided.droppableProps}
-                style={inline([styles.fullWidthContainer, styles.topCenteredColumn,])}>
+                style={inline([styles.flex1, styles.topCenteredColumn])}>
                 {this.props.flowClasses.map((flow, index) => {
                     return this.renderFlow(flow, index)
                 })}

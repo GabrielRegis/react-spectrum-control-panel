@@ -7,8 +7,9 @@ import { inject, observer } from 'mobx-react';
 import * as React from 'react';
 import KeyboardEventHandler from 'react-keyboard-event-handler';
 import { Layer, Line, Stage } from 'react-konva';
-import LinkLayer from './LinkLayer';
-import NodeLayer from './NodeLayer';
+import { default as LinkGroup, default as LinkLayer } from './LinkGroup';
+import { LinksAndNodesConfiguration } from './LinksAndNodesConfiguration';
+import NodeGroup from './NodeGroup';
 import styles from './TopologyConfigurationStyles';
 
 interface IProps {
@@ -49,7 +50,6 @@ export default class TopologyConfiguration extends React.Component<IProps, IStat
     }
 
     componentDidMount() {
-        console.log(this.props.topologyConfigurationStore.selectedNodes.length)
     }
 
     public onMouseMove = (event: Konva.KonvaEventObject<MouseEvent>) => {
@@ -91,9 +91,7 @@ export default class TopologyConfiguration extends React.Component<IProps, IStat
                                         styles.shadowView,
                                         styles.toolbarButton,
                                         styles.centeredColumn,
-                                        this.state.mode === 0 ? {
-                                            backgroundColor: Colors.colors.primary
-                                        } : {}])}
+                                        this.state.mode === 0 ? styles.toolbarButtonPressed : {}])}
                                 >
                                     <div style={inline([styles.keyboardShortcutNumberContainer, styles.centeredColumn])}>
                                         <Typography variant="button">
@@ -103,9 +101,7 @@ export default class TopologyConfiguration extends React.Component<IProps, IStat
                                     <div style={inline([styles.topCenteredColumn, styles.flex1])}>
                                         <Typography style={inline([
                                             styles.buttonText,
-                                            this.state.mode === 0 ? {
-                                                color: Colors.colors.white
-                                            } : {}])} variant="button">
+                                        ])} variant="button">
                                             Cursor
                                         </Typography>
                                         <img
@@ -126,9 +122,7 @@ export default class TopologyConfiguration extends React.Component<IProps, IStat
                                         styles.shadowView,
                                         styles.toolbarButton,
                                         styles.centeredColumn,
-                                        this.state.mode === 1 ? {
-                                            backgroundColor: Colors.colors.primary
-                                        } : {}])}
+                                        this.state.mode === 1 ? styles.toolbarButtonPressed : {}])}
                                 >
                                     <div style={inline([styles.keyboardShortcutNumberContainer, styles.centeredColumn])}>
                                         <Typography variant="button">
@@ -138,9 +132,7 @@ export default class TopologyConfiguration extends React.Component<IProps, IStat
                                     <div style={inline([styles.topCenteredColumn, styles.flex1])}>
                                         <Typography style={inline([
                                             styles.buttonText,
-                                            this.state.mode === 1 ? {
-                                                color: Colors.colors.white
-                                            } : {}])} variant="button">
+                                        ])} variant="button">
                                             Nodos
                                         </Typography>
                                         <img
@@ -162,9 +154,7 @@ export default class TopologyConfiguration extends React.Component<IProps, IStat
                                         styles.shadowView,
                                         styles.toolbarButton,
                                         styles.centeredColumn,
-                                        this.state.mode === 2 ? {
-                                            backgroundColor: Colors.colors.primary
-                                        } : {}])}
+                                        this.state.mode === 2 ? styles.toolbarButtonPressed : {}])}
                                 >
                                     <div style={inline([styles.keyboardShortcutNumberContainer, styles.centeredColumn])}>
                                         <Typography variant="button">
@@ -174,9 +164,7 @@ export default class TopologyConfiguration extends React.Component<IProps, IStat
                                     <div style={inline([styles.topCenteredColumn, styles.flex1])}>
                                         <Typography style={inline([
                                             styles.buttonText,
-                                            this.state.mode === 2 ? {
-                                                color: Colors.colors.white
-                                            } : {}])} variant="button">
+                                        ])} variant="button">
                                             Enlaces
                                         </Typography>
                                         <img
@@ -227,19 +215,22 @@ export default class TopologyConfiguration extends React.Component<IProps, IStat
                             return <Line key={line.toString() + i.toString()} opacity={0.2} stroke={Colors.colors.primary} strokeWidth={1} points={[0, Math.round(i * this.props.topologyConfigurationStore.gridSize), window.innerWidth, Math.round(i * this.props.topologyConfigurationStore.gridSize)]}></Line>
                         })}
                     </Layer>}
-                    <LinkLayer
-                        ref={ref => this.linkLayer = ref}
-                        mode={this.state.mode}
-                        topologyConfigurationStore={this.props.topologyConfigurationStore}
-                    />
                     {/* Camada de nós */}
-                    <NodeLayer
-                        mode={this.state.mode}
-                        topologyConfigurationStore={this.props.topologyConfigurationStore}
-                    />
+                    <Layer>
+
+                        <LinkGroup
+                            ref={ref => this.linkLayer = ref}
+                            mode={this.state.mode}
+                            topologyConfigurationStore={this.props.topologyConfigurationStore}
+                        />
+                        <NodeGroup
+                            mode={this.state.mode}
+                            topologyConfigurationStore={this.props.topologyConfigurationStore}
+                        />
+                    </Layer>
 
                 </Stage>
-
+                <LinksAndNodesConfiguration />
                 <Zoom in={true}>
                     <div style={inline([styles.centeredColumn, styles.leftAlignedColumn, styles.navbarButtonsContainer])}>
                         <Button style={inline([styles.shadowView, styles.openToolbarButton])} onClick={this.onToggleToolsPressed}>

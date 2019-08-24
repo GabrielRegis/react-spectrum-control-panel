@@ -7,6 +7,13 @@ import Fonts from "./Fonts";
 //box-shadow: 2px 2px 20px 0px rgba(204, 204, 204, 0.27);
 
 export default {
+
+    nextButton: {
+        borderRadius: 40,
+        width: 300,
+        height: 50,
+        background: Colors.colors.healthGreen
+    } as React.CSSProperties,
     secondaryColorText: {
         color: Colors.colors.secondary
     } as React.CSSProperties,

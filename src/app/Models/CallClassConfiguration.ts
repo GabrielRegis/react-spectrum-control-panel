@@ -13,12 +13,12 @@ export class CallClassConfiguration {
     @observable @persist('object') degradationConfiguration?: CallDegradationConfiguration
 
     constructor() {
-        this.name = 'minha classe teste'
+        this.name = null
         this.minBandwidth = 2
         this.maxBandwidth = 10
         this.minHoldingTime = 1
         this.maxHoldingTime = 2
-        this.frequency = 0
+        this.frequency = 0.5
         this.degradationConfiguration = new CallDegradationConfiguration()
     }
 }

@@ -1,4 +1,4 @@
-import { Container, ListItem, Typography } from '@material-ui/core';
+import { ListItem, Typography } from '@material-ui/core';
 import { css } from 'aphrodite';
 import { inline } from 'app/utils/StylesUtils';
 import { inject, observer } from 'mobx-react';
@@ -48,7 +48,7 @@ export class CallClassConfigurationComponent extends React.Component<IProps, ISt
                 styles.flowContainer,
                 styles.centeredColumn,
                 styles.leftAlignedColumn,
-                styles.xSmallMarginTop,
+                styles.xSmallMarginBottom,
                 styles.fullWidthContainer,
                 this.props.provided.draggableProps.style,
                 this.props.snapshot.isDragging ? styles.draggingFlowContainer : {}
@@ -56,12 +56,12 @@ export class CallClassConfigurationComponent extends React.Component<IProps, ISt
                 )}
                 className={css(isSelected && styles.aphroditeStyles.selectedFlowContainer)}
             >
-                <Container style={inline([styles.flex1, styles.centeredRow, styles.leftAlignedRow])}>
+                <div style={inline([styles.flex1, styles.centeredRow, styles.leftAlignedRow])}>
                     <div style={inline([styles.flowClassIndicator])} />
                     <Typography paragraph style={inline([styles.xSmallMarginTop, styles.primaryText, styles.xSmallMarginLeft])} variant={'subtitle1'}>
                         {this.props.flowClass.name}
                     </Typography>
-                </Container>
+                </div>
 
             </ListItem>
         );

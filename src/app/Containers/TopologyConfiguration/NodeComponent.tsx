@@ -128,7 +128,6 @@ export class NodeComponent extends React.Component<IProps, IState> {
     }
 
     public onNodeClick = (event: Konva.KonvaEventObject<MouseEvent>) => {
-
         switch (this.props.mode) {
             case 2:
                 this.props.topologyConfigurationStore.selectedNodes.push(this.props.node)
@@ -183,8 +182,8 @@ export class NodeComponent extends React.Component<IProps, IState> {
         }
 
         if (this.props.topologyConfigurationStore.nodes.has(this.props.node.id) && this.group) {
-            this.props.topologyConfigurationStore.nodes.get(this.props.node.id).posX = this.props.topologyConfigurationStore.isGridEnabled ? Math.round(this.group.attrs.x / 40) * 40 : this.group.attrs.x
-            this.props.topologyConfigurationStore.nodes.get(this.props.node.id).posY = this.props.topologyConfigurationStore.isGridEnabled ? Math.round(this.group.attrs.y / 40) * 40 : this.group.attrs.y
+            this.props.topologyConfigurationStore.nodes.get(this.props.node.id).posX = this.props.topologyConfigurationStore.isGridEnabled ? Math.round(this.group.attrs.x / this.props.topologyConfigurationStore.gridSize) * this.props.topologyConfigurationStore.gridSize : this.group.attrs.x
+            this.props.topologyConfigurationStore.nodes.get(this.props.node.id).posY = this.props.topologyConfigurationStore.isGridEnabled ? Math.round(this.group.attrs.y / this.props.topologyConfigurationStore.gridSize) * this.props.topologyConfigurationStore.gridSize : this.group.attrs.y
         }
 
     }
@@ -242,12 +241,13 @@ export class NodeComponent extends React.Component<IProps, IState> {
             scaleX: 0,
             scaleY: 0,
             x: this.props.node.posX,
-            y: this.props.node.posY
+            y: this.props.node.posY,
         }
         return (
             <Group
                 ref={ref => this.group = ref}
                 {...groupConfig}
+                listening={true}
                 onClick={this.onNodeClick}
                 onDragMove={this.onNodeMove}
                 onDragStart={this.onNodeDragStart}

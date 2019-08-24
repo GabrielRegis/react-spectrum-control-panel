@@ -15,6 +15,15 @@ export default {
         width: 70,
         height: 70,
         borderRadius: 20,
+        border: '0px solid ' + Colors.colors.extraLightGray,
+        transition: 'all 0.4s'
+    } as React.CSSProperties,
+    toolbarButtonPressed: {
+        border: '1px solid rgba(234, 82, 111, 0.6)',
+        WebkitBoxShadow: '2px 2px 15px 0px rgba(234, 82, 111, 0.2)',
+        MozBoxShadow: '2px 2px 15px 0px rgba(234, 82, 111, 0.2)',
+        boxShadow: '2px 2px 15px 0px rgba(234, 82, 111, 0.2)',
+        transition: 'all 0.4s'
     } as React.CSSProperties,
     nodeIcon: {
         height: 40,
@@ -34,14 +43,16 @@ export default {
         fontSize: 10
     } as React.CSSProperties,
     keyboardShortcutNumberContainer: {
-        ...ApplicationStyles.shadowView,
-        backgroundColor: Colors.colors.lightGray,
-        height: 30,
-        width: 30,
+        WebkitBoxShadow: '2px 2px 20px 0px rgba(204, 204, 204, 0.8)',
+        MozBoxShadow: '2px 2px 20px 0px rgba(204, 204, 204, 0.8)',
+        boxShadow: '2px 2px 20px 0px rgba(204, 204, 204, 0.8)',
+        backgroundColor: Colors.colors.white,
+        height: 25,
+        width: 25,
         borderRadius: 15,
         position: 'absolute',
-        top: -15,
-        left: -15
+        top: -10,
+        left: -10
     } as React.CSSProperties,
     openToolbarButton: {
         borderRadius: 40,

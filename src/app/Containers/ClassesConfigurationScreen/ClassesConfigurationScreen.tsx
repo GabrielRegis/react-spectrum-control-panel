@@ -1,8 +1,9 @@
 import { faPlusCircle, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Collapse, Container, Divider, Fade, Grid, Grow, Typography } from '@material-ui/core';
+import { Checkbox, Collapse, Container, Divider, Fade, Grid, Grow, Typography } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import { SpectrumTextInput } from 'app/Components/SpectrumTextInput/SpectrumTextInput';
+import { CallDegradationConfiguration } from 'app/Models/CallDegradationConfiguration';
 import { simulationConfigurationStoreContext } from 'app/Store/SimulationConfigurationStore';
 import { Colors } from 'app/Theme';
 import { inline } from 'app/utils/StylesUtils';
@@ -10,6 +11,7 @@ import { observer } from 'mobx-react-lite';
 import * as React from 'react';
 import { FunctionComponent, useEffect } from 'react';
 import { DragDropContext, Droppable, DropResult, ResponderProvided } from "react-beautiful-dnd";
+import KeyboardEventHandler from 'react-keyboard-event-handler';
 import { v4 } from "uuid";
 import { CallClassConfiguration } from '../../Models/CallClassConfiguration';
 import { FlowClassesList } from './FlowClassesList';
@@ -44,6 +46,7 @@ export const ClassesConfigurationScreen: FunctionComponent<IProps> = observer((p
     const onAddClassClicked = () => {
         const callClass = new CallClassConfiguration()
         callClass.id = v4()
+        callClass.name = 'Classe ' + simulationConfigurationStore.classesConfiguration.flowClasses.length
         simulationConfigurationStore.addFlowClass(callClass)
     }
 
@@ -61,6 +64,10 @@ export const ClassesConfigurationScreen: FunctionComponent<IProps> = observer((p
         result.splice(endIndex, 0, removed);
         return result;
     };
+
+    const onDragStart = () => {
+        simulationConfigurationStore.classesConfiguration.selectedFlowClass = { id: null }
+    }
 
     const onDragEnd = (result: DropResult, provided: ResponderProvided) => {
         if (!result.destination) {
@@ -94,18 +101,42 @@ export const ClassesConfigurationScreen: FunctionComponent<IProps> = observer((p
     const onMaxHoldingTimeTextChanged = (text: string) => {
         simulationConfigurationStore.classesConfiguration.selectedFlowClass.maxHoldingTime = parseInt(text)
     }
+    const onBandDegradationTextChanged = (text: string) => {
+        simulationConfigurationStore.classesConfiguration.selectedFlowClass.degradationConfiguration.bandwidthDegradationRate = parseInt(text)
+    }
+    const onDelayToleranceTextChanged = (text: string) => {
+        simulationConfigurationStore.classesConfiguration.selectedFlowClass.degradationConfiguration.delayToleranceRate = parseInt(text)
+    }
+
+    const onToggleDegradationClicked = (checked) => {
+        const isDegradationTolerant = simulationConfigurationStore.classesConfiguration.selectedFlowClass.degradationConfiguration.isDegradationTolerant
+        if (isDegradationTolerant) {
+            simulationConfigurationStore.classesConfiguration.selectedFlowClass.degradationConfiguration = new CallDegradationConfiguration()
+            return
+        }
+        const degradationConfiguration: CallDegradationConfiguration = {
+            isDegradationTolerant: true,
+            bandwidthDegradationRate: 0,
+            delayToleranceRate: 0
+        }
+        simulationConfigurationStore.classesConfiguration.selectedFlowClass.degradationConfiguration = degradationConfiguration
+    }
+
+    const isDegradationTolerant = simulationConfigurationStore.classesConfiguration.selectedFlowClass &&
+        simulationConfigurationStore.classesConfiguration.selectedFlowClass.degradationConfiguration &&
+        simulationConfigurationStore.classesConfiguration.selectedFlowClass.degradationConfiguration.isDegradationTolerant === true
 
     return (
         <Fade timeout={{ enter: 600 }} in={true} mountOnEnter unmountOnExit>
             <div style={inline([styles.flex1, styles.topCenteredColumn])}>
-                <div style={inline([styles.topCenteredColumn, styles.leftAlignedColumn, styles.configurationContainer, styles.padding, styles.shadowView, styles.zIndex3])}>
-                    <Typography variant="h5" style={inline([styles.primaryText])}>
+                <div style={inline([styles.topCenteredColumn, styles.leftAlignedColumn, styles.paddingHorizontal, styles.xSmallMarginTop])}>
+                    <Typography variant="h4" style={inline([styles.primaryText])}>
                         Configurações das Requisições
                     </Typography>
 
-                    <Grid container style={inline([styles.fullWidthContainer])} spacing={1}>
+                    <Grid container spacing={1}>
                         <Grid item xs={12}>
-                            <div style={inline([styles.fullWidthContainer, styles.centeredRow, styles.leftAlignedRow, styles.xSmallMarginTop])}>
+                            <div style={inline([styles.centeredRow, styles.leftAlignedRow, styles.xSmallMarginTop])}>
                                 <Typography paragraph style={inline([styles.xSmallMarginTop, styles.primaryText])} variant={'subtitle1'}>
                                     Chamadas
                                 </Typography>
@@ -123,14 +154,20 @@ export const ClassesConfigurationScreen: FunctionComponent<IProps> = observer((p
                                     Chamadas
                                 </Typography>
                                 <Typography paragraph style={inline([styles.xSmallMarginTop, styles.xSmallMarginLeft])} variant={'body1'}>
-                                    à cada iteração
+                                    à cada ciclo
                                 </Typography>
                             </div>
                         </Grid>
 
-                        <Grid style={inline([styles.fullWidthContainer, styles.row])} >
-                            <Collapse style={inline([styles.centeredColumn, styles.leftAlignedColumn, styles.flowsContainer, styles.smallMarginTop, styles.paddingBottom, styles.paddingHorizontal])} in={true}>
-                                <DragDropContext onDragEnd={onDragEnd}>
+                        <Grid style={inline([styles.fullWidthContainer, styles.row, styles.xSmallMarginTop])} >
+                            <Collapse
+                                style={inline([
+                                    styles.topCenteredColumn,
+                                    styles.leftAlignedColumn,
+                                    styles.flowsContainer,
+                                ])}
+                                in={true}>
+                                <DragDropContext onDragStart={onDragStart} onDragEnd={onDragEnd}>
                                     <Droppable droppableId="list">
                                         {(provided, snapshot) => (
                                             <FlowClassesList provided={provided} snapshot={snapshot} flowClasses={simulationConfigurationStore.classesConfiguration.flowClasses} />
@@ -158,9 +195,10 @@ export const ClassesConfigurationScreen: FunctionComponent<IProps> = observer((p
                                     styles.xSmallPadding,
                                     styles.flex1,
                                     styles.selectedClassContainer,
-                                    styles.bigMarginLeft
+                                    styles.xSmallMarginLeft
                                 ])}>
-                                    <Container style={inline([styles.centeredRow, styles.leftAlignedRow])}>
+
+                                    <Container style={inline([styles.centeredRow, styles.leftAlignedRow, styles.xSmallPaddingHorizontal])}>
                                         <Grid item xs={12}>
                                             <div style={inline([styles.centeredRow, styles.spaceBetween, styles.xSmallMarginTop,])}>
                                                 <Typography paragraph style={inline([styles.primaryText])} variant={'h6'}>
@@ -168,7 +206,7 @@ export const ClassesConfigurationScreen: FunctionComponent<IProps> = observer((p
                                                 </Typography>
                                                 <Button onClick={onRemoveClassPressed} style={inline([styles.deleteButton, styles.centeredColumn, styles.xSmallPaddingHorizontal])}>
                                                     <Typography style={inline([styles.primaryText, styles.whiteText, styles.xSmallMarginRight])} variant={'button'}>
-                                                        Deletar
+                                                        Deletar [D]
                                                     </Typography>
                                                     <FontAwesomeIcon color={Colors.colors.white} size={'1x'} icon={faTrash} />
                                                 </Button>
@@ -238,25 +276,60 @@ export const ClassesConfigurationScreen: FunctionComponent<IProps> = observer((p
                                             </Typography>
                                             </div>
                                             <Divider style={inline([styles.xSmallMarginTop])} />
-                                            <Typography paragraph style={inline([styles.xSmallMarginTop, styles.primaryText])} variant={'h6'}>
+                                            <Typography paragraph style={inline([styles.primaryText, styles.xSmallMarginTop])} variant={'h6'}>
                                                 Degradação de Serviço no estabelecimento
-                                        </Typography>
-                                            <div style={inline([styles.fullWidthContainer, styles.centeredRow, styles.leftAlignedRow, styles.xSmallMarginTop])}>
-                                                <Typography paragraph style={inline([styles.xSmallMarginTop, styles.primaryText])} variant={'subtitle1'}>
-                                                    Degradação de Banda
+                                                <Checkbox
+                                                    checked={simulationConfigurationStore.classesConfiguration.selectedFlowClass &&
+                                                        simulationConfigurationStore.classesConfiguration.selectedFlowClass.degradationConfiguration &&
+                                                        simulationConfigurationStore.classesConfiguration.selectedFlowClass.degradationConfiguration.isDegradationTolerant === true}
+                                                    onChange={onToggleDegradationClicked}
+                                                    value="checkedA"
+                                                    inputProps={{
+                                                        'aria-label': 'primary checkbox',
+                                                    }}
+                                                />
                                             </Typography>
-                                                <Typography paragraph style={inline([styles.xSmallMarginTop, styles.xSmallMarginLeft])} variant={'body1'}>
-                                                    Permitir que a conexão seja estabelecida com até
-                                            </Typography>
-                                                <SpectrumTextInput style={inline([styles.xSmallMarginLeft])} value={20} onChange={(text) => { }} />
-
-                                                <Typography paragraph style={inline([styles.xSmallMarginTop, styles.xSmallMarginLeft, styles.primaryText])} variant={'subtitle1'}>
-                                                    %
-                                            </Typography>
-                                                <Typography paragraph style={inline([styles.xSmallMarginTop, styles.xSmallMarginLeft])} variant={'body1'}>
-                                                    de banda à menos.
-                                            </Typography>
-                                            </div>
+                                            {isDegradationTolerant && <Grow in={true}>
+                                                <div style={inline([styles.fullWidthContainer])}>
+                                                    <div style={inline([styles.fullWidthContainer, styles.centeredRow, styles.leftAlignedRow, styles.xSmallMarginTop])}>
+                                                        <Typography noWrap={true} paragraph style={inline([styles.xSmallMarginTop, styles.primaryText])} variant={'subtitle1'}>
+                                                            Degradação de Banda
+                                                        </Typography>
+                                                        <Typography noWrap={true} paragraph style={inline([styles.xSmallMarginTop, styles.xSmallMarginLeft])} variant={'body1'}>
+                                                            Permitir que a conexão seja estabelecida com até
+                                                        </Typography>
+                                                        <SpectrumTextInput
+                                                            type={'number'}
+                                                            style={inline([styles.xSmallMarginLeft])}
+                                                            value={simulationConfigurationStore.classesConfiguration.selectedFlowClass.degradationConfiguration.bandwidthDegradationRate}
+                                                            max={99}
+                                                            onChange={onBandDegradationTextChanged} />
+                                                        <Typography paragraph style={inline([styles.xSmallMarginTop, styles.xSmallMarginLeft, styles.primaryText])} variant={'subtitle1'}>
+                                                            %
+                                                        </Typography>
+                                                        <Typography noWrap={true} paragraph style={inline([styles.xSmallMarginTop, styles.xSmallMarginLeft])} variant={'body1'}>
+                                                            de banda à menos.
+                                                        </Typography>
+                                                    </div>
+                                                    <div style={inline([styles.fullWidthContainer, styles.centeredRow, styles.leftAlignedRow])}>
+                                                        <Typography noWrap={true} paragraph style={inline([styles.xSmallMarginTop, styles.primaryText])} variant={'subtitle1'}>
+                                                            Atraso
+                                                        </Typography>
+                                                        <Typography noWrap={true} paragraph style={inline([styles.xSmallMarginTop, styles.xSmallMarginLeft])} variant={'body1'}>
+                                                            Permitir que a conexão atrase até
+                                                        </Typography>
+                                                        <SpectrumTextInput
+                                                            type={'number'}
+                                                            style={inline([styles.xSmallMarginLeft])}
+                                                            value={simulationConfigurationStore.classesConfiguration.selectedFlowClass.degradationConfiguration.delayToleranceRate}
+                                                            max={99}
+                                                            onChange={onDelayToleranceTextChanged} />
+                                                        <Typography paragraph style={inline([styles.xSmallMarginTop, styles.xSmallMarginLeft, styles.primaryText])} variant={'subtitle1'}>
+                                                            Instantes
+                                                        </Typography>
+                                                    </div>
+                                                </div>
+                                            </Grow>}
                                         </Grid>
                                     </Container>
                                 </div>
@@ -265,6 +338,9 @@ export const ClassesConfigurationScreen: FunctionComponent<IProps> = observer((p
                     </Grid>
                 </div>
                 <img style={inline([styles.listPlaceholder])} src={require('../../Assets/Icons/listPlaceholder.svg')} alt="" />
+                <KeyboardEventHandler handleKeys={['d', 'del']}
+                    onKeyEvent={onRemoveClassPressed}
+                />
             </div>
         </Fade>
     );

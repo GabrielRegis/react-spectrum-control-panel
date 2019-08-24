@@ -3,7 +3,7 @@ import { TopologyConfigurationStore } from 'app/Store/TopologyConfigurationStore
 import Konva from 'konva';
 import { inject, observer } from 'mobx-react';
 import * as React from 'react';
-import { Layer, Rect } from 'react-konva';
+import { Group, Rect } from 'react-konva';
 import { v4 } from "uuid";
 import { NodeComponent } from './NodeComponent';
 
@@ -19,26 +19,26 @@ interface IState {
 
 @inject('topologyConfigurationStore')
 @observer
-export default class NodeLayer extends React.Component<IProps, IState>{
-    private layer?: Konva.Layer = null
+export default class NodeGroup extends React.Component<IProps, IState>{
+    private group?: Konva.Group = null
     constructor(props) {
         super(props)
         this.state = {
         }
     }
 
-    public onLayerClick = (event: Konva.KonvaEventObject<MouseEvent>) => {
+    public onGroupClick = (event: Konva.KonvaEventObject<MouseEvent>) => {
         if (this.props.mode !== 1) {
             return
         }
-        const mousePos = this.layer.getStage().getPointerPosition()
+        const mousePos = this.group.getStage().getPointerPosition()
         const id = v4()
         const newNode: TopologyNode = {
             id: id,
             shouldConvert: true,
             name: id,
-            posX: this.props.topologyConfigurationStore.isGridEnabled ? Math.round(mousePos.x / 40) * 40 : mousePos.x,
-            posY: this.props.topologyConfigurationStore.isGridEnabled ? Math.round(mousePos.y / 40) * 40 : mousePos.y
+            posX: this.props.topologyConfigurationStore.isGridEnabled ? Math.round(mousePos.x / this.props.topologyConfigurationStore.gridSize) * this.props.topologyConfigurationStore.gridSize : mousePos.x,
+            posY: this.props.topologyConfigurationStore.isGridEnabled ? Math.round(mousePos.y / this.props.topologyConfigurationStore.gridSize) * this.props.topologyConfigurationStore.gridSize : mousePos.y
         }
         this.props.topologyConfigurationStore.nodes.set(newNode.id, newNode)
     }
@@ -49,9 +49,10 @@ export default class NodeLayer extends React.Component<IProps, IState>{
 
     public render() {
         return (
-            <Layer
-                ref={ref => this.layer = ref}
-                onClick={this.onLayerClick}
+            <Group
+                ref={ref => this.group = ref}
+                onClick={this.onGroupClick}
+                listening={this.props.mode === 1}
             >
                 <Rect opacity={0} width={window.innerWidth - 5} height={window.innerHeight - 80} />
                 {this.props.topologyConfigurationStore && this.props.topologyConfigurationStore.nodes && Array.from(this.props.topologyConfigurationStore.nodes.values()).map((node) => {
@@ -63,7 +64,7 @@ export default class NodeLayer extends React.Component<IProps, IState>{
                         onNodeDeleted={() => this.onDeleteNode(node)}
                     />
                 })}
-            </Layer>
+            </Group>
         );
     }
 

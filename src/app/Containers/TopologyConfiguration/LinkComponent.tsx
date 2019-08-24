@@ -1,4 +1,5 @@
-import { TopologyConfigurationStore } from 'app/Store/TopologyConfigurationStore';
+import { TopologyLink } from 'app/Models/TopologyLink';
+import topologyConfigurationStore, { TopologyConfigurationStore } from 'app/Store/TopologyConfigurationStore';
 import Konva from 'konva';
 import { observe } from 'mobx';
 import { observer } from 'mobx-react';
@@ -11,6 +12,7 @@ interface IProps {
     topologyConfigurationStore?: TopologyConfigurationStore
     nodeA: TopologyNode
     nodeB: TopologyNode
+    link: TopologyLink
 }
 
 interface IState {
@@ -44,7 +46,9 @@ export default class LinkComponent extends React.Component<IProps, IState>{
             duration: 0.2
         })
     }
-
+    public onNodeClick = (event: Konva.KonvaEventObject<MouseEvent>) => {
+        topologyConfigurationStore.selectedLink = this.props.link
+    }
     public render() {
 
         const selectedNodes = this.props.topologyConfigurationStore && this.props.topologyConfigurationStore.selectedNodes && this.props.topologyConfigurationStore.selectedNodes.length > 0 ? this.props.topologyConfigurationStore.selectedNodes : []
@@ -57,11 +61,16 @@ export default class LinkComponent extends React.Component<IProps, IState>{
             stroke: "#FF6192",
             strokeWidth: 5,
             opacity: 0,
-            listening: false
+            // listening: false
+        }
+
+        const groupConfig = {
+            // draggable: true,
+            opacity: 1
         }
 
         return (
-            <Line ref={ref => this.line = ref} {...linkConfig} />
+            <Line listening={true} onClick={this.onNodeClick} ref={ref => this.line = ref} {...linkConfig} />
         );
     }
 

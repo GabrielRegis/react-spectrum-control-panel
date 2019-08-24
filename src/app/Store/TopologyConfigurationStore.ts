@@ -11,6 +11,7 @@ export class TopologyConfigurationStore {
     public links: ObservableMap<string, TopologyLink> = observable.map(new Map());
     @observable public isGridEnabled: boolean
     @observable public gridSize: number
+    @observable public selectedLink?: TopologyLink
 
     constructor() {
         this.selectedNodes = observable.array([]);
@@ -18,6 +19,7 @@ export class TopologyConfigurationStore {
         this.links = observable.map(new Map());
         this.isGridEnabled = true
         this.gridSize = 40
+        this.selectedLink = null
     }
 
     @computed get areTopologyConfigurationsReady() {
@@ -53,7 +55,10 @@ export class TopologyConfigurationStore {
             id: id,
             name: id,
             nodeA: nodeA,
-            nodeB: nodeB
+            nodeB: nodeB,
+            distance: 100,
+            slotSize: 12.5,
+            slots: 100
         }
         this.links.set(link.id, link)
         this.selectedNodes = observable.array([nodeB]);

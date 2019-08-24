@@ -1,14 +1,29 @@
 import { CSSProperties, StyleSheet } from 'aphrodite';
 import { ApplicationStyles, Colors } from "app/Theme";
-import { pulse } from 'react-animations';
 
+const selectedFlowAnimation = {
+    '0%': {
+        transform: 'scale(1)',
+        border: '3px solid ' + Colors.colors.white,
+    },
+
+    '50%': {
+        transform: 'scale(1.01)',
+        border: '3px solid ' + Colors.colors.pink,
+    },
+
+    '100%': {
+        transform: 'scale(1)',
+        border: '3px solid ' + Colors.colors.white,
+    },
+};
 
 export default {
     ...ApplicationStyles,
 
     aphroditeStyles: StyleSheet.create({
         selectedFlowContainer: {
-            animationName: pulse,
+            animationName: selectedFlowAnimation,
             animationDuration: '5s',
             animationIterationCount: 'infinite'
         } as CSSProperties
@@ -21,6 +36,7 @@ export default {
     flowsContainer: {
         borderRadius: 10,
         backgroundColor: Colors.colors.extraLightGray,
+        padding: 20,
     } as React.CSSProperties,
     selectedClassContainer: {
         ...ApplicationStyles.shadowView,

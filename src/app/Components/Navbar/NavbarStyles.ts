@@ -3,7 +3,7 @@ import { ApplicationStyles, Colors } from "app/Theme";
 export default {
     ...ApplicationStyles,
     navbar: {
-        backgroundColor: Colors.colors.extraLightGray,
+        backgroundColor: Colors.colors.white,
         height: 80,
         zIndex: 100
     } as React.CSSProperties,
