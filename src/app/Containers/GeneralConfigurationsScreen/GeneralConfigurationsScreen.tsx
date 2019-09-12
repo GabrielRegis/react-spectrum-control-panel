@@ -8,6 +8,7 @@ import { inline } from 'app/utils/StylesUtils';
 import { observer } from 'mobx-react-lite';
 import * as React from 'react';
 import { FunctionComponent, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { SpectrumTextInput } from '../../Components/SpectrumTextInput/SpectrumTextInput';
 import styles from './GeneralConfigurationsScreenStyles';
 
@@ -170,14 +171,17 @@ export const GeneralConfigurationsScreen: FunctionComponent<IProps> = observer((
                     </Grid>
                 </div>
                 <img style={inline([styles.listPlaceholder])} src={require('../../Assets/Icons/generalSettingsPlaceholder.svg')} alt="" />
-                <Button
-                    size={'large'}
-                    style={inline([styles.centeredColumn, styles.xSmallPaddingHorizontal, styles.nextButton, styles.marginTop])}>
-                    <Typography style={inline([styles.primaryText, styles.whiteText, styles.xSmallMarginRight])} variant={'button'}>
-                        Avançar
-                    </Typography>
-                    <FontAwesomeIcon color={Colors.colors.white} size={'1x'} icon={faArrowRight} />
-                </Button>
+                <Link style={{ textDecoration: 'none' }} to="/classes-configurations">
+                    <Button
+                        size={'large'}
+                        style={inline([styles.centeredColumn, styles.xSmallPaddingHorizontal, styles.nextButton, styles.marginTop])}>
+                        <Typography style={inline([styles.primaryText, styles.whiteText, styles.xSmallMarginRight])} variant={'button'}>
+                            Avançar
+                        </Typography>
+                        <FontAwesomeIcon color={Colors.colors.white} size={'1x'} icon={faArrowRight} />
+                    </Button>
+                </Link>
+
             </div>
 
         </Fade>

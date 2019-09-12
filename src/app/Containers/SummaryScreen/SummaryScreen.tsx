@@ -7,6 +7,7 @@ import { runSimulation } from 'app/Services/Api';
 import { simulationConfigurationStoreContext } from 'app/Store/SimulationConfigurationStore';
 import { topologyConfigurationStoreContext } from 'app/Store/TopologyConfigurationStore';
 import { inline } from 'app/utils/StylesUtils';
+import TopologyUtils from 'app/utils/TopologyUtils';
 import { observer } from 'mobx-react-lite';
 import * as React from 'react';
 import { FunctionComponent, useEffect } from 'react';
@@ -73,6 +74,11 @@ export const SummaryScreen: FunctionComponent<IProps> = observer((props) => {
                 }
             }
             return newNode
+        })
+
+        // Calculates links distance.
+        topologyConfigurationStore.links.forEach((link) => {
+            topologyConfigurationStore.links.get(link.id).distance = TopologyUtils.getLinkDistance(link.nodeA, link.nodeB)
         })
 
         const topologyConfiguration: TopologyConfiguration = {

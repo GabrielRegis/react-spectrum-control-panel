@@ -7,7 +7,7 @@ const colors = {
 
 
     // App color
-    patifeBackground: '#050505',
+    spectrumBackground: '#050505',
     darkGray: '#424242',
     lightDarkGray: '#4D4D4D',
     gray: '#B8B8B8',
@@ -23,14 +23,16 @@ const colors = {
     iosDarkGray: '#EFEFF4',
     iosBlue: '#007AFF',
     brownishGray: '#353535',
-    patifeTeal: '#50E3C2',
-    patifePurple: '#BD10E0',
-    patifeDarkGrayBorder: '#2C2C2D',
-    patifeDarkGrayCell: '#111111',
-    patifeBrownishGray: '#646464',
-    patifeAlert: '#151515',
-    patifeAlertText: '#007AFF',
+    spectrumTeal: '#50E3C2',
+    spectrumPurple: '#BD10E0',
+    spectrumDarkGrayBorder: '#2C2C2D',
+    spectrumDarkGrayCell: '#111111',
+    spectrumBrownishGray: '#646464',
+    spectrumAlert: '#151515',
+    spectrumAlertText: '#007AFF',
     pink: '#ea526f',
+    primaryPink: '#FF6192',
+    primaryLightBlue: '#00C9FF',
 
     // pxFeedbacks
     pxFeedPrimary: '#000000',

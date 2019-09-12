@@ -4,17 +4,17 @@ import { ApplicationStyles, Colors } from "app/Theme";
 const selectedFlowAnimation = {
     '0%': {
         transform: 'scale(1)',
-        border: '3px solid ' + Colors.colors.white,
+        border: '1px solid ' + Colors.colors.healthGreen,
     },
 
     '50%': {
         transform: 'scale(1.01)',
-        border: '3px solid ' + Colors.colors.pink,
+        border: '2px solid ' + Colors.colors.healthGreen,
     },
 
     '100%': {
         transform: 'scale(1)',
-        border: '3px solid ' + Colors.colors.white,
+        border: '1px solid ' + Colors.colors.healthGreen,
     },
 };
 
@@ -52,24 +52,25 @@ export default {
         marginBottom: 50
     } as React.CSSProperties,
     flowContainer: {
-        borderRadius: 60,
+        borderRadius: 10,
+        maxHeight: 60,
         backgroundColor: Colors.colors.white
     } as React.CSSProperties,
     draggingFlowContainer: {
-        borderRadius: 60,
+        borderRadius: 10,
         border: '2px solid',
         borderColor: Colors.colors.healthGreen,
         backgroundColor: Colors.colors.white,
     } as React.CSSProperties,
     flowClassIndicator: {
         backgroundColor: Colors.colors.primary,
-        height: 50,
-        width: 50,
-        borderRadius: 25
+        height: 20,
+        width: 20,
+        borderRadius: 10
     } as React.CSSProperties,
     addClassButton: {
         backgroundColor: Colors.colors.white,
-        borderRadius: 60,
+        borderRadius: 10,
         color: Colors.colors.primary
     } as React.CSSProperties,
     addIcon: {

@@ -31,7 +31,7 @@ export const NavbarButton: FunctionComponent<IProps> = (props) => {
     }, [])
 
     return (
-        <Button style={inline([styles.navbarButton, props.styles])} >
+        <Button disableFocusRipple={true} style={inline([styles.navbarButton, props.styles])} >
             <FontAwesomeIcon color={Colors.colors.primary} size={'2x'} icon={props.icon} />
             {props.shouldShowStatus !== false && <div style={inline([styles.buttonStatusContainer, styles.centeredColumn])}>
                 <FontAwesomeIcon

@@ -1,4 +1,4 @@
-import { ApplicationStyles, Colors } from "app/Theme";
+import { ApplicationStyles, Colors, Fonts } from "app/Theme";
 
 export default {
     ...ApplicationStyles,
@@ -59,7 +59,10 @@ export default {
         padding: 10,
         paddingRight: 15,
         paddingLeft: 15,
-        backgroundColor: Colors.colors.white
+        backgroundColor: Colors.colors.white,
+        fontFamily: Fonts.primaryFont,
+        color: Colors.colors.primary,
+        fontSize: 14
     } as React.CSSProperties,
     tipComponent: {
         position: 'absolute',

@@ -7,9 +7,10 @@ import { inject, observer } from 'mobx-react';
 import * as React from 'react';
 import KeyboardEventHandler from 'react-keyboard-event-handler';
 import { Layer, Line, Stage } from 'react-konva';
-import { default as LinkGroup, default as LinkLayer } from './LinkGroup';
-import { LinksAndNodesConfiguration } from './LinksAndNodesConfiguration';
-import NodeGroup from './NodeGroup';
+import { LinkConfiguration } from './LinkConfiguration';
+import { default as LinkLayer } from './LinkLayer';
+import { NodeConfiguration } from './NodeConfigurations';
+import NodeLayer from './NodeLayer';
 import styles from './TopologyConfigurationStyles';
 
 interface IProps {
@@ -216,21 +217,20 @@ export default class TopologyConfiguration extends React.Component<IProps, IStat
                         })}
                     </Layer>}
                     {/* Camada de nós */}
-                    <Layer>
 
-                        <LinkGroup
-                            ref={ref => this.linkLayer = ref}
-                            mode={this.state.mode}
-                            topologyConfigurationStore={this.props.topologyConfigurationStore}
-                        />
-                        <NodeGroup
-                            mode={this.state.mode}
-                            topologyConfigurationStore={this.props.topologyConfigurationStore}
-                        />
-                    </Layer>
+                    <LinkLayer
+                        ref={ref => this.linkLayer = ref}
+                        mode={this.state.mode}
+                        topologyConfigurationStore={this.props.topologyConfigurationStore}
+                    />
+                    <NodeLayer
+                        mode={this.state.mode}
+                        topologyConfigurationStore={this.props.topologyConfigurationStore}
+                    />
 
                 </Stage>
-                <LinksAndNodesConfiguration />
+                <LinkConfiguration />
+                <NodeConfiguration />
                 <Zoom in={true}>
                     <div style={inline([styles.centeredColumn, styles.leftAlignedColumn, styles.navbarButtonsContainer])}>
                         <Button style={inline([styles.shadowView, styles.openToolbarButton])} onClick={this.onToggleToolsPressed}>

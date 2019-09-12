@@ -222,6 +222,9 @@ export default {
     fullWidthContainer: {
         width: '100%'
     } as React.CSSProperties,
+    fullWidthVWContainer: {
+        width: '100vw'
+    } as React.CSSProperties,
 
     halfWidthContainer: {
         width: '50%',

@@ -14,11 +14,13 @@ interface IProps {
     value?: string | number
     onChange?: (text: string) => void
     style?: React.CSSProperties
+    inputStyle?: React.CSSProperties
     type?: 'number' | 'text'
     max?: number
     min?: number
     maxCharacters?: number
     error?: string
+    step?: number
 }
 
 interface IState {
@@ -56,13 +58,13 @@ export const SpectrumTextInput: FunctionComponent<IProps> = (props) => {
     }
 
     const onAddPressed = () => {
-        const newNumber = parseInt(props.value.toString()) + 1
+        const newNumber = parseFloat(props.value.toString()) + (props.step ? props.step : 1)
         const max = props.max ? props.max : 1000
         const min = props.min ? props.min : 0
         props.onChange(Math.min(Math.max(newNumber, min), max).toString())
     }
     const onSubtractPressed = () => {
-        const newNumber = parseInt(props.value.toString()) - 1
+        const newNumber = parseFloat(props.value.toString()) - (props.step ? props.step : 1)
         const max = props.max ? props.max : 1000
         const min = props.min ? props.min : 0
         props.onChange(Math.min(Math.max(newNumber, min), max).toString())
@@ -76,7 +78,7 @@ export const SpectrumTextInput: FunctionComponent<IProps> = (props) => {
         { ...props.style }])}>
 
             <AutosizeInput
-                inputStyle={inline([styles.textInput])}
+                inputStyle={inline([styles.textInput, props.inputStyle])}
                 name="form-field-name"
                 value={props.value}
                 onChange={(event) => onChange(event.target.value)}

@@ -128,38 +128,36 @@ export const ClassesConfigurationScreen: FunctionComponent<IProps> = observer((p
 
     return (
         <Fade timeout={{ enter: 600 }} in={true} mountOnEnter unmountOnExit>
-            <div style={inline([styles.flex1, styles.topCenteredColumn])}>
-                <div style={inline([styles.topCenteredColumn, styles.leftAlignedColumn, styles.paddingHorizontal, styles.xSmallMarginTop])}>
+            <div style={inline([styles.flex1, styles.topCenteredColumn, styles.paddingHorizontal])}>
+                <div style={inline([styles.fullWidthContainer, styles.topCenteredColumn, styles.leftAlignedColumn, styles.xSmallMarginTop])}>
                     <Typography variant="h4" style={inline([styles.primaryText])}>
                         Configurações das Requisições
                     </Typography>
 
-                    <Grid container spacing={1}>
-                        <Grid item xs={12}>
-                            <div style={inline([styles.centeredRow, styles.leftAlignedRow, styles.xSmallMarginTop])}>
-                                <Typography paragraph style={inline([styles.xSmallMarginTop, styles.primaryText])} variant={'subtitle1'}>
-                                    Chamadas
+                    <div style={inline([styles.fullWidthContainer])}>
+                        <div style={inline([styles.centeredRow, styles.leftAlignedRow, styles.xSmallMarginTop])}>
+                            <Typography paragraph style={inline([styles.xSmallMarginTop, styles.primaryText])} variant={'subtitle1'}>
+                                Chamadas
                                 </Typography>
-                                <Typography paragraph style={inline([styles.xSmallMarginTop, styles.xSmallMarginLeft])} variant={'body1'}>
-                                    Realizar
+                            <Typography paragraph style={inline([styles.xSmallMarginTop, styles.xSmallMarginLeft])} variant={'body1'}>
+                                Realizar
                                 </Typography>
-                                <SpectrumTextInput
-                                    style={inline([styles.xSmallMarginLeft])}
-                                    type={'number'}
-                                    min={10}
-                                    max={1000}
-                                    value={simulationConfigurationStore.classesConfiguration.callsNumber}
-                                    onChange={onCallsTextChanged} />
-                                <Typography paragraph style={inline([styles.xSmallMarginTop, styles.xSmallMarginLeft, styles.primaryText])} variant={'subtitle1'}>
-                                    Chamadas
+                            <SpectrumTextInput
+                                style={inline([styles.xSmallMarginLeft])}
+                                type={'number'}
+                                min={10}
+                                max={1000}
+                                value={simulationConfigurationStore.classesConfiguration.callsNumber}
+                                onChange={onCallsTextChanged} />
+                            <Typography paragraph style={inline([styles.xSmallMarginTop, styles.xSmallMarginLeft, styles.primaryText])} variant={'subtitle1'}>
+                                Chamadas
                                 </Typography>
-                                <Typography paragraph style={inline([styles.xSmallMarginTop, styles.xSmallMarginLeft])} variant={'body1'}>
-                                    à cada ciclo
+                            <Typography paragraph style={inline([styles.xSmallMarginTop, styles.xSmallMarginLeft])} variant={'body1'}>
+                                à cada ciclo
                                 </Typography>
-                            </div>
-                        </Grid>
+                        </div>
 
-                        <Grid style={inline([styles.fullWidthContainer, styles.row, styles.xSmallMarginTop])} >
+                        <Grid item xs={12} style={inline([styles.upAlignedRow, styles.leftAlignedRow, styles.xSmallMarginTop])} >
                             <Collapse
                                 style={inline([
                                     styles.topCenteredColumn,
@@ -335,7 +333,7 @@ export const ClassesConfigurationScreen: FunctionComponent<IProps> = observer((p
                                 </div>
                             </Grow>
                         </Grid>
-                    </Grid>
+                    </div>
                 </div>
                 <img style={inline([styles.listPlaceholder])} src={require('../../Assets/Icons/listPlaceholder.svg')} alt="" />
                 <KeyboardEventHandler handleKeys={['d', 'del']}

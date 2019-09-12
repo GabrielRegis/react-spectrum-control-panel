@@ -57,13 +57,13 @@ export default class DebugLink extends React.Component<IProps, IState>{
         }
 
         return (
-            <Group>
+            <Group listening={false}>
                 <KeyboardEventHandler handleKeys={['x', 'del']}
                     onKeyEvent={(key, e) => {
                         this.props.topologyConfigurationStore.cancelLink()
                     }}
                 />
-                <Line ref={ref => this.debugLink = ref} {...debugLinkConfig} />
+                <Line listening={false} ref={ref => this.debugLink = ref} {...debugLinkConfig} />
 
             </Group>
         );

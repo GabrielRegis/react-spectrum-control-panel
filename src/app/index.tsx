@@ -12,19 +12,21 @@ import { SummaryScreen } from './Containers/SummaryScreen/SummaryScreen';
 import TopologyConfiguration from './Containers/TopologyConfiguration/TopologyConfiguration';
 import './main.css';
 import rootStore from './Store/RootStore';
-import styles from './Theme/AppStyles';
 
 class AppClass extends React.Component {
   render() {
     return (<Provider  {...rootStore}>
       <Router >
-        <div style={inline([styles.fullContainer])}>
+        <div style={inline([{ height: '100vh', width: '100vw' }])}>
           <Navbar />
-          <Route exact path="/" component={HomeScreen} />
-          <Route path="/general-configurations" component={GeneralConfigurationsScreen} />
-          <Route path="/classes-configurations" component={ClassesConfigurationScreen} />
-          <Route path="/topology-configurations" component={TopologyConfiguration} />
-          <Route path="/summary" component={SummaryScreen} />
+
+          <div style={inline([{ height: window.innerHeight - 80, paddingTop: 80, width: '100vw' }])}>
+            <Route exact path="/" component={HomeScreen} />
+            <Route path="/general-configurations" component={GeneralConfigurationsScreen} />
+            <Route path="/classes-configurations" component={ClassesConfigurationScreen} />
+            <Route path="/topology-configurations" component={TopologyConfiguration} />
+            <Route path="/summary" component={SummaryScreen} />
+          </div>
         </div>
       </Router>
     </Provider>)
