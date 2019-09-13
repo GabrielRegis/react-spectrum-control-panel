@@ -1,0 +1,35 @@
+body, ul {
+  margin: 0;
+  padding: 0;
+}
+@font-face {
+  font-family: "Skarpa Regular";
+  src: url(ae1ed0a59dc97c65817205ac2033733e.woff2) format("woff2"),
+    url(de55234d483d9e1e0ae7eb44d75d9a44.woff) format("font-woff");
+}
+@font-face {
+  font-family: "Avenir Next";
+  src: url(b1b4b2738bd453aba3543944dc2b539b.woff2) format("woff2");
+}
+@font-face {
+  font-family: "Avenir Next Medium";
+  src: url(de55234d483d9e1e0ae7eb44d75d9a44.woff) format("woff");
+}
+@font-face {
+  font-family: "Multi Regular";
+  src: url(335bf2fbcc9b1e860860c7375f22397c.woff2) format("woff2");
+}
+@font-face {
+  font-family: "Skarpa Regular";
+  src: url(cfac038e2cc9fa1c5c1cf3766d3f1e93.woff) format("woff");
+}
+@font-face {
+  font-family: "Gilroy";
+  src: url(fdacc8e1bca150a398aea03be669ca8d.woff2) format("woff2");
+}
+body{
+  color: #5A5F70;
+}
+
+
+
