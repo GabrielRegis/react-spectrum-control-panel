@@ -1,0 +1,74 @@
+import { Button } from '@material-ui/core';
+import { BlurView } from 'app/Components/BlurView/BlurView';
+import { SpectrumText } from 'app/Components/SpectrumText/SpectrumText';
+import { simulationSummaryStoreContext } from 'app/Store/SimulationSummaryStore';
+import { inline } from 'app/utils/StylesUtils';
+import { observer } from 'mobx-react-lite';
+import * as React from 'react';
+import { FunctionComponent, useEffect } from 'react';
+import { CriticalEventsStatistics } from '../../../Components/CriticalEventsStatistics/CriticalEventsStatistics';
+import { SimulationLoadsStatistics } from '../../../Components/SimulationLoadsStatistics/SimulationLoadsStatistics';
+import { SimulationStatistics } from '../../../Components/SimulationStatistics/SimulationStatistics';
+import styles from './ResultsScreenStyles';
+
+interface IProps {
+    // Props type definition
+}
+
+interface IState {
+    // State type definition
+}
+
+export const ResultsScreen: FunctionComponent<IProps> = observer((props) => {
+    const simulationSummaryStore = React.useContext(simulationSummaryStoreContext)
+    const initialState: IState = {
+    };
+
+    // ComponentDidMount
+    useEffect(() => {
+        return () => {
+            //ComponentDidUnmount
+        }
+    }, [])
+
+
+    const simulationInstanceSummaries = simulationSummaryStore.simulationSummary.simulationInstanceSummaries
+
+    return (
+        <div style={inline([styles.fullWidthContainer, styles.topCenteredColumn, styles.positionRelative])}>
+            <Button onClick={() => {
+                simulationSummaryStore.simulationSummary = null
+            }}>
+                <SpectrumText>
+                    Voltar
+            </SpectrumText>
+            </Button>
+            <div style={inline([styles.statisticsContainer, styles.marginTop, styles.centeredRow,])}>
+                <BlurView style={inline([styles.bigPadding, styles.centeredColumn])} backgroundSource={require('../../../Assets/Backgrounds/pyramid.jpeg')}>
+                    <SimulationStatistics
+                        title={'Resultados Gerais'}
+                        cycleNum={simulationSummaryStore.simulationSummary.cycleNum}
+                        loadStep={simulationSummaryStore.simulationSummary.loadStep}
+                        initialLoad={simulationSummaryStore.simulationSummary.startLoad}
+                        simulationSummary={simulationSummaryStore.simulationSummary}
+                        statistics={simulationSummaryStore.simulationSummary.statistics} />
+                </BlurView>
+            </div>
+            <div style={inline([styles.statisticsContainer, styles.intanceStatisticsContainer, styles.marginTop, styles.centeredRow,])}>
+                <BlurView blurAmount={20} style={inline([styles.bigPadding, styles.centeredColumn])} backgroundSource={require('../../../Assets/Backgrounds/pyramidC.jpeg')}>
+                    <SimulationLoadsStatistics
+                        cycleNum={simulationSummaryStore.simulationSummary.cycleNum}
+                        simulationInstanceSummaries={simulationInstanceSummaries} />
+                </BlurView>
+            </div>
+
+            <div style={inline([styles.statisticsContainer, styles.criticalEventsContainer, styles.marginTop, styles.centeredRow,])}>
+                <BlurView style={inline([styles.bigPadding, styles.centeredColumn])} backgroundSource={require('../../../Assets/Backgrounds/pyramid.jpeg')}>
+                    <CriticalEventsStatistics
+                    />
+                </BlurView>
+            </div>
+
+        </div>
+    );
+});

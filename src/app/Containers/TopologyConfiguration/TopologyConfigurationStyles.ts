@@ -60,7 +60,7 @@ export default {
         paddingRight: 15,
         paddingLeft: 15,
         backgroundColor: Colors.colors.white,
-        fontFamily: Fonts.primaryFont,
+        fontFamily: Fonts.appFont,
         color: Colors.colors.primary,
         fontSize: 14
     } as React.CSSProperties,

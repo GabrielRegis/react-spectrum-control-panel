@@ -1,4 +1,4 @@
-import { Button, Collapse, Grid, Typography, Zoom } from '@material-ui/core';
+import { Button, Collapse, Grid, Zoom } from '@material-ui/core';
 import { TopologyConfigurationStore } from 'app/Store/TopologyConfigurationStore';
 import { Colors } from 'app/Theme';
 import { inline } from 'app/utils/StylesUtils';
@@ -7,6 +7,7 @@ import { inject, observer } from 'mobx-react';
 import * as React from 'react';
 import KeyboardEventHandler from 'react-keyboard-event-handler';
 import { Layer, Line, Stage } from 'react-konva';
+import { SpectrumText } from '../../Components/SpectrumText/SpectrumText';
 import { LinkConfiguration } from './LinkConfiguration';
 import { default as LinkLayer } from './LinkLayer';
 import { NodeConfiguration } from './NodeConfigurations';
@@ -95,16 +96,15 @@ export default class TopologyConfiguration extends React.Component<IProps, IStat
                                         this.state.mode === 0 ? styles.toolbarButtonPressed : {}])}
                                 >
                                     <div style={inline([styles.keyboardShortcutNumberContainer, styles.centeredColumn])}>
-                                        <Typography variant="button">
+                                        <SpectrumText size={'c13'} weight={'semibold'}>
                                             1
-                                        </Typography>
+                                        </SpectrumText>
                                     </div>
                                     <div style={inline([styles.topCenteredColumn, styles.flex1])}>
-                                        <Typography style={inline([
-                                            styles.buttonText,
-                                        ])} variant="button">
+                                        <SpectrumText style={inline([styles.buttonText])} size={'c13'} weight={'semibold'}
+                                        >
                                             Cursor
-                                        </Typography>
+                                        </SpectrumText>
                                         <img
                                             style={inline([styles.cursorIcon])}
                                             src={require('../../Assets/Icons/icCursor.png')}
@@ -126,16 +126,14 @@ export default class TopologyConfiguration extends React.Component<IProps, IStat
                                         this.state.mode === 1 ? styles.toolbarButtonPressed : {}])}
                                 >
                                     <div style={inline([styles.keyboardShortcutNumberContainer, styles.centeredColumn])}>
-                                        <Typography variant="button">
+                                        <SpectrumText size={'c13'} weight={'semibold'}>
                                             2
-                                        </Typography>
+                                        </SpectrumText>
                                     </div>
                                     <div style={inline([styles.topCenteredColumn, styles.flex1])}>
-                                        <Typography style={inline([
-                                            styles.buttonText,
-                                        ])} variant="button">
+                                        <SpectrumText style={inline([styles.buttonText])} size={'c13'} weight={'semibold'}>
                                             Nodos
-                                        </Typography>
+                                        </SpectrumText>
                                         <img
                                             style={inline([styles.nodeIcon])}
                                             src={require('../../Assets/Icons/icNode.png')}
@@ -158,16 +156,14 @@ export default class TopologyConfiguration extends React.Component<IProps, IStat
                                         this.state.mode === 2 ? styles.toolbarButtonPressed : {}])}
                                 >
                                     <div style={inline([styles.keyboardShortcutNumberContainer, styles.centeredColumn])}>
-                                        <Typography variant="button">
+                                        <SpectrumText size={'c13'} weight={'semibold'}>
                                             3
-                                        </Typography>
+                                        </SpectrumText>
                                     </div>
                                     <div style={inline([styles.topCenteredColumn, styles.flex1])}>
-                                        <Typography style={inline([
-                                            styles.buttonText,
-                                        ])} variant="button">
+                                        <SpectrumText style={inline([styles.buttonText])} size={'c11'} weight={'semibold'}>
                                             Enlaces
-                                        </Typography>
+                                        </SpectrumText>
                                         <img
                                             style={inline([styles.linkNode])}
                                             src={require('../../Assets/Icons/icLink.png')}
@@ -230,6 +226,7 @@ export default class TopologyConfiguration extends React.Component<IProps, IStat
 
                 </Stage>
                 <LinkConfiguration />
+
                 <NodeConfiguration />
                 <Zoom in={true}>
                     <div style={inline([styles.centeredColumn, styles.leftAlignedColumn, styles.navbarButtonsContainer])}>

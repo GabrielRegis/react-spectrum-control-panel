@@ -1,7 +1,7 @@
 import { NodeComponent } from 'app/Containers/TopologyConfiguration/NodeComponent';
 import { TopologyNode } from 'app/Models/TopologyNode';
 import { action, computed, IObservableArray, observable, ObservableMap } from 'mobx';
-import { create } from 'mobx-persist';
+import { create, persist } from 'mobx-persist';
 import { createContext } from 'react';
 import { v4 } from "uuid";
 import LinkComponent from '../Containers/TopologyConfiguration/LinkComponent';
@@ -9,8 +9,8 @@ import { TopologyLink } from '../Models/TopologyLink';
 
 export class TopologyConfigurationStore {
     @observable public selectedNodes: IObservableArray<TopologyNode> = observable.array([]);
-    public nodes: ObservableMap<string, TopologyNode> = observable.map(new Map());
-    public links: ObservableMap<string, TopologyLink> = observable.map(new Map());
+    @persist('object') public nodes: ObservableMap<string, TopologyNode> = observable.map(new Map());
+    @persist('object') public links: ObservableMap<string, TopologyLink> = observable.map(new Map());
     @observable public isGridEnabled: boolean
     @observable public gridSize: number
     @observable public selectedLink?: TopologyLink

@@ -7,7 +7,79 @@ import Fonts from "./Fonts";
 //box-shadow: 2px 2px 20px 0px rgba(204, 204, 204, 0.27);
 
 export default {
+    regularTextSpacing: {
+        letterSpacing: 0
+    } as React.CSSProperties,
+    bigTextSpacing: {
+        letterSpacing: 0.3
+    } as React.CSSProperties,
+    miniTextSpacing: {
+        letterSpacing: -0.3
+    } as React.CSSProperties,
+    text40: {
+        fontSize: 40,
+    } as React.CSSProperties,
+    text34: {
+        fontSize: 34
+    } as React.CSSProperties,
+    text28: {
+        fontSize: 28
+    } as React.CSSProperties,
+    text22: {
+        fontSize: 22
+    } as React.CSSProperties,
+    text20: {
+        fontSize: 20
+    } as React.CSSProperties,
+    text17: {
+        fontSize: 17
+    } as React.CSSProperties,
+    text15: {
+        fontSize: 15
+    } as React.CSSProperties,
+    text13: {
+        fontSize: 13
+    } as React.CSSProperties,
+    text11: {
+        fontSize: 11
+    } as React.CSSProperties,
+    thinText: {
+        fontFamily: Fonts.appFontThin,
+    } as React.CSSProperties,
+    lightText: {
+        fontFamily: Fonts.appFontLight,
+    } as React.CSSProperties,
+    regularText: {
+        fontFamily: Fonts.appFont,
+    } as React.CSSProperties,
+    semiBoldText: {
+        fontFamily: Fonts.appFontSemibold,
+    } as React.CSSProperties,
+    boldText: {
+        fontFamily: Fonts.appBoldFont,
+    } as React.CSSProperties,
+    regularSystemText: {
+        fontFamily: Fonts.defaultFont,
+    } as React.CSSProperties,
+    semiBoldSystemText: {
+        fontFamily: Fonts.defaultSemiBoldFont,
+    } as React.CSSProperties,
+    boldSystemText: {
+        fontFamily: Fonts.defaultBoldFont,
+    } as React.CSSProperties,
+    textAlignHorizontalCenter: {
+        textAlign: 'center',
+    } as React.CSSProperties,
 
+    verticalDivider: {
+        height: '100%',
+        width: 0.5,
+        backgroundColor: Colors.colors.white,
+        opacity: 0.5
+    } as React.CSSProperties,
+    positionRelative: {
+        position: 'relative'
+    } as React.CSSProperties,
     nextButton: {
         borderRadius: 40,
         width: 300,
@@ -24,10 +96,10 @@ export default {
         color: Colors.colors.primary
     } as React.CSSProperties,
     secondaryText: {
-        fontFamily: Fonts.secondaryFont
+        fontFamily: Fonts.defaultFont
     } as React.CSSProperties,
     primaryText: {
-        fontFamily: Fonts.primaryFont
+        fontFamily: Fonts.appFont
     } as React.CSSProperties,
     configurationContainer: {
         WebkitBoxShadow: '2px 2px 20px 0px rgba(204, 204, 204, 0.15)',

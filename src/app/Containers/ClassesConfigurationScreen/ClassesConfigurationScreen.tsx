@@ -1,7 +1,8 @@
 import { faPlusCircle, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Checkbox, Collapse, Container, Divider, Fade, Grid, Grow, Typography } from '@material-ui/core';
+import { Checkbox, Collapse, Container, Divider, Fade, Grid, Grow } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
+import { SpectrumText } from 'app/Components/SpectrumText/SpectrumText';
 import { SpectrumTextInput } from 'app/Components/SpectrumTextInput/SpectrumTextInput';
 import { CallDegradationConfiguration } from 'app/Models/CallDegradationConfiguration';
 import { simulationConfigurationStoreContext } from 'app/Store/SimulationConfigurationStore';
@@ -16,7 +17,6 @@ import { v4 } from "uuid";
 import { CallClassConfiguration } from '../../Models/CallClassConfiguration';
 import { FlowClassesList } from './FlowClassesList';
 import styles from './FlowsConfigurationStyles';
-
 
 interface IProps {
     // Props type definition
@@ -130,31 +130,32 @@ export const ClassesConfigurationScreen: FunctionComponent<IProps> = observer((p
         <Fade timeout={{ enter: 600 }} in={true} mountOnEnter unmountOnExit>
             <div style={inline([styles.flex1, styles.topCenteredColumn, styles.paddingHorizontal])}>
                 <div style={inline([styles.fullWidthContainer, styles.topCenteredColumn, styles.leftAlignedColumn, styles.xSmallMarginTop])}>
-                    <Typography variant="h4" style={inline([styles.primaryText])}>
+                    <SpectrumText size={'h2'} weight={'bold'} color={Colors.colors.primary}>
                         Configurações das Requisições
-                    </Typography>
+                    </SpectrumText>
 
                     <div style={inline([styles.fullWidthContainer])}>
                         <div style={inline([styles.centeredRow, styles.leftAlignedRow, styles.xSmallMarginTop])}>
-                            <Typography paragraph style={inline([styles.xSmallMarginTop, styles.primaryText])} variant={'subtitle1'}>
+                            <SpectrumText
+                                color={Colors.colors.primary} size={'b17'} weight={'bold'}>
                                 Chamadas
-                                </Typography>
-                            <Typography paragraph style={inline([styles.xSmallMarginTop, styles.xSmallMarginLeft])} variant={'body1'}>
+                            </SpectrumText>
+                            <SpectrumText style={inline([styles.xSmallMarginLeft])} size={'b15'}>
                                 Realizar
-                                </Typography>
+                            </SpectrumText>
                             <SpectrumTextInput
                                 style={inline([styles.xSmallMarginLeft])}
                                 type={'number'}
                                 min={10}
-                                max={1000}
+                                max={10000}
                                 value={simulationConfigurationStore.classesConfiguration.callsNumber}
                                 onChange={onCallsTextChanged} />
-                            <Typography paragraph style={inline([styles.xSmallMarginTop, styles.xSmallMarginLeft, styles.primaryText])} variant={'subtitle1'}>
+                            <SpectrumText style={inline([styles.xSmallMarginLeft])} size={'b15'} weight={'semibold'}>
                                 Chamadas
-                                </Typography>
-                            <Typography paragraph style={inline([styles.xSmallMarginTop, styles.xSmallMarginLeft])} variant={'body1'}>
+                            </SpectrumText>
+                            <SpectrumText style={inline([styles.xSmallMarginLeft])} size={'b15'}>
                                 à cada ciclo
-                                </Typography>
+                                </SpectrumText>
                         </div>
 
                         <Grid item xs={12} style={inline([styles.upAlignedRow, styles.leftAlignedRow, styles.xSmallMarginTop])} >
@@ -181,9 +182,9 @@ export const ClassesConfigurationScreen: FunctionComponent<IProps> = observer((p
                                         styles.paddingHorizontal,
                                         styles.shadowView
                                     ])}>
-                                    <Typography paragraph style={inline([styles.xSmallMarginTop, styles.primaryText, styles.xSmallMarginRight])} variant={'subtitle1'}>
+                                    <SpectrumText style={inline([styles.xSmallMarginRight])} size={'b15'} weight={'bold'}>
                                         Adicionar Classe
-                                    </Typography>
+                                    </SpectrumText>
                                     <FontAwesomeIcon size={'2x'} style={inline([styles.addIcon])} icon={faPlusCircle} />
                                 </Button>
                             </Collapse>
@@ -199,60 +200,60 @@ export const ClassesConfigurationScreen: FunctionComponent<IProps> = observer((p
                                     <Container style={inline([styles.centeredRow, styles.leftAlignedRow, styles.xSmallPaddingHorizontal])}>
                                         <Grid item xs={12}>
                                             <div style={inline([styles.centeredRow, styles.spaceBetween, styles.xSmallMarginTop,])}>
-                                                <Typography paragraph style={inline([styles.primaryText])} variant={'h6'}>
+                                                <SpectrumText size={'b20'} weight={'bold'}>
                                                     Configuração de Classe
-                                                </Typography>
+                                                </SpectrumText>
                                                 <Button onClick={onRemoveClassPressed} style={inline([styles.deleteButton, styles.centeredColumn, styles.xSmallPaddingHorizontal])}>
-                                                    <Typography style={inline([styles.primaryText, styles.whiteText, styles.xSmallMarginRight])} variant={'button'}>
+                                                    <SpectrumText style={inline([styles.whiteText, styles.xSmallMarginRight])} size={'c13'} weight={'semibold'}>
                                                         Deletar [D]
-                                                    </Typography>
+                                                    </SpectrumText>
                                                     <FontAwesomeIcon color={Colors.colors.white} size={'1x'} icon={faTrash} />
                                                 </Button>
                                             </div>
-                                            <div style={inline([styles.fullWidthContainer, styles.centeredRow, styles.leftAlignedRow])}>
-                                                <Typography paragraph style={inline([styles.xSmallMarginTop, styles.primaryText])} variant={'subtitle1'}>
+                                            <div style={inline([styles.fullWidthContainer, styles.centeredRow, styles.leftAlignedRow, styles.xSmallMarginTop])}>
+                                                <SpectrumText size={'b17'} weight={'semibold'}>
                                                     Nome da Classe
-                                                </Typography>
+                                                </SpectrumText>
                                                 <SpectrumTextInput
                                                     style={inline([styles.xSmallMarginLeft])}
                                                     value={simulationConfigurationStore.classesConfiguration.selectedFlowClass.name}
                                                     onChange={onClassNameTextChanged} />
                                             </div>
-                                            <div style={inline([styles.fullWidthContainer, styles.centeredRow, styles.leftAlignedRow])}>
-                                                <Typography paragraph style={inline([styles.xSmallMarginTop, styles.primaryText])} variant={'subtitle1'}>
+                                            <div style={inline([styles.fullWidthContainer, styles.centeredRow, styles.leftAlignedRow, styles.xSmallMarginTop])}>
+                                                <SpectrumText size={'b17'} weight={'semibold'}>
                                                     Banda requisitada
-                                                </Typography>
-                                                <Typography paragraph style={inline([styles.xSmallMarginTop, styles.xSmallMarginLeft])} variant={'body1'}>
+                                                </SpectrumText>
+                                                <SpectrumText style={inline([styles.xSmallMarginLeft])} size={'b15'}>
                                                     Requisitar entre
-                                                </Typography>
+                                                </SpectrumText>
                                                 <SpectrumTextInput
                                                     style={inline([styles.xSmallMarginLeft])}
                                                     type={'number'}
                                                     max={simulationConfigurationStore.classesConfiguration.selectedFlowClass.maxBandwidth}
                                                     value={simulationConfigurationStore.classesConfiguration.selectedFlowClass.minBandwidth}
                                                     onChange={onMinBandwidthTextChanged} />
-                                                <Typography paragraph style={inline([styles.xSmallMarginTop, styles.xSmallMarginLeft])} variant={'body1'}>
+                                                <SpectrumText style={inline([styles.xSmallMarginLeft])} size={'b15'}>
                                                     e
-                                                </Typography>
+                                                </SpectrumText>
                                                 <SpectrumTextInput
                                                     style={inline([styles.xSmallMarginLeft])}
                                                     type={'number'}
                                                     value={simulationConfigurationStore.classesConfiguration.selectedFlowClass.maxBandwidth}
                                                     onChange={onMaxBandwidthTextChanged} />
-                                                <Typography paragraph style={inline([styles.xSmallMarginTop, styles.xSmallMarginLeft, styles.primaryText])} variant={'subtitle1'}>
+                                                <SpectrumText style={inline([styles.xSmallMarginLeft])} size={'b15'} weight={'semibold'}>
                                                     GB/s
-                                                </Typography>
-                                                <Typography paragraph style={inline([styles.xSmallMarginTop, styles.xSmallMarginLeft])} variant={'body1'}>
+                                                </SpectrumText>
+                                                <SpectrumText style={inline([styles.xSmallMarginLeft])} size={'b15'}>
                                                     de banda larga.
-                                                </Typography>
+                                                </SpectrumText>
                                             </div>
-                                            <div style={inline([styles.fullWidthContainer, styles.centeredRow, styles.leftAlignedRow])}>
-                                                <Typography paragraph style={inline([styles.xSmallMarginTop, styles.primaryText])} variant={'subtitle1'}>
+                                            <div style={inline([styles.fullWidthContainer, styles.centeredRow, styles.leftAlignedRow, styles.xSmallMarginTop])}>
+                                                <SpectrumText size={'b17'} weight={'semibold'}>
                                                     Duração
-                                            </Typography>
-                                                <Typography paragraph style={inline([styles.xSmallMarginTop, styles.xSmallMarginLeft])} variant={'body1'}>
+                                                </SpectrumText>
+                                                <SpectrumText style={inline([styles.xSmallMarginLeft])} size={'b15'}>
                                                     Durar entre
-                                            </Typography>
+                                                </SpectrumText>
                                                 <SpectrumTextInput
                                                     style={inline([styles.xSmallMarginLeft])}
                                                     type={'number'}
@@ -260,21 +261,21 @@ export const ClassesConfigurationScreen: FunctionComponent<IProps> = observer((p
                                                     min={1}
                                                     max={simulationConfigurationStore.classesConfiguration.selectedFlowClass.maxHoldingTime}
                                                     onChange={onMinHoldingTimeTextChanged} />
-                                                <Typography paragraph style={inline([styles.xSmallMarginTop, styles.xSmallMarginLeft])} variant={'body1'}>
+                                                <SpectrumText style={inline([styles.xSmallMarginLeft])} size={'b15'}>
                                                     e
-                                            </Typography>
+                                                </SpectrumText>
                                                 <SpectrumTextInput
                                                     style={inline([styles.xSmallMarginLeft])}
                                                     type={'number'}
                                                     min={1}
                                                     value={simulationConfigurationStore.classesConfiguration.selectedFlowClass.maxHoldingTime}
                                                     onChange={onMaxHoldingTimeTextChanged} />
-                                                <Typography paragraph style={inline([styles.xSmallMarginTop, styles.xSmallMarginLeft, styles.primaryText])} variant={'subtitle1'}>
+                                                <SpectrumText style={inline([styles.xSmallMarginLeft])} size={'b15'} weight={'semibold'}>
                                                     Instantes.
-                                            </Typography>
+                                            </SpectrumText>
                                             </div>
                                             <Divider style={inline([styles.xSmallMarginTop])} />
-                                            <Typography paragraph style={inline([styles.primaryText, styles.xSmallMarginTop])} variant={'h6'}>
+                                            <SpectrumText style={inline([styles.xSmallMarginTop])} size={'b20'} weight={'semibold'}>
                                                 Degradação de Serviço no estabelecimento
                                                 <Checkbox
                                                     checked={simulationConfigurationStore.classesConfiguration.selectedFlowClass &&
@@ -286,48 +287,48 @@ export const ClassesConfigurationScreen: FunctionComponent<IProps> = observer((p
                                                         'aria-label': 'primary checkbox',
                                                     }}
                                                 />
-                                            </Typography>
-                                            {isDegradationTolerant && <Grow in={true}>
+                                            </SpectrumText>
+                                            {isDegradationTolerant && <Fade in={true}>
                                                 <div style={inline([styles.fullWidthContainer])}>
-                                                    <div style={inline([styles.fullWidthContainer, styles.centeredRow, styles.leftAlignedRow, styles.xSmallMarginTop])}>
-                                                        <Typography noWrap={true} paragraph style={inline([styles.xSmallMarginTop, styles.primaryText])} variant={'subtitle1'}>
+                                                    <div style={inline([styles.fullWidthContainer, styles.centeredRow, styles.leftAlignedRow])}>
+                                                        <SpectrumText size={'b17'} weight={'semibold'}>
                                                             Degradação de Banda
-                                                        </Typography>
-                                                        <Typography noWrap={true} paragraph style={inline([styles.xSmallMarginTop, styles.xSmallMarginLeft])} variant={'body1'}>
+                                                        </SpectrumText>
+                                                        <SpectrumText style={inline([styles.xSmallMarginLeft])} size={'b15'}>
                                                             Permitir que a conexão seja estabelecida com até
-                                                        </Typography>
+                                                        </SpectrumText>
                                                         <SpectrumTextInput
                                                             type={'number'}
                                                             style={inline([styles.xSmallMarginLeft])}
                                                             value={simulationConfigurationStore.classesConfiguration.selectedFlowClass.degradationConfiguration.bandwidthDegradationRate}
                                                             max={99}
                                                             onChange={onBandDegradationTextChanged} />
-                                                        <Typography paragraph style={inline([styles.xSmallMarginTop, styles.xSmallMarginLeft, styles.primaryText])} variant={'subtitle1'}>
+                                                        <SpectrumText style={inline([styles.xSmallMarginLeft])} size={'b15'} weight={'semibold'} >
                                                             %
-                                                        </Typography>
-                                                        <Typography noWrap={true} paragraph style={inline([styles.xSmallMarginTop, styles.xSmallMarginLeft])} variant={'body1'}>
+                                                        </SpectrumText>
+                                                        <SpectrumText style={inline([styles.xSmallMarginLeft])} size={'b15'}>
                                                             de banda à menos.
-                                                        </Typography>
+                                                        </SpectrumText>
                                                     </div>
-                                                    <div style={inline([styles.fullWidthContainer, styles.centeredRow, styles.leftAlignedRow])}>
-                                                        <Typography noWrap={true} paragraph style={inline([styles.xSmallMarginTop, styles.primaryText])} variant={'subtitle1'}>
+                                                    <div style={inline([styles.fullWidthContainer, styles.centeredRow, styles.leftAlignedRow, styles.xSmallMarginTop])}>
+                                                        <SpectrumText size={'b17'} weight={'semibold'}>
                                                             Atraso
-                                                        </Typography>
-                                                        <Typography noWrap={true} paragraph style={inline([styles.xSmallMarginTop, styles.xSmallMarginLeft])} variant={'body1'}>
+                                                        </SpectrumText>
+                                                        <SpectrumText style={inline([styles.xSmallMarginLeft])} size={'b15'}>
                                                             Permitir que a conexão atrase até
-                                                        </Typography>
+                                                        </SpectrumText>
                                                         <SpectrumTextInput
                                                             type={'number'}
                                                             style={inline([styles.xSmallMarginLeft])}
                                                             value={simulationConfigurationStore.classesConfiguration.selectedFlowClass.degradationConfiguration.delayToleranceRate}
                                                             max={99}
                                                             onChange={onDelayToleranceTextChanged} />
-                                                        <Typography paragraph style={inline([styles.xSmallMarginTop, styles.xSmallMarginLeft, styles.primaryText])} variant={'subtitle1'}>
+                                                        <SpectrumText style={inline([styles.xSmallMarginLeft])} size={'b15'} weight={'semibold'}>
                                                             Instantes
-                                                        </Typography>
+                                                        </SpectrumText>
                                                     </div>
                                                 </div>
-                                            </Grow>}
+                                            </Fade>}
                                         </Grid>
                                     </Container>
                                 </div>

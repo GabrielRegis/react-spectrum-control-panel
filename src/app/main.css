@@ -27,6 +27,26 @@ body, ul {
   font-family: "Gilroy";
   src: url("./Assets/Fonts/Gilroy-ExtraBold.woff2") format("woff2");
 }
+@font-face {
+  font-family: "Inter-Regular";
+  src: url("./Assets/Fonts/Inter-Regular.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Inter-SemiBold";
+  src: url("./Assets/Fonts/Inter-SemiBold.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Inter-Bold";
+  src: url("./Assets/Fonts/Inter-Bold.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Inter-Light";
+  src: url("./Assets/Fonts/Inter-Light.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Inter-Thin";
+  src: url("./Assets/Fonts/Inter-Thin.woff2") format("woff2");
+}
 
 body{
   color: #5A5F70;

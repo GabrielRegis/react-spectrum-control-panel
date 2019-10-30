@@ -1,6 +1,6 @@
 import { faTimesCircle, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Button, Grid, Typography } from '@material-ui/core';
+import { Button, Grid } from '@material-ui/core';
 import { SpectrumTextInput } from 'app/Components/SpectrumTextInput/SpectrumTextInput';
 import { topologyConfigurationStoreContext } from 'app/Store/TopologyConfigurationStore';
 import { Colors } from 'app/Theme';
@@ -9,6 +9,7 @@ import { observer } from 'mobx-react-lite';
 import * as React from 'react';
 import { FunctionComponent, useEffect } from 'react';
 import KeyboardEventHandler from 'react-keyboard-event-handler';
+import { SpectrumText } from '../../Components/SpectrumText/SpectrumText';
 import styles from './LinkConfigurationStyles';
 
 interface IProps {
@@ -119,9 +120,9 @@ export const LinkConfiguration: FunctionComponent<IProps> = observer((props) => 
 
             <div style={inline([styles.topCenteredColumn, styles.leftAlignedColumn, styles.padding])}>
                 <div style={inline([styles.centeredRow, styles.leftAlignedRow, styles.fullWidthContainer, styles.spaceBetween])}>
-                    <Typography variant={'h5'} style={inline([styles.primaryText])}>
+                    <SpectrumText size={'h3'} weight={'bold'}>
                         Configurações de Enlace
-                    </Typography>
+                    </SpectrumText>
                     <div style={inline([styles.centeredRow])}>
                         <Button onClick={onDeletePressed}
                             style={inline([styles.centeredRow, styles.trashButton])}>
@@ -143,9 +144,9 @@ export const LinkConfiguration: FunctionComponent<IProps> = observer((props) => 
                 <Grid container spacing={1}>
                     <Grid item xs={12}>
                         <div style={inline([styles.centeredRow, styles.leftAlignedRow, styles.xSmallMarginTop])}>
-                            <Typography paragraph style={inline([styles.xSmallMarginTop, styles.primaryText])} variant={'subtitle1'}>
+                            <SpectrumText size={'b17'} weight={'bold'}>
                                 Slots
-                            </Typography>
+                            </SpectrumText>
                             <SpectrumTextInput
                                 type={'number'}
                                 style={inline([styles.xSmallMarginLeft])}
@@ -162,11 +163,14 @@ export const LinkConfiguration: FunctionComponent<IProps> = observer((props) => 
                             <Button onClick={() => onSlotsSuggestionPressed(150)} style={inline([styles.slotsSuggestionButton])}>
                                 150
                             </Button>
+                            <Button onClick={() => onSlotsSuggestionPressed(200)} style={inline([styles.slotsSuggestionButton])}>
+                                200
+                            </Button>
                         </div>
                         <div style={inline([styles.centeredRow, styles.leftAlignedRow, styles.xSmallMarginTop])}>
-                            <Typography paragraph style={inline([styles.xSmallMarginTop, styles.primaryText])} variant={'subtitle1'}>
+                            <SpectrumText size={'b17'} weight={'bold'}>
                                 Capacidade
-                            </Typography>
+                            </SpectrumText>
                             <SpectrumTextInput
                                 type={'number'}
                                 style={inline([styles.xSmallMarginLeft])}
@@ -175,27 +179,27 @@ export const LinkConfiguration: FunctionComponent<IProps> = observer((props) => 
                                 min={1}
                                 step={0.5}
                                 onChange={onSlotSizeChanged} />
-                            <Typography paragraph style={inline([styles.xSmallMarginTop, styles.xSmallMarginLeft, styles.primaryText])} variant={'subtitle1'}>
+                            <SpectrumText style={inline([styles.xSmallMarginLeft])} size={'b15'} weight={'semibold'}>
                                 Ghz
-                            </Typography>
-                            <Typography paragraph style={inline([styles.xSmallMarginTop, styles.xSmallMarginLeft])} variant={'body1'}>
+                            </SpectrumText>
+                            <SpectrumText style={inline([styles.xSmallMarginLeft])} size={'b15'}>
                                 por slot.
-                            </Typography>
+                            </SpectrumText>
                         </div>
 
                     </Grid>
                     <Grid style={inline([styles.centeredRow, styles.leftAlignedRow, styles.xSmallMarginTop])} item xs={12}>
                         <Button onClick={onApplyToAllPressed} size={'large'}
                             style={inline([styles.centeredColumn, styles.applyToAllButon])}>
-                            <Typography style={inline([styles.primaryText, styles.primaryColorText])} variant={'button'}>
+                            <SpectrumText style={inline([styles.primaryColorText])} size={'c13'} weight={'semibold'}>
                                 Aplicar à todos os enlaces [A]
-                            </Typography>
+                            </SpectrumText>
                         </Button>
                         <Button onClick={onApplyPressed} size={'large'}
                             style={inline([styles.centeredColumn, styles.xSmallMarginLeft, styles.applyButon])}>
-                            <Typography style={inline([styles.primaryText, styles.whiteText])} variant={'button'}>
+                            <SpectrumText style={inline([styles.whiteText])} size={'c13'} weight={'semibold'}>
                                 Aplicar [S]
-                            </Typography>
+                            </SpectrumText>
                         </Button>
                     </Grid>
                 </Grid>

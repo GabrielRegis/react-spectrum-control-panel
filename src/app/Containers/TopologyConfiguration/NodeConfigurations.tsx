@@ -1,6 +1,6 @@
 import { faTimesCircle, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Button, Grid, Typography } from '@material-ui/core';
+import { Button, Grid } from '@material-ui/core';
 import { topologyConfigurationStoreContext } from 'app/Store/TopologyConfigurationStore';
 import { Colors } from 'app/Theme';
 import { inline } from 'app/utils/StylesUtils';
@@ -8,6 +8,7 @@ import { observer } from 'mobx-react-lite';
 import * as React from 'react';
 import { FunctionComponent, useEffect } from 'react';
 import KeyboardEventHandler from 'react-keyboard-event-handler';
+import { SpectrumText } from '../../Components/SpectrumText/SpectrumText';
 import styles from './NodeConfigurationStyles';
 
 interface IProps {
@@ -102,9 +103,9 @@ export const NodeConfiguration: FunctionComponent<IProps> = observer((props) => 
 
             <div style={inline([styles.topCenteredColumn, styles.leftAlignedColumn, styles.padding])}>
                 <div style={inline([styles.centeredRow, styles.leftAlignedRow, styles.fullWidthContainer, styles.spaceBetween])}>
-                    <Typography variant={'h5'} style={inline([styles.primaryText])}>
+                    <SpectrumText size={'h3'} weight={'bold'}>
                         Configurações de Nodo
-                    </Typography>
+                    </SpectrumText>
                     <div style={inline([styles.centeredRow])}>
                         <Button onClick={onDeletePressed}
                             style={inline([styles.centeredRow, styles.trashButton])}>
@@ -126,9 +127,9 @@ export const NodeConfiguration: FunctionComponent<IProps> = observer((props) => 
                 <Grid container spacing={1}>
                     <Grid item xs={12}>
                         <div style={inline([styles.centeredRow, styles.leftAlignedRow, styles.xSmallMarginTop])}>
-                            <Typography paragraph style={inline([styles.xSmallMarginTop, styles.primaryText])} variant={'subtitle1'}>
+                            <SpectrumText size={'b17'} weight={'bold'}>
                                 Realizar conversão de sinal
-                            </Typography>
+                            </SpectrumText>
                             <Button onClick={() => onShouldConvertChanged(false)} style={inline([styles.xSmallMarginLeft, shouldConvert === false ? styles.shouldConvertAnswerButtonChecked : styles.shouldConvertAnswerButton])}>
                                 Não
                             </Button>
@@ -140,15 +141,15 @@ export const NodeConfiguration: FunctionComponent<IProps> = observer((props) => 
                     <Grid style={inline([styles.centeredRow, styles.leftAlignedRow, styles.xSmallMarginTop])} item xs={12}>
                         <Button onClick={onApplyToAllPressed} size={'large'}
                             style={inline([styles.centeredColumn, styles.applyToAllButon])}>
-                            <Typography style={inline([styles.primaryText, styles.primaryColorText])} variant={'button'}>
+                            <SpectrumText style={inline([styles.primaryColorText])} size={'c13'} weight={'semibold'}>
                                 Aplicar à todos os nodos [A]
-                            </Typography>
+                            </SpectrumText>
                         </Button>
                         <Button onClick={onApplyPressed} size={'large'}
                             style={inline([styles.centeredColumn, styles.xSmallMarginLeft, styles.applyButon])}>
-                            <Typography style={inline([styles.primaryText, styles.whiteText])} variant={'button'}>
+                            <SpectrumText style={inline([styles.whiteText])} size={'c13'} weight={'semibold'}>
                                 Aplicar [S]
-                            </Typography>
+                            </SpectrumText>
                         </Button>
                     </Grid>
                 </Grid>

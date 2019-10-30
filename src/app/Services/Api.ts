@@ -1,5 +1,6 @@
 import { ApiResponse, ApisauceConfig, ApisauceInstance, create } from 'apisauce';
 import { SimulationConfiguration } from 'app/Models/SimulationConfiguration';
+import { SimulationSummary } from 'app/Models/SimulationSummary';
 
 
 const apiInstance: ApisauceInstance = create({
@@ -11,7 +12,7 @@ const apiInstance: ApisauceInstance = create({
     timeout: 30000
 } as ApisauceConfig);
 
-export const runSimulation = (simulationConfiguration: SimulationConfiguration): Promise<ApiResponse<any>> => {
+export const runSimulation = (simulationConfiguration: SimulationConfiguration): Promise<ApiResponse<SimulationSummary>> => {
     return apiInstance.post('simulation/', simulationConfiguration)
 }
 

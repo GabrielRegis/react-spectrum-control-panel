@@ -25,6 +25,7 @@ const colors = {
     brownishGray: '#353535',
     spectrumTeal: '#50E3C2',
     spectrumPurple: '#BD10E0',
+    spectrumDarkPurple: '#41337A',
     spectrumDarkGrayBorder: '#2C2C2D',
     spectrumDarkGrayCell: '#111111',
     spectrumBrownishGray: '#646464',
@@ -36,7 +37,13 @@ const colors = {
 
     // pxFeedbacks
     pxFeedPrimary: '#000000',
-    pxFeedSeconday: '#111111'
+    pxFeedSeconday: '#111111',
+
+    // TopologySnapshot
+    unfocusedNodeInnerA: '#ff5f6d',
+    unfocusedNodeInnerB: '#ffC371',
+    unfocusedNodeOutterA: '#ff4b1f',
+    unfocusedNodeOutterB: '#ff9068',
 };
 export default {
     colors

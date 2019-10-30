@@ -1,6 +1,7 @@
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Button, Fade, Grid, Typography } from '@material-ui/core';
+import { SpectrumText } from 'app/Components/SpectrumText/SpectrumText';
 import { GeneralConfigurations } from 'app/Models/GeneralConfigurations';
 import { simulationConfigurationStoreContext } from 'app/Store/SimulationConfigurationStore';
 import { Colors } from 'app/Theme';
@@ -79,7 +80,7 @@ export const GeneralConfigurationsScreen: FunctionComponent<IProps> = observer((
             iterations: iterations,
         }
         simulationConfigurationStore.updateGeneralConfigurations(generalConfigurations)
-    }, [minLoad, maxLoad, loadStep])
+    }, [cycles, minLoad, maxLoad, loadStep])
 
     const onCycleTextChanged = (text: string) => {
         setCycles(parseInt(text))
@@ -99,73 +100,79 @@ export const GeneralConfigurationsScreen: FunctionComponent<IProps> = observer((
         <Fade timeout={{ enter: 600 }} in={true} mountOnEnter unmountOnExit>
             <div style={inline([styles.flex1, styles.topCenteredColumn])}>
                 <div style={inline([styles.topCenteredColumn, styles.leftAlignedColumn, styles.paddingHorizontal, styles.xSmallMarginTop])}>
-                    <Typography variant={'h4'} style={inline([styles.primaryText])}>
+                    <SpectrumText size={'h2'} weight={'bold'} color={Colors.colors.primary}>
                         Configurações Gerais
-                    </Typography>
+                    </SpectrumText>
                     <Grid container spacing={1}>
                         <Grid item xs={12}>
                             <div style={inline([styles.centeredRow, styles.leftAlignedRow, styles.xSmallMarginTop])}>
-                                <Typography paragraph style={inline([styles.xSmallMarginTop, styles.primaryText])} variant={'subtitle1'}>
+                                <SpectrumText
+                                    color={Colors.colors.primary} size={'b17'} weight={'bold'}>
                                     Ciclos
-                                    </Typography>
-                                <Typography paragraph style={inline([styles.xSmallMarginTop, styles.xSmallMarginLeft])} variant={'body1'}>
+                                </SpectrumText>
+                                <SpectrumText style={inline([styles.xSmallMarginLeft])}
+                                    color={Colors.colors.primary} size={'b15'}>
                                     Realizar
-                                    </Typography>
+                                    </SpectrumText>
                                 <SpectrumTextInput
                                     type={'number'}
                                     style={inline([styles.xSmallMarginLeft])}
                                     value={cycles}
                                     onChange={onCycleTextChanged} />
-                                <Typography paragraph style={inline([styles.xSmallMarginTop, styles.xSmallMarginLeft, styles.primaryText])} variant={'subtitle1'}>
+                                <SpectrumText
+                                    style={inline([styles.xSmallMarginLeft])}
+                                    color={Colors.colors.primary} size={'b15'} weight={'semibold'}>
                                     Ciclos
-                                </Typography>
-                                <Typography paragraph style={inline([styles.xSmallMarginTop, styles.xSmallMarginLeft])} variant={'body1'}>
-                                    para o cálculo das métricas
-                                </Typography>
+                                </SpectrumText>
+                                <SpectrumText
+                                    color={Colors.colors.primary} size={'b15'}>
+                                    {"\u00a0" + 'para o cálculo das métricas'}
+                                </SpectrumText>
                             </div>
                         </Grid>
                         <Grid item xs={12}>
                             <div style={inline([styles.centeredRow, styles.leftAlignedRow])}>
-                                <Typography paragraph style={inline([styles.xSmallMarginTop, styles.primaryText])} variant={'subtitle1'}>
+                                <SpectrumText
+                                    color={Colors.colors.primary} size={'b17'} weight={'bold'}>
                                     Carga
-                                    </Typography>
-                                <Typography paragraph style={inline([styles.xSmallMarginTop, styles.xSmallMarginLeft])} variant={'body1'}>
+                                </SpectrumText>
+                                <SpectrumText style={inline([styles.xSmallMarginLeft])} size={'b15'}>
                                     Aumentar a carga de
-                                    </Typography>
+                                </SpectrumText>
                                 <SpectrumTextInput
                                     style={inline([styles.xSmallMarginLeft])}
                                     type={'number'}
                                     value={minLoad}
                                     max={maxLoad}
                                     onChange={onMinLoadTextChanged} />
-                                <Typography paragraph style={inline([styles.xSmallMarginTop, styles.xSmallMarginLeft])} variant={'body1'}>
+                                <SpectrumText style={inline([styles.xSmallMarginLeft])} size={'b15'}>
                                     até
-                                    </Typography>
+                                </SpectrumText>
                                 <SpectrumTextInput
                                     style={inline([styles.xSmallMarginLeft])}
                                     type={'number'}
                                     value={maxLoad}
                                     onChange={onMaxLoadTextChanged} />
-                                <Typography paragraph style={inline([styles.xSmallMarginTop, styles.xSmallMarginLeft, styles.primaryText])} variant={'subtitle1'}>
+                                <SpectrumText style={inline([styles.xSmallMarginLeft])} size={'b15'} weight={'semibold'}>
                                     Erlangs
-                                </Typography>
-                                <Typography paragraph style={inline([styles.xSmallMarginTop, styles.xSmallMarginLeft])} variant={'body1'}>
-                                    incrementando
-                                    </Typography>
+                                </SpectrumText>
+                                <SpectrumText size={'b15'}>
+                                    {',' + "\u00a0" + 'incrementando'}
+                                </SpectrumText>
                                 <SpectrumTextInput
                                     style={inline([styles.xSmallMarginLeft])}
                                     type={'number'}
                                     value={loadStep}
                                     onChange={onLoadStepTextChanged} />
-                                <Typography paragraph style={inline([styles.xSmallMarginTop, styles.xSmallMarginLeft])} variant={'body1'}>
+                                <SpectrumText style={inline([styles.xSmallMarginLeft])} size={'b15'}>
                                     à cada iteração, resultando em
-                                </Typography>
-                                <Typography paragraph style={inline([styles.xSmallMarginTop, styles.xSmallMarginLeft, styles.primaryText])} variant={'subtitle1'}>
-                                    {iterations}
-                                </Typography>
-                                <Typography paragraph style={inline([styles.xSmallMarginTop, styles.xSmallMarginLeft])} variant={'body1'}>
+                                </SpectrumText>
+                                <SpectrumText size={'b15'} weight={'semibold'}>
+                                    {"\u00a0" + iterations + "\u00a0"}
+                                </SpectrumText>
+                                <SpectrumText size={'b15'}>
                                     iterações à cada ciclo.
-                                    </Typography>
+                                </SpectrumText>
                             </div>
                         </Grid>
                     </Grid>
@@ -181,9 +188,7 @@ export const GeneralConfigurationsScreen: FunctionComponent<IProps> = observer((
                         <FontAwesomeIcon color={Colors.colors.white} size={'1x'} icon={faArrowRight} />
                     </Button>
                 </Link>
-
             </div>
-
         </Fade>
     );
 });
