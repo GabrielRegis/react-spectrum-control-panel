@@ -30,16 +30,6 @@ export default class LinkComponent extends React.Component<IProps, IState>{
     private line?: Konva.Line = null
     constructor(props) {
         super(props)
-
-        observe(this.props.topologyConfigurationStore.selectedNodes, () => {
-            // if (this.props.topologyConfigurationStore.selectedNodes.length > 0 && this.debugLink) {
-            // this.debugLink.to({
-            //     strokeWidth: 15,
-            //     opacity: 1,
-            //     duration: 0.2
-            // })
-            // }
-        })
         this.state = {
             isSelected: false,
             isModulationTipVisible: false
@@ -69,7 +59,7 @@ export default class LinkComponent extends React.Component<IProps, IState>{
         topologyConfigurationStore.selectedLinkComponent = null
         this.line.to({
             duration: 0.2,
-            stroke: Colors.colors.primaryPink,
+            stroke: Colors.colors.primary,
             strokeWidth: 15
         })
     }
@@ -87,7 +77,7 @@ export default class LinkComponent extends React.Component<IProps, IState>{
         topologyConfigurationStore.selectedLinkComponent = this
         this.line.to({
             duration: 0.2,
-            stroke: '#ab5afc',//Colors.colors.primaryLightBlue,
+            stroke: Colors.colors.healthPink,
             strokeWidth: 20
         })
     }
@@ -155,10 +145,9 @@ export default class LinkComponent extends React.Component<IProps, IState>{
             this.props.topologyConfigurationStore.nodes.get(this.props.nodeA.id).posY,
             this.props.topologyConfigurationStore.nodes.get(this.props.nodeB.id).posX,
             this.props.topologyConfigurationStore.nodes.get(this.props.nodeB.id).posY],
-            stroke: Colors.colors.primaryPink,
+            stroke: Colors.colors.primary,
             strokeWidth: 5,
             opacity: 0,
-            // listening: false
         }
         const infoContainerConfig = {
             x: this.getInfoContainerX(),
@@ -183,10 +172,10 @@ export default class LinkComponent extends React.Component<IProps, IState>{
                     <Rect width={100} shadowEnabled={true}
                         shadowBlur={25}
                         shadowOpacity={0.1}
-                        shadowOffset={{ x: 1.2, y: 1.2 }} height={40} opacity={0.75} fill={Colors.colors.extraLightGray} cornerRadius={30} />
+                        shadowOffset={{ x: 1.2, y: 1.2 }} height={30} opacity={0.75} fill={Colors.colors.extraLightGray} cornerRadius={30} />
                     <Text
                         width={100}
-                        y={15}
+                        y={10}
                         fill={Colors.colors.primary}
                         fontSize={12}
                         fontFamily={Fonts.fontFamilies.primary}
@@ -202,6 +191,7 @@ export default class LinkComponent extends React.Component<IProps, IState>{
                         fill={bestModulation ? bestModulation.color : Colors.colors.primary}
                         fontSize={10}
                         fontFamily={Fonts.fontFamilies.primary}
+                        fontStyle={'bold'}
                         align={'center'}
                         verticalAlign={'center'}
                         text={bestModulation ? bestModulation.name : ''} />

@@ -11,13 +11,10 @@ export default {
     } as React.CSSProperties,
     linkConfigurationContainer: {
         verticalAlign: 'center',
-        position: 'fixed',
         backgroundColor: Colors.colors.white,
-        right: -480,
-        top: 200,
         maxWidth: 520,
-        borderTopLeftRadius: 30,
-        borderBottomLeftRadius: 30,
+        borderRadius: 30,
+        outline: 'none',
         WebkitBoxShadow: '2px 2px 20px 0px rgba(204, 204, 204, 0.6)',
         MozBoxShadow: '2px 2px 20px 0px rgba(204, 204, 204, 0.6)',
         boxShadow: '2px 2px 20px 0px rgba(204, 204, 204, 0.6)',
@@ -67,8 +64,8 @@ export default {
         minWidth: 0,
         minHeight: 0,
         padding: 0,
-        width: 50,
-        height: 50,
+        width: 35,
+        height: 35,
         fontSize: 12
     } as React.CSSProperties,
     slotsSuggestionButton: {

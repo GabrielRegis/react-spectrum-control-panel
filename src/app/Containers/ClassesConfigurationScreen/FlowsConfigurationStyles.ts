@@ -28,15 +28,15 @@ export default {
             animationIterationCount: 'infinite'
         } as CSSProperties
     }),
-    deleteButton: {
-        backgroundColor: Colors.colors.pink,
-        borderRadius: 20,
-        animation: 'changewidth'
-    } as React.CSSProperties,
+
     flowsContainer: {
+        margin: 0,
+        border: '2px solid',
+        borderColor: Colors.colors.lightGray,
         borderRadius: 10,
         backgroundColor: Colors.colors.extraLightGray,
         padding: 20,
+        ...ApplicationStyles.shadowView,
     } as React.CSSProperties,
     selectedClassContainer: {
         ...ApplicationStyles.shadowView,
@@ -45,21 +45,21 @@ export default {
         border: '5px solid ' + Colors.colors.extraLightGray,
     } as React.CSSProperties,
     listPlaceholder: {
-        bottom: 20,
         zIndex: 0,
         width: 400,
-        marginTop: 100,
-        marginBottom: 50
+        marginBottom: 20
     } as React.CSSProperties,
     flowContainer: {
         borderRadius: 10,
         maxHeight: 60,
+        outline: 'none',
         backgroundColor: Colors.colors.white
     } as React.CSSProperties,
     draggingFlowContainer: {
         borderRadius: 10,
+        outline: 'none',
         border: '2px solid',
-        borderColor: Colors.colors.healthGreen,
+        borderColor: Colors.colors.healthPink,
         backgroundColor: Colors.colors.white,
     } as React.CSSProperties,
     flowClassIndicator: {
@@ -69,11 +69,13 @@ export default {
         borderRadius: 10
     } as React.CSSProperties,
     addClassButton: {
-        backgroundColor: Colors.colors.white,
+        backgroundColor: 'transparent',
+        border: '2px dashed',
+        borderColor: Colors.colors.primary,
         borderRadius: 10,
-        color: Colors.colors.primary
+        bottom: 0,
     } as React.CSSProperties,
     addIcon: {
-        color: Colors.colors.healthGreen
+        color: Colors.colors.healthPink
     } as React.CSSProperties
 } 

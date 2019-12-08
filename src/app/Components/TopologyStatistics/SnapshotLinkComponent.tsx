@@ -54,7 +54,7 @@ export default class SnapshotLinkComponent extends React.Component<IProps, IStat
         this.props.topologySnapshotStore.selectedLinkComponent = null
         this.line.to({
             duration: 0.2,
-            stroke: Colors.colors.unfocusedNodeInnerA,
+            stroke: Colors.colors.lightGray,
             strokeWidth: 15
         })
     }
@@ -72,7 +72,7 @@ export default class SnapshotLinkComponent extends React.Component<IProps, IStat
         this.props.topologySnapshotStore.selectedLinkComponent = this
         this.line.to({
             duration: 0.2,
-            stroke: '#ab5afc',
+            stroke: Colors.colors.healthPink,
             strokeWidth: 20
         })
     }
@@ -84,7 +84,7 @@ export default class SnapshotLinkComponent extends React.Component<IProps, IStat
             this.props.topologySnapshotStore.nodes.get(this.props.nodeA.id).posY,
             this.props.topologySnapshotStore.nodes.get(this.props.nodeB.id).posX,
             this.props.topologySnapshotStore.nodes.get(this.props.nodeB.id).posY],
-            stroke: Colors.colors.unfocusedNodeInnerA,
+            stroke: Colors.colors.lightGray,
             strokeWidth: 5,
             opacity: 0,
             listening: true

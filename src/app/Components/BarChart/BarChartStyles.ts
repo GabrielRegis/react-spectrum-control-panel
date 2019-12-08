@@ -17,8 +17,30 @@ export default {
         marginBottom: 2,
         transition: 'all .2s ease-in-out'
     } as React.CSSProperties,
+    axisText: {
+        fontSize: 8
+    } as React.CSSProperties,
+    xAxis: {
+        marginTop: 5,
+        paddingTop: 20,
+        position: 'absolute',
+        borderTop: '1px dashed',
+        top: 175,
+        borderColor: Colors.colors.white
+    } as React.CSSProperties,
+    yAxis: {
+        position: 'absolute',
+        marginBottom: 5,
+        transform: 'rotate(-90deg)',
+        paddingBottom: 5,
+        borderBottom: '1px dashed',
+        top: 100,
+        left: -80,
+        width: 170,
+        borderColor: Colors.colors.white
+    } as React.CSSProperties,
     barChart: {
-        height: 170,
+        height: 200,
         minWidth: 200,
         maxWidth: 250
     } as React.CSSProperties,

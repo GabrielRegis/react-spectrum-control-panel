@@ -14,6 +14,8 @@ interface IProps {
     shouldEnableMaxValueToggle?: boolean
     data: BarChartData[]
     title?: string
+    xAxisLabel?: string
+    yAxisLabel?: string
     maxValue?: number
 }
 
@@ -66,14 +68,13 @@ export const BarChart: FunctionComponent<IProps> = (props) => {
     const renderBar = (data: BarChartData, index: number) => {
         const selectedMaxValue = shouldUseMaxValue ? (props.maxValue ? props.maxValue : maxValue) : 1
         return <div key={data.value + index} style={inline([styles.fullHeightContainer, styles.centeredColumn, styles.botAlignedColumn, index !== 0 && styles.xSmallMarginLeft])}>
-            <SpectrumText size={'c11'} weight={'semibold'} color={'white'}
+            <SpectrumText size={'c13'} weight={'semibold'} color={'white'}
                 style={inline([styles.fullWidthContainer, styles.textAlignHorizontalCenter, {
                     bottom: (data.value / selectedMaxValue) * 45 + '%',
                     zIndex: 5,
                 }])}>
                 {data.yLabel}
             </SpectrumText>
-            <div></div>
             <div style={inline([styles.bar, styles.fullWidthContainer, styles.positionRelative, styles.topCenteredColumn, {
                 flex: data.value / selectedMaxValue,
                 opacity: data.value / selectedMaxValue * 2
@@ -85,14 +86,14 @@ export const BarChart: FunctionComponent<IProps> = (props) => {
                 }])} />}
             </div>
             {data.xLabel && <SpectrumText size={'c11'} weight={'light'} color={'white'}
-                style={inline([styles.fullWidthContainer, styles.textAlignHorizontalCenter])}>
+                style={inline([styles.fullWidthContainer, styles.textAlignHorizontalCenter, styles.xSmallMarginTop])}>
                 {data.xLabel}
             </SpectrumText>}
         </div>
     }
 
     return (
-        <div style={inline([styles.barChart, styles.leftAlignedColumn, props.style])}>
+        <div style={inline([styles.barChart, styles.leftAlignedColumn, styles.positionRelative, props.style])}>
             <div style={inline([styles.upAlignedRow, styles.spaceBetween])}>
                 {props.title && <SpectrumText size={'b15'} weight={'semibold'} color={'white'}
                     style={inline([styles.fullWidthContainer])}>
@@ -109,10 +110,23 @@ export const BarChart: FunctionComponent<IProps> = (props) => {
                 />}
             </div>
 
-            <div style={inline([styles.botAlignedRow, styles.fullHeightContainer, styles.xSmallMarginTop, styles.fullWidthContainer])}>
+            <div style={inline([styles.centeredRow, styles.botAlignedRow, styles.fullHeightContainer, styles.xSmallMarginTop, styles.fullWidthContainer])}>
                 {props.data.map((data, index) => {
                     return renderBar(data, index)
                 })}
+            </div>
+
+            <div style={inline([styles.xAxis, styles.fullWidthContainer, styles.rightAlignedRow])}>
+                <SpectrumText style={inline([styles.flex1, styles.rightAlignedColumn, styles.axisText])} weight={'light'} color={'white'}
+                >
+                    {props.xAxisLabel}
+                </SpectrumText>
+            </div>
+            <div style={inline([styles.yAxis, styles.rightAlignedRow])}>
+                <SpectrumText style={inline([styles.flex1, styles.rightAlignedColumn, styles.axisText])} size={'c11'} weight={'light'} color={'white'}
+                >
+                    {props.yAxisLabel}
+                </SpectrumText>
             </div>
 
         </div>

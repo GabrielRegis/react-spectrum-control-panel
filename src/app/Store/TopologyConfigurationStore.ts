@@ -23,7 +23,7 @@ export class TopologyConfigurationStore {
         this.nodes = observable.map(new Map());
         this.links = observable.map(new Map());
         this.isGridEnabled = true
-        this.gridSize = 40
+        this.gridSize = 30
         this.selectedLink = null
     }
 

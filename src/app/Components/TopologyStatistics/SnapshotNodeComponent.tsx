@@ -17,11 +17,6 @@ interface IState {
     isSelected: boolean
 }
 
-const unfocusedNodeOutterGradient = [0, Colors.colors.unfocusedNodeOutterA, 1, Colors.colors.unfocusedNodeOutterB]
-const focusedNodeOutterGradient = [0, Colors.colors.unfocusedNodeOutterA, 1, Colors.colors.unfocusedNodeOutterB]
-const unfocusedNodeInnerGradient = [0, Colors.colors.unfocusedNodeInnerA, 1, Colors.colors.unfocusedNodeInnerB]
-const focusedNodeInnerGradient = [0, Colors.colors.unfocusedNodeOutterA, 1, Colors.colors.unfocusedNodeOutterB]
-
 @observer
 export class SnapshotNodeComponent extends React.Component<IProps, IState> {
 
@@ -99,13 +94,11 @@ export class SnapshotNodeComponent extends React.Component<IProps, IState> {
                 shadowOffsetX: 5,
                 shadowOffsetY: 5,
                 radius: 55,
-                fillLinearGradientColorStops: [0, "#9cacfc", 1, "#cc9bfd"]
             });
             this.innerNode.to({
                 duration: 0.2,
                 radius: 45,
                 easing: Konva.Easings.EaseInOut,
-                fillLinearGradientColorStops: [0, "#6a82fb", 1, "#ab5afc"]
             });
             setTimeout(() => {
                 if (then) {
@@ -122,13 +115,11 @@ export class SnapshotNodeComponent extends React.Component<IProps, IState> {
                 easing: Konva.Easings.EaseInOut,
                 shadowOffsetX: 5,
                 shadowOffsetY: 5,
-                fillLinearGradientColorStops: [0, '#ff4b1f', 1, '#ff9068']
             });
             this.innerNode.to({
                 duration: 0.2,
                 radius: 40,
                 easing: Konva.Easings.EaseInOut,
-                fillLinearGradientColorStops: [0, '#ff5f6d', 1, '#ffC371']
             });
             setTimeout(() => {
                 if (then) {
@@ -141,10 +132,8 @@ export class SnapshotNodeComponent extends React.Component<IProps, IState> {
     public render() {
         const outterNodeConfig = {
             radius: 50,
-            fillLinearGradientStartPoint: { x: -50, y: 0 },
-            fillLinearGradientEndPoint: { x: 50, y: 0 },
-            fillLinearGradientColorStops: this.state.isSelected ? [0, "#9cacfc", 1, "#cc9bfd"] : [0, '#ff4b1f', 1, '#ff9068'],
             opacity: 0.8,
+            fill: Colors.colors.lightGray,
             scaleX: 1,
             scaleY: 1,
             shadowBlur: 20,
@@ -155,12 +144,10 @@ export class SnapshotNodeComponent extends React.Component<IProps, IState> {
         }
         const innerNodeConfig = {
             radius: 40,
-            fillLinearGradientStartPoint: { x: -35, y: 0 },
-            fillLinearGradientEndPoint: { x: 35, y: 0 },
-            fillLinearGradientColorStops: this.state.isSelected ? [0, "#6a82fb", 1, "#ab5afc"] : [0, '#ff5f6d', 1, '#ffC371'],
             opacity: 1,
             scaleX: 1,
             scaleY: 1,
+            fill: Colors.colors.lightGray,
             shadowBlur: 20,
             shadowOffsetX: 0,
             shadowOffsetY: 0,

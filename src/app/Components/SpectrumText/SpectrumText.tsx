@@ -11,6 +11,7 @@ interface IProps {
     weight?: 'thin' | 'regular' | 'bold' | 'semibold' | 'light'
     size?: 'h1' | 'largeTitle' | 'h2' | 'h3' | 'b20' | 'b17' | 'b15' | 'c13' | 'c11'
     color?: 'white' | 'black' | string
+    className?: string
 }
 
 interface IState {
@@ -81,7 +82,7 @@ export const SpectrumText: FunctionComponent<IProps> = (props) => {
     }
 
     //@ts-ignore
-    return <div style={inline([appTypeStyle, textSizeStyle, textWeightStyle, textLetterSpacingStyle, props.color ? { color: props.color } : { color: Colors.colors.primary }, props.style])}>
+    return <div className={props.className} style={inline([appTypeStyle, textSizeStyle, textWeightStyle, textLetterSpacingStyle, props.color ? { color: props.color } : { color: Colors.colors.primary }, props.style])}>
         {props.children}
     </div>
 };

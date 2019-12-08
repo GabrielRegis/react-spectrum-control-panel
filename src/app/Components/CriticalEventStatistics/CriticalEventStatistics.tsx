@@ -59,7 +59,7 @@ export const CriticalEventStatistics: FunctionComponent<IProps> = (props) => {
             <div style={inline([styles.fullWidthContainer, styles.topologyContainer, styles.xSmallMarginTop])}>
                 <TopologySnapshot />
             </div>
-            <div style={inline([styles.fullWidthContainer, styles.topologyContainer, styles.xSmallPadding, styles.smallMarginTop])}>
+            <div style={inline([styles.fullWidthContainer, styles.smallMarginTop])}>
                 <SnapshotSlots criticalEvent={props.criticalEvent} />
             </div>
 

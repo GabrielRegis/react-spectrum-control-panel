@@ -154,7 +154,7 @@ export const SummaryScreen: FunctionComponent<IProps> = observer((props) => {
         <div style={inline([styles.fullContainer, styles.positionRelative, styles.topCenteredColumn])}>
             {simulationSummaryStore.simulationSummary ? <ResultsScreen /> :
                 <div style={inline([styles.fullWidthContainer])}>
-                    <img style={inline([styles.positionAbsolute, styles.placeholder])} src={require('../../Assets/Icons/summaryPlaceholder.svg')} alt="" />
+                    {/* <img style={inline([styles.positionAbsolute, styles.placeholder])} src={require('../../Assets/Icons/summaryPlaceholder.svg')} alt="" /> */}
                     <SummaryPlaceholder
                         isConnected={isConnected}
                         isLoading={simulationSummaryStore.isLoading}

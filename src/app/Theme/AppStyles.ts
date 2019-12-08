@@ -7,6 +7,9 @@ import Fonts from "./Fonts";
 //box-shadow: 2px 2px 20px 0px rgba(204, 204, 204, 0.27);
 
 export default {
+    trashIcon: {
+        color: Colors.colors.healthPink
+    } as React.CSSProperties,
     regularTextSpacing: {
         letterSpacing: 0
     } as React.CSSProperties,
@@ -82,9 +85,11 @@ export default {
     } as React.CSSProperties,
     nextButton: {
         borderRadius: 40,
-        width: 300,
+        width: 200,
         height: 50,
-        background: Colors.colors.healthGreen
+        border: '2px dashed',
+        borderColor: Colors.colors.healthPink
+        // background: Colors.colors.healthPink
     } as React.CSSProperties,
     secondaryColorText: {
         color: Colors.colors.secondary
@@ -513,6 +518,10 @@ export default {
     } as React.CSSProperties,
     xSmallMarginRight: {
         marginRight: 15
+    } as React.CSSProperties,
+
+    xxSmallMarginTop: {
+        marginTop: 5
     } as React.CSSProperties,
 
     // FlexDirection

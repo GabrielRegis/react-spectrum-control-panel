@@ -9,6 +9,6 @@ export default {
         WebkitBoxShadow: '2px 2px 15px 0px rgba(234, 82, 111, 0.2)',
         MozBoxShadow: '2px 2px 15px 0px rgba(234, 82, 111, 0.2)',
         boxShadow: '2px 2px 15px 0px rgba(234, 82, 111, 0.2)',
-        borderRadius: 5
+        borderRadius: 2
     } as React.CSSProperties
 } 

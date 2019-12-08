@@ -1,6 +1,6 @@
-import { faPoll } from '@fortawesome/free-solid-svg-icons';
+import { faPoll, faExpand } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Grid } from '@material-ui/core';
+import { Grid, Collapse, Button } from '@material-ui/core';
 import { SpectrumText } from 'app/Components/SpectrumText/SpectrumText';
 import { SimulationInstanceSummaryStatistics } from 'app/Models/SimulationInstanceSummaryStatistics';
 import { SimulationSummary } from 'app/Models/SimulationSummary';
@@ -29,14 +29,17 @@ interface IProps {
 interface IState {
     // State type definition
     id: string
+    isCollapsed: boolean
 }
 
 export const SimulationStatistics: FunctionComponent<IProps> = (props) => {
     const initialState: IState = {
-        id: v4()
+        id: v4(),
+        isCollapsed: false
     };
 
     const [id, setId] = React.useState(initialState.id)
+    const [isCollapsed, setIsCollapsed] = React.useState(initialState.isCollapsed)
 
     // ComponentDidMount
     useEffect(() => {
@@ -44,6 +47,10 @@ export const SimulationStatistics: FunctionComponent<IProps> = (props) => {
             //ComponentDidUnmount
         }
     }, [])
+
+    const onToggleStatistics = () => {
+        setIsCollapsed(!isCollapsed)
+    }
 
     const blockedAmount = props.statistics.totalBlockedAmount
     const callsAmount = props.statistics.totalCallsAmount
@@ -125,72 +132,77 @@ export const SimulationStatistics: FunctionComponent<IProps> = (props) => {
 
     return (
         <div id={id} style={inline([styles.fullWidthContainer, styles.centeredColumn, styles.leftAlignedColumn, styles.positionRelative, props.style])}>
-            <div style={inline([styles.fullWidthContainer, styles.upAlignedRow, styles.leftAlignedRow, styles.spaceBetween, styles.positionRelative])}>
-                <div style={inline([styles.leftAlignedColumn, styles.upAlignedColumn])}>
-                    {props.title && <SpectrumText style={inline([styles.whiteText])} size={'h3'} weight={'bold'}>
-                        {props.title}
-                        <FontAwesomeIcon style={inline([styles.xSmallMarginLeft])} color={Colors.colors.white} size={'1x'} icon={faPoll} />
-                    </SpectrumText>}
-                    <Grid container spacing={2} style={inline([styles.upAlignedRow, styles.xSmallMarginTop])}>
-                        <Grid item xs={3}>
-                            <SimpleStatisticsResult
-                                style={inline([styles.simpleStatisticsContainer])}
-                                label={'Média de Chamadas com Sucesso'}
-                                result={successCallsAmountMean.toFixed(0)} />
-                        </Grid>
-
-                        <Grid item xs={3}>
-                            <SimpleStatisticsResult
-                                style={inline([styles.simpleStatisticsContainer])}
-                                label={'Média de Chamadas bloqueadas'}
-                                result={blockedAmountMean.toFixed(0)} />
-                        </Grid>
-
-                        <Grid item xs={3}>
-                            <SimpleStatisticsResult
-                                style={inline([styles.simpleStatisticsContainer])}
-                                label={'Total de Chamadas com Sucesso'}
-                                result={successCallsAmount} />
-                        </Grid>
-
-                        <Grid item xs={3}>
-                            <SimpleStatisticsResult
-                                style={inline([styles.simpleStatisticsContainer])}
-                                label={'Total de Chamadas bloqueadas'}
-                                result={blockedAmount} />
-                        </Grid>
-
-                        <Grid item xs={3}>
-                            <SimpleStatisticsResult
-                                style={inline([styles.simpleStatisticsContainer])}
-                                label={'Total de Chamadas'}
-                                result={callsAmount} />
-                        </Grid>
-                    </Grid>
-                </div>
-
-                <div style={inline([styles.verticalDivider])} />
-
-                <div style={inline([styles.centeredRow])}>
-                    <PercentageResult style={inline([styles.marginRight])} label={'Bloqueadas'} result={props.statistics.blockProbabilityMean} />
-                    <PercentageResult label={'Sucedidas'} result={1 - props.statistics.blockProbabilityMean} />
-                </div>
-                {/* <Button disableFocusRipple={true} onClick={() => {
-                    document.getElementById(id).style.backgroundColor = Colors.colors.pink
-                    html2canvas(document.getElementById(id)).then(function (canvas) {
-                        const imgData = canvas.toDataURL('image/png');
-                        FileSaver.saveAs(imgData, 'teste.png')
-                    });
-                }}>
-                    <FontAwesomeIcon color={Colors.colors.white} size={'1x'} icon={faSave} />
-                </Button> */}
-            </div>
-            <div style={inline([styles.divider, styles.marginTop, styles.marginBottom])} />
             <div style={inline([styles.fullWidthContainer, styles.centeredRow, styles.leftAlignedRow])}>
-                <BarChart shouldEnableMaxValueToggle={true} maxValue={maxBPchartValue} title={'Probabilidade de Bloqueio'} data={bpChartData} />
-                <BarChart style={inline([styles.bigMarginLeft])} maxValue={maxBBRchartValue} title={'Banda Bloqueada'} data={bbrChartData} />
-                <BarChart style={inline([styles.bigMarginLeft])} maxValue={maxBCchartValue} title={'Chamadas Bloqueadas'} data={bcChartData} />
+                {props.title && <SpectrumText style={inline([styles.whiteText])} size={'h3'} weight={'bold'}>
+                    {props.title}
+                    <FontAwesomeIcon style={inline([styles.xSmallMarginLeft])} color={Colors.colors.white} size={'1x'} icon={faPoll} />
+                </SpectrumText>}
+                <Button style={inline([props.title && styles.smallMarginLeft, styles.expandButton])} onClick={onToggleStatistics} >
+                    <SpectrumText style={inline([styles.whiteText, styles.xSmallMarginRight])} size={'b15'} weight={'bold'}>
+                        {isCollapsed ? 'Expandir' : 'Minimizar'}
+                    </SpectrumText>
+                    <FontAwesomeIcon color={Colors.colors.lightGray} size={'lg'} icon={faExpand} />
+                </Button>
             </div>
+            <Collapse in={!isCollapsed}>
+                {!isCollapsed && <div style={inline([styles.fullWidthContainer])}>
+                    <div style={inline([styles.fullWidthContainer, styles.upAlignedRow, styles.leftAlignedRow, styles.spaceBetween, styles.positionRelative])}>
+                        <div style={inline([styles.leftAlignedColumn, styles.upAlignedColumn])}>
+
+                            <Grid container spacing={2} style={inline([styles.upAlignedRow, styles.xSmallMarginTop])}>
+                                <Grid item xs={3}>
+                                    <SimpleStatisticsResult
+                                        style={inline([styles.simpleStatisticsContainer])}
+                                        label={'Média de Chamadas com Sucesso'}
+                                        result={successCallsAmountMean.toFixed(0)} />
+                                </Grid>
+
+                                <Grid item xs={3}>
+                                    <SimpleStatisticsResult
+                                        style={inline([styles.simpleStatisticsContainer])}
+                                        label={'Média de Chamadas bloqueadas'}
+                                        result={blockedAmountMean.toFixed(0)} />
+                                </Grid>
+
+                                <Grid item xs={3}>
+                                    <SimpleStatisticsResult
+                                        style={inline([styles.simpleStatisticsContainer])}
+                                        label={'Total de Chamadas com Sucesso'}
+                                        result={successCallsAmount} />
+                                </Grid>
+
+                                <Grid item xs={3}>
+                                    <SimpleStatisticsResult
+                                        style={inline([styles.simpleStatisticsContainer])}
+                                        label={'Total de Chamadas bloqueadas'}
+                                        result={blockedAmount} />
+                                </Grid>
+
+                                <Grid item xs={3}>
+                                    <SimpleStatisticsResult
+                                        style={inline([styles.simpleStatisticsContainer])}
+                                        label={'Total de Chamadas'}
+                                        result={callsAmount} />
+                                </Grid>
+                            </Grid>
+                        </div>
+
+                        <div style={inline([styles.verticalDivider])} />
+
+                        <div style={inline([styles.centeredRow])}>
+                            <PercentageResult style={inline([styles.marginRight])} label={'Bloqueadas'} result={props.statistics.blockProbabilityMean} />
+                            <PercentageResult label={'Sucedidas'} result={1 - props.statistics.blockProbabilityMean} />
+                        </div>
+                    </div>
+                    <div style={inline([styles.divider, styles.marginTop, styles.marginBottom])} />
+                    <div style={inline([styles.fullWidthContainer, styles.centeredRow, styles.leftAlignedRow])}>
+                        <BarChart shouldEnableMaxValueToggle={true} maxValue={maxBPchartValue} title={'Probabilidade de Bloqueio'} data={bpChartData} xAxisLabel={props.loadStep ? 'Carga' : 'Semente'} />
+                        <BarChart style={inline([styles.bigMarginLeft])} yAxisLabel={'Gbs'} xAxisLabel={props.loadStep ? 'Carga' : 'Semente'} maxValue={maxBBRchartValue} title={'Banda Bloqueada'} data={bbrChartData} />
+                        <BarChart style={inline([styles.bigMarginLeft])} xAxisLabel={props.loadStep ? 'Carga' : 'Semente'} maxValue={maxBCchartValue} title={'Chamadas Bloqueadas'} data={bcChartData} />
+                    </div>
+                </div>}
+            </Collapse>
+
 
         </div>
 

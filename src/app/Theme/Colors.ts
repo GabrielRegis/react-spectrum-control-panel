@@ -19,6 +19,8 @@ const colors = {
     secondary: '#0F0F14',
     secondaryTransluscent: 'rgba(15, 15, 20, 0.8)',
     healthGreen: '#00CA72',
+    darkHealthGreen: '#57B993',
+    healthPink: '#FF6585',
     mustard: '#F8A01C',
     iosDarkGray: '#EFEFF4',
     iosBlue: '#007AFF',

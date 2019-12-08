@@ -3,7 +3,10 @@ import { ApplicationStyles, Colors } from "app/Theme";
 export default {
     ...ApplicationStyles,
     statisticsContainer: {
-        backgroundColor: '#D90368',//Colors.colors.iosBlue,
+        ...ApplicationStyles.shadowView,
+        backgroundColor: Colors.colors.primary,
+        border: '2px solid',
+        borderColor: Colors.colors.healthPink,
         borderRadius: 10,
         WebkitBoxShadow: '2px 2px 15px 0px rgba(0, 0, 0, 0.2)',
         MozBoxShadow: '2px 2px 15px 0px rgba(0, 0, 0, 0.2)',
@@ -14,10 +17,11 @@ export default {
         padding: 0,
     } as React.CSSProperties,
     intanceStatisticsContainer: {
-        backgroundColor: Colors.colors.spectrumDarkPurple,
+        borderColor: Colors.colors.spectrumDarkPurple,
+
     } as React.CSSProperties,
     criticalEventsContainer: {
-        backgroundColor: Colors.colors.pxFeedSeconday,
+        borderColor: Colors.colors.pxFeedSeconday,
     } as React.CSSProperties,
 
     loadButton: {

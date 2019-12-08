@@ -14,8 +14,8 @@ export class CallClassConfiguration {
 
     constructor() {
         this.name = null
-        this.minBandwidth = 2
-        this.maxBandwidth = 10
+        this.minBandwidth = 40
+        this.maxBandwidth = 100
         this.minHoldingTime = 1
         this.maxHoldingTime = 2
         this.frequency = 0.5

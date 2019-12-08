@@ -1,6 +1,6 @@
 import { faTimesCircle, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Button, Grid } from '@material-ui/core';
+import { Button, Grid, Modal, Zoom } from '@material-ui/core';
 import { SpectrumTextInput } from 'app/Components/SpectrumTextInput/SpectrumTextInput';
 import { topologyConfigurationStoreContext } from 'app/Store/TopologyConfigurationStore';
 import { Colors } from 'app/Theme';
@@ -11,6 +11,7 @@ import { FunctionComponent, useEffect } from 'react';
 import KeyboardEventHandler from 'react-keyboard-event-handler';
 import { SpectrumText } from '../../Components/SpectrumText/SpectrumText';
 import styles from './LinkConfigurationStyles';
+import { NumberSelector } from '../../Components/NumberSelector/NumberSelector';
 
 interface IProps {
     // Props type definition
@@ -54,8 +55,8 @@ export const LinkConfiguration: FunctionComponent<IProps> = observer((props) => 
     const onSlotsChanged = (text) => {
         setSlots(parseInt(text))
     }
-    const onSlotSizeChanged = (text) => {
-        setSlotSize(parseFloat(text))
+    const onSlotSizeChanged = (number: number) => {
+        setSlotSize(number)
     }
 
     const onClosePressed = () => {
@@ -93,117 +94,111 @@ export const LinkConfiguration: FunctionComponent<IProps> = observer((props) => 
         }
     }
 
-    const linkDistance = topologyConfigurationStore.selectedLink ? topologyConfigurationStore.selectedLink.distance : 0
-
     return (
 
-        <div style={inline([styles.linkConfigurationContainer, topologyConfigurationStore.selectedLink ? { right: 0 } : {}])}>
+        <Modal
+            open={topologyConfigurationStore.selectedLink !== null}
+            onClose={onClosePressed}
+            closeAfterTransition
+            style={inline([styles.centeredColumn])}
+            BackdropProps={{
+                timeout: 500,
+            }}
+        >
+            <Zoom in={topologyConfigurationStore.selectedLink !== null}>
+                <div style={inline([styles.linkConfigurationContainer,])}>
+                    <KeyboardEventHandler handleKeys={['D', 'S', 'A', 'F']}
+                        onKeyEvent={(key, e) => {
+                            switch (key) {
+                                case 'F':
+                                    onClosePressed()
+                                    break
+                                case 'S':
+                                    onApplyPressed()
+                                    break
+                                case 'A':
+                                    onApplyToAllPressed()
+                                    break
+                                case 'D':
+                                    onDeletePressed()
+                                    break
+                            }
+                        }}
+                    />
 
-            <KeyboardEventHandler handleKeys={['D', 'S', 'A', 'F']}
-                onKeyEvent={(key, e) => {
-                    switch (key) {
-                        case 'F':
-                            onClosePressed()
-                            break
-                        case 'S':
-                            onApplyPressed()
-                            break
-                        case 'A':
-                            onApplyToAllPressed()
-                            break
-                        case 'D':
-                            onDeletePressed()
-                            break
-                    }
-                }}
-            />
-
-            <div style={inline([styles.topCenteredColumn, styles.leftAlignedColumn, styles.padding])}>
-                <div style={inline([styles.centeredRow, styles.leftAlignedRow, styles.fullWidthContainer, styles.spaceBetween])}>
-                    <SpectrumText size={'h3'} weight={'bold'}>
-                        Configurações de Enlace
+                    <div style={inline([styles.topCenteredColumn, styles.leftAlignedColumn, styles.padding])}>
+                        <div style={inline([styles.centeredRow, styles.leftAlignedRow, styles.fullWidthContainer, styles.spaceBetween])}>
+                            <SpectrumText size={'h3'} weight={'bold'}>
+                                Configurações de Enlace
                     </SpectrumText>
-                    <div style={inline([styles.centeredRow])}>
-                        <Button onClick={onDeletePressed}
-                            style={inline([styles.centeredRow, styles.trashButton])}>
-                            <FontAwesomeIcon color={Colors.colors.white} icon={faTrash} />
-                            <p style={inline([styles.primaryText, styles.whiteText, styles.shortcutText])}>
-                                {'[D]'}
-                            </p>
-                        </Button>
-                        <Button onClick={onClosePressed}
-                            style={inline([styles.centeredRow, styles.closeButton])}>
-                            <FontAwesomeIcon color={Colors.colors.primary} icon={faTimesCircle} />
-                            <p style={inline([styles.primaryText, styles.primaryColorText, styles.shortcutText])}>
-                                {'[F]'}
-                            </p>
-                        </Button>
+                            <div style={inline([styles.centeredRow])}>
+
+                                <Button onClick={onDeletePressed}
+                                    style={inline([styles.centeredRow, styles.trashButton])}>
+                                    <FontAwesomeIcon color={Colors.colors.white} size={'lg'} icon={faTrash} />
+                                </Button>
+                            </div>
+
+                        </div>
+                        <Grid container spacing={1}>
+                            <Grid item xs={12}>
+                                <div style={inline([styles.centeredRow, styles.leftAlignedRow, styles.xSmallMarginTop])}>
+                                    <SpectrumText size={'b17'} weight={'bold'}>
+                                        Slots
+                            </SpectrumText>
+                                    <SpectrumTextInput
+                                        type={'number'}
+                                        style={inline([styles.xSmallMarginLeft])}
+                                        inputStyle={inline([styles.slotSizeInput])}
+                                        value={slots}
+                                        min={1}
+                                        onChange={onSlotsChanged} />
+                                    <Button onClick={() => onSlotsSuggestionPressed(50)} style={inline([styles.xSmallMarginLeft, styles.slotsSuggestionButton])}>
+                                        50
+                            </Button>
+                                    <Button onClick={() => onSlotsSuggestionPressed(100)} style={inline([styles.slotsSuggestionButton])}>
+                                        100
+                            </Button>
+                                    <Button onClick={() => onSlotsSuggestionPressed(150)} style={inline([styles.slotsSuggestionButton])}>
+                                        150
+                            </Button>
+                                    <Button onClick={() => onSlotsSuggestionPressed(200)} style={inline([styles.slotsSuggestionButton])}>
+                                        200
+                            </Button>
+                                </div>
+                                <div style={inline([styles.centeredRow, styles.leftAlignedRow, styles.xSmallMarginTop])}>
+                                    <SpectrumText size={'b17'} weight={'bold'}>
+                                        Capacidade
+                            </SpectrumText>
+                                    <NumberSelector style={inline([styles.xSmallMarginLeft])} onNumberSelected={onSlotSizeChanged} numbers={[12.5, 25, 50, 75, 100]} selectedNumber={slotSize} />
+                                    <SpectrumText style={inline([styles.xSmallMarginLeft])} size={'b15'} weight={'semibold'}>
+                                        Ghz
+                            </SpectrumText>
+
+                                    <SpectrumText style={inline([styles.xSmallMarginLeft])} size={'b15'}>
+                                        por slot.
+                            </SpectrumText>
+                                </div>
+
+                            </Grid>
+                            <Grid style={inline([styles.centeredRow, styles.leftAlignedRow, styles.xSmallMarginTop])} item xs={12}>
+                                <Button onClick={onApplyToAllPressed} size={'large'}
+                                    style={inline([styles.centeredColumn, styles.applyToAllButon])}>
+                                    <SpectrumText style={inline([styles.primaryColorText])} size={'c13'} weight={'semibold'}>
+                                        Aplicar à todos os enlaces
+                            </SpectrumText>
+                                </Button>
+                                <Button onClick={onApplyPressed} size={'large'}
+                                    style={inline([styles.centeredColumn, styles.xSmallMarginLeft, styles.applyButon])}>
+                                    <SpectrumText style={inline([styles.whiteText])} size={'c13'} weight={'semibold'}>
+                                        Aplicar
+                            </SpectrumText>
+                                </Button>
+                            </Grid>
+                        </Grid>
                     </div>
-
                 </div>
-                <Grid container spacing={1}>
-                    <Grid item xs={12}>
-                        <div style={inline([styles.centeredRow, styles.leftAlignedRow, styles.xSmallMarginTop])}>
-                            <SpectrumText size={'b17'} weight={'bold'}>
-                                Slots
-                            </SpectrumText>
-                            <SpectrumTextInput
-                                type={'number'}
-                                style={inline([styles.xSmallMarginLeft])}
-                                inputStyle={inline([styles.slotSizeInput])}
-                                value={slots}
-                                min={1}
-                                onChange={onSlotsChanged} />
-                            <Button onClick={() => onSlotsSuggestionPressed(50)} style={inline([styles.xSmallMarginLeft, styles.slotsSuggestionButton])}>
-                                50
-                            </Button>
-                            <Button onClick={() => onSlotsSuggestionPressed(100)} style={inline([styles.slotsSuggestionButton])}>
-                                100
-                            </Button>
-                            <Button onClick={() => onSlotsSuggestionPressed(150)} style={inline([styles.slotsSuggestionButton])}>
-                                150
-                            </Button>
-                            <Button onClick={() => onSlotsSuggestionPressed(200)} style={inline([styles.slotsSuggestionButton])}>
-                                200
-                            </Button>
-                        </div>
-                        <div style={inline([styles.centeredRow, styles.leftAlignedRow, styles.xSmallMarginTop])}>
-                            <SpectrumText size={'b17'} weight={'bold'}>
-                                Capacidade
-                            </SpectrumText>
-                            <SpectrumTextInput
-                                type={'number'}
-                                style={inline([styles.xSmallMarginLeft])}
-                                inputStyle={inline([styles.slotSizeInput])}
-                                value={slotSize}
-                                min={1}
-                                step={0.5}
-                                onChange={onSlotSizeChanged} />
-                            <SpectrumText style={inline([styles.xSmallMarginLeft])} size={'b15'} weight={'semibold'}>
-                                Ghz
-                            </SpectrumText>
-                            <SpectrumText style={inline([styles.xSmallMarginLeft])} size={'b15'}>
-                                por slot.
-                            </SpectrumText>
-                        </div>
-
-                    </Grid>
-                    <Grid style={inline([styles.centeredRow, styles.leftAlignedRow, styles.xSmallMarginTop])} item xs={12}>
-                        <Button onClick={onApplyToAllPressed} size={'large'}
-                            style={inline([styles.centeredColumn, styles.applyToAllButon])}>
-                            <SpectrumText style={inline([styles.primaryColorText])} size={'c13'} weight={'semibold'}>
-                                Aplicar à todos os enlaces [A]
-                            </SpectrumText>
-                        </Button>
-                        <Button onClick={onApplyPressed} size={'large'}
-                            style={inline([styles.centeredColumn, styles.xSmallMarginLeft, styles.applyButon])}>
-                            <SpectrumText style={inline([styles.whiteText])} size={'c13'} weight={'semibold'}>
-                                Aplicar [S]
-                            </SpectrumText>
-                        </Button>
-                    </Grid>
-                </Grid>
-            </div>
-        </div>
+            </Zoom>
+        </Modal>
     );
 });

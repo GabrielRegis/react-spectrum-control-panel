@@ -21,6 +21,7 @@ interface IState {
     isSelected: boolean
 }
 
+
 @observer
 export class NodeComponent extends React.Component<IProps, IState> {
 
@@ -50,8 +51,8 @@ export class NodeComponent extends React.Component<IProps, IState> {
             this.group.to({
                 duration: 0.1,
                 opacity: 1,
-                scaleX: 0.7,
-                scaleY: 0.7,
+                scaleX: 0.6,
+                scaleY: 0.6,
                 easing: Konva.Easings.EaseInOut,
             })
         }
@@ -109,11 +110,12 @@ export class NodeComponent extends React.Component<IProps, IState> {
                 }
                 break
             default:
-                if (this.state.isSelected) {
-                    this.deselectNode()
-                    return
-                }
-                this.selectNode()
+                // Future feature
+                // if (this.state.isSelected) {
+                //     this.deselectNode()
+                //     return
+                // }
+                // this.selectNode()
                 break
         }
 
@@ -184,13 +186,13 @@ export class NodeComponent extends React.Component<IProps, IState> {
                 shadowOffsetX: 5,
                 shadowOffsetY: 5,
                 radius: 55,
-                fillLinearGradientColorStops: [0, "#9cacfc", 1, "#cc9bfd"]
+                // fillLinearGradientColorStops: [0, "#9cacfc", 1, "#cc9bfd"]
             });
             this.innerNode.to({
                 duration: 0.2,
                 radius: 45,
                 easing: Konva.Easings.EaseInOut,
-                fillLinearGradientColorStops: [0, "#6a82fb", 1, "#ab5afc"]
+                // fillLinearGradientColorStops: [0, "#6a82fb", 1, "#ab5afc"]
             });
             setTimeout(() => {
                 if (then) {
@@ -207,13 +209,13 @@ export class NodeComponent extends React.Component<IProps, IState> {
                 easing: Konva.Easings.EaseInOut,
                 shadowOffsetX: 5,
                 shadowOffsetY: 5,
-                fillLinearGradientColorStops: [0, "#FF6192", 1, "#FF66B1"]
+                // fillLinearGradientColorStops: [0, "#FF6192", 1, "#FF66B1"]
             });
             this.innerNode.to({
                 duration: 0.2,
                 radius: 40,
                 easing: Konva.Easings.EaseInOut,
-                fillLinearGradientColorStops: [0, "#EA5EA3", 1, "#FF457E"]
+                // fillLinearGradientColorStops: [0, "#EA5EA3", 1, "#FF457E"]
             });
             setTimeout(() => {
                 if (then) {
@@ -226,9 +228,10 @@ export class NodeComponent extends React.Component<IProps, IState> {
     public render() {
         const outterNodeConfig = {
             radius: 50,
-            fillLinearGradientStartPoint: { x: -50, y: 0 },
-            fillLinearGradientEndPoint: { x: 50, y: 0 },
-            fillLinearGradientColorStops: this.state.isSelected || this.state.isFocused ? [0, "#9cacfc", 1, "#cc9bfd"] : [0, "#FF6192", 1, "#FF66B1"],
+            // fillLinearGradientStartPoint: { x: -50, y: 0 },
+            // fillLinearGradientEndPoint: { x: 50, y: 0 },
+            // fillLinearGradientColorStops: this.state.isSelected || this.state.isFocused ? [0, "#9cacfc", 1, "#cc9bfd"] : [0, "#FF6192", 1, "#FF66B1"],
+            fill: Colors.colors.primary,
             opacity: 0.8,
             scaleX: 1,
             scaleY: 1,
@@ -241,9 +244,10 @@ export class NodeComponent extends React.Component<IProps, IState> {
         }
         const innerNodeConfig = {
             radius: 40,
-            fillLinearGradientStartPoint: { x: -35, y: 0 },
-            fillLinearGradientEndPoint: { x: 35, y: 0 },
-            fillLinearGradientColorStops: this.state.isSelected || this.state.isFocused ? [0, "#6a82fb", 1, "#ab5afc"] : [0, "#EA5EA3", 1, "#FF457E"],
+            // fillLinearGradientStartPoint: { x: -35, y: 0 },
+            // fillLinearGradientEndPoint: { x: 35, y: 0 },
+            // fillLinearGradientColorStops: this.state.isSelected || this.state.isFocused ? [0, "#6a82fb", 1, "#ab5afc"] : [0, "#EA5EA3", 1, "#FF457E"],
+            fill: Colors.colors.primary,
             opacity: 1,
             scaleX: 1,
             scaleY: 1,

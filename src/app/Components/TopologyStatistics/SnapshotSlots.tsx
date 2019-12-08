@@ -27,8 +27,7 @@ export const SnapshotSlots: FunctionComponent<IProps> = observer((props) => {
     }, [])
 
     const renderSlot = (slot: SlotSnapshot) => {
-        return <div key={slot.slotId} style={inline([styles.slot, styles.flex1, { backgroundColor: slot.occupied ? Colors.colors.primaryPink : Colors.colors.lightGray }])}>
-
+        return <div key={slot.slotId} style={inline([styles.slot, styles.flex1, { backgroundColor: slot.occupied ? Colors.colors.healthPink : Colors.colors.lightGray }])}>
         </div>
     }
 

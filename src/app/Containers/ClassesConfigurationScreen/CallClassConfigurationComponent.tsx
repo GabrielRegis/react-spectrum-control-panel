@@ -1,4 +1,4 @@
-import { ListItem, Typography } from '@material-ui/core';
+import { ListItem, Typography, Button, Fab, IconButton } from '@material-ui/core';
 import { css } from 'aphrodite';
 import { inline } from 'app/utils/StylesUtils';
 import { inject, observer } from 'mobx-react';
@@ -7,6 +7,11 @@ import { DraggableProvided, DraggableStateSnapshot } from 'react-beautiful-dnd';
 import { CallClassConfiguration } from '../../Models/CallClassConfiguration';
 import { SimulationConfigurationStore } from '../../Store/SimulationConfigurationStore';
 import styles from './FlowsConfigurationStyles';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPen, faTrash, faLayerGroup } from '@fortawesome/free-solid-svg-icons';
+import { Colors } from 'app/Theme';
+import { SpectrumText } from '../../Components/SpectrumText/SpectrumText';
+import { ClassConfigurationModal } from '../../Components/ClassConfigurationModal/ClassConfigurationModal';
 
 interface IProps {
     // Props type definition
@@ -18,6 +23,7 @@ interface IProps {
 
 interface IState {
     // State type definition
+    isEditing: boolean
 }
 
 @inject('simulationConfigurationStore')
@@ -26,10 +32,31 @@ export class CallClassConfigurationComponent extends React.Component<IProps, ISt
     constructor(props) {
         super(props)
         this.state = {
+            isEditing: false
         }
     }
 
     public onFlowPressed = () => {
+        this.props.simulationConfigurationStore.classesConfiguration.selectedFlowClass = this.props.flowClass
+    }
+
+    public onDeletePressed = () => {
+        const newClasses = this.props.simulationConfigurationStore.classesConfiguration.flowClasses.filter((classes) => {
+            return classes.id !== this.props.simulationConfigurationStore.classesConfiguration.selectedFlowClass.id
+        })
+        this.props.simulationConfigurationStore.classesConfiguration.selectedFlowClass.id = null
+        this.props.simulationConfigurationStore.classesConfiguration.flowClasses = newClasses
+    }
+    public onEditPressed = () => {
+        this.setState({
+            isEditing: true
+        })
+    }
+
+    public onEditingModalClosed = () => {
+        this.setState({
+            isEditing: false
+        })
         this.props.simulationConfigurationStore.classesConfiguration.selectedFlowClass = this.props.flowClass
     }
 
@@ -46,23 +73,32 @@ export class CallClassConfigurationComponent extends React.Component<IProps, ISt
                 style={inline([styles.flex1,
                 styles.shadowView,
                 styles.flowContainer,
-                styles.centeredColumn,
-                styles.leftAlignedColumn,
+                styles.centeredRow,
+                styles.spaceBetween,
                 styles.xSmallMarginBottom,
                 styles.fullWidthContainer,
                 this.props.provided.draggableProps.style,
                 this.props.snapshot.isDragging ? styles.draggingFlowContainer : {}
                 ]
                 )}
-                className={css(isSelected && styles.aphroditeStyles.selectedFlowContainer)}
             >
-                <div style={inline([styles.flex1, styles.centeredRow, styles.leftAlignedRow])}>
-                    <div style={inline([styles.flowClassIndicator])} />
-                    <Typography paragraph style={inline([styles.xSmallMarginTop, styles.primaryText, styles.xSmallMarginLeft])} variant={'subtitle1'}>
+                <div style={inline([styles.flex1, styles.centeredRow, styles.leftAlignedRow, styles.verticalPadding])}>
+                    <FontAwesomeIcon icon={faLayerGroup} />
+                    <SpectrumText
+                        style={inline([styles.xSmallMarginLeft])}
+                        color={Colors.colors.primary} size={'b15'} weight={'bold'}>
                         {this.props.flowClass.name}
-                    </Typography>
-                </div>
+                    </SpectrumText>
 
+                </div>
+                <IconButton onClick={this.onEditPressed} size="small">
+                    <FontAwesomeIcon color={Colors.colors.darkHealthGreen} icon={faPen} />
+                </IconButton>
+                <IconButton style={inline([styles.xSmallMarginLeft])} onClick={this.onDeletePressed} size="small">
+                    <FontAwesomeIcon style={inline([styles.trashIcon])} icon={faTrash} />
+                </IconButton>
+
+                <ClassConfigurationModal flowClass={this.props.flowClass} isVisible={this.state.isEditing} onClose={this.onEditingModalClosed} />
             </ListItem>
         );
     }

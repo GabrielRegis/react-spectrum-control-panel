@@ -44,7 +44,7 @@ export const ResultsScreen: FunctionComponent<IProps> = observer((props) => {
             </SpectrumText>
             </Button>
             <div style={inline([styles.statisticsContainer, styles.marginTop, styles.centeredRow,])}>
-                <BlurView style={inline([styles.bigPadding, styles.centeredColumn])} backgroundSource={require('../../../Assets/Backgrounds/pyramid.jpeg')}>
+                <BlurView style={inline([styles.bigPadding, styles.centeredColumn])} >
                     <SimulationStatistics
                         title={'Resultados Gerais'}
                         cycleNum={simulationSummaryStore.simulationSummary.cycleNum}
@@ -55,7 +55,7 @@ export const ResultsScreen: FunctionComponent<IProps> = observer((props) => {
                 </BlurView>
             </div>
             <div style={inline([styles.statisticsContainer, styles.intanceStatisticsContainer, styles.marginTop, styles.centeredRow,])}>
-                <BlurView blurAmount={20} style={inline([styles.bigPadding, styles.centeredColumn])} backgroundSource={require('../../../Assets/Backgrounds/pyramidC.jpeg')}>
+                <BlurView blurAmount={20} style={inline([styles.bigPadding, styles.centeredColumn])} >
                     <SimulationLoadsStatistics
                         cycleNum={simulationSummaryStore.simulationSummary.cycleNum}
                         simulationInstanceSummaries={simulationInstanceSummaries} />
@@ -63,7 +63,7 @@ export const ResultsScreen: FunctionComponent<IProps> = observer((props) => {
             </div>
 
             <div style={inline([styles.statisticsContainer, styles.criticalEventsContainer, styles.marginTop, styles.centeredRow,])}>
-                <BlurView style={inline([styles.bigPadding, styles.centeredColumn])} backgroundSource={require('../../../Assets/Backgrounds/pyramid.jpeg')}>
+                <BlurView style={inline([styles.bigPadding, styles.centeredColumn])} >
                     <CriticalEventsStatistics
                     />
                 </BlurView>
