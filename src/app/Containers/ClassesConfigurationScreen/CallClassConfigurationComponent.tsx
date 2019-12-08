@@ -41,6 +41,8 @@ export class CallClassConfigurationComponent extends React.Component<IProps, ISt
     }
 
     public onDeletePressed = () => {
+        this.props.simulationConfigurationStore.classesConfiguration.selectedFlowClass = this.props.flowClass
+
         const newClasses = this.props.simulationConfigurationStore.classesConfiguration.flowClasses.filter((classes) => {
             return classes.id !== this.props.simulationConfigurationStore.classesConfiguration.selectedFlowClass.id
         })
@@ -48,6 +50,8 @@ export class CallClassConfigurationComponent extends React.Component<IProps, ISt
         this.props.simulationConfigurationStore.classesConfiguration.flowClasses = newClasses
     }
     public onEditPressed = () => {
+        this.props.simulationConfigurationStore.classesConfiguration.selectedFlowClass = this.props.flowClass
+
         this.setState({
             isEditing: true
         })
@@ -67,9 +71,9 @@ export class CallClassConfigurationComponent extends React.Component<IProps, ISt
         return (
             <ListItem
                 ref={this.props.provided.innerRef}
-                onClick={this.onFlowPressed}
                 {...this.props.provided.draggableProps}
                 {...this.props.provided.dragHandleProps}
+                onClick={this.onFlowPressed}
                 style={inline([styles.flex1,
                 styles.shadowView,
                 styles.flowContainer,
@@ -82,6 +86,7 @@ export class CallClassConfigurationComponent extends React.Component<IProps, ISt
                 ]
                 )}
             >
+                <ClassConfigurationModal flowClass={this.props.flowClass} isVisible={this.state.isEditing} onClose={this.onEditingModalClosed} />
                 <div style={inline([styles.flex1, styles.centeredRow, styles.leftAlignedRow, styles.verticalPadding])}>
                     <FontAwesomeIcon icon={faLayerGroup} />
                     <SpectrumText
@@ -91,14 +96,15 @@ export class CallClassConfigurationComponent extends React.Component<IProps, ISt
                     </SpectrumText>
 
                 </div>
-                <IconButton onClick={this.onEditPressed} size="small">
-                    <FontAwesomeIcon color={Colors.colors.darkHealthGreen} icon={faPen} />
-                </IconButton>
-                <IconButton style={inline([styles.xSmallMarginLeft])} onClick={this.onDeletePressed} size="small">
-                    <FontAwesomeIcon style={inline([styles.trashIcon])} icon={faTrash} />
-                </IconButton>
+                <div className={"classesHowTo"} style={inline([styles.centeredRow])}>
 
-                <ClassConfigurationModal flowClass={this.props.flowClass} isVisible={this.state.isEditing} onClose={this.onEditingModalClosed} />
+                    <IconButton onClick={this.onEditPressed} size="small">
+                        <FontAwesomeIcon color={Colors.colors.darkHealthGreen} icon={faPen} />
+                    </IconButton>
+                    <IconButton style={inline([styles.xSmallMarginLeft, styles.zIndex3])} onClick={this.onDeletePressed} size="small">
+                        <FontAwesomeIcon style={inline([styles.trashIcon])} icon={faTrash} />
+                    </IconButton>
+                </div>
             </ListItem>
         );
     }

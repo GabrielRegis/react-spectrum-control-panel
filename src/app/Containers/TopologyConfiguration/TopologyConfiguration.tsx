@@ -89,7 +89,7 @@ export default class TopologyConfiguration extends React.Component<IProps, IStat
 
     render() {
         return (
-            <div style={inline([styles.fullWidthContainer, styles.topCenteredColumn, styles.topologyConfigurationScreenContainer])}>
+            <div style={inline([styles.flex1, styles.topCenteredColumn, styles.topologyConfigurationScreenContainer])}>
 
                 <div style={inline([styles.toolbarContainer, styles.centeredRow, styles.leftAlignedRow])}>
                     <div style={inline([styles.centeredRow])}>

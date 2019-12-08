@@ -6,6 +6,7 @@ import { createContext } from 'react';
 import { v4 } from "uuid";
 import LinkComponent from '../Containers/TopologyConfiguration/LinkComponent';
 import { TopologyLink } from '../Models/TopologyLink';
+import TopologyUtils from 'app/utils/TopologyUtils';
 
 export class TopologyConfigurationStore {
     @observable public selectedNodes: IObservableArray<TopologyNode> = observable.array([]);
@@ -22,8 +23,17 @@ export class TopologyConfigurationStore {
         this.selectedNodes = observable.array([]);
         this.nodes = observable.map(new Map());
         this.links = observable.map(new Map());
-        this.isGridEnabled = true
         this.gridSize = 30
+
+
+        const defaultNodesAndLinks = TopologyUtils.generateDefaultTopology(this.gridSize)
+        defaultNodesAndLinks.links.forEach((link) => {
+            this.links.set(link.id, link)
+        })
+        defaultNodesAndLinks.nodes.forEach((node) => {
+            this.nodes.set(node.id, node)
+        })
+        this.isGridEnabled = true
         this.selectedLink = null
     }
 

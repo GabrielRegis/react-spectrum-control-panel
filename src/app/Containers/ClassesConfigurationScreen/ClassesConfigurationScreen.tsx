@@ -151,7 +151,7 @@ export const ClassesConfigurationScreen: FunctionComponent<IProps> = observer((p
                                     Chamadas
                                 </SpectrumText>
                                 <SpectrumText style={inline([styles.xSmallMarginLeft])} size={'b15'}>
-                                    à cada ciclo
+                                    à cada simulação.
                                 </SpectrumText>
                             </div>
 
@@ -164,8 +164,6 @@ export const ClassesConfigurationScreen: FunctionComponent<IProps> = observer((p
                                             )}
                                         </Droppable>
                                     </DragDropContext>
-
-
                                 </div>
                                 <div style={inline([styles.botAlignedColumn, styles.bigMarginLeft])}>
                                     <img style={inline([styles.listPlaceholder])} src={require('../../Assets/Icons/listPlaceholder.svg')} alt="" />
@@ -183,13 +181,9 @@ export const ClassesConfigurationScreen: FunctionComponent<IProps> = observer((p
                                         <FontAwesomeIcon size={'2x'} style={inline([styles.addIcon])} icon={faPlusCircle} />
                                     </Button>
                                 </div>
-
-
                             </div>
-
                         </div>
                     </div>
-
                 </div>
             </Fade>
         </div>

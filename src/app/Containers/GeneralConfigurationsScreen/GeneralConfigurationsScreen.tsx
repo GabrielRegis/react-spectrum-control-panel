@@ -106,12 +106,12 @@ export const GeneralConfigurationsScreen: FunctionComponent<IProps> = observer(
 
     return (
       <Fade timeout={{ enter: 600 }} in={true} mountOnEnter unmountOnExit>
-        <div style={inline([styles.flex1, styles.topCenteredColumn])}>
+        <div style={inline([styles.flex1, styles.topCenteredColumn, styles.paddingHorizontal])}>
           <div
             style={inline([
               styles.topCenteredColumn,
               styles.leftAlignedColumn,
-              styles.paddingHorizontal,
+              styles.fullWidthContainer,
               styles.xSmallMarginTop
             ])}
           >

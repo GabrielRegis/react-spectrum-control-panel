@@ -95,7 +95,7 @@ export const ClassConfigurationModal: FunctionComponent<IProps> = observer((prop
             }}
         >
             <Zoom in={props.isVisible}>
-                <div style={inline([
+                {simulationConfigurationStore.classesConfiguration.selectedFlowClass && <div style={inline([
                     styles.leftAlignedColumn,
                     styles.padding,
                     styles.modalContent,
@@ -160,7 +160,7 @@ export const ClassConfigurationModal: FunctionComponent<IProps> = observer((prop
                             GB/s
                     </SpectrumText>
                         <SpectrumText style={inline([styles.xSmallMarginLeft])} size={'b15'}>
-                            de banda larga.
+                            de banda passante.
                     </SpectrumText>
                     </div>
                     <div style={inline([styles.fullWidthContainer, styles.centeredRow, styles.leftAlignedRow, styles.xSmallMarginTop])}>
@@ -189,7 +189,7 @@ export const ClassConfigurationModal: FunctionComponent<IProps> = observer((prop
                             onChange={onMaxHoldingTimeTextChanged}
                         />
                         <SpectrumText style={inline([styles.xSmallMarginLeft])} size={'b15'} weight={'semibold'}>
-                            Instantes.
+                            Unidades de tempo.
                         </SpectrumText>
                     </div>
                     {/* <Divider style={inline([styles.xSmallMarginTop])} /> */}
@@ -250,7 +250,7 @@ export const ClassConfigurationModal: FunctionComponent<IProps> = observer((prop
                     <KeyboardEventHandler handleKeys={['d', 'del']}
                         onKeyEvent={onRemoveClassPressed}
                     />
-                </div>
+                </div>}
 
             </Zoom>
 
