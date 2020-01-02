@@ -8,6 +8,7 @@ import SpectrumStore from './SpectrumStore';
 export class SimulationConfigurationStore extends SpectrumStore {
     @persist('object') @observable public generalConfiguration: GeneralConfigurations;
     @persist('object') @observable public classesConfiguration: ClassesConfiguration;
+    @observable public colors: string[] = ['#EE7752', '#E73C7E', '#23A6D5', '#23D5AB']
 
     constructor() {
         super();
@@ -35,6 +36,20 @@ export class SimulationConfigurationStore extends SpectrumStore {
 
     @action public addFlowClass = (flowClass: CallClassConfiguration) => {
         this.classesConfiguration.flowClasses.push(flowClass)
+    }
+
+    @action public updateClassesFrequency() {
+        let totalLocalFrequencies = 0
+
+        this.classesConfiguration.flowClasses.forEach((flowClass) => {
+            totalLocalFrequencies += flowClass.localFrequency
+        })
+        this.classesConfiguration.flowClasses = this.classesConfiguration.flowClasses.map((flowClass) => {
+            return {
+                ...flowClass,
+                frequency: flowClass.localFrequency / totalLocalFrequencies
+            }
+        })
     }
 
 }

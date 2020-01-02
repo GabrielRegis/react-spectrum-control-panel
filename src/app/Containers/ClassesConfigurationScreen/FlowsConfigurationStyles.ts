@@ -29,6 +29,13 @@ export default {
         } as CSSProperties
     }),
 
+    pickerButton: {
+        height: 30,
+        width: 30,
+        maxWidth: 30,
+        minWidth: 30
+    } as React.CSSProperties,
+
     flowsContainer: {
         margin: 0,
         border: '2px solid',

@@ -39,6 +39,7 @@ export const FlowsFrequencyConfiguration: FunctionComponent<IProps> = observer((
             {simulationConfigurationStore.classesConfiguration.flowClasses.map((flowClass) => {
                 return <FlowFrequencyConfiguration flowClass={flowClass} />
             })}
+
         </div>
     );
 });

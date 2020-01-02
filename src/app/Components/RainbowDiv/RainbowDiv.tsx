@@ -6,6 +6,7 @@ import { css } from 'aphrodite';
 interface IProps {
     // Props type definition
     style?: React.CSSProperties
+    disabled?: boolean
 }
 
 interface IState {
@@ -25,7 +26,7 @@ export const RainbowDiv: FunctionComponent<IProps> = (props) => {
     }, [])
 
     return (
-        <div className={css(styles.aphroditeStyles.rainbowView)} style={inline([props.style])}  >
+        <div className={css(props.disabled === true ? styles.aphroditeStyles.disabledRainbowView : styles.aphroditeStyles.rainbowView)} style={inline([props.style])}  >
             {props.children}
         </div>
     );

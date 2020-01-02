@@ -1,17 +1,19 @@
-import { ListItem, Typography, Button, Fab, IconButton } from '@material-ui/core';
+import { ListItem, Typography, Button, Fab, IconButton, Collapse } from '@material-ui/core';
 import { css } from 'aphrodite';
 import { inline } from 'app/utils/StylesUtils';
 import { inject, observer } from 'mobx-react';
 import * as React from 'react';
 import { DraggableProvided, DraggableStateSnapshot } from 'react-beautiful-dnd';
 import { CallClassConfiguration } from '../../Models/CallClassConfiguration';
-import { SimulationConfigurationStore } from '../../Store/SimulationConfigurationStore';
+import simulationConfigurationStore, { SimulationConfigurationStore } from '../../Store/SimulationConfigurationStore';
 import styles from './FlowsConfigurationStyles';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPen, faTrash, faLayerGroup } from '@fortawesome/free-solid-svg-icons';
 import { Colors } from 'app/Theme';
 import { SpectrumText } from '../../Components/SpectrumText/SpectrumText';
 import { ClassConfigurationModal } from '../../Components/ClassConfigurationModal/ClassConfigurationModal';
+import { TwitterPicker, SketchPicker, GithubPicker } from 'react-color';
+import { RainbowBorderButton } from 'app/Components/RainbowBorderButton/RainbowBorderButton';
 
 interface IProps {
     // Props type definition
@@ -24,6 +26,7 @@ interface IProps {
 interface IState {
     // State type definition
     isEditing: boolean
+    isPickerVisible: boolean
 }
 
 @inject('simulationConfigurationStore')
@@ -32,7 +35,8 @@ export class CallClassConfigurationComponent extends React.Component<IProps, ISt
     constructor(props) {
         super(props)
         this.state = {
-            isEditing: false
+            isEditing: false,
+            isPickerVisible: false
         }
     }
 
@@ -64,6 +68,16 @@ export class CallClassConfigurationComponent extends React.Component<IProps, ISt
         this.props.simulationConfigurationStore.classesConfiguration.selectedFlowClass = this.props.flowClass
     }
 
+    public handlePickerChange = (color, event) => {
+        const index = this.props.simulationConfigurationStore.classesConfiguration.flowClasses.indexOf(this.props.flowClass)
+        if (index !== - 1) {
+            this.props.simulationConfigurationStore.classesConfiguration.flowClasses[index].color = color.hex
+        }
+        this.setState({
+            isPickerVisible: false
+        })
+    }
+
     public render() {
 
         const isSelected = this.props.simulationConfigurationStore.classesConfiguration.selectedFlowClass === this.props.flowClass
@@ -88,7 +102,14 @@ export class CallClassConfigurationComponent extends React.Component<IProps, ISt
             >
                 <ClassConfigurationModal flowClass={this.props.flowClass} isVisible={this.state.isEditing} onClose={this.onEditingModalClosed} />
                 <div style={inline([styles.flex1, styles.centeredRow, styles.leftAlignedRow, styles.verticalPadding])}>
-                    <FontAwesomeIcon icon={faLayerGroup} />
+                    <Button style={inline([styles.pickerButton, {
+                        background: this.props.flowClass.color
+                    }])} onClick={() => {
+                        this.setState({
+                            isPickerVisible: !this.state.isPickerVisible
+                        })
+                    }} />
+
                     <SpectrumText
                         style={inline([styles.xSmallMarginLeft])}
                         color={Colors.colors.primary} size={'b15'} weight={'bold'}>
@@ -105,6 +126,9 @@ export class CallClassConfigurationComponent extends React.Component<IProps, ISt
                         <FontAwesomeIcon style={inline([styles.trashIcon])} icon={faTrash} />
                     </IconButton>
                 </div>
+                <Collapse in={this.state.isPickerVisible} style={inline([styles.positionAbsolute, { left: 10, top: 50, zIndex: 100 }])}>
+                    <GithubPicker onChange={this.handlePickerChange} colors={simulationConfigurationStore.colors} />
+                </Collapse>
             </ListItem>
         );
     }

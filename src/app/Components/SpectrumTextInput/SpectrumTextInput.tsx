@@ -71,7 +71,7 @@ export const SpectrumTextInput: FunctionComponent<IProps> = (props) => {
     }
 
     return (
-        <div style={inline([styles.textInputContainer,
+        <div style={inline([props.type === 'number' ? styles.numberInputContainer : styles.textInputContainer,
         styles.centeredRow,
         props.error && styles.textInputContainerError,
         styles.shadowView,
@@ -85,10 +85,10 @@ export const SpectrumTextInput: FunctionComponent<IProps> = (props) => {
             />
             {props.type === 'number' && <div style={inline([styles.centeredColumn, styles.xSmallMarginLeft])}>
                 <IconButton onClick={onAddPressed} size={'small'} aria-label="Aumentar">
-                    <FontAwesomeIcon color={Colors.colors.lightGray} size={'xs'} icon={faPlusCircle} />
+                    <FontAwesomeIcon color={Colors.colors.primary} size={'xs'} icon={faPlusCircle} />
                 </IconButton>
                 <IconButton onClick={onSubtractPressed} size={'small'} aria-label="Diminuir">
-                    <FontAwesomeIcon color={Colors.colors.lightGray} size={'xs'} icon={faMinusCircle} />
+                    <FontAwesomeIcon color={Colors.colors.primary} size={'xs'} icon={faMinusCircle} />
                 </IconButton>
             </div>}
         </div>

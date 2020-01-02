@@ -11,6 +11,8 @@ export class CallClassConfiguration {
     @observable @persist maxHoldingTime?: number;
     @observable @persist frequency?: number
     @observable @persist localFrequency?: number
+    @observable @persist color?: string
+
     @observable @persist('object') degradationConfiguration?: CallDegradationConfiguration
 
     constructor() {
@@ -21,6 +23,7 @@ export class CallClassConfiguration {
         this.maxHoldingTime = 2
         this.frequency = 0.5
         this.localFrequency = 50
+        this.color = '#EE7752'
         this.degradationConfiguration = new CallDegradationConfiguration()
     }
 }

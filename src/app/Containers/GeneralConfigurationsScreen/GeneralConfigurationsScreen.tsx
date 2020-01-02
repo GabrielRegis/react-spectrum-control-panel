@@ -154,6 +154,7 @@ export const GeneralConfigurationsScreen: FunctionComponent<IProps> = observer(
                     <SpectrumTextInput
                       type={"number"}
                       style={inline([styles.xSmallMarginLeft])}
+                      max={6}
                       value={cycles}
                       onChange={onCycleTextChanged}
                     />

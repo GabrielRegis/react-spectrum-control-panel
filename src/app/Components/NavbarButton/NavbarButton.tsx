@@ -1,5 +1,5 @@
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
-import { faAdjust, faCircle, faCheck, faCheckCircle } from '@fortawesome/free-solid-svg-icons';
+import { faAdjust, faCircle, faCheck, faCheckCircle, faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Button, Fade } from '@material-ui/core';
 import { Colors } from 'app/Theme';
@@ -45,16 +45,8 @@ export const NavbarButton: FunctionComponent<IProps> = (props) => {
                     </RainbowDiv> :
                         <FontAwesomeIcon
                             style={inline([styles.checkIconOff])}
-                            icon={faAdjust} />
+                            icon={faExclamationCircle} />
                 }
-
-                {/* {props.isFinished && <Lottie
-                    style={inline([styles.positionAbsolute])}
-                    options={{
-                        animationData: require('../../Assets/Animations/checkAnimation.json'),
-                        loop: false,
-                    }}
-                />} */}
             </div>}
         </Button>
     );

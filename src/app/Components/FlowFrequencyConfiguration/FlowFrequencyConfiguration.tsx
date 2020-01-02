@@ -36,20 +36,9 @@ export const FlowFrequencyConfiguration: FunctionComponent<IProps> = React.memo(
 
     const onSliderChange = (event: React.ChangeEvent<{}>, value: number) => {
         const index = simulationConfigurationStore.classesConfiguration.flowClasses.indexOf(props.flowClass)
-
         if (index !== -1) {
             simulationConfigurationStore.classesConfiguration.flowClasses[index].localFrequency = value
-            let totalLocalFrequencies = 0
-            simulationConfigurationStore.classesConfiguration.flowClasses.forEach((flowClass) => {
-                totalLocalFrequencies += flowClass.localFrequency
-            })
-            simulationConfigurationStore.classesConfiguration.flowClasses = simulationConfigurationStore.classesConfiguration.flowClasses.map((flowClass) => {
-                return {
-                    ...flowClass,
-                    frequency: flowClass.localFrequency / totalLocalFrequencies
-                }
-            })
-
+            simulationConfigurationStore.updateClassesFrequency()
         }
     }
 
@@ -58,8 +47,12 @@ export const FlowFrequencyConfiguration: FunctionComponent<IProps> = React.memo(
             <SpectrumText style={styles.flex1} size={'b17'} weight={'semibold'}>
                 {props.flowClass.name}
             </SpectrumText>
-            <Slider value={props.flowClass.localFrequency} onChange={onSliderChange} min={5} max={100} step={5} marks style={inline([styles.slider, styles.flex4])} />
-            <SpectrumText style={styles.smallMarginLeft} size={'b17'} weight={'semibold'}>
+            <Slider value={props.flowClass.localFrequency} onChange={onSliderChange} min={5} max={100} step={5} marks style={inline([styles.xSmallMarginLeft, styles.slider, {
+                color: props.flowClass.color
+            }, styles.flex4])} />
+            <SpectrumText style={inline([styles.smallMarginLeft, {
+                flex: 0.4
+            }])} size={'b17'} weight={'semibold'}>
                 {(props.flowClass.frequency * 100).toPrecision(2) + '%'}
             </SpectrumText>
         </div>

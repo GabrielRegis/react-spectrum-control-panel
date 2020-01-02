@@ -5,6 +5,7 @@ import styles from './RainbowBorderButtonStyles';
 import { css } from 'aphrodite';
 import { RainbowDiv } from '../RainbowDiv/RainbowDiv';
 import { Button } from '@material-ui/core';
+import { Colors } from 'app/Theme';
 interface IProps {
     // Props type definition
     style?: React.CSSProperties
@@ -13,6 +14,7 @@ interface IProps {
     borderRadius?: number
     borderWidth?: number
     onClick?: () => void
+    disabled?: boolean
 }
 
 interface IState {
@@ -32,8 +34,8 @@ export const RainbowBorderButton: FunctionComponent<IProps> = (props) => {
     }, [])
 
     return (
-        <Button onClick={props.onClick} style={inline([{ borderRadius: props.borderRadius ? props.borderRadius : 50, }, props.style])} disableFocusRipple>
-            <RainbowDiv style={inline([{
+        <Button disabled={props.disabled} onClick={props.onClick} style={inline([{ borderRadius: props.borderRadius ? props.borderRadius : 50, }, props.style])} disableFocusRipple>
+            <RainbowDiv disabled={props.disabled} style={inline([{
                 borderRadius: props.borderRadius ? props.borderRadius : 50,
                 padding: props.borderWidth ? props.borderWidth : 3,
             }, styles.textWithoutSelection, props.middleStyle])}>

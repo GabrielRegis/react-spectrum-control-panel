@@ -26,6 +26,13 @@ export default {
             animationIterationCount: 'infinite',
             background: 'linear-gradient(-45deg, #EE7752, #E73C7E, #23A6D5, #23D5AB)',
             backgroundSize: '400% 400%',
-        } as CSSProperties
+        } as CSSProperties,
+        disabledRainbowView: {
+            animationName: gradientAnimation,
+            animationDuration: '5s',
+            animationIterationCount: 'infinite',
+            background: 'linear-gradient(-45deg, #EFEFEF, #AAAAAA, #EFEFEF)',
+            backgroundSize: '400% 400%',
+        } as CSSProperties,
     }),
 };

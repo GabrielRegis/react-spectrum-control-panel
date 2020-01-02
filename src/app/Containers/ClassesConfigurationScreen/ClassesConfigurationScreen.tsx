@@ -132,11 +132,14 @@ export const ClassesConfigurationScreen: FunctionComponent<IProps> = observer((p
                                         </Droppable>
                                     </DragDropContext>
                                 </div>
-                                <FlowsFrequencyConfiguration />
+                                {simulationConfigurationStore.classesConfiguration.flowClasses.length > 1 && <Fade timeout={2000} in={true}>
+                                    <FlowsFrequencyConfiguration />
+                                </Fade>}
 
                                 <div style={inline([styles.centeredColumn, styles.botAlignedColumn, styles.bigMarginLeft])}>
                                     <img style={inline([styles.listPlaceholder])} src={require('../../Assets/Icons/listPlaceholder.svg')} alt="" />
                                     <RainbowBorderButton
+                                        disabled={simulationConfigurationStore.classesConfiguration.flowClasses.length >= 5}
                                         onClick={onAddClassClicked}
                                         innerStyle={inline([styles.centeredRow])}
                                     >
@@ -145,6 +148,17 @@ export const ClassesConfigurationScreen: FunctionComponent<IProps> = observer((p
                                         </SpectrumText>
                                         <FontAwesomeIcon size={'1x'} style={inline([styles.addIcon])} icon={faPlusCircle} />
                                     </RainbowBorderButton>
+                                    <div style={inline([styles.leftAlignedColumn])}>
+                                        <SpectrumText >
+                                            {"Número mínimo de classes: 2"}
+                                        </SpectrumText>
+                                        <SpectrumText >
+                                            {"Número máximo de classes: 5"}
+                                        </SpectrumText>
+                                        <SpectrumText >
+                                            {"Total de classes: " + simulationConfigurationStore.classesConfiguration.flowClasses.length}
+                                        </SpectrumText>
+                                    </div>
                                 </div>
                             </div>
                         </div>
