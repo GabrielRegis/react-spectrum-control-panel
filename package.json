@@ -112,6 +112,7 @@
     "react-router-dom": "^5.0.1",
     "react-shimmer-effect": "^1.0.9",
     "react-transition-group": "^4.1.1",
+    "react-wavify": "^1.2.1",
     "reactour": "^1.15.5",
     "redux": "^4.0.1",
     "redux-actions": "^2.6.4",

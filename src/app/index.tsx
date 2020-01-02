@@ -18,7 +18,7 @@ class AppClass extends React.Component {
     return (<Provider  {...rootStore}>
       <Router >
         <div style={inline([{ height: '100vh', width: '100vw' }])}>
-          <Navbar />
+          {/* <Navbar />
 
           <div style={inline([{ height: window.innerHeight - 80, paddingTop: 80, width: '100vw' }])}>
             <Route exact path="/" component={HomeScreen} />
@@ -26,7 +26,12 @@ class AppClass extends React.Component {
             <Route path="/classes-configurations" component={ClassesConfigurationScreen} />
             <Route path="/topology-configurations" component={TopologyConfiguration} />
             <Route path="/summary" component={SummaryScreen} />
-          </div>
+          </div> */}
+          <Route exact path="/" component={HomeScreen} />
+          <Route path="/general-configurations" component={GeneralConfigurationsScreen} />
+          <Route path="/classes-configurations" component={ClassesConfigurationScreen} />
+          <Route path="/topology-configurations" component={TopologyConfiguration} />
+          <Route path="/summary" component={SummaryScreen} />
         </div>
       </Router>
     </Provider>)

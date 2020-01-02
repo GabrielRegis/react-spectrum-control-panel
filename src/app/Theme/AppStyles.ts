@@ -7,6 +7,10 @@ import Fonts from "./Fonts";
 //box-shadow: 2px 2px 20px 0px rgba(204, 204, 204, 0.27);
 
 export default {
+    textWithoutSelection: {
+        MozUserSelect: 'none',
+        userSelect: 'none',
+    } as React.CSSProperties,
     trashIcon: {
         color: Colors.colors.healthPink
     } as React.CSSProperties,
