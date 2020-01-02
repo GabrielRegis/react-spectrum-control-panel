@@ -2,7 +2,13 @@ import { ApplicationStyles, Colors } from "app/Theme";
 
 export default {
     ...ApplicationStyles,
-
+    waveContainer: {
+        padding: 0,
+        margin: 0,
+        width: '100%',
+        zIndex: 5,
+        overflow: 'hidden'
+    } as React.CSSProperties,
     titleContainer: {
         borderRadius: 10,
         height: 120,
@@ -52,7 +58,7 @@ export default {
     footer: {
         bottom: 0,
         position: 'fixed',
-        zIndex: 4
+        zIndex: 5
     } as React.CSSProperties,
     utfprLogo: {
         width: 100,

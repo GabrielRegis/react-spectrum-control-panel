@@ -273,6 +273,12 @@ export default {
     } as React.CSSProperties,
 
     // Flex
+    flexStretch: {
+        display: 'flex',
+        flex: 1,
+        flexWrap: 'wrap',
+        alignItems: 'stretch',
+    } as React.CSSProperties,
     flex1: {
         display: 'flex',
         flex: 1

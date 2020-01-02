@@ -37,7 +37,7 @@ export const Navbar: FunctionComponent<IProps> = observer((props) => {
 
     return (
         <Fade in={true}>
-            <div style={inline([styles.navbar, styles.centeredRow, styles.leftAlignedRow, styles.positionAbsolute])}>
+            <div style={inline([styles.navbar, styles.centeredRow, styles.leftAlignedRow])}>
                 <Link to="/">
                     <Button style={inline([styles.spectrumButton])} >
                         <img style={inline([styles.logo])} src={require('../../Assets/Icons/icLogo.png')} alt="" />

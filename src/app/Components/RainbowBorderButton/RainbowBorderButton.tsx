@@ -30,17 +30,17 @@ export const RainbowBorderButton: FunctionComponent<IProps> = (props) => {
     }, [])
 
     return (
-        <Button style={inline([{ borderRadius: props.borderRadius ? props.borderRadius : 5, }, props.style])} disableFocusRipple>
+        <Button style={inline([{ borderRadius: props.borderRadius ? props.borderRadius : 50, }, props.style])} disableFocusRipple>
             <RainbowDiv style={inline([{
-                borderRadius: props.borderRadius ? props.borderRadius : 5,
-                padding: props.borderWidth ? props.borderWidth : 5,
+                borderRadius: props.borderRadius ? props.borderRadius : 50,
+                padding: props.borderWidth ? props.borderWidth : 3,
             }, styles.textWithoutSelection,])}>
                 <div style={inline([styles.flex1,
                 {
-                    borderRadius: props.borderRadius ? props.borderRadius : 5,
-                    padding: props.borderWidth ? props.borderWidth : 5,
+                    borderRadius: props.borderRadius ? props.borderRadius : 50,
+                    padding: props.borderWidth ? props.borderWidth : 3,
                 },
-                styles.whiteContainer, props.innerStyle])}>
+                styles.whiteContainer, styles.xSmallPaddingHorizontal, props.innerStyle])}>
                     {props.children}
                 </div>
             </RainbowDiv>

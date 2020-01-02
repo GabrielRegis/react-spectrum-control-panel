@@ -15,6 +15,9 @@ import { SpectrumTextInput } from "../../Components/SpectrumTextInput/SpectrumTe
 import { steps } from "./GeneralConfigurationScreenGuide";
 import styles from "./GeneralConfigurationsScreenStyles";
 import { SpectrumGuide } from '../../Components/SpectrumGuide/SpectrumGuide';
+import { SpectrumScreen } from "app/Components/SpectrumScreen/SpectrumScreen";
+import { RainbowBorderButton } from 'app/Components/RainbowBorderButton/RainbowBorderButton';
+
 
 interface IProps {
   // Props type definition
@@ -105,169 +108,164 @@ export const GeneralConfigurationsScreen: FunctionComponent<IProps> = observer(
     const tourSteps = steps;
 
     return (
-      <Fade timeout={{ enter: 600 }} in={true} mountOnEnter unmountOnExit>
-        <div style={inline([styles.flex1, styles.topCenteredColumn, styles.paddingHorizontal])}>
-          <div
-            style={inline([
-              styles.topCenteredColumn,
-              styles.leftAlignedColumn,
-              styles.fullWidthContainer,
-              styles.xSmallMarginTop
-            ])}
-          >
-            <SpectrumText
-              size={"h2"}
-              weight={"bold"}
-              color={Colors.colors.primary}
-            >
-              Configurações Gerais
-            </SpectrumText>
-            <Grid container spacing={1}>
-              <Grid item xs={12}>
-                <div
-                  style={inline([
-                    styles.centeredRow,
-                    styles.leftAlignedRow,
-                    styles.xSmallMarginTop
-                  ])}
-                >
-                  <SpectrumText
-                    className={"seedsGuide"}
-                    color={Colors.colors.primary}
-                    size={"b17"}
-                    weight={"bold"}
-                  >
-                    Sementes
-                  </SpectrumText>
-                  <SpectrumText
-                    style={inline([styles.xSmallMarginLeft])}
-                    color={Colors.colors.primary}
-                    size={"b15"}
-                  >
-                    Simular com
-                  </SpectrumText>
-                  <SpectrumTextInput
-                    type={"number"}
-                    style={inline([styles.xSmallMarginLeft])}
-                    value={cycles}
-                    onChange={onCycleTextChanged}
-                  />
-                  <SpectrumText
-                    style={inline([styles.xSmallMarginLeft])}
-                    color={Colors.colors.primary}
-                    size={"b15"}
-                    weight={"semibold"}
-                  >
-                    Sementes
-                  </SpectrumText>
-                  <SpectrumText color={Colors.colors.primary} size={"b15"}>
-                    {"\u00a0" + "para o cálculo das métricas"}
-                  </SpectrumText>
-                </div>
-              </Grid>
-              <Grid item xs={12}>
-                <div
-                  style={inline([styles.centeredRow, styles.leftAlignedRow])}
-                >
-                  <SpectrumText
-                    className={"loadGuide"}
-                    color={Colors.colors.primary}
-                    size={"b17"}
-                    weight={"bold"}
-                  >
-                    Carga
-                  </SpectrumText>
-                  <SpectrumText
-                    style={inline([styles.xSmallMarginLeft])}
-                    size={"b15"}
-                  >
-                    Aumentar a carga de
-                  </SpectrumText>
-                  <SpectrumTextInput
-                    style={inline([styles.xSmallMarginLeft])}
-                    type={"number"}
-                    value={minLoad}
-                    max={maxLoad}
-                    onChange={onMinLoadTextChanged}
-                  />
-                  <SpectrumText
-                    style={inline([styles.xSmallMarginLeft])}
-                    size={"b15"}
-                  >
-                    até
-                  </SpectrumText>
-                  <SpectrumTextInput
-                    style={inline([styles.xSmallMarginLeft])}
-                    type={"number"}
-                    value={maxLoad}
-                    onChange={onMaxLoadTextChanged}
-                  />
-                  <SpectrumText
-                    style={inline([styles.xSmallMarginLeft])}
-                    size={"b15"}
-                    weight={"semibold"}
-                  >
-                    Erlangs
-                  </SpectrumText>
-                  <SpectrumText size={"b15"}>
-                    {"," + "\u00a0" + "incrementando"}
-                  </SpectrumText>
-                  <SpectrumTextInput
-                    style={inline([styles.xSmallMarginLeft])}
-                    type={"number"}
-                    value={loadStep}
-                    onChange={onLoadStepTextChanged}
-                  />
-                  <SpectrumText
-                    style={inline([styles.xSmallMarginLeft])}
-                    size={"b15"}
-                  >
-                    à cada iteração, resultando em
-                  </SpectrumText>
-                  <SpectrumText size={"b15"} weight={"semibold"}>
-                    {"\u00a0" + iterations + "\u00a0"}
-                  </SpectrumText>
-                  <SpectrumText size={"b15"}>
-                    iterações à cada ciclo.
-                  </SpectrumText>
-                </div>
-              </Grid>
-            </Grid>
-          </div>
-          <img
-            style={inline([styles.listPlaceholder])}
-            src={require("../../Assets/Icons/generalSettingsPlaceholder.svg")}
-            alt=""
-          />
-          <SpectrumGuide tourSteps={steps} shouldLaunchGuideOnRender={true} />
-          <Link style={{ textDecoration: "none" }} to="/classes-configurations">
-            <Button
-              size={"large"}
+      <SpectrumScreen style={inline([styles.fullWidthContainer, styles.topCenteredColumn, styles.positionRelative, styles.flexStretch])}>
+        <Fade style={inline([styles.flexStretch])} timeout={{ enter: 600 }} in={true} mountOnEnter unmountOnExit>
+          <div style={inline([styles.flex1, styles.topCenteredColumn, styles.paddingHorizontal])}>
+            <div
               style={inline([
-                styles.centeredColumn,
-                styles.xSmallPaddingHorizontal,
-                styles.nextButton,
-                styles.marginTop
+                styles.topCenteredColumn,
+                styles.leftAlignedColumn,
+                styles.fullWidthContainer,
+                styles.xSmallMarginTop
               ])}
             >
               <SpectrumText
-                style={inline([
-                  styles.xSmallMarginRight
-                ])}
-                weight={'bold'}
-                color={Colors.colors.healthPink}
+                size={"h2"}
+                weight={"bold"}
+                color={Colors.colors.primary}
               >
-                Avançar
-              </SpectrumText>
-              <FontAwesomeIcon
-                color={Colors.colors.healthPink}
-                size={"1x"}
-                icon={faArrowRight}
-              />
-            </Button>
-          </Link>
-        </div>
-      </Fade>
+                Configurações Gerais
+            </SpectrumText>
+              <Grid container spacing={1}>
+                <Grid item xs={12}>
+                  <div
+                    style={inline([
+                      styles.centeredRow,
+                      styles.leftAlignedRow,
+                      styles.xSmallMarginTop
+                    ])}
+                  >
+                    <SpectrumText
+                      className={"seedsGuide"}
+                      color={Colors.colors.primary}
+                      size={"b17"}
+                      weight={"bold"}
+                    >
+                      Sementes
+                  </SpectrumText>
+                    <SpectrumText
+                      style={inline([styles.xSmallMarginLeft])}
+                      color={Colors.colors.primary}
+                      size={"b15"}
+                    >
+                      Simular com
+                  </SpectrumText>
+                    <SpectrumTextInput
+                      type={"number"}
+                      style={inline([styles.xSmallMarginLeft])}
+                      value={cycles}
+                      onChange={onCycleTextChanged}
+                    />
+                    <SpectrumText
+                      style={inline([styles.xSmallMarginLeft])}
+                      color={Colors.colors.primary}
+                      size={"b15"}
+                      weight={"semibold"}
+                    >
+                      Sementes
+                  </SpectrumText>
+                    <SpectrumText color={Colors.colors.primary} size={"b15"}>
+                      {"\u00a0" + "para o cálculo das métricas"}
+                    </SpectrumText>
+                  </div>
+                </Grid>
+                <Grid item xs={12}>
+                  <div
+                    style={inline([styles.centeredRow, styles.leftAlignedRow])}
+                  >
+                    <SpectrumText
+                      className={"loadGuide"}
+                      color={Colors.colors.primary}
+                      size={"b17"}
+                      weight={"bold"}
+                    >
+                      Carga
+                  </SpectrumText>
+                    <SpectrumText
+                      style={inline([styles.xSmallMarginLeft])}
+                      size={"b15"}
+                    >
+                      Aumentar a carga de
+                  </SpectrumText>
+                    <SpectrumTextInput
+                      style={inline([styles.xSmallMarginLeft])}
+                      type={"number"}
+                      value={minLoad}
+                      max={maxLoad}
+                      onChange={onMinLoadTextChanged}
+                    />
+                    <SpectrumText
+                      style={inline([styles.xSmallMarginLeft])}
+                      size={"b15"}
+                    >
+                      até
+                  </SpectrumText>
+                    <SpectrumTextInput
+                      style={inline([styles.xSmallMarginLeft])}
+                      type={"number"}
+                      value={maxLoad}
+                      onChange={onMaxLoadTextChanged}
+                    />
+                    <SpectrumText
+                      style={inline([styles.xSmallMarginLeft])}
+                      size={"b15"}
+                      weight={"semibold"}
+                    >
+                      Erlangs
+                  </SpectrumText>
+                    <SpectrumText size={"b15"}>
+                      {"," + "\u00a0" + "incrementando"}
+                    </SpectrumText>
+                    <SpectrumTextInput
+                      style={inline([styles.xSmallMarginLeft])}
+                      type={"number"}
+                      value={loadStep}
+                      onChange={onLoadStepTextChanged}
+                    />
+                    <SpectrumText
+                      style={inline([styles.xSmallMarginLeft])}
+                      size={"b15"}
+                    >
+                      à cada iteração, resultando em
+                  </SpectrumText>
+                    <SpectrumText size={"b15"} weight={"semibold"}>
+                      {"\u00a0" + iterations + "\u00a0"}
+                    </SpectrumText>
+                    <SpectrumText size={"b15"}>
+                      iterações à cada ciclo.
+                  </SpectrumText>
+                  </div>
+                </Grid>
+              </Grid>
+            </div>
+            <img
+              style={inline([styles.listPlaceholder])}
+              src={require("../../Assets/Icons/generalSettingsPlaceholder.svg")}
+              alt=""
+            />
+            <SpectrumGuide tourSteps={steps} shouldLaunchGuideOnRender={true} />
+            <Link style={{ textDecoration: "none" }} to="/classes-configurations">
+              <RainbowBorderButton
+                style={inline([
+                  styles.marginTop
+                ])}
+                innerStyle={inline([
+                  styles.centeredRow
+                ])}
+              >
+                <SpectrumText style={inline([styles.xSmallMarginRight])} size={'b15'} weight={'bold'}>
+                  Próxima Etapa
+                </SpectrumText>
+                <FontAwesomeIcon
+                  color={Colors.colors.primary}
+                  size={"1x"}
+                  icon={faArrowRight}
+                />
+              </RainbowBorderButton>
+            </Link>
+          </div>
+        </Fade>
+      </SpectrumScreen>
     );
   }
 );
