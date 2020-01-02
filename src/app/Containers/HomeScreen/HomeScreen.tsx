@@ -9,6 +9,7 @@ import Wave from 'react-wavify'
 import { RainbowDiv } from 'app/Components/RainbowDiv/RainbowDiv';
 import { RainbowBorderButton } from 'app/Components/RainbowBorderButton/RainbowBorderButton';
 import { Link } from 'react-router-dom';
+import { Waves } from 'app/Components/Waves/Waves';
 
 interface IProps {
     // Props type definition
@@ -17,19 +18,14 @@ interface IProps {
 
 interface IState {
     // State type definition
-    number: number;
-    waveAnimationTrigger: boolean
     titleAnimationTrigger: boolean
 }
 
 export const HomeScreen: FunctionComponent<IProps> = (props) => {
     const initialState: IState = {
-        number: 0,
-        waveAnimationTrigger: false,
         titleAnimationTrigger: false,
     };
 
-    const [waveAnimationTrigger, setWaveAnimationTrigger] = React.useState(initialState.waveAnimationTrigger)
     const [titleAnimationTrigger, setTitleAnimationTrigger] = React.useState(initialState.titleAnimationTrigger)
 
     // ComponentDidMount
@@ -37,9 +33,6 @@ export const HomeScreen: FunctionComponent<IProps> = (props) => {
         setTimeout(() => {
             setTitleAnimationTrigger(true)
         }, 200)
-        setTimeout(() => {
-            setWaveAnimationTrigger(true)
-        }, 300)
         return () => {
             //ComponentDidUnmount
         }
@@ -62,78 +55,17 @@ export const HomeScreen: FunctionComponent<IProps> = (props) => {
                     </div>
                 </Fade>
                 <Fade timeout={1000} in={titleAnimationTrigger}>
-
                     <Link style={{ textDecoration: "none" }} to="/general-configurations">
                         <RainbowBorderButton style={inline([styles.marginTop])}>
                             <SpectrumText style={styles.startText} weight={'bold'}>
                                 INICIAR
-                        </SpectrumText>
+                            </SpectrumText>
                         </RainbowBorderButton>
                     </Link>
                 </Fade>
             </div>
 
-            <div style={inline([styles.flex1, styles.flexStretch, styles.waveContainer])}>
-
-                <Slide timeout={1000} direction={'up'} in={waveAnimationTrigger}>
-                    <div style={inline([styles.flex1, styles.flexStretch, styles.waveContainer, styles.positionRelative])}>
-                        <div style={inline([styles.flex1, styles.flexStretch, styles.fullWidthContainer, styles.positionAbsolute, { zIndex: -1, top: 200 }])}>
-                            <Wave fill='#EE7752'
-                                style={{
-                                    width: '100%',
-                                }}
-                                paused={false}
-                                options={{
-                                    height: 40,
-                                    amplitude: 60,
-                                    speed: 0.3,
-                                    points: 3
-                                }}
-                            />
-                        </div>
-                        <div style={inline([styles.flex1, styles.flexStretch, styles.fullWidthContainer, styles.positionAbsolute, { zIndex: -1, top: 230 }])}>
-                            <Wave fill='#E73C7E'
-                                style={{
-                                    width: '100%'
-                                }}
-                                paused={false}
-                                options={{
-                                    height: 40,
-                                    amplitude: 60,
-                                    speed: 0.1,
-                                    points: 3
-                                }}
-                            />
-                        </div>
-                        <div style={inline([styles.flex1, styles.flexStretch, styles.fullWidthContainer, styles.positionAbsolute, { zIndex: -1, top: 260 }])}>
-                            <Wave fill='#23A6D5'
-                                style={{
-                                    width: '100%'
-                                }}
-                                paused={false}
-                                options={{
-                                    height: 40,
-                                    amplitude: 20,
-                                    speed: 0.2,
-                                    points: 5
-                                }}
-                            />
-                        </div>
-                        <Wave fill='#0F0F14'
-                            style={{
-                                width: '100%'
-                            }}
-                            paused={false}
-                            options={{
-                                height: 300,
-                                amplitude: 60,
-                                speed: 0.15,
-                                points: 3
-                            }}
-                        />
-                    </div>
-                </Slide>
-            </div>
+            <Waves />
 
             <div style={inline([styles.positionAbsolute, styles.fullWidthContainer, styles.footer,])}>
                 <div style={inline([styles.smallPadding, styles.botAlignedRow, styles.spaceBetween])}>

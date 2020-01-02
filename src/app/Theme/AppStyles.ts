@@ -10,6 +10,7 @@ export default {
     textWithoutSelection: {
         MozUserSelect: 'none',
         userSelect: 'none',
+        outline: 'none'
     } as React.CSSProperties,
     trashIcon: {
         color: Colors.colors.healthPink

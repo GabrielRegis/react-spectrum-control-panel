@@ -10,6 +10,7 @@ export class CallClassConfiguration {
     @observable @persist minHoldingTime?: number;
     @observable @persist maxHoldingTime?: number;
     @observable @persist frequency?: number
+    @observable @persist localFrequency?: number
     @observable @persist('object') degradationConfiguration?: CallDegradationConfiguration
 
     constructor() {
@@ -19,6 +20,7 @@ export class CallClassConfiguration {
         this.minHoldingTime = 1
         this.maxHoldingTime = 2
         this.frequency = 0.5
+        this.localFrequency = 50
         this.degradationConfiguration = new CallDegradationConfiguration()
     }
 }

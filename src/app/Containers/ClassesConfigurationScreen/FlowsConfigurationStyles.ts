@@ -76,6 +76,7 @@ export default {
         bottom: 0,
     } as React.CSSProperties,
     addIcon: {
-        color: Colors.colors.healthPink
+        color: Colors.colors.primary,
+        fontSize: 20
     } as React.CSSProperties
 } 

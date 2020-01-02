@@ -1,4 +1,4 @@
-import { faPlusCircle, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faPlusCircle, faTrash, faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Checkbox, Collapse, Container, Divider, Fade, Grid, Grow } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
@@ -19,6 +19,12 @@ import { FlowClassesList } from './FlowClassesList';
 import styles from './FlowsConfigurationStyles';
 import { SpectrumGuide } from '../../Components/SpectrumGuide/SpectrumGuide';
 import { steps } from './ClassesConfigurationScreenGuide';
+import { SpectrumScreen } from 'app/Components/SpectrumScreen/SpectrumScreen';
+import { Link } from 'react-router-dom';
+import { RainbowBorderButton } from 'app/Components/RainbowBorderButton/RainbowBorderButton';
+import { NextStepButton } from 'app/Components/NextStepButton/NextStepButton';
+import { FlowsFrequencyConfiguration } from 'app/Components/FlowsFrequencyConfiguration/FlowsFrequencyConfiguration';
+
 
 interface IProps {
     // Props type definition
@@ -80,48 +86,9 @@ export const ClassesConfigurationScreen: FunctionComponent<IProps> = observer((p
         simulationConfigurationStore.classesConfiguration.flowClasses = flowClasses
     }
 
-    const onClassNameTextChanged = (text: string) => {
-        simulationConfigurationStore.classesConfiguration.selectedFlowClass.name = text
-    }
-    const onMinBandwidthTextChanged = (text: string) => {
-        simulationConfigurationStore.classesConfiguration.selectedFlowClass.minBandwidth = parseInt(text)
-    }
-    const onMaxBandwidthTextChanged = (text: string) => {
-        simulationConfigurationStore.classesConfiguration.selectedFlowClass.maxBandwidth = parseInt(text)
-    }
-    const onMinHoldingTimeTextChanged = (text: string) => {
-        simulationConfigurationStore.classesConfiguration.selectedFlowClass.minHoldingTime = parseInt(text)
-    }
-    const onMaxHoldingTimeTextChanged = (text: string) => {
-        simulationConfigurationStore.classesConfiguration.selectedFlowClass.maxHoldingTime = parseInt(text)
-    }
-    const onBandDegradationTextChanged = (text: string) => {
-        simulationConfigurationStore.classesConfiguration.selectedFlowClass.degradationConfiguration.bandwidthDegradationRate = parseInt(text)
-    }
-    const onDelayToleranceTextChanged = (text: string) => {
-        simulationConfigurationStore.classesConfiguration.selectedFlowClass.degradationConfiguration.delayToleranceRate = parseInt(text)
-    }
-
-    const onToggleDegradationClicked = (checked) => {
-        const isDegradationTolerant = simulationConfigurationStore.classesConfiguration.selectedFlowClass.degradationConfiguration.isDegradationTolerant
-        if (isDegradationTolerant) {
-            simulationConfigurationStore.classesConfiguration.selectedFlowClass.degradationConfiguration = new CallDegradationConfiguration()
-            return
-        }
-        const degradationConfiguration: CallDegradationConfiguration = {
-            isDegradationTolerant: true,
-            bandwidthDegradationRate: 0,
-            delayToleranceRate: 0
-        }
-        simulationConfigurationStore.classesConfiguration.selectedFlowClass.degradationConfiguration = degradationConfiguration
-    }
-
-    const isDegradationTolerant = simulationConfigurationStore.classesConfiguration.selectedFlowClass &&
-        simulationConfigurationStore.classesConfiguration.selectedFlowClass.degradationConfiguration &&
-        simulationConfigurationStore.classesConfiguration.selectedFlowClass.degradationConfiguration.isDegradationTolerant === true
 
     return (
-        <div>
+        <SpectrumScreen style={inline([styles.fullWidthContainer, styles.topCenteredColumn, styles.positionRelative, styles.flexStretch])}>
             <SpectrumGuide shouldLaunchGuideOnRender={true} tourSteps={steps} />
             <Fade timeout={{ enter: 600 }} in={true} mountOnEnter unmountOnExit>
                 <div style={inline([styles.flex1, styles.topCenteredColumn, styles.paddingHorizontal])}>
@@ -165,28 +132,29 @@ export const ClassesConfigurationScreen: FunctionComponent<IProps> = observer((p
                                         </Droppable>
                                     </DragDropContext>
                                 </div>
-                                <div style={inline([styles.botAlignedColumn, styles.bigMarginLeft])}>
+                                <FlowsFrequencyConfiguration />
+
+                                <div style={inline([styles.centeredColumn, styles.botAlignedColumn, styles.bigMarginLeft])}>
                                     <img style={inline([styles.listPlaceholder])} src={require('../../Assets/Icons/listPlaceholder.svg')} alt="" />
-                                    <Button
+                                    <RainbowBorderButton
                                         onClick={onAddClassClicked}
-                                        style={inline([
-                                            styles.xSmallMarginTop,
-                                            styles.addClassButton,
-                                            styles.paddingHorizontal,
-                                            styles.shadowView
-                                        ])}>
+                                        innerStyle={inline([styles.centeredRow])}
+                                    >
                                         <SpectrumText style={inline([styles.xSmallMarginRight])} color={Colors.colors.primary} size={'b15'} weight={'bold'}>
                                             Adicionar Classe
                                         </SpectrumText>
-                                        <FontAwesomeIcon size={'2x'} style={inline([styles.addIcon])} icon={faPlusCircle} />
-                                    </Button>
+                                        <FontAwesomeIcon size={'1x'} style={inline([styles.addIcon])} icon={faPlusCircle} />
+                                    </RainbowBorderButton>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <NextStepButton style={inline([styles.smallMarginTop])} nextRoute={"/topology-configurations"} />
                 </div>
+
             </Fade>
-        </div>
+
+        </SpectrumScreen>
 
     );
 });

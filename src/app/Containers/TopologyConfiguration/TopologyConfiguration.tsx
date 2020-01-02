@@ -16,6 +16,7 @@ import styles from './TopologyConfigurationStyles';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGripHorizontal, faBorderAll } from '@fortawesome/free-solid-svg-icons';
 import { observe } from 'mobx';
+import { SpectrumScreen } from 'app/Components/SpectrumScreen/SpectrumScreen';
 
 interface IProps {
     // Props type definition
@@ -89,8 +90,7 @@ export default class TopologyConfiguration extends React.Component<IProps, IStat
 
     render() {
         return (
-            <div style={inline([styles.flex1, styles.topCenteredColumn, styles.topologyConfigurationScreenContainer])}>
-
+            <SpectrumScreen overflowYHidden={true} style={inline([styles.topCenteredColumn, styles.flexStretch, styles.topologyConfigurationScreenContainer])}>
                 <div style={inline([styles.toolbarContainer, styles.centeredRow, styles.leftAlignedRow])}>
                     <div style={inline([styles.centeredRow])}>
                         <Button
@@ -224,7 +224,11 @@ export default class TopologyConfiguration extends React.Component<IProps, IStat
                     }}
                 />
 
+
                 <Stage
+                    style={inline([{
+                        overflow: 'hidden'
+                    }, styles.flexStretch])}
                     width={window.innerWidth}
                     height={window.innerHeight}
                     onMouseMove={this.onMouseMove}
@@ -252,7 +256,7 @@ export default class TopologyConfiguration extends React.Component<IProps, IStat
                 </Stage>
                 <LinkConfiguration />
 
-            </div >
+            </SpectrumScreen >
 
         );
     }

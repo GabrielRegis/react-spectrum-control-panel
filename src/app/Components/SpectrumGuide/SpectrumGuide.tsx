@@ -3,6 +3,7 @@ import * as React from 'react';
 import { FunctionComponent, useEffect } from 'react';
 import styles from './SpectrumGuideStyles';
 import Tour from 'reactour';
+import { Colors } from 'app/Theme';
 interface IProps {
     // Props type definition
     tourSteps: any[]
@@ -36,7 +37,9 @@ export const SpectrumGuide: FunctionComponent<IProps> = (props) => {
         <Tour
             steps={props.tourSteps}
             isOpen={isOpened}
-            rounded={5}
+
+            accentColor={Colors.colors.pink}
+            rounded={10}
             onRequestClose={closeTour}
         />
     );

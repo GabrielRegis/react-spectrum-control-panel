@@ -18,6 +18,7 @@ import { SummaryPlaceholder } from './SummaryPlaceholder/SummaryPlaceholder';
 import styles from './SummaryScreenStyles';
 import { topologySnapshotStoreContext } from 'app/Store/TopologySnapshotStore';
 import { observable } from 'mobx';
+import { SpectrumScreen } from 'app/Components/SpectrumScreen/SpectrumScreen';
 
 interface IProps {
     // Props type definition
@@ -151,42 +152,15 @@ export const SummaryScreen: FunctionComponent<IProps> = observer((props) => {
     }
 
     return (
-        <div style={inline([styles.fullContainer, styles.positionRelative, styles.topCenteredColumn])}>
+        <SpectrumScreen overflowYHidden={simulationSummaryStore.simulationSummary === null || simulationSummaryStore.simulationSummary === undefined}
+            style={inline([styles.positionRelative, styles.topCenteredColumn, styles.fullContainer])}>
             {simulationSummaryStore.simulationSummary ? <ResultsScreen /> :
-                <div style={inline([styles.fullWidthContainer])}>
-                    {/* <img style={inline([styles.positionAbsolute, styles.placeholder])} src={require('../../Assets/Icons/summaryPlaceholder.svg')} alt="" /> */}
-                    <SummaryPlaceholder
-                        isConnected={isConnected}
-                        isLoading={simulationSummaryStore.isLoading}
-                        onPlaySimulationPressed={onPlaySimulationPressed} />
+                <SummaryPlaceholder
+                    isConnected={isConnected}
+                    isLoading={simulationSummaryStore.isLoading}
+                    onPlaySimulationPressed={onPlaySimulationPressed} />
+            }
 
-                    {false && <CircularProgress style={{ ...styles.flex1 }} color="secondary" />}
-                </div>}
-
-
-            <Snackbar
-                anchorOrigin={{
-                    vertical: 'bottom',
-                    horizontal: 'right',
-                }}
-                open={snackbackMessage !== undefined && snackbackMessage !== null && snackbackMessage !== ''}
-                autoHideDuration={3000}
-                onClose={onSnackBarClosed}
-                ContentProps={{
-                    'aria-describedby': 'message-id',
-                }}
-                message={<span id="message-id">{snackbackMessage}</span>}
-                action={[
-                    <IconButton
-                        key="close"
-                        aria-label="Close"
-                        color="inherit"
-                        onClick={onSnackBarClosed}
-                    >
-                        <CloseIcon />
-                    </IconButton>,
-                ]}
-            />
-        </div>
+        </SpectrumScreen>
     );
 });

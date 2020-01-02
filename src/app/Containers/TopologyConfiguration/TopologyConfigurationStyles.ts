@@ -3,7 +3,10 @@ import { ApplicationStyles, Colors, Fonts } from "app/Theme";
 export default {
     ...ApplicationStyles,
     topologyConfigurationScreenContainer: {
-        background: Colors.colors.extraLightGray
+        background: Colors.colors.extraLightGray,
+        overflow: 'hidden',
+        margin: 0,
+        padding: 0
     } as React.CSSProperties,
     gridSlider: {
         color: Colors.colors.healthPink

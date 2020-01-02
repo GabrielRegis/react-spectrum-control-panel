@@ -1,17 +1,18 @@
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
-import { faAdjust, faCircle } from '@fortawesome/free-solid-svg-icons';
+import { faAdjust, faCircle, faCheck, faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Button } from '@material-ui/core';
+import { Button, Fade } from '@material-ui/core';
 import { Colors } from 'app/Theme';
 import { inline } from 'app/utils/StylesUtils';
 import Lottie from 'lottie-react-web';
 import * as React from 'react';
 import { FunctionComponent, useEffect } from 'react';
 import styles from './NavbarButtonStyles';
+import { RainbowDiv } from '../RainbowDiv/RainbowDiv';
 
 interface IProps {
     // Props type definition
-    isFinished: number | boolean
+    isFinished: boolean | number
     icon: IconProp
     styles?: React.CSSProperties
     shouldShowStatus?: boolean
@@ -30,20 +31,30 @@ export const NavbarButton: FunctionComponent<IProps> = (props) => {
         }
     }, [])
 
+    const isFinished = props.isFinished !== false && props.isFinished !== null && props.isFinished !== undefined
+
     return (
         <Button disableFocusRipple={true} style={inline([styles.navbarButton, props.styles])} >
             <FontAwesomeIcon color={Colors.colors.primary} size={'2x'} icon={props.icon} />
             {props.shouldShowStatus !== false && <div style={inline([styles.buttonStatusContainer, styles.centeredColumn])}>
-                <FontAwesomeIcon
-                    style={inline([styles.checkIconOff, props.isFinished ? styles.checkIconOn : {}])}
-                    icon={props.isFinished ? faCircle : faAdjust} />
-                {props.isFinished && <Lottie
+                {
+                    isFinished ? <RainbowDiv style={inline([styles.rainbowA, styles.centeredColumn])}>
+                        <FontAwesomeIcon
+                            style={inline([styles.checkIconOn, styles.flexStretch])}
+                            icon={faCheckCircle} />
+                    </RainbowDiv> :
+                        <FontAwesomeIcon
+                            style={inline([styles.checkIconOff])}
+                            icon={faAdjust} />
+                }
+
+                {/* {props.isFinished && <Lottie
                     style={inline([styles.positionAbsolute])}
                     options={{
                         animationData: require('../../Assets/Animations/checkAnimation.json'),
                         loop: false,
                     }}
-                />}
+                />} */}
             </div>}
         </Button>
     );

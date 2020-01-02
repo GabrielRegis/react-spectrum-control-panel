@@ -9,8 +9,10 @@ interface IProps {
     // Props type definition
     style?: React.CSSProperties
     innerStyle?: React.CSSProperties
+    middleStyle?: React.CSSProperties
     borderRadius?: number
     borderWidth?: number
+    onClick?: () => void
 }
 
 interface IState {
@@ -30,11 +32,11 @@ export const RainbowBorderButton: FunctionComponent<IProps> = (props) => {
     }, [])
 
     return (
-        <Button style={inline([{ borderRadius: props.borderRadius ? props.borderRadius : 50, }, props.style])} disableFocusRipple>
+        <Button onClick={props.onClick} style={inline([{ borderRadius: props.borderRadius ? props.borderRadius : 50, }, props.style])} disableFocusRipple>
             <RainbowDiv style={inline([{
                 borderRadius: props.borderRadius ? props.borderRadius : 50,
                 padding: props.borderWidth ? props.borderWidth : 3,
-            }, styles.textWithoutSelection,])}>
+            }, styles.textWithoutSelection, props.middleStyle])}>
                 <div style={inline([styles.flex1,
                 {
                     borderRadius: props.borderRadius ? props.borderRadius : 50,

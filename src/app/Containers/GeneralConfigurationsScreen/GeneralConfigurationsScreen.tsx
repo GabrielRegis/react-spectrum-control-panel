@@ -17,6 +17,7 @@ import styles from "./GeneralConfigurationsScreenStyles";
 import { SpectrumGuide } from '../../Components/SpectrumGuide/SpectrumGuide';
 import { SpectrumScreen } from "app/Components/SpectrumScreen/SpectrumScreen";
 import { RainbowBorderButton } from 'app/Components/RainbowBorderButton/RainbowBorderButton';
+import { NextStepButton } from "app/Components/NextStepButton/NextStepButton";
 
 
 interface IProps {
@@ -244,25 +245,7 @@ export const GeneralConfigurationsScreen: FunctionComponent<IProps> = observer(
               alt=""
             />
             <SpectrumGuide tourSteps={steps} shouldLaunchGuideOnRender={true} />
-            <Link style={{ textDecoration: "none" }} to="/classes-configurations">
-              <RainbowBorderButton
-                style={inline([
-                  styles.marginTop
-                ])}
-                innerStyle={inline([
-                  styles.centeredRow
-                ])}
-              >
-                <SpectrumText style={inline([styles.xSmallMarginRight])} size={'b15'} weight={'bold'}>
-                  Próxima Etapa
-                </SpectrumText>
-                <FontAwesomeIcon
-                  color={Colors.colors.primary}
-                  size={"1x"}
-                  icon={faArrowRight}
-                />
-              </RainbowBorderButton>
-            </Link>
+            <NextStepButton style={inline([styles.marginTop])} nextRoute={"/classes-configurations"} />
           </div>
         </Fade>
       </SpectrumScreen>

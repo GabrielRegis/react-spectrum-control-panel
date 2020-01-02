@@ -57,35 +57,45 @@ export const generateDefaultTopology = (gridSize: number) => {
         id: v4().toString(),
         name: 'Link A',
         nodeA: nodeA,
-        nodeB: nodeB
+        nodeB: nodeB,
+        slotSize: 12.5,
+        slots: 50
     }
 
     const linkB: TopologyLink = {
         id: v4().toString(),
         name: 'Link B',
         nodeA: nodeA,
-        nodeB: nodeC
+        nodeB: nodeC,
+        slotSize: 12.5,
+        slots: 50
     }
 
     const linkC: TopologyLink = {
         id: v4().toString(),
         name: 'Link B',
         nodeA: nodeA,
-        nodeB: nodeD
+        nodeB: nodeD,
+        slotSize: 12.5,
+        slots: 50
     }
 
     const linkD: TopologyLink = {
         id: v4().toString(),
         name: 'Link D',
         nodeA: nodeB,
-        nodeB: nodeC
+        nodeB: nodeC,
+        slotSize: 12.5,
+        slots: 50
     }
 
     const linkE: TopologyLink = {
         id: v4().toString(),
         name: 'Link E',
         nodeA: nodeB,
-        nodeB: nodeD
+        nodeB: nodeD,
+        slotSize: 12.5,
+        slots: 50
     }
 
     links.push(linkA)

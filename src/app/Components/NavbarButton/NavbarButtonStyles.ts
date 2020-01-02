@@ -2,6 +2,11 @@ import { ApplicationStyles, Colors } from "app/Theme";
 
 export default {
     ...ApplicationStyles,
+    rainbowA: {
+        width: 20,
+        height: 20,
+        borderRadius: 10
+    } as React.CSSProperties,
     navbarButton: {
         ...ApplicationStyles.shadowView,
         backgroundColor: Colors.colors.white,
@@ -25,8 +30,8 @@ export default {
         marginLeft: 10
     } as React.CSSProperties,
     checkIconOn: {
-        fontSize: 20,
-        color: Colors.colors.healthGreen
+        fontSize: 16,
+        color: Colors.colors.white
     } as React.CSSProperties,
     checkIconOff: {
         fontSize: 24,

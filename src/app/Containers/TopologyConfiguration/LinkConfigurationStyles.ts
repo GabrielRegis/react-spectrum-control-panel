@@ -15,9 +15,6 @@ export default {
         maxWidth: 520,
         borderRadius: 30,
         outline: 'none',
-        WebkitBoxShadow: '2px 2px 20px 0px rgba(204, 204, 204, 0.6)',
-        MozBoxShadow: '2px 2px 20px 0px rgba(204, 204, 204, 0.6)',
-        boxShadow: '2px 2px 20px 0px rgba(204, 204, 204, 0.6)',
         transition: 'all 0.4s'
     } as React.CSSProperties,
     nodeConfigurationContainer: {
@@ -35,17 +32,9 @@ export default {
         transition: 'all 0.4s'
     } as React.CSSProperties,
     applyButon: {
-        backgroundColor: Colors.colors.healthGreen,
-        WebkitBoxShadow: '2px 2px 20px 0px rgba(80, 204, 80, 0.6)',
-        MozBoxShadow: '2px 2px 20px 0px rgba(80, 204, 80, 0.6)',
-        boxShadow: '2px 2px 20px 0px rgba(80, 204, 80, 0.6)',
-        borderRadius: 30
     } as React.CSSProperties,
     closeButton: {
         backgroundColor: Colors.colors.lightGray,
-        WebkitBoxShadow: '2px 2px 20px 0px rgba(204, 204, 204, 0.3)',
-        MozBoxShadow: '2px 2px 20px 0px rgba(204, 204, 204, 0.3)',
-        boxShadow: '2px 2px 20px 0px rgba(204, 204, 204, 0.3)',
         borderRadius: 30,
         minWidth: 0,
         minHeight: 0,
@@ -83,10 +72,6 @@ export default {
         marginRight: 5
     } as React.CSSProperties,
     applyToAllButon: {
-        backgroundColor: Colors.colors.lightGray,
-        WebkitBoxShadow: '2px 2px 20px 0px rgba(204, 204, 204, 0.6)',
-        MozBoxShadow: '2px 2px 20px 0px rgba(204, 204, 204, 0.6)',
-        boxShadow: '2px 2px 20px 0px rgba(204, 204, 204, 0.6)',
-        borderRadius: 30
+        background: 'red',
     } as React.CSSProperties,
 }

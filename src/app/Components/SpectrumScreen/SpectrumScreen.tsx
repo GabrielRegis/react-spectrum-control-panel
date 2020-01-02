@@ -7,6 +7,7 @@ interface IProps {
     // Props type definition
     shouldHideNavbar?: boolean
     style?: React.CSSProperties
+    overflowYHidden?: boolean
 }
 
 interface IState {
@@ -28,7 +29,10 @@ export const SpectrumScreen: FunctionComponent<IProps> = (props) => {
     const shouldShowNavbar = props.shouldHideNavbar !== true
 
     return (
-        <div style={inline([styles.fullContainer])}>
+        <div style={inline([styles.fullContainer, {
+            overflowX: 'hidden',
+            overflowY: props.overflowYHidden === true ? 'hidden' : 'visible'
+        }])}>
             {shouldShowNavbar && <Navbar />}
             <div style={inline([styles.flex1, props.style])}>
                 {props.children}

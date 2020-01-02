@@ -12,6 +12,7 @@ import KeyboardEventHandler from 'react-keyboard-event-handler';
 import { SpectrumText } from '../../Components/SpectrumText/SpectrumText';
 import styles from './LinkConfigurationStyles';
 import { NumberSelector } from '../../Components/NumberSelector/NumberSelector';
+import { RainbowBorderButton } from 'app/Components/RainbowBorderButton/RainbowBorderButton';
 
 interface IProps {
     // Props type definition
@@ -181,19 +182,18 @@ export const LinkConfiguration: FunctionComponent<IProps> = observer((props) => 
                                 </div>
 
                             </Grid>
-                            <Grid style={inline([styles.centeredRow, styles.leftAlignedRow, styles.xSmallMarginTop])} item xs={12}>
-                                <Button onClick={onApplyToAllPressed} size={'large'}
-                                    style={inline([styles.centeredColumn, styles.applyToAllButon])}>
+                            <Grid style={inline([styles.centeredRow, styles.rightAlignedRow, styles.smallMarginTop])} item xs={12}>
+                                <RainbowBorderButton onClick={onApplyToAllPressed}>
                                     <SpectrumText style={inline([styles.primaryColorText])} size={'c13'} weight={'semibold'}>
                                         Aplicar à todos os enlaces
-                            </SpectrumText>
-                                </Button>
-                                <Button onClick={onApplyPressed} size={'large'}
-                                    style={inline([styles.centeredColumn, styles.xSmallMarginLeft, styles.applyButon])}>
-                                    <SpectrumText style={inline([styles.whiteText])} size={'c13'} weight={'semibold'}>
+                                    </SpectrumText>
+                                </RainbowBorderButton>
+                                <RainbowBorderButton onClick={onApplyPressed}
+                                    style={inline([styles.centeredColumn, styles.applyButon])}>
+                                    <SpectrumText size={'c13'} weight={'semibold'}>
                                         Aplicar
-                            </SpectrumText>
-                                </Button>
+                                    </SpectrumText>
+                                </RainbowBorderButton>
                             </Grid>
                         </Grid>
                     </div>

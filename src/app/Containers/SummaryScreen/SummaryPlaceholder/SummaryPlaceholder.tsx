@@ -1,6 +1,6 @@
-import { faCogs, faNetworkWired, faPlayCircle, faStream } from '@fortawesome/free-solid-svg-icons';
+import { faCogs, faNetworkWired, faPlayCircle, faStream, faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Button, CircularProgress, Container, Typography, Zoom } from '@material-ui/core';
+import { Button, CircularProgress, Container, Typography, Zoom, Fade } from '@material-ui/core';
 import { simulationConfigurationStoreContext } from 'app/Store/SimulationConfigurationStore';
 import { topologyConfigurationStoreContext } from 'app/Store/TopologyConfigurationStore';
 import { inline } from 'app/utils/StylesUtils';
@@ -11,6 +11,12 @@ import { Link } from 'react-router-dom';
 import { NavbarButton } from '../../../Components/NavbarButton/NavbarButton';
 import { Placeholder } from '../Placeholder/Placeholder';
 import styles from './SummaryPlaceholderStyles';
+import { SpectrumScreen } from 'app/Components/SpectrumScreen/SpectrumScreen';
+import { SpectrumText } from 'app/Components/SpectrumText/SpectrumText';
+import { RainbowDiv } from 'app/Components/RainbowDiv/RainbowDiv';
+import { RainbowBorderButton } from 'app/Components/RainbowBorderButton/RainbowBorderButton';
+import { Waves } from 'app/Components/Waves/Waves';
+import { Colors } from 'app/Theme';
 
 
 interface IProps {
@@ -22,6 +28,8 @@ interface IProps {
 
 interface IState {
     // State type definition
+    titleAnimationTrigger: boolean,
+
 }
 
 export const SummaryPlaceholder: FunctionComponent<IProps> = observer((props) => {
@@ -29,8 +37,18 @@ export const SummaryPlaceholder: FunctionComponent<IProps> = observer((props) =>
     const simulationConfigurationStore = React.useContext(simulationConfigurationStoreContext)
     const topologyConfigurationStore = React.useContext(topologyConfigurationStoreContext)
 
+    const initialState: IState = {
+        titleAnimationTrigger: false,
+    };
+
+    const [titleAnimationTrigger, setTitleAnimationTrigger] = React.useState(initialState.titleAnimationTrigger)
+
+
     // ComponentDidMount
     useEffect(() => {
+        setTimeout(() => {
+            setTitleAnimationTrigger(true)
+        }, 200)
         return () => {
             //ComponentDidUnmount
         }
@@ -41,77 +59,31 @@ export const SummaryPlaceholder: FunctionComponent<IProps> = observer((props) =>
         topologyConfigurationStore.areTopologyConfigurationsReady && props.isConnected
 
     return (
-        <Zoom in={true}>
-            <div style={inline([styles.centeredColumn, styles.marginTop, styles.shadowView, styles.padding, styles.infosContainer])}>
-                <Typography
-                    style={inline([styles.primaryText, styles.xSmallMarginBottom])}
-                    variant={'h3'}>
-                    Resumo de simulação
-                </Typography>
-                <Placeholder />
-                <Typography
-                    style={inline([styles.simulationSubtitle, styles.marginTop])}
-                    variant={'button'}>
-                    Configurações obrigatórias
-                </Typography>
-                <Container>
-                    <Container style={inline([styles.centeredRow, styles.leftAlignedRow, styles.xSmallMarginTop])}>
-                        <Link to="/general-configurations">
-                            <NavbarButton
-                                icon={faCogs}
-                                styles={inline([styles.navbarButton])}
-                                isFinished={simulationConfigurationStore.areGeneralConfigurationsReady} />
-                        </Link>
-                        <Typography style={inline([styles.xSmallMarginLeft])} variant={'button'}>
-                            Configurações gerais
-                        </Typography>
-                    </Container>
-                    <Container style={inline([styles.centeredRow, styles.leftAlignedRow, styles.xSmallMarginTop])}>
-                        <Link to="/classes-configurations">
-                            <NavbarButton
-                                icon={faStream}
-                                styles={inline([styles.navbarButton])}
-                                isFinished={simulationConfigurationStore.areClassesConfigurationsReady} />
-                        </Link>
-                        <Typography style={inline([styles.xSmallMarginLeft])} variant={'button'}>
-                            Configurações de classes
-                        </Typography>
-                    </Container>
-                    <Container style={inline([styles.centeredRow, styles.leftAlignedRow, styles.xSmallMarginTop])}>
-                        <Link to="/topology-configurations">
-                            <NavbarButton
-                                styles={inline([styles.navbarButton])}
-                                icon={faNetworkWired}
-                                isFinished={topologyConfigurationStore.areTopologyConfigurationsReady} />
-                        </Link>
-                        <Typography style={inline([styles.xSmallMarginLeft])} variant={'button'}>
-                            Configurações de topologia
-                        </Typography>
-                    </Container>
-                </Container>
-                <Zoom in={true}>
-                    <div style={inline([styles.centeredColumn, styles.smallMarginTop])}>
-                        <Button
-                            disabled={!isSimulationReady || props.isLoading}
-                            onClick={props.onPlaySimulationPressed} style={inline([styles.startSimulationButton])} >
-                            <Zoom in={!props.isLoading}>
-                                <div style={inline([styles.flex1, styles.centeredRow])}>
-
-                                    <Typography style={inline([styles.startSimulationButtonText])} variant={'button'}>
-                                        Iniciar Simulação
-                                    </Typography>
-
-                                    <FontAwesomeIcon size={'2x'} style={inline([isSimulationReady ? styles.addIconOn : styles.addIconOff])} icon={faPlayCircle} />
-                                </div>
-                            </Zoom>
-
-                            <Zoom style={inline([styles.positionAbsolute])} in={props.isLoading}>
-                                <CircularProgress style={{ ...styles.flex1 }} color="secondary" />
-                            </Zoom>
-                        </Button>
+        <div style={inline([styles.centeredColumn, styles.flexStretch, styles.fullWidthContainer])}>
+            <div style={inline([styles.background, styles.fullContainer, styles.positionAbsolute])} />
+            <div style={inline([styles.flex1, styles.zIndex2, styles.marginTop, styles.centeredColumn])}>
+                <Fade timeout={1000} in={titleAnimationTrigger}>
+                    <div style={inline([styles.topCenteredColumn, styles.leftAlignedColumn, styles.bigPadding, styles.titleContainer])}>
+                        <SpectrumText style={inline([styles.textWithoutSelection, styles.spectrumTitleText])} size={"h1"} weight={'bold'}>
+                            {isSimulationReady ? 'CONFIGURAÇÃO COMPLETA' : 'CONFIGURAÇÕES PENDENTES'}
+                        </SpectrumText>
+                        {isSimulationReady === false && <SpectrumText style={inline([styles.textWithoutSelection, styles.simulationSubtitle, styles.xSmallMarginTop])} size={"h1"} weight={'light'}>
+                            {'Verifique se todas as etapas de configuração foram completas'}
+                            <FontAwesomeIcon style={styles.xSmallMarginLeft} color={Colors.colors.primary} icon={faExclamationCircle} />
+                        </SpectrumText>}
+                        {isSimulationReady && <RainbowDiv style={styles.rainbowA} />}
                     </div>
-                </Zoom>
+                </Fade>
+                <Fade timeout={1000} in={titleAnimationTrigger && isSimulationReady}>
+                    <RainbowBorderButton onClick={props.onPlaySimulationPressed} style={inline([styles.marginTop])}>
+                        <SpectrumText style={styles.startText} weight={'bold'}>
+                            INICIAR SIMULAÇÃO
+                        </SpectrumText>
+                    </RainbowBorderButton>
+                </Fade>
             </div>
-        </Zoom>
+
+            <Waves />
+        </div>
     );
 });

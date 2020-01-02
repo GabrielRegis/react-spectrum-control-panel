@@ -7463,6 +7463,11 @@ react-circular-progressbar@^2.0.2:
   resolved "https://registry.yarnpkg.com/react-circular-progressbar/-/react-circular-progressbar-2.0.2.tgz#8fa5fc4cb5e07dfe4036ade8695ba125742f4de4"
   integrity sha512-o0xpWnW53LAOmyvk3HpzxcUbysYpOVZJ9sm3kHTLBd10Mryev42eq2Q1UjayaBPkvNHtlcbtjDm4xOCI/4WxQQ==
 
+react-circular-slider-svg@^0.1.3:
+  version "0.1.3"
+  resolved "https://registry.yarnpkg.com/react-circular-slider-svg/-/react-circular-slider-svg-0.1.3.tgz#cc36511e98dde7d97c9dfb84861e35bb08eeaf8a"
+  integrity sha512-cdH7DHvrUzRyQAdLMJV315ECgMS84hoe6FNvfNkbcRuF00gN/8IF9aH4vXmBq7LMV1GH+2nYt5BIRdzOJVrftw==
+
 react-clientside-effect@^1.2.2:
   version "1.2.2"
   resolved "https://registry.yarnpkg.com/react-clientside-effect/-/react-clientside-effect-1.2.2.tgz#6212fb0e07b204e714581dd51992603d1accc837"

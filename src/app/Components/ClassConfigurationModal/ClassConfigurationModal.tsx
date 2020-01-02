@@ -99,11 +99,11 @@ export const ClassConfigurationModal: FunctionComponent<IProps> = observer((prop
                     styles.leftAlignedColumn,
                     styles.padding,
                     styles.modalContent,
+                    styles.textWithoutSelection
                 ])}>
 
                     <div style={inline([styles.centeredRow, styles.spaceBetween, styles.fullWidthContainer])}>
-
-                        <SpectrumText size={'b20'} weight={'bold'}>
+                        <SpectrumText size={'h2'} weight={'bold'}>
                             Configuração de Classe
                         </SpectrumText>
                         <div style={inline([styles.centeredRow])}>
@@ -123,7 +123,7 @@ export const ClassConfigurationModal: FunctionComponent<IProps> = observer((prop
                             </IconButton>
                         </div>
                     </div>
-                    <div style={inline([styles.fullWidthContainer, styles.centeredRow, styles.leftAlignedRow, styles.xSmallMarginTop])}>
+                    <div style={inline([styles.fullWidthContainer, styles.centeredRow, styles.leftAlignedRow, styles.smallMarginTop])}>
                         <SpectrumText size={'b17'} weight={'semibold'}>
                             Nome da Classe
                                 </SpectrumText>
