@@ -89,6 +89,9 @@ export const LoadExample: FunctionComponent<IProps> = (props) => {
             <Slider
                 defaultValue={30}
                 onChange={onSliderChange}
+                style={{
+                    color: Colors.colors.pink
+                }}
                 aria-labelledby="discrete-slider"
                 valueLabelDisplay={"off"}
                 step={50}
