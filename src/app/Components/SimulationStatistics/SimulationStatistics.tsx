@@ -13,6 +13,7 @@ import { BarChart, BarChartData } from '../BarChart/BarChart';
 import { PercentageResult } from '../PercentageResult/PercentageResult';
 import { SimpleStatisticsResult } from '../SimpleStatisticsResult/SimpleStatisticsResult';
 import styles from './SimulationStatisticsStyles';
+import { RainbowBorderButton } from '../RainbowBorderButton/RainbowBorderButton';
 
 interface IProps {
     // Props type definition
@@ -137,12 +138,15 @@ export const SimulationStatistics: FunctionComponent<IProps> = (props) => {
                     {props.title}
                     <FontAwesomeIcon style={inline([styles.xSmallMarginLeft])} color={Colors.colors.white} size={'1x'} icon={faPoll} />
                 </SpectrumText>}
-                <Button style={inline([props.title && styles.smallMarginLeft, styles.expandButton])} onClick={onToggleStatistics} >
+                <RainbowBorderButton
+                    innerStyle={inline([styles.secondaryColorBackground])}
+                    style={inline([props.title && styles.smallMarginLeft])}
+                    onClick={onToggleStatistics} >
                     <SpectrumText style={inline([styles.whiteText, styles.xSmallMarginRight])} size={'b15'} weight={'bold'}>
                         {isCollapsed ? 'Expandir' : 'Minimizar'}
                     </SpectrumText>
                     <FontAwesomeIcon color={Colors.colors.lightGray} size={'lg'} icon={faExpand} />
-                </Button>
+                </RainbowBorderButton>
             </div>
             <Collapse in={!isCollapsed}>
                 {!isCollapsed && <div style={inline([styles.fullWidthContainer])}>

@@ -4,7 +4,7 @@ export default {
     ...ApplicationStyles,
     statisticsContainer: {
         ...ApplicationStyles.shadowView,
-        backgroundColor: Colors.colors.primary,
+        backgroundColor: Colors.colors.secondary,
         border: '2px solid',
         borderColor: Colors.colors.healthPink,
         borderRadius: 10,

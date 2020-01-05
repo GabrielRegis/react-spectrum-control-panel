@@ -12,11 +12,10 @@ export default {
         marginRight: 10,
     } as React.CSSProperties,
     selectedLoadButton: {
-        backgroundColor: 'rgba(255, 255, 255, 0.8)',
         transition: '0.5s all'
     } as React.CSSProperties,
     selectedLoadButtonText: {
-        color: Colors.colors.spectrumDarkPurple
+        color: Colors.colors.pink
     } as React.CSSProperties,
     buttonsContainer: {
         marginTop: 10

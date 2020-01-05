@@ -33,7 +33,8 @@ const colors = {
     spectrumBrownishGray: '#646464',
     spectrumAlert: '#151515',
     spectrumAlertText: '#007AFF',
-    pink: '#ea526f',
+    pink: '#E73C7E',
+    // pink: '#ea526f',
     primaryPink: '#FF6192',
     primaryLightBlue: '#00C9FF',
 

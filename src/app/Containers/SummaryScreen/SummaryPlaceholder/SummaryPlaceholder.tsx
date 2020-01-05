@@ -18,6 +18,7 @@ import { RainbowBorderButton } from 'app/Components/RainbowBorderButton/RainbowB
 import { Waves } from 'app/Components/Waves/Waves';
 import { Colors } from 'app/Theme';
 
+import ScaleLoader from "react-spinners/ScaleLoader";
 
 interface IProps {
     // Props type definition
@@ -75,10 +76,19 @@ export const SummaryPlaceholder: FunctionComponent<IProps> = observer((props) =>
                     </div>
                 </Fade>
                 <Fade timeout={1000} in={titleAnimationTrigger && isSimulationReady}>
-                    <RainbowBorderButton onClick={props.onPlaySimulationPressed} style={inline([styles.marginTop])}>
+                    <RainbowBorderButton disabled={props.isLoading} onClick={props.onPlaySimulationPressed} style={inline([styles.marginTop])} innerStyle={inline([styles.centeredRow])}>
                         <SpectrumText style={styles.startText} weight={'bold'}>
-                            INICIAR SIMULAÇÃO
+                            {props.isLoading ? "CARREGANDO" : "INICIAR SIMULAÇÃO"}
                         </SpectrumText>
+                        {props.isLoading &&
+                            <div style={inline([styles.centeredColumn, styles.flexStretch, styles.xSmallMarginLeft, { marginTop: 8 }])}>
+                                <ScaleLoader
+                                    height={30}
+                                    color={simulationConfigurationStore.colors[1]}
+                                    loading={true}
+                                />
+                            </div>
+                        }
                     </RainbowBorderButton>
                 </Fade>
             </div>

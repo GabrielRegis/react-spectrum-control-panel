@@ -44,7 +44,7 @@ export const RainbowBorderButton: FunctionComponent<IProps> = (props) => {
                     borderRadius: props.borderRadius ? props.borderRadius : 50,
                     padding: props.borderWidth ? props.borderWidth : 3,
                 },
-                styles.whiteContainer, styles.xSmallPaddingHorizontal, props.innerStyle])}>
+                styles.whiteContainer, styles.xSmallPaddingHorizontal, styles.centeredRow, props.innerStyle])}>
                     {props.children}
                 </div>
             </RainbowDiv>

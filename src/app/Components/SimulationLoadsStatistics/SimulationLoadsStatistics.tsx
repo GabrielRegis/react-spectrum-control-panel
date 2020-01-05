@@ -9,6 +9,7 @@ import { SimulationClassesStatistics } from '../SimulationClassesStatistics/Simu
 import { SimulationStatistics } from '../SimulationStatistics/SimulationStatistics';
 import { SpectrumText } from '../SpectrumText/SpectrumText';
 import styles from './SimulationLoadsStatisticsStyles';
+import { RainbowBorderButton } from '../RainbowBorderButton/RainbowBorderButton';
 interface IProps {
     // Props type definition
     simulationInstanceSummaries: SimulationInstanceSummary[]
@@ -54,18 +55,18 @@ export const SimulationLoadsStatistics: FunctionComponent<IProps> = (props) => {
                     style={inline([styles.buttonsContainer,])}
                 >
                     {props.simulationInstanceSummaries.map((instance) =>
-                        <Grid xs={3} item>
-                            <BlurView key={instance.id}>
-                                <Button onClick={() => onLoadClicked(instance)}
-                                    disableFocusRipple={true}
-                                    style={inline([styles.loadButton, selectedInstance && selectedInstance.load === instance.load && styles.selectedLoadButton])}>
-                                    <SpectrumText style={inline([styles.whiteText, selectedInstance && selectedInstance.load === instance.load && styles.selectedLoadButtonText])}
-                                        size={'c13'}
-                                        weight={'semibold'}>
-                                        {instance.load}
-                                    </SpectrumText>
-                                </Button>
-                            </BlurView>
+                        <Grid key={instance.id} xs={3} item>
+                            <RainbowBorderButton onClick={() => onLoadClicked(instance)}
+                                innerStyle={styles.secondaryColorBackground}
+                                style={inline([styles.loadButton])}
+                                middleStyle={styles.loadButton}
+                            >
+                                <SpectrumText style={inline([styles.whiteText, selectedInstance && selectedInstance.load === instance.load && styles.selectedLoadButtonText])}
+                                    size={'c13'}
+                                    weight={'semibold'}>
+                                    {instance.load}
+                                </SpectrumText>
+                            </RainbowBorderButton>
                         </Grid>
 
                     )}
@@ -79,11 +80,8 @@ export const SimulationLoadsStatistics: FunctionComponent<IProps> = (props) => {
                 </SpectrumText>
                 <SimulationStatistics cycleNum={props.cycleNum} statistics={selectedInstance.statistics} />
                 <div style={inline([styles.divider, styles.marginTop, styles.marginBottom])} />
-
                 <SimulationClassesStatistics simulationInstanceSummary={selectedInstance} />
             </div>
-
-
         </div>
     );
 };

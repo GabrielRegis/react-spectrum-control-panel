@@ -9,6 +9,7 @@ import { ClassSummary } from '../../Models/ClassSummary';
 import { SimulationStatistics } from '../SimulationStatistics/SimulationStatistics';
 import { SpectrumText } from '../SpectrumText/SpectrumText';
 import styles from './SimulationClassesStatisticsStyles';
+import { RainbowBorderButton } from '../RainbowBorderButton/RainbowBorderButton';
 interface IProps {
     // Props type definition
     simulationInstanceSummary: SimulationInstanceSummary
@@ -51,15 +52,13 @@ export const SimulationClassesStatistics: FunctionComponent<IProps> = (props) =>
                 </SpectrumText>
                 <div style={inline([styles.fullWidthContainer, styles.leftAlignedRow, styles.upAlignedRow, styles.buttonsContainer])}>
                     {props.simulationInstanceSummary.classSummaries.map((classSummary) =>
-                        <BlurView key={classSummary.id} style={inline([{ width: null, flex: null }])}>
-                            <Button onClick={() => onClassPressed(classSummary)}
-                                disableFocusRipple={true}
-                                style={inline([styles.classButton, selectedSummary && selectedSummary.classId === classSummary.classId && styles.selectedLoadButton])}>
-                                <SpectrumText style={inline([styles.whiteText, selectedSummary && selectedSummary.classId === classSummary.classId && styles.selectedLoadButtonText])} size={'b17'} weight={'semibold'}>
-                                    {classSummary.className}
-                                </SpectrumText>
-                            </Button>
-                        </BlurView>
+                        <RainbowBorderButton key={classSummary.id} onClick={() => onClassPressed(classSummary)}
+                            innerStyle={styles.secondaryColorBackground}
+                            style={inline([selectedSummary && selectedSummary.classId === classSummary.classId && styles.selectedLoadButton])}>
+                            <SpectrumText style={inline([styles.whiteText, selectedSummary && selectedSummary.classId === classSummary.classId && styles.selectedLoadButtonText])} size={'b17'} weight={'semibold'}>
+                                {classSummary.className}
+                            </SpectrumText>
+                        </RainbowBorderButton>
                     )}
                 </div>
             </div>

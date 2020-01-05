@@ -80,8 +80,8 @@ export const BarChart: FunctionComponent<IProps> = (props) => {
                 opacity: data.value / selectedMaxValue * 2
             }])}>
                 {data.confidenceInterval && <div style={inline([styles.confidenceInterval, styles.positionAbsolute, {
-                    height: data.confidenceInterval * 1,
-                    top: -data.confidenceInterval * 1 / 2,
+                    height: data.confidenceInterval / 10,
+                    top: -data.confidenceInterval / 20,
                     opacity: 0.7
                 }])} />}
             </div>
