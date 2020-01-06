@@ -15,7 +15,7 @@ export default {
         borderRadius: 5,
         marginTop: 5,
         marginBottom: 2,
-        transition: 'all .2s ease-in-out'
+        transition: 'all .2s ease-in-out',
     } as React.CSSProperties,
     barContainer: {
         maxWidth: 35,
@@ -55,8 +55,9 @@ export default {
         maxWidth: null
     } as React.CSSProperties,
     confidenceInterval: {
-        width: 1,
+        width: 4,
         borderRadius: 5,
-        backgroundColor: Colors.colors.darkGray
+        backgroundColor: Colors.colors.pink,
+        zIndex: 5
     } as React.CSSProperties
 } 

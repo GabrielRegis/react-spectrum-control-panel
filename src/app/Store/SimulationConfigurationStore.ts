@@ -5,15 +5,18 @@ import { CallClassConfiguration } from '../Models/CallClassConfiguration';
 import { ClassesConfiguration } from '../Models/ClassesConfiguration';
 import { GeneralConfigurations } from '../Models/GeneralConfigurations';
 import SpectrumStore from './SpectrumStore';
+import { Colors } from 'app/Theme';
 export class SimulationConfigurationStore extends SpectrumStore {
     @persist('object') @observable public generalConfiguration: GeneralConfigurations;
     @persist('object') @observable public classesConfiguration: ClassesConfiguration;
-    @observable public colors: string[] = ['#EE7752', '#E73C7E', '#23A6D5', '#23D5AB']
+    @observable public colors: string[] = ['#EE7752', '#E73C7E', '#23A6D5', '#23D5AB', '#7f7ce3']
+    @persist('list') @observable public availableColors: string[];
 
     constructor() {
         super();
         this.generalConfiguration = new GeneralConfigurations();
         this.classesConfiguration = new ClassesConfiguration()
+        this.availableColors = this.colors;
     }
 
     @computed get areGeneralConfigurationsReady() {
@@ -35,7 +38,12 @@ export class SimulationConfigurationStore extends SpectrumStore {
     }
 
     @action public addFlowClass = (flowClass: CallClassConfiguration) => {
-        this.classesConfiguration.flowClasses.push(flowClass)
+        const color = this.availableColors.pop()
+        const updatedFlow = {
+            ...flowClass,
+            color: color
+        }
+        this.classesConfiguration.flowClasses.push(updatedFlow)
     }
 
     @action public updateClassesFrequency() {

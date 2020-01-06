@@ -100,6 +100,11 @@ export const SummaryScreen: FunctionComponent<IProps> = observer((props) => {
             return newNode
         })
 
+        topologySnapshotStore.links = observable.map(new Map());
+        topologySnapshotStore.nodes = observable.map(new Map());
+        topologySnapshotStore.selectedLink = null
+        topologySnapshotStore.selectedLinkComponent = null
+
         Array.from(topologyConfigurationStore.nodes.values()).forEach((node) => {
             const newNode = {
                 ...node,

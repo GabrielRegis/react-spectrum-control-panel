@@ -45,6 +45,10 @@ export class CallClassConfigurationComponent extends React.Component<IProps, ISt
     }
 
     public onDeletePressed = () => {
+
+        // Update available colors
+        this.props.simulationConfigurationStore.availableColors.push(this.props.flowClass.color)
+
         this.props.simulationConfigurationStore.classesConfiguration.selectedFlowClass = this.props.flowClass
 
         const newClasses = this.props.simulationConfigurationStore.classesConfiguration.flowClasses.filter((classes) => {
@@ -52,6 +56,7 @@ export class CallClassConfigurationComponent extends React.Component<IProps, ISt
         })
         this.props.simulationConfigurationStore.classesConfiguration.selectedFlowClass.id = null
         this.props.simulationConfigurationStore.classesConfiguration.flowClasses = newClasses
+
     }
     public onEditPressed = () => {
         this.props.simulationConfigurationStore.classesConfiguration.selectedFlowClass = this.props.flowClass
@@ -71,7 +76,14 @@ export class CallClassConfigurationComponent extends React.Component<IProps, ISt
     public handlePickerChange = (color, event) => {
         const index = this.props.simulationConfigurationStore.classesConfiguration.flowClasses.indexOf(this.props.flowClass)
         if (index !== - 1) {
+            const lastColor = this.props.simulationConfigurationStore.classesConfiguration.flowClasses[index].color
             this.props.simulationConfigurationStore.classesConfiguration.flowClasses[index].color = color.hex
+
+            // Update available colors
+            this.props.simulationConfigurationStore.availableColors.push(lastColor)
+            this.props.simulationConfigurationStore.availableColors = this.props.simulationConfigurationStore.availableColors.filter((col) => {
+                return col.toLocaleLowerCase() !== color.hex.toLocaleLowerCase()
+            })
         }
         this.setState({
             isPickerVisible: false
@@ -127,7 +139,7 @@ export class CallClassConfigurationComponent extends React.Component<IProps, ISt
                     </IconButton>
                 </div>
                 <Collapse in={this.state.isPickerVisible} style={inline([styles.positionAbsolute, { left: 10, top: 50, zIndex: 100 }])}>
-                    <GithubPicker onChange={this.handlePickerChange} colors={simulationConfigurationStore.colors} />
+                    <GithubPicker onChange={this.handlePickerChange} colors={simulationConfigurationStore.availableColors} />
                 </Collapse>
             </ListItem>
         );

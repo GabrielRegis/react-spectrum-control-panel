@@ -77,17 +77,17 @@ export const SimulationStatistics: FunctionComponent<IProps> = (props) => {
         bbrChartData = props.statistics.totalBlockedBandwidthAmountPerCycle.map((bbr, index) => {
             return {
                 xLabel: ((index * props.loadStep) + props.initialLoad).toString(),
-                yLabel: bbr.toString(),
-                value: bbr,
+                yLabel: Math.trunc(props.simulationSummary.simulationInstanceSummaries[index].statistics.totalBlockedBandwidthAmountMean).toString(),
+                value: Math.trunc(props.simulationSummary.simulationInstanceSummaries[index].statistics.totalBlockedBandwidthAmountMean),
                 confidenceInterval: props.simulationSummary.simulationInstanceSummaries[index].statistics.totalBlockedBandwidthConfidenceInterval
             } as BarChartData
         })
         bcChartData = props.statistics.blockedAmountPerCycle.map((bc, index) => {
             return {
                 xLabel: ((index * props.loadStep) + props.initialLoad).toString(),
-                yLabel: bc.toString(),
-                value: bc,
-                // confidenceInterval: props.simulationSummary.simulationInstanceSummaries[index].statistics.totalBlockedAmountMean
+                yLabel: Math.trunc(props.simulationSummary.simulationInstanceSummaries[index].statistics.totalBlockedAmountMean).toString(),
+                value: Math.trunc(props.simulationSummary.simulationInstanceSummaries[index].statistics.totalBlockedAmountMean),
+                confidenceInterval: props.simulationSummary.simulationInstanceSummaries[index].statistics.totalBlockedAmountConfidenceInterval
             } as BarChartData
         })
     } else {
@@ -201,18 +201,22 @@ export const SimulationStatistics: FunctionComponent<IProps> = (props) => {
                     <div style={inline([styles.divider, styles.marginTop, styles.marginBottom])} />
                     <div style={inline([styles.fullWidthContainer, styles.centeredRow, styles.leftAlignedRow])}>
                         <BarChart shouldEnableMaxValueToggle={true} maxValue={maxBPchartValue}
-                            title={'Probabilidade de Bloqueio'}
+                            title={'Probabilidade de Bloqueio' + (props.loadStep && props.initialLoad ? ' (Média)' : '')}
                             data={bpChartData}
                             yAxisLabel={'BP (%)'}
                             xAxisLabel={props.loadStep ? 'Carga' : 'Semente'} />
                         <BarChart
                             style={inline([styles.bigMarginLeft])}
                             yAxisLabel={'Gb/s'}
-                            xAxisLabel={props.loadStep ? 'Carga' : 'Semente'} maxValue={maxBBRchartValue} title={'Banda Bloqueada'} data={bbrChartData} />
+                            xAxisLabel={props.loadStep ? 'Carga' : 'Semente'} maxValue={maxBBRchartValue}
+                            title={'Banda Bloqueada' + (props.loadStep && props.initialLoad ? ' (Média)' : '')}
+                            data={bbrChartData} />
                         <BarChart style={inline([styles.bigMarginLeft])}
                             xAxisLabel={props.loadStep ? 'Carga' : 'Semente'}
                             yAxisLabel={'Nro Chamadas'}
-                            maxValue={maxBCchartValue} title={'Chamadas Bloqueadas'} data={bcChartData} />
+                            maxValue={maxBCchartValue}
+                            title={'Chamadas Bloqueadas' + (props.loadStep && props.initialLoad ? ' (Média)' : '')}
+                            data={bcChartData} />
                         {props.simulationSummary && props.simulationSummary.blockedCallsAmountPerClass &&
                             <PieChart
                                 style={{

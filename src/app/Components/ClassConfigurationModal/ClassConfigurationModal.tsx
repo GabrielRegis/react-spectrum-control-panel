@@ -41,6 +41,10 @@ export const ClassConfigurationModal: FunctionComponent<IProps> = observer((prop
     }, [])
 
     const onRemoveClassPressed = () => {
+
+        // Update available colors
+        simulationConfigurationStore.availableColors.push(props.flowClass.color)
+
         const newClasses = simulationConfigurationStore.classesConfiguration.flowClasses.filter((classes) => {
             return classes.id !== simulationConfigurationStore.classesConfiguration.selectedFlowClass.id
         })

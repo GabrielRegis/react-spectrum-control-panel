@@ -67,6 +67,8 @@ export const BarChart: FunctionComponent<IProps> = (props) => {
 
     const renderBar = (data: BarChartData, index: number) => {
         const selectedMaxValue = shouldUseMaxValue ? (props.maxValue ? props.maxValue : maxValue) : 1
+        const confidenceIntervalSubtraction = Math.abs(data.confidenceInterval - data.value)
+
         return <div key={data.value + index} style={inline([styles.fullHeightContainer, styles.centeredColumn, styles.botAlignedColumn, index !== 0 && styles.xSmallMarginLeft])}>
             <SpectrumText size={'c13'} weight={'semibold'} color={'white'}
                 style={inline([styles.fullWidthContainer, styles.textAlignHorizontalCenter, {
@@ -79,11 +81,11 @@ export const BarChart: FunctionComponent<IProps> = (props) => {
                 flex: data.value / selectedMaxValue,
                 opacity: (data.value / selectedMaxValue * 2) + 0.2
             }])}>
-                {data.confidenceInterval && <div style={inline([styles.confidenceInterval, styles.positionAbsolute, {
-                    height: data.confidenceInterval / 10,
-                    top: -data.confidenceInterval / 20,
-                    opacity: 0.7
-                }])} />}
+                {data.confidenceInterval && data.confidenceInterval > 0 ? <div style={inline([styles.confidenceInterval, styles.positionAbsolute, {
+                    top: -((confidenceIntervalSubtraction * (props.shouldEnableMaxValueToggle === true ? 500 : 5)) / selectedMaxValue) + '%',
+                    height: ((confidenceIntervalSubtraction * (props.shouldEnableMaxValueToggle === true ? 1000 : 10)) / selectedMaxValue) + '%',
+                    opacity: 1
+                }])} /> : <div />}
             </div>
             {data.xLabel && <SpectrumText size={'c11'} weight={'light'} color={'white'}
                 style={inline([styles.fullWidthContainer, styles.textAlignHorizontalCenter, styles.xSmallMarginTop])}>
