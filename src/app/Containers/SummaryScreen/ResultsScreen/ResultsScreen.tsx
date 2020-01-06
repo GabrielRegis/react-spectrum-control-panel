@@ -41,7 +41,7 @@ export const ResultsScreen: FunctionComponent<IProps> = observer((props) => {
             }}>
                 <SpectrumText>
                     Voltar
-            </SpectrumText>
+             </SpectrumText>
             </Button>
             <div style={inline([styles.statisticsContainer, styles.marginTop, styles.centeredRow,])}>
                 <BlurView style={inline([styles.bigPadding, styles.centeredColumn])} >
@@ -54,7 +54,7 @@ export const ResultsScreen: FunctionComponent<IProps> = observer((props) => {
                         statistics={simulationSummaryStore.simulationSummary.statistics} />
                 </BlurView>
             </div>
-            <div style={inline([styles.statisticsContainer, styles.intanceStatisticsContainer, styles.marginTop, styles.centeredRow,])}>
+            <div style={inline([styles.statisticsContainer, styles.intanceStatisticsContainer, styles.smallMarginTop, styles.centeredRow,])}>
                 <BlurView blurAmount={20} style={inline([styles.bigPadding, styles.centeredColumn])} >
                     <SimulationLoadsStatistics
                         cycleNum={simulationSummaryStore.simulationSummary.cycleNum}
@@ -62,7 +62,7 @@ export const ResultsScreen: FunctionComponent<IProps> = observer((props) => {
                 </BlurView>
             </div>
 
-            <div style={inline([styles.statisticsContainer, styles.criticalEventsContainer, styles.marginTop, styles.centeredRow,])}>
+            <div style={inline([styles.statisticsContainer, styles.criticalEventsContainer, styles.smallMarginTop, styles.centeredRow,])}>
                 <BlurView style={inline([styles.bigPadding, styles.centeredColumn])} >
                     <CriticalEventsStatistics
                     />

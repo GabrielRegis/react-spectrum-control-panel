@@ -9,7 +9,7 @@ const apiInstance: ApisauceInstance = create({
         'Content-Type': 'application/json',
         'Access-Control-Allow-Origin': '*'
     },
-    timeout: 30000
+    timeout: 30000000
 } as ApisauceConfig);
 
 export const runSimulation = (simulationConfiguration: SimulationConfiguration): Promise<ApiResponse<SimulationSummary>> => {

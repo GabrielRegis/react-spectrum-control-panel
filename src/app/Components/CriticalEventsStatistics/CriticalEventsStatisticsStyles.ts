@@ -9,14 +9,12 @@ export default {
     simpleStatisticsContainer: {
         ...ApplicationStyles.marginRight
     } as React.CSSProperties,
-    loadButton: {
-        backgroundColor: 'rgba(255, 255, 255, 0.1)',
-        border: '1.5px solid rgba(255, 255, 255, 0.1)',
-        borderRadius: 25,
-        maxWidth: 35,
-        minWidth: 35,
-        margin: 0,
+    loadButtonContainer: {
         padding: 0,
+        width: 40,
+    } as React.CSSProperties,
+    loadButton: {
+        width: 40
     } as React.CSSProperties,
     selectedLoadButton: {
         backgroundColor: 'rgba(255, 255, 255, 0.8)',
@@ -40,12 +38,10 @@ export default {
         transition: '0.5s all'
     } as React.CSSProperties,
     selectedLoadButtonText: {
-        color: Colors.colors.spectrumDarkPurple
+        color: Colors.colors.pink
     } as React.CSSProperties,
     buttonsContainer: {
-        // maxWidth: 210,
-        maxHeight: null,
-        minHeight: null,
+        maxWidth: 210,
         margin: 0,
         paddingTop: 5,
     } as React.CSSProperties,

@@ -77,7 +77,7 @@ export const BarChart: FunctionComponent<IProps> = (props) => {
             </SpectrumText>
             <div style={inline([styles.bar, styles.fullWidthContainer, styles.positionRelative, styles.topCenteredColumn, {
                 flex: data.value / selectedMaxValue,
-                opacity: data.value / selectedMaxValue * 2
+                opacity: (data.value / selectedMaxValue * 2) + 0.2
             }])}>
                 {data.confidenceInterval && <div style={inline([styles.confidenceInterval, styles.positionAbsolute, {
                     height: data.confidenceInterval / 10,
@@ -110,7 +110,7 @@ export const BarChart: FunctionComponent<IProps> = (props) => {
                 />}
             </div>
 
-            <div style={inline([styles.centeredRow, styles.botAlignedRow, styles.fullHeightContainer, styles.xSmallMarginTop, styles.fullWidthContainer])}>
+            <div style={inline([styles.leftAlignedRow, styles.smallPaddingHorizontal, styles.botAlignedRow, styles.fullHeightContainer, styles.xSmallMarginTop, styles.fullWidthContainer])}>
                 {props.data.map((data, index) => {
                     return renderBar(data, index)
                 })}
@@ -125,7 +125,7 @@ export const BarChart: FunctionComponent<IProps> = (props) => {
             <div style={inline([styles.yAxis, styles.rightAlignedRow])}>
                 <SpectrumText style={inline([styles.flex1, styles.rightAlignedColumn, styles.axisText])} size={'c11'} weight={'light'} color={'white'}
                 >
-                    {props.yAxisLabel}
+                    {props.yAxisLabel ? props.yAxisLabel : " % "}
                 </SpectrumText>
             </div>
 

@@ -17,8 +17,12 @@ export default {
         marginBottom: 2,
         transition: 'all .2s ease-in-out'
     } as React.CSSProperties,
+    barContainer: {
+        maxWidth: 35,
+        minWidth: 35,
+    } as React.CSSProperties,
     axisText: {
-        fontSize: 8
+        fontSize: 10
     } as React.CSSProperties,
     xAxis: {
         marginTop: 5,
@@ -42,7 +46,7 @@ export default {
     barChart: {
         height: 200,
         minWidth: 200,
-        maxWidth: 250
+        // maxWidth: 250
     } as React.CSSProperties,
     checkbox: {
         padding: 0,

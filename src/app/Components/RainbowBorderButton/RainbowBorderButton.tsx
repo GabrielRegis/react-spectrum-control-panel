@@ -15,6 +15,7 @@ interface IProps {
     borderWidth?: number
     onClick?: () => void
     disabled?: boolean
+    dontDisableClick?: boolean
 }
 
 interface IState {
@@ -34,7 +35,7 @@ export const RainbowBorderButton: FunctionComponent<IProps> = (props) => {
     }, [])
 
     return (
-        <Button disabled={props.disabled} onClick={props.onClick} style={inline([{ borderRadius: props.borderRadius ? props.borderRadius : 50, }, props.style])} disableFocusRipple>
+        <Button disabled={props.disabled && props.dontDisableClick !== true} onClick={props.onClick} style={inline([{ borderRadius: props.borderRadius ? props.borderRadius : 50, }, props.style])} disableFocusRipple>
             <RainbowDiv disabled={props.disabled} style={inline([{
                 borderRadius: props.borderRadius ? props.borderRadius : 50,
                 padding: props.borderWidth ? props.borderWidth : 3,

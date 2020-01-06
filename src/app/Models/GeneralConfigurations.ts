@@ -14,7 +14,7 @@ export class GeneralConfigurations {
     @observable @persist iterations?: number;
 
     constructor() {
-        this.simulationCycles = 1
+        this.simulationCycles = 2
         this.minLoad = 50
         this.maxLoad = 150
         this.loadStep = 50

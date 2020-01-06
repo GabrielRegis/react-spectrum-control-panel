@@ -78,7 +78,7 @@ export const SummaryPlaceholder: FunctionComponent<IProps> = observer((props) =>
                 <Fade timeout={1000} in={titleAnimationTrigger && isSimulationReady}>
                     <RainbowBorderButton disabled={props.isLoading} onClick={props.onPlaySimulationPressed} style={inline([styles.marginTop])} innerStyle={inline([styles.centeredRow])}>
                         <SpectrumText style={styles.startText} weight={'bold'}>
-                            {props.isLoading ? "CARREGANDO" : "INICIAR SIMULAÇÃO"}
+                            {props.isLoading ? "SIMULAÇÃO EM ANDAMENTO" : "INICIAR SIMULAÇÃO"}
                         </SpectrumText>
                         {props.isLoading &&
                             <div style={inline([styles.centeredColumn, styles.flexStretch, styles.xSmallMarginLeft, { marginTop: 8 }])}>

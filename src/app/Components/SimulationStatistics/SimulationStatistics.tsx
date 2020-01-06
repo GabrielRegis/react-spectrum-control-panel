@@ -14,6 +14,7 @@ import { PercentageResult } from '../PercentageResult/PercentageResult';
 import { SimpleStatisticsResult } from '../SimpleStatisticsResult/SimpleStatisticsResult';
 import styles from './SimulationStatisticsStyles';
 import { RainbowBorderButton } from '../RainbowBorderButton/RainbowBorderButton';
+import PieChart from 'react-minimal-pie-chart';
 
 interface IProps {
     // Props type definition
@@ -24,7 +25,6 @@ interface IProps {
     cycleNum: number
     title?: string
     style?: React.CSSProperties
-
 }
 
 interface IState {
@@ -200,9 +200,32 @@ export const SimulationStatistics: FunctionComponent<IProps> = (props) => {
                     </div>
                     <div style={inline([styles.divider, styles.marginTop, styles.marginBottom])} />
                     <div style={inline([styles.fullWidthContainer, styles.centeredRow, styles.leftAlignedRow])}>
-                        <BarChart shouldEnableMaxValueToggle={true} maxValue={maxBPchartValue} title={'Probabilidade de Bloqueio'} data={bpChartData} xAxisLabel={props.loadStep ? 'Carga' : 'Semente'} />
-                        <BarChart style={inline([styles.bigMarginLeft])} yAxisLabel={'Gbs'} xAxisLabel={props.loadStep ? 'Carga' : 'Semente'} maxValue={maxBBRchartValue} title={'Banda Bloqueada'} data={bbrChartData} />
-                        <BarChart style={inline([styles.bigMarginLeft])} xAxisLabel={props.loadStep ? 'Carga' : 'Semente'} maxValue={maxBCchartValue} title={'Chamadas Bloqueadas'} data={bcChartData} />
+                        <BarChart shouldEnableMaxValueToggle={true} maxValue={maxBPchartValue}
+                            title={'Probabilidade de Bloqueio'}
+                            data={bpChartData}
+                            yAxisLabel={'BP (%)'}
+                            xAxisLabel={props.loadStep ? 'Carga' : 'Semente'} />
+                        <BarChart
+                            style={inline([styles.bigMarginLeft])}
+                            yAxisLabel={'Gb/s'}
+                            xAxisLabel={props.loadStep ? 'Carga' : 'Semente'} maxValue={maxBBRchartValue} title={'Banda Bloqueada'} data={bbrChartData} />
+                        <BarChart style={inline([styles.bigMarginLeft])}
+                            xAxisLabel={props.loadStep ? 'Carga' : 'Semente'}
+                            yAxisLabel={'Nro Chamadas'}
+                            maxValue={maxBCchartValue} title={'Chamadas Bloqueadas'} data={bcChartData} />
+                        {props.simulationSummary && props.simulationSummary.blockedCallsAmountPerClass &&
+                            <PieChart
+                                style={{
+                                    height: 200
+                                }}
+                                data={props.simulationSummary.blockedCallsAmountPerClass.map((classStatistics) => {
+                                    return {
+                                        title: classStatistics.className,
+                                        color: classStatistics.color,
+                                        value: classStatistics.blockedAmount
+                                    }
+                                })}
+                            />}
                     </div>
                 </div>}
             </Collapse>

@@ -54,6 +54,8 @@ export const SimulationClassesStatistics: FunctionComponent<IProps> = (props) =>
                     {props.simulationInstanceSummary.classSummaries.map((classSummary) =>
                         <RainbowBorderButton key={classSummary.id} onClick={() => onClassPressed(classSummary)}
                             innerStyle={styles.secondaryColorBackground}
+                            disabled={selectedSummary && selectedSummary.classId !== classSummary.classId}
+                            dontDisableClick={true}
                             style={inline([selectedSummary && selectedSummary.classId === classSummary.classId && styles.selectedLoadButton])}>
                             <SpectrumText style={inline([styles.whiteText, selectedSummary && selectedSummary.classId === classSummary.classId && styles.selectedLoadButtonText])} size={'b17'} weight={'semibold'}>
                                 {classSummary.className}
@@ -63,7 +65,7 @@ export const SimulationClassesStatistics: FunctionComponent<IProps> = (props) =>
                 </div>
             </div>
 
-            <SimulationStatistics style={inline([styles.marginTop])} cycleNum={props.simulationInstanceSummary.cycleNum} statistics={selectedSummary.statistics} />
+            <SimulationStatistics title={'Resultados para \u00a0' + selectedSummary.className} style={inline([styles.marginTop])} cycleNum={props.simulationInstanceSummary.cycleNum} statistics={selectedSummary.statistics} />
 
         </div>
     );

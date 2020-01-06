@@ -43,16 +43,17 @@ export const FlowFrequencyConfiguration: FunctionComponent<IProps> = React.memo(
     }
 
     return (
-        <div style={inline([styles.centeredRow, styles.leftAlignedRow,])} >
-            <SpectrumText style={styles.flex1} size={'b17'} weight={'semibold'}>
+        <div style={inline([styles.centeredRow, styles.leftAlignedRow, styles.classContainer,])} >
+            <SpectrumText style={styles.flex1} size={'b15'} weight={'bold'}>
                 {props.flowClass.name}
             </SpectrumText>
             <Slider value={props.flowClass.localFrequency} onChange={onSliderChange} min={5} max={100} step={5} marks style={inline([styles.xSmallMarginLeft, styles.slider, {
                 color: props.flowClass.color
             }, styles.flex4])} />
-            <SpectrumText style={inline([styles.smallMarginLeft, {
-                flex: 0.4
-            }])} size={'b17'} weight={'semibold'}>
+            <SpectrumText style={inline([styles.smallMarginLeft, styles.rightAlignedColumn, {
+                flex: 0.4,
+                maxWidth: 30
+            }])} size={'b15'} weight={'semibold'}>
                 {(props.flowClass.frequency * 100).toPrecision(2) + '%'}
             </SpectrumText>
         </div>

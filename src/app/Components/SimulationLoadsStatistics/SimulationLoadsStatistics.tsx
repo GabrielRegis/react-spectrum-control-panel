@@ -51,15 +51,17 @@ export const SimulationLoadsStatistics: FunctionComponent<IProps> = (props) => {
                     Selecione a carga
                 </SpectrumText>
                 <Grid container
-                    spacing={2}
+                    spacing={1}
                     style={inline([styles.buttonsContainer,])}
                 >
                     {props.simulationInstanceSummaries.map((instance) =>
-                        <Grid key={instance.id} xs={3} item>
+                        <Grid style={styles.centeredColumn} alignItems={'center'} justify={'center'} key={instance.id} xs={3} item>
                             <RainbowBorderButton onClick={() => onLoadClicked(instance)}
                                 innerStyle={styles.secondaryColorBackground}
-                                style={inline([styles.loadButton])}
+                                style={inline([styles.loadButtonContainer])}
                                 middleStyle={styles.loadButton}
+                                disabled={selectedInstance && selectedInstance.load !== instance.load}
+                                dontDisableClick={true}
                             >
                                 <SpectrumText style={inline([styles.whiteText, selectedInstance && selectedInstance.load === instance.load && styles.selectedLoadButtonText])}
                                     size={'c13'}
@@ -75,10 +77,7 @@ export const SimulationLoadsStatistics: FunctionComponent<IProps> = (props) => {
             <div style={inline([styles.verticalDivider, styles.marginRight])} />
 
             <div style={inline([styles.fullWidthContainer, styles.topCenteredColumn, styles.leftAlignedColumn])}>
-                <SpectrumText style={inline([styles.whiteText])} color={Colors.colors.white} size={'h3'} weight={'bold'}>
-                    {'Resultados para carga \u00a0' + selectedInstance.load}
-                </SpectrumText>
-                <SimulationStatistics cycleNum={props.cycleNum} statistics={selectedInstance.statistics} />
+                <SimulationStatistics title={'Resultados para carga \u00a0' + selectedInstance.load} cycleNum={props.cycleNum} statistics={selectedInstance.statistics} />
                 <div style={inline([styles.divider, styles.marginTop, styles.marginBottom])} />
                 <SimulationClassesStatistics simulationInstanceSummary={selectedInstance} />
             </div>

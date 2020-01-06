@@ -2,6 +2,11 @@ import { ApplicationStyles, Colors } from "app/Theme";
 
 export default {
     ...ApplicationStyles,
+
+    loadButtonContainer: {
+        padding: 0,
+        width: 40,
+    } as React.CSSProperties,
     loadButton: {
         width: 40,
     } as React.CSSProperties,
@@ -15,6 +20,8 @@ export default {
     } as React.CSSProperties,
     buttonsContainer: {
         maxWidth: 210,
-        marginTop: 5
+        marginTop: 5,
+        marginLeft: 0,
+        paddingLeft: 0,
     } as React.CSSProperties,
 } 

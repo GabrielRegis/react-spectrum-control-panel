@@ -15,6 +15,7 @@ import { CriticalBPEventSnapshot } from '../../Models/CriticalBPEventSnapshot';
 import { CriticalEventSnapshot } from '../../Models/CriticalEventSnapshot';
 import { CriticalEventStatistics } from '../CriticalEventStatistics/CriticalEventStatistics';
 import styles from './CriticalEventsStatisticsStyles';
+import { RainbowBorderButton } from '../RainbowBorderButton/RainbowBorderButton';
 
 interface IProps {
     // Props type definition
@@ -86,22 +87,24 @@ export const CriticalEventsStatistics: FunctionComponent<IProps> = observer((pro
                             Selecione a carga
                         </SpectrumText>
                         <Grid container
-                            spacing={2}
+                            spacing={1}
                             style={inline([styles.buttonsContainer,])}
                         >
                             {criticalEvents.map((event) =>
-                                <Grid xs={3} style={inline([{ paddingTop: 0, paddingBottom: 0, paddingLeft: 0 }])} item>
-                                    <BlurView key={event.load + event.gainRate}>
-                                        <Button onClick={() => onLoadClicked(event)}
-                                            disableFocusRipple={true}
-                                            style={inline([styles.loadButton, selectedEvent && selectedEvent.load === event.load && styles.selectedLoadButton])}>
-                                            <SpectrumText style={inline([styles.whiteText, selectedEvent && selectedEvent.load === event.load && styles.selectedLoadButtonText])}
-                                                size={'c13'}
-                                                weight={'semibold'}>
-                                                {event.load}
-                                            </SpectrumText>
-                                        </Button>
-                                    </BlurView>
+                                <Grid style={styles.centeredColumn} key={event.load + event.gainRate} xs={3} item>
+                                    <RainbowBorderButton onClick={() => onLoadClicked(event)}
+                                        innerStyle={styles.secondaryColorBackground}
+                                        style={inline([styles.loadButtonContainer])}
+                                        middleStyle={styles.loadButton}
+                                        disabled={selectedEvent && selectedEvent.load !== event.load}
+                                        dontDisableClick={true}
+                                    >
+                                        <SpectrumText style={inline([styles.whiteText, selectedEvent && selectedEvent.load === event.load && styles.selectedLoadButtonText])}
+                                            size={'c13'}
+                                            weight={'semibold'}>
+                                            {event.load}
+                                        </SpectrumText>
+                                    </RainbowBorderButton>
                                 </Grid>
 
                             )}
@@ -114,24 +117,24 @@ export const CriticalEventsStatistics: FunctionComponent<IProps> = observer((pro
                         {'Selecione a Categoria de Evento Crítico'}
                     </SpectrumText>
                     <div style={inline([styles.centeredRow, styles.leftAlignedRow])}>
-                        <Button onClick={() => onCategoryClicked('FRAGMENTATION')}
-                            disableFocusRipple={true}
-                            style={inline([styles.categoryButton, selectedCriticalEventCategory === 'FRAGMENTATION' && styles.selectedCategoryButton])}>
+                        <RainbowBorderButton onClick={() => onCategoryClicked('FRAGMENTATION')}
+                            innerStyle={styles.secondaryColorBackground}
+                        >
                             <SpectrumText style={inline([styles.whiteText, selectedCriticalEventCategory === 'FRAGMENTATION' && styles.selectedLoadButtonText])}
                                 size={'c13'}
                                 weight={'semibold'}>
                                 {'Fragmentação'}
                             </SpectrumText>
-                        </Button>
-                        <Button onClick={() => onCategoryClicked('BP')}
-                            disableFocusRipple={true}
-                            style={inline([styles.xSmallMarginLeft, styles.categoryButton, selectedCriticalEventCategory === 'BP' && styles.selectedCategoryButton])}>
+                        </RainbowBorderButton>
+                        <RainbowBorderButton onClick={() => onCategoryClicked('BP')}
+                            innerStyle={styles.secondaryColorBackground}
+                            style={inline([styles.xSmallMarginLeft])}>
                             <SpectrumText style={inline([styles.whiteText, selectedCriticalEventCategory === 'BP' && styles.selectedLoadButtonText])}
                                 size={'c13'}
                                 weight={'semibold'}>
                                 {'Probabilidade de Bloqueio'}
                             </SpectrumText>
-                        </Button>
+                        </RainbowBorderButton>
                     </div>
 
                 </div>

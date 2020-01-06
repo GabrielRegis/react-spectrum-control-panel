@@ -2,6 +2,7 @@ import { CriticalFragmentationEventSnapshot } from 'app/Models/CriticalFragmenta
 import { CriticalBPEventSnapshot } from './CriticalBPEventSnapshot';
 import { SimulationInstanceSummary } from './SimulationInstanceSummary';
 import { SimulationInstanceSummaryStatistics } from './SimulationInstanceSummaryStatistics';
+import { CallClassGeneralStatistics } from './CallClassGeneralStatistics';
 export class SimulationSummary {
     id?: string
     cycleNum?: number
@@ -12,4 +13,5 @@ export class SimulationSummary {
     statistics?: SimulationInstanceSummaryStatistics
     startLoad?: number
     loadStep?: number
+    blockedCallsAmountPerClass?: CallClassGeneralStatistics[]
 }

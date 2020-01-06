@@ -7764,6 +7764,13 @@ react-lodash@^0.1.2:
   dependencies:
     lodash "^4.17.11"
 
+react-minimal-pie-chart@^6.0.1:
+  version "6.0.1"
+  resolved "https://registry.yarnpkg.com/react-minimal-pie-chart/-/react-minimal-pie-chart-6.0.1.tgz#4baa3d62afaac4ea63edeb68425ec7b781ff841d"
+  integrity sha512-AlnZn2TjgX7Rm9E4SlV4iZphJVx8r3cojhm/VAzxuJMOevizCAxbSKhBlYjmmRtCNAWBX6JlALaPkOpEaPBFMQ==
+  dependencies:
+    prop-types "^15.5.7"
+
 react-reconciler@^0.20.4:
   version "0.20.4"
   resolved "https://registry.yarnpkg.com/react-reconciler/-/react-reconciler-0.20.4.tgz#3da6a95841592f849cb4edd3d38676c86fd920b2"
