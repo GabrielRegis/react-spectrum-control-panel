@@ -2,6 +2,10 @@ import { ApplicationStyles, Colors } from "app/Theme";
 
 export default {
     ...ApplicationStyles,
+    newSimulationButton: {
+        top: -65,
+        left: 600
+    } as React.CSSProperties,
     statisticsContainer: {
         ...ApplicationStyles.shadowView,
         backgroundColor: Colors.colors.secondary,

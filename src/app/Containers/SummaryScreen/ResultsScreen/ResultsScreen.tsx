@@ -10,6 +10,7 @@ import { CriticalEventsStatistics } from '../../../Components/CriticalEventsStat
 import { SimulationLoadsStatistics } from '../../../Components/SimulationLoadsStatistics/SimulationLoadsStatistics';
 import { SimulationStatistics } from '../../../Components/SimulationStatistics/SimulationStatistics';
 import styles from './ResultsScreenStyles';
+import { RainbowBorderButton } from 'app/Components/RainbowBorderButton/RainbowBorderButton';
 
 interface IProps {
     // Props type definition
@@ -36,13 +37,13 @@ export const ResultsScreen: FunctionComponent<IProps> = observer((props) => {
 
     return (
         <div style={inline([styles.fullWidthContainer, styles.topCenteredColumn, styles.positionRelative])}>
-            <Button onClick={() => {
+            <RainbowBorderButton style={inline([styles.positionAbsolute, styles.newSimulationButton])} onClick={() => {
                 simulationSummaryStore.simulationSummary = null
             }}>
-                <SpectrumText>
-                    Voltar
-             </SpectrumText>
-            </Button>
+                <SpectrumText size={'b15'} weight={'bold'}>
+                    Simular novamente
+                </SpectrumText>
+            </RainbowBorderButton>
             <div style={inline([styles.statisticsContainer, styles.marginTop, styles.centeredRow,])}>
                 <BlurView style={inline([styles.bigPadding, styles.centeredColumn])} >
                     <SimulationStatistics

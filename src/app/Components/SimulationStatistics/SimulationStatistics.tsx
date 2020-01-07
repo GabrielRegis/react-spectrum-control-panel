@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Grid, Collapse, Button } from '@material-ui/core';
 import { SpectrumText } from 'app/Components/SpectrumText/SpectrumText';
 import { SimulationInstanceSummaryStatistics } from 'app/Models/SimulationInstanceSummaryStatistics';
+import { SimulationInstanceSummary } from 'app/Models/SimulationInstanceSummary';
 import { SimulationSummary } from 'app/Models/SimulationSummary';
 import { Colors, Fonts } from 'app/Theme';
 import { inline } from 'app/utils/StylesUtils';
@@ -20,6 +21,7 @@ interface IProps {
     // Props type definition
     statistics: SimulationInstanceSummaryStatistics
     simulationSummary?: SimulationSummary
+    selectedInstanceSummary?: SimulationInstanceSummary
     initialLoad?: number
     loadStep?: number
     cycleNum: number
@@ -109,6 +111,7 @@ export const SimulationStatistics: FunctionComponent<IProps> = (props) => {
                 value: props.statistics.totalBlockedBandwidthAmountPerCycle[i],
             })
         }
+
     }
 
     let maxBPchartValue = 0
@@ -143,6 +146,26 @@ export const SimulationStatistics: FunctionComponent<IProps> = (props) => {
         })
         classesColors = props.simulationSummary.blockedCallsAmountPerClass.map((classStatistics) => {
             return classStatistics.color
+        })
+    }
+
+    let bpPerClass = []
+    let maxBpPerClass = 0
+
+    if (props.selectedInstanceSummary) {
+        bpPerClass = props.selectedInstanceSummary.blockProbabilityPerClass.map((callClass) => {
+            return {
+                xLabel: callClass.className,
+                yLabel: (callClass.blockedProbability * 100).toFixed(1) + '%',
+                value: callClass.blockedProbability,
+                color: callClass.color
+            }
+        })
+
+        bpPerClass.forEach((dat) => {
+            if (dat.value > maxBpPerClass) {
+                maxBpPerClass = dat.value
+            }
         })
     }
 
@@ -297,6 +320,11 @@ export const SimulationStatistics: FunctionComponent<IProps> = (props) => {
                             maxValue={maxBCchartValue}
                             title={'Chamadas Bloqueadas' + (props.loadStep && props.initialLoad ? ' (Média)' : '')}
                             data={bcChartData} />
+                        {bpPerClass.length > 0 && <BarChart maxValue={maxBpPerClass} shouldEnableMaxValueToggle={true} style={inline([styles.bigMarginLeft])}
+                            xAxisLabel={'Classe'}
+                            yAxisLabel={'BP (%)'}
+                            title={'Probabilidade de Bloqueio por Classe'}
+                            data={bpPerClass} />}
                         {props.simulationSummary && props.simulationSummary.blockedCallsAmountPerClass &&
                             <div style={inline([styles.topCenteredColumn, styles.leftAlignedColumn, styles.bigMarginLeft])}>
                                 <SpectrumText size={'b15'} weight={'semibold'} color={'white'}

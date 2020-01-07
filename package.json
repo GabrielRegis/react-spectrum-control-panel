@@ -109,6 +109,7 @@
     "react-konva": "^16.8.7-3",
     "react-lodash": "^0.1.2",
     "react-minimal-pie-chart": "^6.0.1",
+    "react-player": "^1.14.2",
     "react-redux": "^6.0.0",
     "react-reveal": "^1.2.2",
     "react-router": "^4.3.1",

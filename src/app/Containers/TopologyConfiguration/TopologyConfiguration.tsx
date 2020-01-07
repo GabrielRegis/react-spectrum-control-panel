@@ -17,6 +17,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGripHorizontal, faBorderAll } from '@fortawesome/free-solid-svg-icons';
 import { observe } from 'mobx';
 import { SpectrumScreen } from 'app/Components/SpectrumScreen/SpectrumScreen';
+import { SpectrumGuide } from 'app/Components/SpectrumGuide/SpectrumGuide';
+import { steps } from './TopologyConfigurationScreenGuide';
 
 interface IProps {
     // Props type definition
@@ -255,6 +257,7 @@ export default class TopologyConfiguration extends React.Component<IProps, IStat
 
                 </Stage>
                 <LinkConfiguration />
+                <SpectrumGuide tourSteps={steps} shouldLaunchGuideOnRender={true} />
 
             </SpectrumScreen >
 

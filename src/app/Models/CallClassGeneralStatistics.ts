@@ -3,4 +3,5 @@ export interface CallClassGeneralStatistics {
     classId?: string
     color?: string
     blockedAmount?: number
+    blockedProbability?: number
 }

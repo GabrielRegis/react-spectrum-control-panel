@@ -59,7 +59,7 @@ export const generateDefaultTopology = (gridSize: number) => {
         nodeA: nodeA,
         nodeB: nodeB,
         slotSize: 12.5,
-        slots: 50
+        slots: 100
     }
 
     const linkB: TopologyLink = {
@@ -68,7 +68,7 @@ export const generateDefaultTopology = (gridSize: number) => {
         nodeA: nodeA,
         nodeB: nodeC,
         slotSize: 12.5,
-        slots: 50
+        slots: 100
     }
 
     const linkC: TopologyLink = {
@@ -77,7 +77,7 @@ export const generateDefaultTopology = (gridSize: number) => {
         nodeA: nodeA,
         nodeB: nodeD,
         slotSize: 12.5,
-        slots: 50
+        slots: 100
     }
 
     const linkD: TopologyLink = {
@@ -86,7 +86,7 @@ export const generateDefaultTopology = (gridSize: number) => {
         nodeA: nodeB,
         nodeB: nodeC,
         slotSize: 12.5,
-        slots: 50
+        slots: 100
     }
 
     const linkE: TopologyLink = {
@@ -95,7 +95,7 @@ export const generateDefaultTopology = (gridSize: number) => {
         nodeA: nodeB,
         nodeB: nodeD,
         slotSize: 12.5,
-        slots: 50
+        slots: 100
     }
 
     links.push(linkA)

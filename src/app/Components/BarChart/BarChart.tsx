@@ -29,6 +29,7 @@ export interface BarChartData {
     value?: number
     xLabel?: string
     yLabel?: string
+    color?: string
     confidenceInterval?: number
 }
 
@@ -79,6 +80,7 @@ export const BarChart: FunctionComponent<IProps> = (props) => {
             </SpectrumText>
             <div style={inline([styles.bar, styles.fullWidthContainer, styles.positionRelative, styles.topCenteredColumn, {
                 flex: data.value / selectedMaxValue,
+                background: data.color ? data.color : 'white',
                 opacity: (data.value / selectedMaxValue * 2) + 0.2
             }])}>
                 {data.confidenceInterval && data.confidenceInterval > 0 ? <div style={inline([styles.confidenceInterval, styles.positionAbsolute, {

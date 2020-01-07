@@ -77,7 +77,8 @@ export const SimulationLoadsStatistics: FunctionComponent<IProps> = (props) => {
             <div style={inline([styles.verticalDivider, styles.marginRight])} />
 
             <div style={inline([styles.fullWidthContainer, styles.topCenteredColumn, styles.leftAlignedColumn])}>
-                <SimulationStatistics title={'Resultados para carga \u00a0' + selectedInstance.load} cycleNum={props.cycleNum} statistics={selectedInstance.statistics} />
+                <SimulationStatistics title={'Resultados para carga \u00a0' + selectedInstance.load} cycleNum={props.cycleNum}
+                    selectedInstanceSummary={selectedInstance} statistics={selectedInstance.statistics} />
                 <div style={inline([styles.divider, styles.marginTop, styles.marginBottom])} />
                 <SimulationClassesStatistics simulationInstanceSummary={selectedInstance} />
             </div>

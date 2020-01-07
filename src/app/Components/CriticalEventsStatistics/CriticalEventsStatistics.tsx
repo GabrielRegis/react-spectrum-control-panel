@@ -128,7 +128,8 @@ export const CriticalEventsStatistics: FunctionComponent<IProps> = observer((pro
                         </RainbowBorderButton>
                         <RainbowBorderButton onClick={() => onCategoryClicked('BP')}
                             innerStyle={styles.secondaryColorBackground}
-                            style={inline([styles.xSmallMarginLeft])}>
+                        // style={inline([styles.xSmallMarginLeft,])}
+                        >
                             <SpectrumText style={inline([styles.whiteText, selectedCriticalEventCategory === 'BP' && styles.selectedLoadButtonText])}
                                 size={'c13'}
                                 weight={'semibold'}>

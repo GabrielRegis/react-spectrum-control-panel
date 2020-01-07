@@ -6,6 +6,6 @@ export const getGuideContainerStyle = () => {
         borderRadius: 10,
         fontFamily: Fonts.appFont,
         fontSize: 14,
-        color: Colors.colors.primary
+        color: Colors.colors.primary,
     } as React.CSSProperties
 }
