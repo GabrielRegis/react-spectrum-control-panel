@@ -4,7 +4,7 @@ import { Grid, Collapse, Button } from '@material-ui/core';
 import { SpectrumText } from 'app/Components/SpectrumText/SpectrumText';
 import { SimulationInstanceSummaryStatistics } from 'app/Models/SimulationInstanceSummaryStatistics';
 import { SimulationSummary } from 'app/Models/SimulationSummary';
-import { Colors } from 'app/Theme';
+import { Colors, Fonts } from 'app/Theme';
 import { inline } from 'app/utils/StylesUtils';
 import * as React from 'react';
 import { FunctionComponent, useEffect } from 'react';
@@ -14,7 +14,7 @@ import { PercentageResult } from '../PercentageResult/PercentageResult';
 import { SimpleStatisticsResult } from '../SimpleStatisticsResult/SimpleStatisticsResult';
 import styles from './SimulationStatisticsStyles';
 import { RainbowBorderButton } from '../RainbowBorderButton/RainbowBorderButton';
-import PieChart from 'react-minimal-pie-chart';
+import Chart from "react-apexcharts";
 
 interface IProps {
     // Props type definition
@@ -130,6 +130,86 @@ export const SimulationStatistics: FunctionComponent<IProps> = (props) => {
         }
     })
 
+    let classesBPLabels = []
+    let classesBP = []
+    let classesColors = []
+
+    if (props.simulationSummary && props.simulationSummary.blockedCallsAmountPerClass) {
+        classesBPLabels = props.simulationSummary.blockedCallsAmountPerClass.map((classStatistics) => {
+            return classStatistics.className
+        })
+        classesBP = props.simulationSummary.blockedCallsAmountPerClass.map((classStatistics) => {
+            return classStatistics.blockedAmount
+        })
+        classesColors = props.simulationSummary.blockedCallsAmountPerClass.map((classStatistics) => {
+            return classStatistics.color
+        })
+    }
+
+    const chartOptions = {
+        dataLabels: {
+            enabled: false,
+            dropShadow: {
+                enabled: false
+            },
+            style: {
+                fontSize: '14px',
+                fontFamily: Fonts.appBoldFont,
+                fontWeight: 'bold',
+            },
+            background: {
+                enabled: true,
+                foreColor: '#fff',
+            },
+        },
+        pie: {
+            customScale: 1,
+            offsetX: 0,
+            offsetY: 0,
+            expandOnClick: true,
+            dataLabels: {
+                offset: 0,
+                minAngleToShowLabel: 10
+            },
+        },
+        stroke: {
+            show: false,
+            curve: 'smooth',
+            width: 2,
+            dashArray: 0,
+        },
+        labels: classesBPLabels,
+        chart: {
+            type: 'donut',
+            fontFamily: Fonts.appFont,
+            dropShadow: {
+                enabled: false,
+            }
+        },
+        fill: {
+            colors: classesColors
+        },
+        colors: classesColors,
+        segmentShowStroke: false,
+        legend: {
+            fontFamily: Fonts.appFontSemibold,
+            fontSize: '14px',
+            labels: {
+                useSeriesColors: true,
+            },
+        },
+        responsive: [{
+            breakpoint: 480,
+            options: {
+                chart: {
+                    width: 200
+                },
+                legend: {
+                    position: 'bottom'
+                }
+            }
+        }]
+    }
 
     return (
         <div id={id} style={inline([styles.fullWidthContainer, styles.centeredColumn, styles.leftAlignedColumn, styles.positionRelative, props.style])}>
@@ -218,18 +298,21 @@ export const SimulationStatistics: FunctionComponent<IProps> = (props) => {
                             title={'Chamadas Bloqueadas' + (props.loadStep && props.initialLoad ? ' (Média)' : '')}
                             data={bcChartData} />
                         {props.simulationSummary && props.simulationSummary.blockedCallsAmountPerClass &&
-                            <PieChart
-                                style={{
-                                    height: 200
-                                }}
-                                data={props.simulationSummary.blockedCallsAmountPerClass.map((classStatistics) => {
-                                    return {
-                                        title: classStatistics.className,
-                                        color: classStatistics.color,
-                                        value: classStatistics.blockedAmount
+                            <div style={inline([styles.topCenteredColumn, styles.leftAlignedColumn, styles.bigMarginLeft])}>
+                                <SpectrumText size={'b15'} weight={'semibold'} color={'white'}
+                                    style={inline([styles.fullWidthContainer,])}>
+                                    {"Comparação de Chamadas Bloqueadas por Classe"}
+                                </SpectrumText>
+                                <Chart
+                                    width={320}
+                                    options={
+                                        chartOptions
                                     }
-                                })}
-                            />}
+                                    series={classesBP}
+                                    type={"donut"}
+                                />
+                            </div>
+                        }
                     </div>
                 </div>}
             </Collapse>
