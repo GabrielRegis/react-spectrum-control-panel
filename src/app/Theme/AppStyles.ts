@@ -7,6 +7,14 @@ import Fonts from "./Fonts";
 //box-shadow: 2px 2px 20px 0px rgba(204, 204, 204, 0.27);
 
 export default {
+    headerText: {
+        fontSize: 40
+    } as React.CSSProperties,
+    rainbowDivider: {
+        height: 4,
+        width: '100%',
+        marginTop: 10
+    } as React.CSSProperties,
     textWithoutSelection: {
         MozUserSelect: 'none',
         userSelect: 'none',

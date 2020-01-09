@@ -13,17 +13,6 @@ export const steps = [
             icon={faBook}
             title={'Tutorial - Editor de Topologia'}
             renderExtraComponent={() =>
-                // <ReactPlayer
-                //     config={{
-                //         youtube: {
-                //             playerVars: {
-                //                 controls: 1,
-                //                 fs: 1
-                //             }
-                //         }
-                //     }}
-                //     width={330}
-                //     url='https://www.youtube.com/watch?v=yhfxpOY4E8Q' />
                 <iframe allowFullScreen={true}
                     frameBorder={0}
                     id="ytplayer" width="330" height="360"

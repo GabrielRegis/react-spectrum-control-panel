@@ -2,6 +2,11 @@ import { ApplicationStyles, Colors } from "app/Theme";
 
 export default {
     ...ApplicationStyles,
+    questionsContainer: {
+        ...ApplicationStyles.shadowView,
+        borderRadius: 20,
+        background: Colors.colors.white
+    } as React.CSSProperties,
     waveContainer: {
         padding: 0,
         margin: 0,

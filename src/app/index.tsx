@@ -12,6 +12,7 @@ import { SummaryScreen } from './Containers/SummaryScreen/SummaryScreen';
 import TopologyConfiguration from './Containers/TopologyConfiguration/TopologyConfiguration';
 import './main.css';
 import rootStore from './Store/RootStore';
+import { EducationalGuideScreen } from './Containers/EducationalGuideScreen/EducationalGuideScreen';
 
 class AppClass extends React.Component {
   render() {
@@ -29,6 +30,7 @@ class AppClass extends React.Component {
           </div> */}
           <Route exact path="/" component={HomeScreen} />
           <Route path="/general-configurations" component={GeneralConfigurationsScreen} />
+          <Route path="/educational-guide" component={EducationalGuideScreen} />
           <Route path="/classes-configurations" component={ClassesConfigurationScreen} />
           <Route path="/topology-configurations" component={TopologyConfiguration} />
           <Route path="/summary" component={SummaryScreen} />

@@ -1,5 +1,4 @@
-import { faCogs, faNetworkWired, faPoll, faStream, faArrowRight } from "@fortawesome/free-solid-svg-icons";
-import { Fade } from "@material-ui/core";
+import { faCogs, faNetworkWired, faPoll, faStream } from "@fortawesome/free-solid-svg-icons";
 import Button from '@material-ui/core/Button';
 import { simulationConfigurationStoreContext } from "app/Store/SimulationConfigurationStore";
 import { inline } from 'app/utils/StylesUtils';
@@ -10,10 +9,6 @@ import { Link } from 'react-router-dom';
 import { topologyConfigurationStoreContext } from '../../Store/TopologyConfigurationStore';
 import { NavbarButton } from '../NavbarButton/NavbarButton';
 import styles from './NavbarStyles';
-import { RainbowBorderButton } from "../RainbowBorderButton/RainbowBorderButton";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Colors } from "app/Theme";
-import { SpectrumText } from "../SpectrumText/SpectrumText";
 
 interface IProps {
     // Props type definition
@@ -46,7 +41,6 @@ export const Navbar: FunctionComponent<IProps> = observer((props) => {
                     <img style={inline([styles.logo])} src={require('../../Assets/Icons/icLogo.png')} alt="" />
                 </Button>
             </Link>
-
             <Link to="/general-configurations">
                 <NavbarButton
                     styles={inline([styles.navbarButton])}

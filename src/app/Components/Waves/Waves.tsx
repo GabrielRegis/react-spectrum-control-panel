@@ -7,6 +7,7 @@ import styles from './WavesStyles';
 
 interface IProps {
     // Props type definition
+    style?: React.CSSProperties
 }
 
 interface IState {
@@ -35,7 +36,7 @@ export const Waves: FunctionComponent<IProps> = (props) => {
     }, [])
 
     return (
-        <div style={inline([styles.flex1, styles.flexStretch, styles.waveContainer])}>
+        <div style={inline([styles.flex1, styles.flexStretch, styles.waveContainer, props.style])}>
             <Slide timeout={1000} direction={'up'} in={waveAnimationTrigger}>
                 <div style={inline([styles.flex1, styles.flexStretch, styles.waveContainer, styles.positionRelative])}>
                     <div style={inline([styles.flex1, styles.flexStretch, styles.fullWidthContainer, styles.positionAbsolute, { zIndex: -1, top: 200 }])}>
