@@ -15,12 +15,17 @@ interface IState {
     isOpened: boolean
 }
 
-export const SpectrumGuide: FunctionComponent<IProps> = (props) => {
+export const SpectrumGuide: FunctionComponent<IProps> = (props, ref) => {
     const initialState: IState = {
         isOpened: props.shouldLaunchGuideOnRender
     };
 
     const [isOpened, setIsOpened] = React.useState(initialState.isOpened)
+    React.useImperativeHandle(ref, () => ({
+        openGuide: () => {
+            setIsOpened(true)
+        }
+    }));
 
     // ComponentDidMount
     useEffect(() => {
@@ -37,10 +42,11 @@ export const SpectrumGuide: FunctionComponent<IProps> = (props) => {
         <Tour
             steps={props.tourSteps}
             isOpen={isOpened}
-
             accentColor={Colors.colors.pink}
             rounded={10}
             onRequestClose={closeTour}
         />
     );
 };
+
+export default React.forwardRef(SpectrumGuide)

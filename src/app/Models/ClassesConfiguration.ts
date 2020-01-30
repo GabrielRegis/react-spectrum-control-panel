@@ -8,7 +8,7 @@ export class ClassesConfiguration {
     @persist('object') @observable public selectedFlowClass: CallClassConfiguration = {};
 
     constructor() {
-        this.callsNumber = 10
+        this.callsNumber = 5000
         this.flowClasses = []
         this.selectedFlowClass = {
             id: null,

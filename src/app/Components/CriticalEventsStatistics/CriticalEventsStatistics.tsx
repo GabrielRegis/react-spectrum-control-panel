@@ -106,7 +106,6 @@ export const CriticalEventsStatistics: FunctionComponent<IProps> = observer((pro
                                         </SpectrumText>
                                     </RainbowBorderButton>
                                 </Grid>
-
                             )}
                         </Grid>
                     </div>

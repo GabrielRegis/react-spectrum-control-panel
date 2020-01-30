@@ -2,6 +2,20 @@ import { ApplicationStyles, Colors } from "app/Theme";
 
 export default {
     ...ApplicationStyles,
+    subtitleOccupiedSlot: {
+        width: 25,
+        height: 25,
+        borderRadius: 5,
+        background: Colors.colors.healthPink,
+        marginRight: 5
+    } as React.CSSProperties,
+    subtitleFreeSlot: {
+        width: 25,
+        height: 25,
+        borderRadius: 5,
+        background: Colors.colors.lightGray,
+        marginRight: 5
+    } as React.CSSProperties,
     topologyContainer: {
         backgroundColor: 'rgba(255, 255, 255, 0.1)',
         borderRadius: 20

@@ -7,6 +7,7 @@ import { FunctionComponent, useEffect } from 'react';
 import { CriticalEventSnapshot } from '../../Models/CriticalEventSnapshot';
 import { SlotSnapshot } from '../../Models/SlotSnapshot';
 import styles from './SnapshotSlotsStyles';
+import { SpectrumText } from '../SpectrumText/SpectrumText';
 interface IProps {
     // Props type definition
     criticalEvent?: CriticalEventSnapshot
@@ -34,7 +35,7 @@ export const SnapshotSlots: FunctionComponent<IProps> = observer((props) => {
     const selectedLink = topologySnapshotStore.selectedLink
     const criticalEvent = props.criticalEvent
     const topologySnapshot = criticalEvent && criticalEvent.topologySnapshot ? criticalEvent.topologySnapshot : null
-    let slots = []
+    let slots = new Array({})
 
     if (selectedLink && topologySnapshot) {
         const selectedLinkSnapshot = topologySnapshot.linkSnapshots.filter((linkSnapshot) => {

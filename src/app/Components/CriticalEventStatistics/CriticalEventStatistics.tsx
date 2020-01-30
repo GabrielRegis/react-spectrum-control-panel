@@ -7,6 +7,7 @@ import { SimpleStatisticsResult } from '../SimpleStatisticsResult/SimpleStatisti
 import { SnapshotSlots } from '../TopologyStatistics/SnapshotSlots';
 import TopologySnapshot from '../TopologyStatistics/TopologySnapshot';
 import styles from './CriticalEventStatisticsStyles';
+import { SpectrumText } from '../SpectrumText/SpectrumText';
 
 interface IProps {
     // Props type definition
@@ -59,9 +60,31 @@ export const CriticalEventStatistics: FunctionComponent<IProps> = (props) => {
             <div style={inline([styles.fullWidthContainer, styles.topologyContainer, styles.xSmallMarginTop])}>
                 <TopologySnapshot />
             </div>
-            <div style={inline([styles.fullWidthContainer, styles.smallMarginTop])}>
+            <SpectrumText style={inline([styles.xSmallMarginTop])} size={'c13'} color={'white'}>
+                Para analisar o estado dos Slots de cada Enlace da Topologia no momento crítico, basta selecionar qualquer Enlace.
+            </SpectrumText>
+            <div style={inline([styles.fullWidthContainer, styles.xSmallMarginTop])}>
+                <SpectrumText size={'b20'} weight={'semibold'} color={'white'}>
+                    Legenda
+                </SpectrumText>
+                <div style={inline([styles.leftAlignedRow, styles.xSmallMarginBottom, styles.xSmallMarginTop])}>
+
+                    <div style={inline([styles.centeredRow, styles.leftAlignedRow,])}>
+                        <div style={styles.subtitleFreeSlot} />
+                        <SpectrumText size={'c13'} color={'white'}>
+                            Slot Ocupado
+                    </SpectrumText>
+                    </div>
+                    <div style={inline([styles.centeredRow, styles.leftAlignedRow, styles.xSmallMarginLeft])}>
+                        <div style={styles.subtitleOccupiedSlot} />
+                        <SpectrumText size={'c13'} color={'white'}>
+                            Slot Ocupado
+                    </SpectrumText>
+                    </div>
+                </div>
                 <SnapshotSlots criticalEvent={props.criticalEvent} />
             </div>
+
 
         </div> : <div />
 

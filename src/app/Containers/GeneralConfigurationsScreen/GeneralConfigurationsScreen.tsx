@@ -1,5 +1,4 @@
-import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowRight, faInfo, faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 import { Button, Fade, Grid, Typography } from "@material-ui/core";
 import { SpectrumText } from "app/Components/SpectrumText/SpectrumText";
 import { GeneralConfigurations } from "app/Models/GeneralConfigurations";
@@ -14,10 +13,11 @@ import Tour from "reactour";
 import { SpectrumTextInput } from "../../Components/SpectrumTextInput/SpectrumTextInput";
 import { steps } from "./GeneralConfigurationScreenGuide";
 import styles from "./GeneralConfigurationsScreenStyles";
-import { SpectrumGuide } from '../../Components/SpectrumGuide/SpectrumGuide';
+import SpectrumGuide from '../../Components/SpectrumGuide/SpectrumGuide';
 import { SpectrumScreen } from "app/Components/SpectrumScreen/SpectrumScreen";
 import { RainbowBorderButton } from 'app/Components/RainbowBorderButton/RainbowBorderButton';
 import { NextStepButton } from "app/Components/NextStepButton/NextStepButton";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 
 interface IProps {
@@ -60,6 +60,8 @@ export const GeneralConfigurationsScreen: FunctionComponent<IProps> = observer(
       loadStep: simulationConfigurationStore.generalConfiguration.loadStep,
       iterations: simulationConfigurationStore.generalConfiguration.iterations
     };
+
+    const guide: React.MutableRefObject<any> = React.useRef(null)
 
     // ComponentDidMount
     useEffect(() => {
@@ -106,6 +108,12 @@ export const GeneralConfigurationsScreen: FunctionComponent<IProps> = observer(
       setLoadStep(parseInt(text));
     };
 
+    const onInfoClicked = () => {
+      if (guide && guide.current && guide.current.openGuide) {
+        guide.current.openGuide()
+      }
+    }
+
     const tourSteps = steps;
 
     return (
@@ -120,13 +128,28 @@ export const GeneralConfigurationsScreen: FunctionComponent<IProps> = observer(
                 styles.xSmallMarginTop
               ])}
             >
-              <SpectrumText
-                size={"h2"}
-                weight={"bold"}
-                color={Colors.colors.primary}
-              >
-                Configurações Gerais
-            </SpectrumText>
+              <div style={inline([styles.centeredRow, styles.leftAlignedRow])}>
+
+                <SpectrumText
+                  size={"h2"}
+                  weight={"bold"}
+                  color={Colors.colors.primary}
+                >
+                  Configurações Gerais
+                </SpectrumText>
+                <RainbowBorderButton
+                  onClick={onInfoClicked}
+                  style={styles.xSmallMarginLeft}
+                  innerStyle={inline([
+                    styles.centeredRow, {
+                      width: 0
+                    }
+                  ])}
+                >
+                  <FontAwesomeIcon color={Colors.colors.primary} size={'2x'} icon={faInfoCircle} />
+                </RainbowBorderButton>
+
+              </div>
               <Grid container spacing={1}>
                 <Grid item xs={12}>
                   <div
@@ -246,7 +269,7 @@ export const GeneralConfigurationsScreen: FunctionComponent<IProps> = observer(
               src={require("../../Assets/Icons/generalSettingsPlaceholder.svg")}
               alt=""
             />
-            <SpectrumGuide tourSteps={steps} shouldLaunchGuideOnRender={true} />
+            <SpectrumGuide ref={guide} tourSteps={steps} shouldLaunchGuideOnRender={true} />
             <NextStepButton style={inline([styles.marginTop])} nextRoute={"/classes-configurations"} />
           </div>
         </Fade>

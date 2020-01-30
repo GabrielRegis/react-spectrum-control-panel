@@ -14,11 +14,12 @@ import { NodeConfiguration } from './NodeConfigurations';
 import NodeLayer from './NodeLayer';
 import styles from './TopologyConfigurationStyles';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faGripHorizontal, faBorderAll } from '@fortawesome/free-solid-svg-icons';
+import { faGripHorizontal, faBorderAll, faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 import { observe } from 'mobx';
 import { SpectrumScreen } from 'app/Components/SpectrumScreen/SpectrumScreen';
-import { SpectrumGuide } from 'app/Components/SpectrumGuide/SpectrumGuide';
+import SpectrumGuide from 'app/Components/SpectrumGuide/SpectrumGuide';
 import { steps } from './TopologyConfigurationScreenGuide';
+import { RainbowBorderButton } from 'app/Components/RainbowBorderButton/RainbowBorderButton';
 
 interface IProps {
     // Props type definition
@@ -36,7 +37,8 @@ interface IState {
 @observer
 export default class TopologyConfiguration extends React.Component<IProps, IState>{
 
-    linkLayer?: LinkLayer = null
+    private linkLayer?: LinkLayer = null
+    private guide?: any = null
 
     constructor(props) {
         super(props)
@@ -49,7 +51,6 @@ export default class TopologyConfiguration extends React.Component<IProps, IStat
     }
 
     componentDidMount() {
-
         this.createGridLines()
     }
 
@@ -90,11 +91,28 @@ export default class TopologyConfiguration extends React.Component<IProps, IStat
         this.createGridLines()
     }
 
+    public onInfoClicked = () => {
+        if (this.guide && this.guide.openGuide) {
+            this.guide.openGuide()
+        }
+    }
+
     render() {
         return (
             <SpectrumScreen overflowYHidden={true} style={inline([styles.topCenteredColumn, styles.flexStretch, styles.topologyConfigurationScreenContainer])}>
                 <div style={inline([styles.toolbarContainer, styles.centeredRow, styles.leftAlignedRow])}>
                     <div style={inline([styles.centeredRow])}>
+                        <RainbowBorderButton
+                            onClick={this.onInfoClicked}
+                            style={styles.xSmallMarginLeft}
+                            innerStyle={inline([
+                                styles.centeredRow, {
+                                    width: 0
+                                }
+                            ])}
+                        >
+                            <FontAwesomeIcon color={Colors.colors.primary} size={'2x'} icon={faInfoCircle} />
+                        </RainbowBorderButton>
                         <Button
                             onClick={() => this.onChangeModePressed(0)}
                             style={inline([
@@ -257,7 +275,7 @@ export default class TopologyConfiguration extends React.Component<IProps, IStat
 
                 </Stage>
                 <LinkConfiguration />
-                <SpectrumGuide tourSteps={steps} shouldLaunchGuideOnRender={true} />
+                <SpectrumGuide ref={ref => this.guide = ref} tourSteps={steps} shouldLaunchGuideOnRender={true} />
 
             </SpectrumScreen >
 

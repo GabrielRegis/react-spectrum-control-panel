@@ -3,8 +3,10 @@ import { ApplicationStyles, Colors } from "app/Theme";
 export default {
     ...ApplicationStyles,
     newSimulationButton: {
-        top: -65,
-        left: 600
+        top: 15,
+        left: 600,
+        zIndex: 200,
+        position: 'fixed'
     } as React.CSSProperties,
     statisticsContainer: {
         ...ApplicationStyles.shadowView,
@@ -26,6 +28,7 @@ export default {
     } as React.CSSProperties,
     criticalEventsContainer: {
         borderColor: Colors.colors.pxFeedSeconday,
+        marginBottom: 130
     } as React.CSSProperties,
 
     loadButton: {

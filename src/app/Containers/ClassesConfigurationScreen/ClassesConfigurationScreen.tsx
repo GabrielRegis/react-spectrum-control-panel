@@ -1,4 +1,4 @@
-import { faPlusCircle, faTrash, faArrowRight } from '@fortawesome/free-solid-svg-icons';
+import { faPlusCircle, faTrash, faArrowRight, faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Checkbox, Collapse, Container, Divider, Fade, Grid, Grow } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
@@ -17,7 +17,7 @@ import { v4 } from "uuid";
 import { CallClassConfiguration } from '../../Models/CallClassConfiguration';
 import { FlowClassesList } from './FlowClassesList';
 import styles from './FlowsConfigurationStyles';
-import { SpectrumGuide } from '../../Components/SpectrumGuide/SpectrumGuide';
+import SpectrumGuide from '../../Components/SpectrumGuide/SpectrumGuide';
 import { steps } from './ClassesConfigurationScreenGuide';
 import { SpectrumScreen } from 'app/Components/SpectrumScreen/SpectrumScreen';
 import { Link } from 'react-router-dom';
@@ -39,6 +39,8 @@ export const ClassesConfigurationScreen: FunctionComponent<IProps> = observer((p
     const simulationConfigurationStore = React.useContext(simulationConfigurationStoreContext)
     const initialState: IState = {
     };
+
+    const guide: React.MutableRefObject<any> = React.useRef(null)
 
     // ComponentDidMount
     useEffect(() => {
@@ -86,16 +88,39 @@ export const ClassesConfigurationScreen: FunctionComponent<IProps> = observer((p
         simulationConfigurationStore.classesConfiguration.flowClasses = flowClasses
     }
 
+    const onInfoClicked = () => {
+        if (guide && guide.current && guide.current.openGuide) {
+            guide.current.openGuide()
+        }
+    }
 
     return (
         <SpectrumScreen style={inline([styles.fullWidthContainer, styles.topCenteredColumn, styles.positionRelative, styles.flexStretch])}>
-            <SpectrumGuide shouldLaunchGuideOnRender={true} tourSteps={steps} />
+            <SpectrumGuide ref={guide} shouldLaunchGuideOnRender={true} tourSteps={steps} />
             <Fade timeout={{ enter: 600 }} in={true} mountOnEnter unmountOnExit>
                 <div style={inline([styles.flex1, styles.topCenteredColumn, styles.paddingHorizontal])}>
                     <div style={inline([styles.fullWidthContainer, styles.topCenteredColumn, styles.leftAlignedColumn, styles.xSmallMarginTop])}>
-                        <SpectrumText size={'h2'} weight={'bold'} color={Colors.colors.primary}>
-                            Configurações das Requisições
-                        </SpectrumText>
+                        <div style={inline([styles.centeredRow, styles.leftAlignedRow])}>
+
+                            <SpectrumText
+                                size={"h2"}
+                                weight={"bold"}
+                                color={Colors.colors.primary}
+                            >
+                                Configurações das Requisições
+                            </SpectrumText>
+                            <RainbowBorderButton
+                                onClick={onInfoClicked}
+                                style={styles.xSmallMarginLeft}
+                                innerStyle={inline([
+                                    styles.centeredRow, {
+                                        width: 0
+                                    }
+                                ])}
+                            >
+                                <FontAwesomeIcon color={Colors.colors.primary} size={'2x'} icon={faInfoCircle} />
+                            </RainbowBorderButton>
+                        </div>
 
                         <div style={inline([styles.fullWidthContainer])}>
                             <div style={inline([styles.centeredRow, styles.leftAlignedRow, styles.xSmallMarginTop])}>
