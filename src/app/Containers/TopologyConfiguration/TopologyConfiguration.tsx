@@ -114,6 +114,7 @@ export default class TopologyConfiguration extends React.Component<IProps, IStat
                             <FontAwesomeIcon color={Colors.colors.primary} size={'2x'} icon={faInfoCircle} />
                         </RainbowBorderButton>
                         <Button
+                            className={"cursorMode"}
                             onClick={() => this.onChangeModePressed(0)}
                             style={inline([
                                 styles.xSmallMarginLeft,
@@ -142,6 +143,7 @@ export default class TopologyConfiguration extends React.Component<IProps, IStat
                             </div>
                         </Button>
                         <Button
+                            className={"nodeMode"}
                             onClick={() => this.onChangeModePressed(1)}
                             style={inline([
                                 styles.xSmallMarginLeft,
@@ -169,6 +171,7 @@ export default class TopologyConfiguration extends React.Component<IProps, IStat
                             </div>
                         </Button>
                         <Button
+                            className={"linkMode"}
                             onClick={() => this.onChangeModePressed(2)}
                             style={inline([
                                 styles.xSmallMarginLeft,
@@ -197,7 +200,8 @@ export default class TopologyConfiguration extends React.Component<IProps, IStat
                         </Button>
                     </div>
 
-                    <div style={inline([styles.centeredColumn, styles.marginLeft, styles.marginRight])}>
+                    <div className={"gridTutorial"}
+                        style={inline([styles.centeredColumn, styles.marginLeft, styles.marginRight])}>
 
                         <Button
                             onClick={this.onToggleGridPressed}

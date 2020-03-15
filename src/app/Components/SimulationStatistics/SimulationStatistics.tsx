@@ -254,13 +254,13 @@ export const SimulationStatistics: FunctionComponent<IProps> = (props) => {
             <Collapse in={!isCollapsed}>
                 {!isCollapsed && <div style={inline([styles.fullWidthContainer])}>
                     <div style={inline([styles.fullWidthContainer, styles.upAlignedRow, styles.leftAlignedRow, styles.spaceBetween, styles.positionRelative])}>
-                        <div style={inline([styles.leftAlignedColumn, styles.upAlignedColumn])}>
+                        <div className={"summaryGeneralNumberResults"} style={inline([styles.leftAlignedColumn, styles.upAlignedColumn])}>
 
                             <Grid container spacing={2} style={inline([styles.upAlignedRow, styles.xSmallMarginTop])}>
                                 <Grid item xs={3}>
                                     <SimpleStatisticsResult
                                         style={inline([styles.simpleStatisticsContainer])}
-                                        label={'Média de Chamadas com Sucesso'}
+                                        label={'Média de Chamadas Atendidas'}
                                         result={successCallsAmountMean.toFixed(0)} />
                                 </Grid>
 
@@ -271,14 +271,14 @@ export const SimulationStatistics: FunctionComponent<IProps> = (props) => {
                                         result={blockedAmountMean.toFixed(0)} />
                                 </Grid>
 
-                                <Grid item xs={3}>
+                                <Grid className={"summaryGeneralNumberResultsSuccessCalls"} item xs={3}>
                                     <SimpleStatisticsResult
                                         style={inline([styles.simpleStatisticsContainer])}
-                                        label={'Total de Chamadas com Sucesso'}
+                                        label={'Total de Chamadas Atendidas'}
                                         result={successCallsAmount} />
                                 </Grid>
 
-                                <Grid item xs={3}>
+                                <Grid className={"summaryGeneralNumberResultsBlockedCalls"} item xs={3}>
                                     <SimpleStatisticsResult
                                         style={inline([styles.simpleStatisticsContainer])}
                                         label={'Total de Chamadas bloqueadas'}
@@ -298,11 +298,11 @@ export const SimulationStatistics: FunctionComponent<IProps> = (props) => {
 
                         <div style={inline([styles.centeredRow])}>
                             <PercentageResult style={inline([styles.marginRight])} label={'Bloqueadas'} result={props.statistics.blockProbabilityMean} />
-                            <PercentageResult label={'Sucedidas'} result={1 - props.statistics.blockProbabilityMean} />
+                            <PercentageResult label={'Atendidas'} result={1 - props.statistics.blockProbabilityMean} />
                         </div>
                     </div>
                     <div style={inline([styles.divider, styles.marginTop, styles.marginBottom])} />
-                    <div style={inline([styles.fullWidthContainer, styles.centeredRow, styles.leftAlignedRow])}>
+                    <div className={"summaryGeneralChartResults"} style={inline([styles.fullWidthContainer, styles.centeredRow, styles.leftAlignedRow])}>
                         <BarChart shouldEnableMaxValueToggle={true} maxValue={maxBPchartValue}
                             title={'Probabilidade de Bloqueio' + (props.loadStep && props.initialLoad ? ' (Média)' : '')}
                             data={bpChartData}

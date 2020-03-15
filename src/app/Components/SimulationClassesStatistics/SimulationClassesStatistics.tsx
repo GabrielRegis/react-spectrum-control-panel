@@ -50,7 +50,7 @@ export const SimulationClassesStatistics: FunctionComponent<IProps> = (props) =>
                 <SpectrumText style={inline([styles.xSmallMarginTop])} color={Colors.colors.white} size={'c13'} weight={'light'}>
                     Selecione a Classe
                 </SpectrumText>
-                <div style={inline([styles.fullWidthContainer, styles.leftAlignedRow, styles.upAlignedRow, styles.buttonsContainer])}>
+                <div className={"summaryClassResults"} style={inline([styles.fullWidthContainer, styles.leftAlignedRow, styles.upAlignedRow, styles.buttonsContainer])}>
                     {props.simulationInstanceSummary.classSummaries.map((classSummary) =>
                         <RainbowBorderButton key={classSummary.id} onClick={() => onClassPressed(classSummary)}
                             innerStyle={styles.secondaryColorBackground}

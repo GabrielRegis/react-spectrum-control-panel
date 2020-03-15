@@ -135,7 +135,7 @@ export const ClassesConfigurationScreen: FunctionComponent<IProps> = observer((p
                                 <SpectrumTextInput
                                     style={inline([styles.xSmallMarginLeft])}
                                     type={'number'}
-                                    min={10}
+                                    min={2000}
                                     max={10000}
                                     value={simulationConfigurationStore.classesConfiguration.callsNumber}
                                     onChange={onCallsTextChanged} />

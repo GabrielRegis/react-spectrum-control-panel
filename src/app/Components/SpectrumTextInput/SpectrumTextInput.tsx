@@ -43,17 +43,26 @@ export const SpectrumTextInput: FunctionComponent<IProps> = (props) => {
     const onChange = (text: string) => {
         if (props.onChange) {
             if (props.type === 'number') {
-                const number = parseFloat(text)
-                const max = props.max ? props.max : 1000
-                const min = props.min ? props.min : 0
                 if (text === undefined || text === null || Number.isNaN(parseFloat(text))) {
-                    props.onChange(min.toString())
+                    props.onChange("0")
                     return
                 }
-                props.onChange(Math.min(Math.max(number, min), max).toString())
-                return
             }
             props.onChange(text)
+        }
+    }
+    const onBlur = () => {
+        if (props.type === 'number') {
+            const text = props.value.toString()
+            const number = parseFloat(text)
+            const max = props.max ? props.max : 1000
+            const min = props.min ? props.min : 0
+            if (text === undefined || text === null || Number.isNaN(parseFloat(text))) {
+                props.onChange(min.toString())
+                return
+            }
+            props.onChange(Math.min(Math.max(number, min), max).toString())
+            return
         }
     }
 
@@ -81,6 +90,7 @@ export const SpectrumTextInput: FunctionComponent<IProps> = (props) => {
                 inputStyle={inline([styles.textInput, props.inputStyle])}
                 name="form-field-name"
                 value={props.value}
+                onBlur={onBlur}
                 onChange={(event) => onChange(event.target.value)}
             />
             {props.type === 'number' && <div style={inline([styles.centeredColumn, styles.xSmallMarginLeft])}>

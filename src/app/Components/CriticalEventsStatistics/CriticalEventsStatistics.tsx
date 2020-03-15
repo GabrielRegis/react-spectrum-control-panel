@@ -75,7 +75,7 @@ export const CriticalEventsStatistics: FunctionComponent<IProps> = observer((pro
     }
 
     return (
-        <div id={id} style={inline([styles.fullWidthContainer, styles.positionRelative, styles.centeredColumn, styles.leftAlignedColumn, styles.positionRelative, props.style])}>
+        <div className={"summaryCriticalEvents"} id={id} style={inline([styles.fullWidthContainer, styles.positionRelative, styles.centeredColumn, styles.leftAlignedColumn, styles.positionRelative, props.style])}>
             <div style={inline([styles.fullWidthContainer, styles.botAlignedRow, styles.leftAlignedRow, styles.positionRelative])}>
                 <div style={inline([styles.leftAlignedColumn, styles.upAlignedColumn])}>
                     <SpectrumText style={inline([styles.whiteText])} size={'h3'} weight={'bold'}>
@@ -119,7 +119,7 @@ export const CriticalEventsStatistics: FunctionComponent<IProps> = observer((pro
                         <RainbowBorderButton onClick={() => onCategoryClicked('FRAGMENTATION')}
                             innerStyle={styles.secondaryColorBackground}
                         >
-                            <SpectrumText style={inline([styles.whiteText, selectedCriticalEventCategory === 'FRAGMENTATION' && styles.selectedLoadButtonText])}
+                            <SpectrumText className={"summaryFragmentation"} style={inline([styles.whiteText, selectedCriticalEventCategory === 'FRAGMENTATION' && styles.selectedLoadButtonText])}
                                 size={'c13'}
                                 weight={'semibold'}>
                                 {'Fragmentação'}

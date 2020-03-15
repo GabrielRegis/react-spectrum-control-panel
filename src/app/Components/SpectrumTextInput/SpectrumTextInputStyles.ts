@@ -7,12 +7,12 @@ export default {
     } as React.CSSProperties,
     textInputContainer: {
         borderRadius: 10,
-        backgroundColor: Colors.colors.lightGray,
+        backgroundColor: Colors.colors.silentWhite,
         padding: 5,
     } as React.CSSProperties,
     numberInputContainer: {
         borderRadius: 10,
-        backgroundColor: Colors.colors.lightGray,
+        backgroundColor: Colors.colors.silentWhite,
         paddingTop: 0,
         paddingBottom: 0,
         paddingLeft: 10,
