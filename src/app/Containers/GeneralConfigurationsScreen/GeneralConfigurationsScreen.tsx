@@ -258,7 +258,7 @@ export const GeneralConfigurationsScreen: FunctionComponent<IProps> = observer(
                       {"\u00a0" + iterations + "\u00a0"}
                     </SpectrumText>
                     <SpectrumText size={"b15"}>
-                      iterações à cada ciclo.
+                      iterações à cada ciclo (Semente).
                   </SpectrumText>
                   </div>
                 </Grid>

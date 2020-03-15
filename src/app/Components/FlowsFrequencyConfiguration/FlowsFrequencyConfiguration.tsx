@@ -32,7 +32,7 @@ export const FlowsFrequencyConfiguration: FunctionComponent<IProps> = observer((
     }, [])
 
     return (
-        <div style={inline([styles.leftAlignedColumn, styles.flexStretch, styles.configurationContainer, styles.marginLeft, styles.smallPadding])} >
+        <div className={"classesFrequency"} style={inline([styles.leftAlignedColumn, styles.flexStretch, styles.configurationContainer, styles.marginLeft, styles.smallPadding])} >
             <SpectrumText style={styles.smallMarginBottom} weight={'bold'} size={'b20'}>
                 Frequência das Classes
            </SpectrumText>

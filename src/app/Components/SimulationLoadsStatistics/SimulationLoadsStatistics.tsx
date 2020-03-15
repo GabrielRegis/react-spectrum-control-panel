@@ -45,12 +45,13 @@ export const SimulationLoadsStatistics: FunctionComponent<IProps> = (props) => {
         <div style={inline([styles.fullWidthContainer, styles.upAlignedRow, styles.leftAlignedRow, styles.spaceBetween, props.style])}>
             <div style={inline([styles.leftAlignedColumn, styles.upAlignedColumn])}>
                 <SpectrumText style={inline([styles.whiteText])} color={Colors.colors.white} size={'h3'} weight={'bold'}>
-                    Resultado à cada Interação
+                    Resultados à cada Carga
                 </SpectrumText>
                 <SpectrumText style={inline([styles.xSmallMarginTop])} color={Colors.colors.white} size={'c13'} weight={'light'}>
                     Selecione a carga
                 </SpectrumText>
                 <Grid container
+                    className={"summaryLoadResultsSelectLoad"}
                     spacing={1}
                     style={inline([styles.buttonsContainer,])}
                 >

@@ -72,7 +72,7 @@ export const CriticalEventStatistics: FunctionComponent<IProps> = (props) => {
                     <div style={inline([styles.centeredRow, styles.leftAlignedRow,])}>
                         <div style={styles.subtitleFreeSlot} />
                         <SpectrumText size={'c13'} color={'white'}>
-                            Slot Ocupado
+                            Slot Livre
                     </SpectrumText>
                     </div>
                     <div style={inline([styles.centeredRow, styles.leftAlignedRow, styles.xSmallMarginLeft])}>
