@@ -54,7 +54,9 @@ export const steps = [
             icon={faBalanceScale}
             title={'Proporção'}
             content={[
-                'Aqui será possível configurar a proporção das classes em cada ciclo da simulação. Isso é, de 100% das conexões que serão simuladas, qual será a porcentagem/proporção de conexões de uma determinada classe. Em outras palavras, aqui será definido a distribuição das porcentagens entre as classes configuradas.',
+                'Aqui será possível configurar a proporção das classes em cada ciclo da simulação. Isso é, de 100% das conexões que serão simuladas, qual será a porcentagem/proporção de conexões de uma determinada classe.',
+                "Em outras palavras, aqui será definido a distribuição das porcentagens entre as classes configuradas.",
+                "Para distrubuir a porcentagem, basta arrastar o componente deslizante de uma das classes escolhidas."
             ]}
         />),
 

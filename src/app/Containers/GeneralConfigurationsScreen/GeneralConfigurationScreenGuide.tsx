@@ -29,7 +29,7 @@ export const steps = [
         ]}
         renderExtraComponent={() => <div>
           <LoadExample />
-          <SpectrumText color={Colors.colors.lightGray} size={'c13'}>
+          <SpectrumText color={Colors.colors.primary} size={'c13'}>
             {'Deslize a barra para simular a alteração de carga e o comportamento das conexões em um quadro de tempo.'}
           </SpectrumText>
         </div>}

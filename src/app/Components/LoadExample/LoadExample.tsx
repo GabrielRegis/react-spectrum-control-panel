@@ -83,7 +83,7 @@ export const LoadExample: FunctionComponent<IProps> = (props) => {
             <SpectrumText
                 style={inline([styles.marginTop, styles.fullWidthContainer])}
                 weight={'semibold'}
-                color={'white'}>
+                color={Colors.colors.primary}>
                 {'Carga: ' + sliderValue + ' Erlangs'}
             </SpectrumText>
             <Slider

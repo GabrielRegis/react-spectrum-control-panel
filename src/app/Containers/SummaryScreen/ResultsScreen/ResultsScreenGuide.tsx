@@ -32,7 +32,7 @@ export const steps = [
         const configStore = React.useContext(simulationConfigurationStoreContext)
 
         return <div>
-          <div style={inline([styles.fullWidthContainer, styles.text13, styles.whiteText, styles.regularText])} color={'white'}>
+          <div style={inline([styles.fullWidthContainer, styles.text13, styles.primaryText, styles.regularText])} color={'white'}>
             {"Por exemplo, para o resultado de Total de chamadas, se temos\u00a0"}
             <strong >
               {configStore.generalConfiguration.simulationCycles}

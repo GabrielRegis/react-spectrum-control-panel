@@ -8,12 +8,14 @@ import FlareComponent from 'flare-react';
 import anim from './Conexoes.flr'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
+import { Colors } from 'app/Theme';
 
 interface IProps {
     // Props type definition
     title: string
     content: string[]
     icon?: IconProp
+    isLightThemeOn?: boolean
     renderExtraComponent?: () => React.ReactNode
 }
 
@@ -38,12 +40,12 @@ export const SpectrumGuideStep: FunctionComponent<IProps> = (props) => {
             <div style={inline([styles.row])}>
 
             </div>
-            <SpectrumText size={'h2'} weight={'bold'} color={'white'}>
+            <SpectrumText size={'h2'} weight={'bold'} color={props.isLightThemeOn !== false ? Colors.colors.primary : 'white'}>
                 {props.title + ' '}
-                {props.icon && <FontAwesomeIcon color={'white'} icon={props.icon} />}
+                {props.icon && <FontAwesomeIcon color={props.isLightThemeOn !== false ? Colors.colors.primary : 'white'} icon={props.icon} />}
             </SpectrumText>
             <div style={inline([styles.xSmallMarginTop])}>
-                {props.content.map((contentParagraph, index) => <SpectrumText style={inline([index !== 0 && styles.xSmallMarginTop])} color={'white'}>
+                {props.content.map((contentParagraph, index) => <SpectrumText style={inline([index !== 0 && styles.xSmallMarginTop])} color={props.isLightThemeOn !== false ? Colors.colors.primary : 'white'}>
                     {contentParagraph}
                 </SpectrumText>)}
 

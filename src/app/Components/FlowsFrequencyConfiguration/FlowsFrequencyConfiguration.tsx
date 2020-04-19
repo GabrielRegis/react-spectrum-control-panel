@@ -34,7 +34,7 @@ export const FlowsFrequencyConfiguration: FunctionComponent<IProps> = observer((
     return (
         <div className={"classesFrequency"} style={inline([styles.leftAlignedColumn, styles.flexStretch, styles.configurationContainer, styles.marginLeft, styles.smallPadding])} >
             <SpectrumText style={styles.smallMarginBottom} weight={'bold'} size={'b20'}>
-                Frequência das Classes
+                Proporção das Classes
            </SpectrumText>
             {simulationConfigurationStore.classesConfiguration.flowClasses.map((flowClass) => {
                 return <FlowFrequencyConfiguration flowClass={flowClass} />
