@@ -16,7 +16,8 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "startDev": "webpack-dev-server --mode development --hot --progress --color --port 3000 --open",
+    "startDev": "webpack-dev-server --mode development --hot --progress --color --port 10002 --open",
+    "startRelease": "webpack-dev-server --mode production --hot --progress --color --port 10002 --open",
     "start": "node server.js",
     "build": "webpack -p --progress --colors",
     "prettier": "prettier --write \"src/**/*.{ts,tsx,css}\""
