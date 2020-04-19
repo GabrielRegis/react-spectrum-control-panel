@@ -4,7 +4,7 @@ import { SimulationSummary } from 'app/Models/SimulationSummary';
 
 
 const apiInstance: ApisauceInstance = create({
-    baseURL: 'http://localhost:8090/api/',
+    baseURL: 'https://spectrum-service.herokuapp.com/api/',
     headers: {
         'Content-Type': 'application/json',
         'Access-Control-Allow-Origin': '*'
