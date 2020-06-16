@@ -61,9 +61,9 @@ export const steps = [
     selector: ".summaryGeneralNumberResultsSuccessCalls",
     content: () => (<SpectrumGuideStep
       icon={faCheckCircle}
-      title={'Chamadas Atendidas'}
+      title={'Chamadas Aceitas'}
       content={[
-        "As chamadas atendidas representam todas as requesições que tiveram sucesso ao serem transmitidas, do início ao fim, no tempo esperado, utilizando a banda larga previamente definida.",
+        "As chamadas aceitas representam todas as requesições que tiveram sucesso ao serem transmitidas, do início ao fim, no tempo esperado, utilizando a banda larga previamente definida.",
       ]}
     />
     ),

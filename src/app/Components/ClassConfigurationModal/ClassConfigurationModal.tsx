@@ -162,7 +162,7 @@ export const ClassConfigurationModal: FunctionComponent<IProps> = observer((prop
                         />
                         <SpectrumText style={inline([styles.xSmallMarginLeft])} size={'b15'} weight={'semibold'}>
                             GB/s
-                    </SpectrumText>
+                        </SpectrumText>
                         <SpectrumText style={inline([styles.xSmallMarginLeft])} size={'b15'}>
                             de banda passante.
                     </SpectrumText>

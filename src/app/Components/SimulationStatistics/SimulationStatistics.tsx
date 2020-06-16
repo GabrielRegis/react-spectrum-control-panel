@@ -260,7 +260,7 @@ export const SimulationStatistics: FunctionComponent<IProps> = (props) => {
                                 <Grid item xs={3}>
                                     <SimpleStatisticsResult
                                         style={inline([styles.simpleStatisticsContainer])}
-                                        label={'Média de Chamadas Atendidas'}
+                                        label={'Média de Chamadas Aceitas'}
                                         result={successCallsAmountMean.toFixed(0)} />
                                 </Grid>
 
@@ -274,7 +274,7 @@ export const SimulationStatistics: FunctionComponent<IProps> = (props) => {
                                 <Grid className={"summaryGeneralNumberResultsSuccessCalls"} item xs={3}>
                                     <SimpleStatisticsResult
                                         style={inline([styles.simpleStatisticsContainer])}
-                                        label={'Total de Chamadas Atendidas'}
+                                        label={'Total de Chamadas Aceitas'}
                                         result={successCallsAmount} />
                                 </Grid>
 
@@ -298,7 +298,7 @@ export const SimulationStatistics: FunctionComponent<IProps> = (props) => {
 
                         <div style={inline([styles.centeredRow])}>
                             <PercentageResult style={inline([styles.marginRight])} label={'Bloqueadas'} result={props.statistics.blockProbabilityMean} />
-                            <PercentageResult label={'Atendidas'} result={1 - props.statistics.blockProbabilityMean} />
+                            <PercentageResult label={'Aceitas'} result={1 - props.statistics.blockProbabilityMean} />
                         </div>
                     </div>
                     <div style={inline([styles.divider, styles.marginTop, styles.marginBottom])} />
@@ -310,7 +310,7 @@ export const SimulationStatistics: FunctionComponent<IProps> = (props) => {
                             xAxisLabel={props.loadStep ? 'Carga' : 'Semente'} />
                         <BarChart
                             style={inline([styles.bigMarginLeft])}
-                            yAxisLabel={'Gb/s'}
+                            yAxisLabel={'BBR (Gb/s)'}
                             xAxisLabel={props.loadStep ? 'Carga' : 'Semente'} maxValue={maxBBRchartValue}
                             title={'Banda Bloqueada' + (props.loadStep && props.initialLoad ? ' (Média)' : '')}
                             data={bbrChartData} />
