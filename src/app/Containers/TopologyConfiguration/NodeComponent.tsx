@@ -1,6 +1,6 @@
 import { TopologyNode } from 'app/Models/TopologyNode';
 import { TopologyConfigurationStore } from 'app/Store/TopologyConfigurationStore';
-import { Colors } from 'app/Theme';
+import { Colors, Fonts } from 'app/Theme';
 import Konva from 'konva';
 import { observer } from 'mobx-react';
 import * as React from 'react';
@@ -20,6 +20,7 @@ interface IState {
     isFocused: boolean
     isSelected: boolean
 }
+
 
 @observer
 export class NodeComponent extends React.Component<IProps, IState> {
@@ -50,8 +51,8 @@ export class NodeComponent extends React.Component<IProps, IState> {
             this.group.to({
                 duration: 0.1,
                 opacity: 1,
-                scaleX: 0.8,
-                scaleY: 0.8,
+                scaleX: 0.6,
+                scaleY: 0.6,
                 easing: Konva.Easings.EaseInOut,
             })
         }
@@ -63,72 +64,44 @@ export class NodeComponent extends React.Component<IProps, IState> {
     }
 
     public dragNode = () => {
-        if (this.outterNode && this.innerNode) {
-            this.outterNode.to({
-                duration: 0.2,
-                easing: Konva.Easings.EaseInOut,
-                shadowOffsetX: 5,
-                shadowOffsetY: 5,
-                fillLinearGradientColorStops: [0, "#9cacfc", 1, "#cc9bfd"]
-            });
-            this.innerNode.to({
-                duration: 0.2,
-                easing: Konva.Easings.EaseInOut,
-                fillLinearGradientColorStops: [0, "#6a82fb", 1, "#ab5afc"]
-            });
-            this.setState({
-                isFocused: true,
-                isSelected: false
-            })
-        }
+        this.applyFocusedNodeStyle()
+        this.setState({
+            isFocused: true,
+        })
     }
 
     public releaseNode = () => {
-        if (this.outterNode && this.innerNode) {
-            this.outterNode.to({
-                duration: 0.2,
-                easing: Konva.Easings.EaseInOut,
-                shadowOffsetX: 5,
-                shadowOffsetY: 5,
-                fillLinearGradientColorStops: [0, "#FF6192", 1, "#FF66B1"]
-            });
-            this.innerNode.to({
-                duration: 0.2,
-                easing: Konva.Easings.EaseInOut,
-                fillLinearGradientColorStops: [0, "#EA5EA3", 1, "#FF457E"]
-            });
-            this.setState({
-                isFocused: false
-            })
+        this.setState({
+            isFocused: false
+        })
+        if (this.state.isSelected === false) {
+            this.applyUnfocusedNodeStyle()
         }
     }
 
     public deselectNode = () => {
-
+        this.props.topologyConfigurationStore.selectedNode = null
+        this.props.topologyConfigurationStore.selectedNodeComponent = null
+        this.applyUnfocusedNodeStyle(() => {
+            this.setState({
+                isSelected: false,
+                isFocused: false
+            })
+        })
     }
     public selectNode = () => {
-        if (this.outterNode && this.innerNode) {
-            this.outterNode.to({
-                duration: 0.2,
-                easing: Konva.Easings.EaseInOut,
-                shadowOffsetX: 5,
-                shadowOffsetY: 5,
-                fillLinearGradientColorStops: [0, "#B3FFAB", 1, "#12FFF7"]
-
-            });
-            this.innerNode.to({
-                duration: 0.2,
-                easing: Konva.Easings.EaseInOut,
-                fillLinearGradientColorStops: [0, "#92FE9D", 1, "#00C9FF"]
-            });
-            this.setState({
-                isSelected: true
-            })
+        this.applyFocusedNodeStyle()
+        this.setState({
+            isSelected: true
+        })
+        if (this.props.topologyConfigurationStore.selectedNodeComponent) {
+            this.props.topologyConfigurationStore.selectedNodeComponent.deselectNode()
         }
+        this.props.topologyConfigurationStore.selectedNode = this.props.node
+        this.props.topologyConfigurationStore.selectedNodeComponent = this
     }
 
     public onNodeClick = (event: Konva.KonvaEventObject<MouseEvent>) => {
-
         switch (this.props.mode) {
             case 2:
                 this.props.topologyConfigurationStore.selectedNodes.push(this.props.node)
@@ -137,11 +110,12 @@ export class NodeComponent extends React.Component<IProps, IState> {
                 }
                 break
             default:
-                if (this.state.isSelected) {
-                    this.deselectNode()
-                    return
-                }
-                this.selectNode()
+                // Future feature
+                // if (this.state.isSelected) {
+                //     this.deselectNode()
+                //     return
+                // }
+                // this.selectNode()
                 break
         }
 
@@ -183,8 +157,8 @@ export class NodeComponent extends React.Component<IProps, IState> {
         }
 
         if (this.props.topologyConfigurationStore.nodes.has(this.props.node.id) && this.group) {
-            this.props.topologyConfigurationStore.nodes.get(this.props.node.id).posX = this.props.topologyConfigurationStore.isGridEnabled ? Math.round(this.group.attrs.x / 40) * 40 : this.group.attrs.x
-            this.props.topologyConfigurationStore.nodes.get(this.props.node.id).posY = this.props.topologyConfigurationStore.isGridEnabled ? Math.round(this.group.attrs.y / 40) * 40 : this.group.attrs.y
+            this.props.topologyConfigurationStore.nodes.get(this.props.node.id).posX = this.props.topologyConfigurationStore.isGridEnabled ? Math.round(this.group.attrs.x / this.props.topologyConfigurationStore.gridSize) * this.props.topologyConfigurationStore.gridSize : this.group.attrs.x
+            this.props.topologyConfigurationStore.nodes.get(this.props.node.id).posY = this.props.topologyConfigurationStore.isGridEnabled ? Math.round(this.group.attrs.y / this.props.topologyConfigurationStore.gridSize) * this.props.topologyConfigurationStore.gridSize : this.group.attrs.y
         }
 
     }
@@ -204,12 +178,60 @@ export class NodeComponent extends React.Component<IProps, IState> {
         }
     }
 
+    public applyFocusedNodeStyle = (then?: () => void) => {
+        if (this.outterNode && this.innerNode) {
+            this.outterNode.to({
+                duration: 0.2,
+                easing: Konva.Easings.EaseInOut,
+                shadowOffsetX: 5,
+                shadowOffsetY: 5,
+                radius: 55,
+                // fillLinearGradientColorStops: [0, "#9cacfc", 1, "#cc9bfd"]
+            });
+            this.innerNode.to({
+                duration: 0.2,
+                radius: 45,
+                easing: Konva.Easings.EaseInOut,
+                // fillLinearGradientColorStops: [0, "#6a82fb", 1, "#ab5afc"]
+            });
+            setTimeout(() => {
+                if (then) {
+                    then()
+                }
+            }, 200)
+        }
+    }
+    public applyUnfocusedNodeStyle = (then?: () => void) => {
+        if (this.outterNode && this.innerNode) {
+            this.outterNode.to({
+                duration: 0.2,
+                radius: 50,
+                easing: Konva.Easings.EaseInOut,
+                shadowOffsetX: 5,
+                shadowOffsetY: 5,
+                // fillLinearGradientColorStops: [0, "#FF6192", 1, "#FF66B1"]
+            });
+            this.innerNode.to({
+                duration: 0.2,
+                radius: 40,
+                easing: Konva.Easings.EaseInOut,
+                // fillLinearGradientColorStops: [0, "#EA5EA3", 1, "#FF457E"]
+            });
+            setTimeout(() => {
+                if (then) {
+                    then()
+                }
+            }, 200)
+        }
+    }
+
     public render() {
         const outterNodeConfig = {
             radius: 50,
-            fillLinearGradientStartPoint: { x: -50, y: 0 },
-            fillLinearGradientEndPoint: { x: 50, y: 0 },
-            fillLinearGradientColorStops: this.state.isFocused ? [0, "#9cacfc", 1, "#cc9bfd"] : [0, "#FF6192", 1, "#FF66B1"],
+            // fillLinearGradientStartPoint: { x: -50, y: 0 },
+            // fillLinearGradientEndPoint: { x: 50, y: 0 },
+            // fillLinearGradientColorStops: this.state.isSelected || this.state.isFocused ? [0, "#9cacfc", 1, "#cc9bfd"] : [0, "#FF6192", 1, "#FF66B1"],
+            fill: Colors.colors.primary,
             opacity: 0.8,
             scaleX: 1,
             scaleY: 1,
@@ -222,9 +244,10 @@ export class NodeComponent extends React.Component<IProps, IState> {
         }
         const innerNodeConfig = {
             radius: 40,
-            fillLinearGradientStartPoint: { x: -35, y: 0 },
-            fillLinearGradientEndPoint: { x: 35, y: 0 },
-            fillLinearGradientColorStops: this.state.isFocused ? [0, "#6a82fb", 1, "#ab5afc"] : [0, "#EA5EA3", 1, "#FF457E"],
+            // fillLinearGradientStartPoint: { x: -35, y: 0 },
+            // fillLinearGradientEndPoint: { x: 35, y: 0 },
+            // fillLinearGradientColorStops: this.state.isSelected || this.state.isFocused ? [0, "#6a82fb", 1, "#ab5afc"] : [0, "#EA5EA3", 1, "#FF457E"],
+            fill: Colors.colors.primary,
             opacity: 1,
             scaleX: 1,
             scaleY: 1,
@@ -242,12 +265,13 @@ export class NodeComponent extends React.Component<IProps, IState> {
             scaleX: 0,
             scaleY: 0,
             x: this.props.node.posX,
-            y: this.props.node.posY
+            y: this.props.node.posY,
         }
         return (
             <Group
                 ref={ref => this.group = ref}
                 {...groupConfig}
+                listening={true}
                 onClick={this.onNodeClick}
                 onDragMove={this.onNodeMove}
                 onDragStart={this.onNodeDragStart}
@@ -268,16 +292,16 @@ export class NodeComponent extends React.Component<IProps, IState> {
                 />
                 <Group listening={false} ref={ref => this.tipGroup = ref}
                     x={-150} y={-120} >
-                    <Rect width={300} height={60} fill={Colors.colors.lightGray} cornerRadius={5} />
+                    <Rect width={300} height={60} fill={Colors.colors.extraLightGray} cornerRadius={5} />
                     <Text
                         width={300}
                         y={20}
+                        fill={Colors.colors.primary}
                         fontSize={18}
-                        fontFamily={'Roboto'}
+                        fontFamily={Fonts.fontFamilies.primary}
                         align={'center'}
                         verticalAlign={'center'}
                         text={'Pressione X ou Z para deletar'} />
-
                 </Group>
 
 

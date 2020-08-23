@@ -1,11 +1,13 @@
 import { faCogs, faNetworkWired, faPoll, faStream } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Button from '@material-ui/core/Button';
-import { Colors } from 'app/Theme';
+import { simulationConfigurationStoreContext } from "app/Store/SimulationConfigurationStore";
 import { inline } from 'app/utils/StylesUtils';
+import { observer } from "mobx-react-lite";
 import * as React from 'react';
 import { FunctionComponent, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { topologyConfigurationStoreContext } from '../../Store/TopologyConfigurationStore';
+import { NavbarButton } from '../NavbarButton/NavbarButton';
 import styles from './NavbarStyles';
 
 interface IProps {
@@ -14,12 +16,14 @@ interface IProps {
 
 interface IState {
     // State type definition
-    number: number;
 }
 
-export const Navbar: FunctionComponent<IProps> = (props) => {
+export const Navbar: FunctionComponent<IProps> = observer((props) => {
+
+    const simulationConfigurationStore = React.useContext(simulationConfigurationStoreContext)
+    const topologyConfigurationStore = React.useContext(topologyConfigurationStoreContext)
+
     const initialState: IState = {
-        number: 0
     };
 
     // ComponentDidMount
@@ -31,36 +35,37 @@ export const Navbar: FunctionComponent<IProps> = (props) => {
 
 
     return (
-        <div style={inline([styles.navbar, styles.centeredRow, styles.leftAlignedRow,])}>
+        <div id={'navbar'} style={inline([styles.navbar, styles.centeredRow, styles.leftAlignedRow])}>
             <Link to="/">
-                <Button style={inline([styles.navbarButton])} >
+                <Button style={inline([styles.spectrumButton])} >
                     <img style={inline([styles.logo])} src={require('../../Assets/Icons/icLogo.png')} alt="" />
                 </Button>
             </Link>
-
-            <Link to="/simulation-configuration">
-                <Button style={inline([styles.navbarButton])} >
-                    <FontAwesomeIcon color={Colors.colors.primary} size={'2x'} icon={faCogs} />
-                </Button>
+            <Link to="/general-configurations">
+                <NavbarButton
+                    styles={inline([styles.navbarButton])}
+                    icon={faCogs}
+                    isFinished={simulationConfigurationStore.areGeneralConfigurationsReady} />
             </Link>
-            <Link to="/flow-configuration">
-                <Button style={inline([styles.navbarButton])}>
-                    <FontAwesomeIcon color={Colors.colors.primary} size={'2x'} icon={faStream} />
-                </Button>
+            <Link to="/classes-configurations">
+                <NavbarButton
+                    styles={inline([styles.navbarButton])}
+                    icon={faStream}
+                    isFinished={simulationConfigurationStore.areClassesConfigurationsReady} />
             </Link>
 
-            <Link to="/topology-configuration">
-                <Button style={inline([styles.navbarButton])}>
-                    <FontAwesomeIcon color={Colors.colors.primary} size={'2x'} icon={faNetworkWired} />
-                </Button>
+            <Link to="/topology-configurations">
+                <NavbarButton
+                    styles={inline([styles.navbarButton])}
+                    icon={faNetworkWired}
+                    isFinished={topologyConfigurationStore.areTopologyConfigurationsReady} />
             </Link>
 
             <Link to="/summary">
-                <Button style={inline([styles.navbarButton])}>
-                    <FontAwesomeIcon color={Colors.colors.primary} size={'2x'} icon={faPoll} />
-                </Button>
+                <NavbarButton icon={faPoll} shouldShowStatus={false} isFinished={false} />
             </Link>
 
         </div>
+
     );
-};
+});

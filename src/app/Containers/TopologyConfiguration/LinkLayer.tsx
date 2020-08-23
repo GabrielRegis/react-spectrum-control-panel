@@ -2,7 +2,7 @@ import { TopologyConfigurationStore } from 'app/Store/TopologyConfigurationStore
 import Konva from 'konva';
 import { observer } from 'mobx-react';
 import * as React from 'react';
-import { Layer, Rect } from 'react-konva';
+import { Layer } from 'react-konva';
 import DebugLink from './DebugLink';
 import LinkComponent from './LinkComponent';
 
@@ -43,8 +43,8 @@ export default class LinkLayer extends React.Component<IProps, IState>{
         return (
             <Layer
                 ref={ref => this.layer = ref}
+                listening={false}
             >
-                <Rect opacity={0} width={window.innerWidth - 5} height={window.innerHeight - 80} />
                 {this.props.topologyConfigurationStore.selectedNodes &&
                     this.props.topologyConfigurationStore.selectedNodes.length > 0 && this.props.mode === 2 && <DebugLink
                         ref={ref => this.debugLink = ref}
@@ -53,6 +53,7 @@ export default class LinkLayer extends React.Component<IProps, IState>{
                     return <LinkComponent
                         key={link.id}
                         topologyConfigurationStore={this.props.topologyConfigurationStore}
+                        link={link}
                         nodeA={link.nodeA}
                         nodeB={link.nodeB} />
                 })}

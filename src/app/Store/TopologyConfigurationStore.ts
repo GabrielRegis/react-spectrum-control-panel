@@ -1,23 +1,44 @@
+import { NodeComponent } from 'app/Containers/TopologyConfiguration/NodeComponent';
 import { TopologyNode } from 'app/Models/TopologyNode';
-import { action, IObservableArray, observable, ObservableMap } from 'mobx';
-import { create } from 'mobx-persist';
+import { action, computed, IObservableArray, observable, ObservableMap } from 'mobx';
+import { create, persist } from 'mobx-persist';
 import { createContext } from 'react';
 import { v4 } from "uuid";
+import LinkComponent from '../Containers/TopologyConfiguration/LinkComponent';
 import { TopologyLink } from '../Models/TopologyLink';
+import TopologyUtils from 'app/utils/TopologyUtils';
 
 export class TopologyConfigurationStore {
     @observable public selectedNodes: IObservableArray<TopologyNode> = observable.array([]);
-    public nodes: ObservableMap<string, TopologyNode> = observable.map(new Map());
-    public links: ObservableMap<string, TopologyLink> = observable.map(new Map());
+    @persist('object') public nodes: ObservableMap<string, TopologyNode> = observable.map(new Map());
+    @persist('object') public links: ObservableMap<string, TopologyLink> = observable.map(new Map());
     @observable public isGridEnabled: boolean
     @observable public gridSize: number
+    @observable public selectedLink?: TopologyLink
+    @observable public selectedLinkComponent?: LinkComponent
+    @observable public selectedNode?: TopologyNode
+    @observable public selectedNodeComponent?: NodeComponent
 
     constructor() {
         this.selectedNodes = observable.array([]);
         this.nodes = observable.map(new Map());
         this.links = observable.map(new Map());
+        this.gridSize = 30
+
+
+        const defaultNodesAndLinks = TopologyUtils.generateDefaultTopology(this.gridSize)
+        defaultNodesAndLinks.links.forEach((link) => {
+            this.links.set(link.id, link)
+        })
+        defaultNodesAndLinks.nodes.forEach((node) => {
+            this.nodes.set(node.id, node)
+        })
         this.isGridEnabled = true
-        this.gridSize = 40
+        this.selectedLink = null
+    }
+
+    @computed get areTopologyConfigurationsReady() {
+        return this.nodes.size > 1 && this.links.size > 0
     }
 
     @action public deleteNode(node: TopologyNode) {
@@ -49,7 +70,10 @@ export class TopologyConfigurationStore {
             id: id,
             name: id,
             nodeA: nodeA,
-            nodeB: nodeB
+            nodeB: nodeB,
+            distance: 100,
+            slotSize: 12.5,
+            slots: 100
         }
         this.links.set(link.id, link)
         this.selectedNodes = observable.array([nodeB]);

@@ -27,7 +27,7 @@ export default class NodeLayer extends React.Component<IProps, IState>{
         }
     }
 
-    public onLayerClick = (event: Konva.KonvaEventObject<MouseEvent>) => {
+    public onGroupClick = (event: Konva.KonvaEventObject<MouseEvent>) => {
         if (this.props.mode !== 1) {
             return
         }
@@ -37,8 +37,8 @@ export default class NodeLayer extends React.Component<IProps, IState>{
             id: id,
             shouldConvert: true,
             name: id,
-            posX: this.props.topologyConfigurationStore.isGridEnabled ? Math.round(mousePos.x / 40) * 40 : mousePos.x,
-            posY: this.props.topologyConfigurationStore.isGridEnabled ? Math.round(mousePos.y / 40) * 40 : mousePos.y
+            posX: this.props.topologyConfigurationStore.isGridEnabled ? Math.round(mousePos.x / this.props.topologyConfigurationStore.gridSize) * this.props.topologyConfigurationStore.gridSize : mousePos.x,
+            posY: this.props.topologyConfigurationStore.isGridEnabled ? Math.round(mousePos.y / this.props.topologyConfigurationStore.gridSize) * this.props.topologyConfigurationStore.gridSize : mousePos.y
         }
         this.props.topologyConfigurationStore.nodes.set(newNode.id, newNode)
     }
@@ -51,7 +51,8 @@ export default class NodeLayer extends React.Component<IProps, IState>{
         return (
             <Layer
                 ref={ref => this.layer = ref}
-                onClick={this.onLayerClick}
+                onClick={this.onGroupClick}
+                listening={this.props.mode === 1}
             >
                 <Rect opacity={0} width={window.innerWidth - 5} height={window.innerHeight - 80} />
                 {this.props.topologyConfigurationStore && this.props.topologyConfigurationStore.nodes && Array.from(this.props.topologyConfigurationStore.nodes.values()).map((node) => {

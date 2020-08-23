@@ -1,0 +1,55 @@
+body, ul {
+  margin: 0;
+  padding: 0;
+}
+@font-face {
+  font-family: "Skarpa Regular";
+  src: url(ae1ed0a59dc97c65817205ac2033733e.woff2) format("woff2"),
+    url(de55234d483d9e1e0ae7eb44d75d9a44.woff) format("font-woff");
+}
+@font-face {
+  font-family: "Avenir Next";
+  src: url(b1b4b2738bd453aba3543944dc2b539b.woff2) format("woff2");
+}
+@font-face {
+  font-family: "Avenir Next Medium";
+  src: url(de55234d483d9e1e0ae7eb44d75d9a44.woff) format("woff");
+}
+@font-face {
+  font-family: "Multi Regular";
+  src: url(335bf2fbcc9b1e860860c7375f22397c.woff2) format("woff2");
+}
+@font-face {
+  font-family: "Skarpa Regular";
+  src: url(cfac038e2cc9fa1c5c1cf3766d3f1e93.woff) format("woff");
+}
+@font-face {
+  font-family: "Gilroy";
+  src: url(fdacc8e1bca150a398aea03be669ca8d.woff2) format("woff2");
+}
+@font-face {
+  font-family: "Inter-Regular";
+  src: url(18e83d6dfd14797c8ec0cb4ce904f233.woff2) format("woff2");
+}
+@font-face {
+  font-family: "Inter-SemiBold";
+  src: url(de3f13e0e75b19919866ba61f72e64b1.woff2) format("woff2");
+}
+@font-face {
+  font-family: "Inter-Bold";
+  src: url(be76611f7fa8cb1ffa28ae557d0b3202.woff2) format("woff2");
+}
+@font-face {
+  font-family: "Inter-Light";
+  src: url(ebd51e8727e59f491b6c235e1430660f.woff2) format("woff2");
+}
+@font-face {
+  font-family: "Inter-Thin";
+  src: url(3c6190005f461a335dd06c7a712ce587.woff2) format("woff2");
+}
+body{
+  color: #5A5F70;
+}
+
+
+

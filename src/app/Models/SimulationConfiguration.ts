@@ -1,9 +1,15 @@
-import TopologyConfiguration from '../Containers/TopologyConfiguration/TopologyConfiguration';
-import { FlowsConfiguration } from './FlowsConfiguration';
-import { SimulationGeneralConfiguration } from "./SimulationGeneralConfiguration";
+
+import { ClassesConfiguration } from './ClassesConfiguration';
+import { GeneralConfigurations } from './GeneralConfigurations';
+import { TopologyConfiguration } from './TopologyConfiguration';
 
 export class SimulationConfiguration {
-    private generalConfigurations: SimulationGeneralConfiguration
-    private classesConfiguration: FlowsConfiguration
-    private topologyConfiguration: TopologyConfiguration
+    generalConfigurations: GeneralConfigurations
+    classesConfiguration: ClassesConfiguration
+    topologyConfiguration: TopologyConfiguration
+    constructor() {
+        this.generalConfigurations = new GeneralConfigurations()
+        this.classesConfiguration = new ClassesConfiguration()
+        this.topologyConfiguration = new TopologyConfiguration()
+    }
 }

@@ -1,0 +1,16 @@
+export const colors = {
+    lightGreen: '#C2FFAC',
+    darkGreen: '#68DD3F',
+    lightYellow: '#FFE8AC',
+    darkYellow: '#FF9C54',
+    lightOrange: '#FFD4AC',
+    darkOrange: '#FF5454',
+    lightPink: '#FFACAC',
+    darkPink: '#ED157D',
+    lightPurple: '#C2ACFF',
+    darkPurple: '#5F3FDD',
+    lightBlue: '#ACEBFF',
+    darkBlue: '#3682F3',
+    lightTeal: '#ACFFFA',
+    darkTeal: '#13AAFF',
+}
