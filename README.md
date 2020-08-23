@@ -1,68 +1,28 @@
-# Frontend Boilerplate with React, Redux & TypeScript
 
-A bare minimum react-redux-webpack-typescript boilerplate with TodoMVC example. 
+# SPECTRUM - Painel de Controle
 
-[Live demo](https://rokoroku.github.io/react-redux-typescript-boilerplate)
+O Spectrum é um simulador de Redes Ópticas Elásticas (EON) cujo objetivo é promover simulações de forma abstraída, com configurações práticas e visuais. É também uma ferramenta para ensino do comportamento de uma Rede EON.
 
-Note that this project does not include **Server-Side Rendering**, **Static code analysis**, **Testing Frameworks** and other stuffs that makes the package unnecessarily complicated. (e.g. yarn, tslint, jest, ...)  
-If needed, please fork this repository and add your own that meets your requirements.
+Este repositório compila o código do Painel de Controle (Cliente) do SPECTRUM. Para acessar o código da aplicação servidor do simulador, basta acessar [seu repositório](https://github.com/GabrielRegis/spring-spectrum-service)
 
-Ideal for creating React apps from the scratch.
+Atualmente, o Painel de Controle está hospedado através do serviço Heroku, e pode ser acessado [neste link](https://spectrum-eon-simulator.herokuapp.com).
 
-See also: [react-mobx-typescript-boilerplate](https://github.com/rokoroku/react-mobx-typescript-boilerplate)
+## Modificação do Código
+O SPECTRUM é uma ferramenta de código aberto, e poderá sofrer modificações pela comunidade interessada. Para modificar o código do simulador, é necessário clonar este repositório (Branch Develop) e criar uma nova branch de trabalho. Ao final da validação e das modificações da ferramenta, será necessário realizar um pull-request para a Master. Este pull-request será analisado e posteriormente aprovado.
 
-## Contains
+Ao desenvolver modificações para o SPECTRUM, realizá-las respeitando a licensa deste simulador ([Confira aqui](https://creativecommons.org/licenses/by-nc-sa/4.0/))
 
-- [x] [Typescript](https://www.typescriptlang.org/) 3
-- [x] [React](https://facebook.github.io/react/) 16.8
-- [x] [Redux](https://github.com/reactjs/redux) 4
-- [x] [React Router](https://github.com/ReactTraining/react-router) 4.3
-- [x] [Redux DevTools Extension](https://github.com/zalmoxisus/redux-devtools-extension)
-- [x] [TodoMVC example](http://todomvc.com)
-
-### Build tools
-
-- [x] [Webpack](https://webpack.github.io) 4
-  - [x] [Tree Shaking](https://medium.com/@Rich_Harris/tree-shaking-versus-dead-code-elimination-d3765df85c80)
-  - [x] [Webpack Dev Server](https://github.com/webpack/webpack-dev-server)
-- [x] [Typescript Loader](https://github.com/TypeStrong/ts-loader)
-- [x] [PostCSS Loader](https://github.com/postcss/postcss-loader)
-  - [x] [PostCSS Preset Env](https://preset-env.cssdb.org/)
-  - [x] [CSS modules](https://github.com/css-modules/css-modules)
-- [x] [React Hot Loader](https://github.com/gaearon/react-hot-loader)
-- [x] [Mini CSS Extract Plugin](https://github.com/webpack-contrib/mini-css-extract-plugin)
-- [x] [HTML Webpack Plugin](https://github.com/ampedandwired/html-webpack-plugin)
-
-## Installation
-
+## Instalando, compilando e executando o SPECTRUM em modo desenvolvedor
+Inicialmente, execute o comando abaixo para que as dependências sejam instaladas:
 ```
-$ npm ci
+$ yarn
+```
+Para executar o Painel de Controle, execute o seguinte comando:
+```
+$ yarn startDev
 ```
 
-## Running
 
-```
-$ npm start
-```
 
-## Build
-
-```
-$ npm run build
-```
-
-## Deploy (to the [GitHub Pages](https://pages.github.com/))
-
-```
-$ npm run deploy
-```
-
-## Format code (using [Prettier](https://github.com/prettier/prettier))
-
-```
-$ npm run prettier
-```
-
-# License
-
-MIT
+# Licença
+ [Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)](https://creativecommons.org/licenses/by-nc-sa/4.0/)
